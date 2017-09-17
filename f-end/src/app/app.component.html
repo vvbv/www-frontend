@@ -15,6 +15,10 @@
   </li>
   <li>
     <h2><a target="_blank" href="https://blog.angular.io/">Angular blog</a></h2>
+    <h1>{{coneccion.token}}</h1>
+      <div *ngFor="let evento of eventos">
+          {{evento.nombre}}
+      </div>
   </li>
 </ul>
 
