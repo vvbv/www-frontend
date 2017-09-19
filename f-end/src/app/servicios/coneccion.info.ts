@@ -14,7 +14,7 @@ export class Coneccion {
   private url_get_eventos: string;
   private url_verify_token: string;
   public token: string;
-
+  private headers: Headers;
   constructor (private http: Http) {}
   init(base_url: string, url_get_token: string, url_refresh_token: string, url_verify_token: string, url_get_eventos: string) {
              this.base_url = base_url;
@@ -22,6 +22,7 @@ export class Coneccion {
              this.url_refresh_token = url_refresh_token;
              this.url_verify_token = url_verify_token;
              this.url_get_eventos = url_get_eventos;
+             this.headers = new Headers({'Content-Type': 'application/json'});
   }
 
   public getBaseUrl(): string {
@@ -53,7 +54,10 @@ export class Coneccion {
     return this.http
                      .post(this.base_url + this.url_get_token + '/', {'username': username, 'password': password})
                      .toPromise()
-                     .then(response =>  this.token = (JSON.parse(response.text().toString())['token']))
+                     .then(response =>  {
+                         this.token = (JSON.parse(response.text().toString())['token']);
+                         this.headers.append('Authorization', 'JWT ' + this.token);
+                     })
                      .catch(this.handleError);
     }
     private handleError(error: any): Promise<any> {
@@ -72,11 +76,8 @@ export class Coneccion {
     }
   }
   public getEventos(): any {
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('Authorization', 'JWT ' + this.token);
     return this.http
-    .get(this.base_url + this.url_get_eventos + '/', {headers: headers } )
+    .get(this.base_url + this.url_get_eventos + '/', {headers: this.headers } )
     .toPromise()
     .then(response =>  response = JSON.parse(response.text().toString()))
     .catch(this.handleError);
