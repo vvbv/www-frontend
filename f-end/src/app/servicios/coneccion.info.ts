@@ -2,7 +2,7 @@ import { JsonFormatter } from 'tslint/lib/formatters';
 
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-
+import { Evento } from '../eventos/evento';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -75,13 +75,16 @@ export class Coneccion {
         return false;
     }
   }
-  public getEventos(): any {
+  public getEventos(): Promise<Evento[]> {
     return this.http
     .get(this.base_url + this.url_get_eventos + '/', {headers: this.headers } )
     .toPromise()
-    .then(response =>  response = JSON.parse(response.text().toString()))
+    .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
     .catch(this.handleError);
-  }
+  }/*
+  public crearEvento(evento: Evento): Promise<Evento> {
+    return new Evento;
+  }*/
 
   public getToken(): string | boolean {
       if (this.token) {
