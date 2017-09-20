@@ -13,15 +13,18 @@ export class Coneccion {
   private url_refresh_token: string;
   private url_get_eventos: string;
   private url_verify_token: string;
+  private url_save_evento: string;
   public token: string;
   private headers: Headers;
   constructor (private http: Http) {}
-  init(base_url: string, url_get_token: string, url_refresh_token: string, url_verify_token: string, url_get_eventos: string) {
+  init(base_url: string, url_get_token: string, url_refresh_token: string,
+       url_verify_token: string, url_get_eventos: string, url_save_evento: string) {
              this.base_url = base_url;
              this.url_get_token = url_get_token;
              this.url_refresh_token = url_refresh_token;
              this.url_verify_token = url_verify_token;
              this.url_get_eventos = url_get_eventos;
+             this.url_save_evento = url_save_evento;
              this.headers = new Headers({'Content-Type': 'application/json'});
   }
 
@@ -81,9 +84,12 @@ export class Coneccion {
     .toPromise()
     .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
     .catch(this.handleError);
-  }/*
+  }
+  /*
   public crearEvento(evento: Evento): Promise<Evento> {
-    return new Evento;
+    return this.http
+    .put(this.base_url+this.url_save_evento+'/', {headers: this.headers})
+    .toPromise()
   }*/
 
   public getToken(): string | boolean {

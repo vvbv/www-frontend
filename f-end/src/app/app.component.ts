@@ -16,7 +16,8 @@ export class AppComponent implements OnInit {
   public eventos:  Evento[] ;
   ngOnInit() {
     this.eventos = new Array<Evento>();
-    this.coneccion.init( 'http://localhost:8000/api/' , 'auth-jwt', '', '' , 'eventos');
+    this.coneccion.init( 'http://localhost:8000/api/' , 'auth-jwt', '', '' ,
+                          'eventos', 'eventos');
     this.coneccion.obtenerToken('admin', 'Suputamadre-08').then(
    token => this.coneccion.getEventos().then(
      eventos => this.eventos = eventos));
