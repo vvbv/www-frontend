@@ -85,12 +85,13 @@ export class Coneccion {
     .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
     .catch(this.handleError);
   }
-  /*
   public crearEvento(evento: Evento): Promise<Evento> {
     return this.http
-    .put(this.base_url+this.url_save_evento+'/', {headers: this.headers})
+    .put(this.base_url + this.url_get_eventos + '/', {'Authorization': 'JWT ' + this.token})
     .toPromise()
-  }*/
+    .then(response => JSON.parse(response.text().toString()).results as Evento )
+    .catch(this.handleError);
+  }
 
   public getToken(): string | boolean {
       if (this.token) {
