@@ -26,6 +26,10 @@ export class AppComponent implements OnInit {
   }
   cambiarPrimerUsuario() {
     this.eventos[1].nombre = 'Evento 3';
+    this.eventos[1].descripcion = 'Su madre';
+    var ev: Evento;
+    ev  = this.eventos[1];
+    console.log(JSON.stringify(ev ));
     this.coneccion.crearEvento(this.eventos[1]);
   }
 

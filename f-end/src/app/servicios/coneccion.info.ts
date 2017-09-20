@@ -87,7 +87,7 @@ export class Coneccion {
   }
   public crearEvento(evento: Evento): Promise<Evento> {
     return this.http
-    .put(this.base_url + this.url_get_eventos + '/', {'Authorization': 'JWT ' + this.token})
+    .post(this.base_url + this.url_get_eventos + '/', JSON.stringify(evento) ,  {headers: this.headers})
     .toPromise()
     .then(response => JSON.parse(response.text().toString()).results as Evento )
     .catch(this.handleError);
