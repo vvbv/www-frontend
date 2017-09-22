@@ -1,36 +1,15 @@
-import { timeout } from 'rxjs/operator/timeout';
-import { Component, OnInit } from '@angular/core';
-import { Coneccion } from './servicios/coneccion.info';
-import { Token } from './servicios/coneccion.info';
-import { Evento } from './eventos/evento';
-import { JsonFormatter } from 'tslint/lib/formatters';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  constructor(private coneccion: Coneccion) {}
-  title = 'app';
-  asdf = 'hola mundo';
-  public eventos:  Evento[] ;
-  ngOnInit() {
-    this.eventos = new Array<Evento>();
-    this.coneccion.init( 'http://localhost:8000/api/' , 'auth-jwt', '', '' ,
-                          'eventos', 'eventos/');
-    this.coneccion.obtenerToken('administrator', 'administrator').then(
-   token =>   { this.coneccion.getEventos().then(
-     eventos => { this.eventos = eventos;
-      this.cambiarPrimerUsuario(); } );
-      } );
-  }
-  cambiarPrimerUsuario() {
-    this.eventos[1].nombre = 'Evento 3';
-    this.eventos[1].descripcion = 'Su madre';
-    var ev: Evento;
-    ev  = this.eventos[1];
-    console.log(JSON.stringify(ev ));
-    this.coneccion.crearEvento(this.eventos[1]);
-  }
-
+export class AppComponent {
+    constructor(private translate: TranslateService) {
+        translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa']);
+        translate.setDefaultLang('en');
+        const browserLang = translate.getBrowserLang();
+        translate.use(browserLang.match(/en|fr|ur|es|it|fa/) ? browserLang : 'en');
+    }
 }

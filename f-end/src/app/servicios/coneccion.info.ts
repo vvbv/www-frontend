@@ -58,10 +58,14 @@ export class Coneccion {
                      .post(this.base_url + this.url_get_token + '/', {'username': username, 'password': password})
                      .toPromise()
                      .then(response =>  {
-                         this.token = (JSON.parse(response.text().toString())['token']);
-                         this.headers.append('Authorization', 'JWT ' + this.token);
+                         localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
+                         console.log(localStorage.getItem('tok'));
                      })
                      .catch(this.handleError);
+    }
+
+    public logout(){
+        localStorage.removeItem('tok');
     }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
