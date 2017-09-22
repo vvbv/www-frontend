@@ -2,12 +2,12 @@ import { JsonFormatter } from 'tslint/lib/formatters';
 
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Evento } from '../eventos/evento';
+import { Event } from '../eventos/evento';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 @Injectable()
-export class Coneccion {
+export class  AuthenticationService  {
   private base_url: string;
   private url_get_token: string;
   private url_refresh_token: string;
@@ -82,18 +82,18 @@ export class Coneccion {
         return false;
     }
   }
-  public getEventos(): Promise<Evento[]> {
+  public getEventos(): Promise<Event[]> {
     return this.http
     .get(this.base_url + this.url_get_eventos + '/', {headers: this.headers } )
     .toPromise()
-    .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
+    .then(response =>  JSON.parse(response.text().toString()).results as Event[])
     .catch(this.handleError);
   }
-  public crearEvento(evento: Evento): Promise<Evento> {
+  public crearEvento(evento: Event): Promise<Event> {
     return this.http
     .post(this.base_url + this.url_get_eventos + '/', JSON.stringify(evento) ,  {headers: this.headers})
     .toPromise()
-    .then(response => JSON.parse(response.text().toString()).results as Evento )
+    .then(response => JSON.parse(response.text().toString()).results as Event )
     .catch(this.handleError);
   }
 

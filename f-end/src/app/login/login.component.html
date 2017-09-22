@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input  type="password" class="form-control input-underline input-lg" id="" name = "password" [(ngModel)]="model.password" placeholder="Password" #password="ngModel">
+                        <input  type="password" class="form-control input-underline input-lg" id="" (keyup.enter)="onLoggedin()" name = "password" [(ngModel)]="model.password" placeholder="Password" #password="ngModel">
                     </div>
                 <a class="btn rounded-btn" [routerLink]="['/dashboard']" (click)="onLoggedin()"> Log in </a>
                 &nbsp;

@@ -1,4 +1,6 @@
 $topnav-background-color: #222;
+
+
 .topnav {
     border-radius: 0;
     background-color: $topnav-background-color;
@@ -69,4 +71,19 @@ $topnav-background-color: #222;
 }
 .header .navbar {
     background: $topnav-background-color !important;
+}
+
+.navbar {
+    @media screen and (max-width: 990px) {
+        .navbar-brand-right{
+            position: absolute;
+            right: 0px;
+        }
+    } 
+   
+}
+.navbar{
+    .navbar-toggler{
+        position: inherit;
+    }
 }

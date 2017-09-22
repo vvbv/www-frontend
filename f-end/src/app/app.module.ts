@@ -9,7 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
-import { Coneccion } from './servicios/coneccion.info';
+import { AuthenticationService } from './servicios/authentication.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -36,7 +36,7 @@ export function HttpLoaderFactory(http: Http) {
         })
     ],
     providers: [AuthGuard,
-                Coneccion],
+                AuthenticationService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
