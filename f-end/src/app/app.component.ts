@@ -1,25 +1,15 @@
-import { timeout } from 'rxjs/operator/timeout';
-import { Component, OnInit } from '@angular/core';
-import { Coneccion } from './servicios/coneccion.info';
-import { Token } from './servicios/coneccion.info';
-import { Evento } from './eventos/evento';
-import { JsonFormatter } from 'tslint/lib/formatters';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  constructor(private coneccion: Coneccion) {}
-  title = 'app';
-  asdf = 'hola mundo';
-  public eventos:  Evento[] ;
-  ngOnInit() {
-    this.eventos = new Array<Evento>();
-    this.coneccion.init( 'http://localhost:8000/api/' , 'auth-jwt', '', '' ,
-                          'eventos', 'eventos');
-    this.coneccion.obtenerToken('admin', 'Suputamadre-08').then(
-   token => this.coneccion.getEventos().then(
-     eventos => this.eventos = eventos));
-  }
+export class AppComponent {
+    constructor(private translate: TranslateService) {
+        translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa']);
+        translate.setDefaultLang('en');
+        const browserLang = translate.getBrowserLang();
+        translate.use(browserLang.match(/en|fr|ur|es|it|fa/) ? browserLang : 'en');
+    }
 }

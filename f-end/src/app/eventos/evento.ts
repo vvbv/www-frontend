@@ -1,4 +1,4 @@
-export class Evento {
+export class Event {
     public nombre: string;
     public descripcion: string;
     public fechaInicio: string;
