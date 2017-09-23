@@ -35,13 +35,14 @@ export class TokenService {
         })
         .catch();
     }
-    validateToken() {
+    isValid(token: string): Promise<boolean> {
         return this.http
-        .post(this.coneccionInfo.url_validar_token, JSON.parse('{token: ' + 'JWT ' + localStorage.getItem('tok') + '}'))
+        .post(this.coneccionInfo.url_validar_token, JSON.parse('{"token": "' + token + '"}'))
         .toPromise()
         .then(response =>  {
-            localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
-            this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
+            if (JSON.parse(response.text())) {
+                return true;
+            }
         })
         .catch();
     }

@@ -9,10 +9,8 @@ import { Evento } from '../modelos/evento.class';
 export class EventoService {
   constructor( private http: Http, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
   public getEventos(): Promise<Evento[]> {
-    const headers = new Headers();
-    headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
     return this.http
-    .get(this.coneccionInfo.url_eventos , {headers: headers} )
+    .get(this.coneccionInfo.url_eventos , {headers: this.coneccionInfo.headers} )
     .toPromise()
     .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
     .catch(response => {
@@ -20,11 +18,17 @@ export class EventoService {
     });
   }
   public crearEvento(evento: Evento): Promise<Evento | JSON> {
-    const headers = new Headers();
-    headers.append('content-type', 'application/json');
-    headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
     return this.http
-    .post(this.coneccionInfo.url_eventos , JSON.stringify(evento) ,  {headers: headers})
+    .post(this.coneccionInfo.url_eventos , JSON.stringify(evento) ,  {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response =>    JSON.parse(response.text().toString()) as Evento )
+    .catch(response => {
+      return  JSON.parse(response.text().toString());
+    });
+  }
+  public getOpciones() {
+    return this.http
+    .options(this.coneccionInfo.url_eventos ,  {headers: this.coneccionInfo.headers})
     .toPromise()
     .then(response =>    JSON.parse(response.text().toString()) as Evento )
     .catch(response => {

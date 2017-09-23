@@ -1,3 +1,4 @@
+import { TokenService } from './servicios/token.service';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
@@ -12,6 +13,7 @@ import { AuthGuard } from './shared';
 import { AuthenticationService } from './servicios/authentication.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
+import { InjectorToken } from './servicios/injectorToken.service';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
@@ -39,7 +41,9 @@ export function HttpLoaderFactory(http: Http) {
     providers: [AuthGuard,
                 AuthenticationService,
                 EventoService,
-            ConeccionInfo],
+                ConeccionInfo,
+                InjectorToken,
+                TokenService],
     bootstrap: [AppComponent]
 })
 export class AppModule {
