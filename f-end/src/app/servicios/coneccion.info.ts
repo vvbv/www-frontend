@@ -12,12 +12,19 @@ export class ConeccionInfo {
     public url_validar_token: string;
     public headers: Headers;
     constructor() {
-        this.url_base = 'http://192.168.1.4:8000';
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
+        this.url_base = 'http://localhost';
         this.url_base_api = this.url_base + '/api';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
+        this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
+        this.url_validar_token = this.url_base_api + '/auth-jwt-verify/';
         this.url_eventos = this.url_base_api + '/eventos/';
+    }
+    construirHeaders() {
+        if (localStorage.getItem('tok')) {
+            this.headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
+        }
     }
 }
 

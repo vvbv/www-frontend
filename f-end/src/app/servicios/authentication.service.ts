@@ -2,7 +2,7 @@ import { JsonFormatter } from 'tslint/lib/formatters';
 
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Event } from '../eventos/evento';
+import { Evento } from '../modelos/evento.class';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
