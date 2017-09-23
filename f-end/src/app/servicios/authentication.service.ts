@@ -6,40 +6,11 @@ import { Event } from '../eventos/evento';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { ConeccionInfo } from './coneccion.info';
+
 @Injectable()
 export class  AuthenticationService  {
-  private base_url: string;
-  private url_get_token: string;
-  private url_refresh_token: string;
-  private url_get_eventos: string;
-  private url_verify_token: string;
-  private url_save_evento: string;
-  public token: string;
-  private headers: Headers;
-  constructor (private http: Http) {}
-  init(base_url: string, url_get_token: string, url_refresh_token: string,
-       url_verify_token: string, url_get_eventos: string, url_save_evento: string) {
-             this.base_url = base_url;
-             this.url_get_token = url_get_token;
-             this.url_refresh_token = url_refresh_token;
-             this.url_verify_token = url_verify_token;
-             this.url_get_eventos = url_get_eventos;
-             this.url_save_evento = url_save_evento;
-             this.headers = new Headers({'Content-Type': 'application/json'});
-  }
-
-  public getBaseUrl(): string {
-      return this.base_url;
-  }
-  public getUrlGetToken(): string {
-      return this.url_get_token;
-  }
-  public getUrlRefreshToken(): string {
-      return this.url_refresh_token;
-  }
-  public getUrlVerifyToken(): string {
-      return this.url_verify_token;
-  }
+    constructor (private http: Http, private coneccionInfo: ConeccionInfo) {}
   /*
    * Obtiene el token si exite, retorna falso en caso contrario
    * @returns string | boolean
@@ -55,16 +26,16 @@ export class  AuthenticationService  {
     headers.append('password', password);
     headers.append('Content-Type', 'application/json');
     return this.http
-                     .post(this.base_url + this.url_get_token + '/', {'username': username, 'password': password})
+                     .post(this.coneccionInfo.url_obtener_token , {'username': username, 'password': password})
                      .toPromise()
                      .then(response =>  {
                          localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
-                         console.log(localStorage.getItem('tok'));
+                         this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
                      })
                      .catch(this.handleError);
     }
 
-    public logout(){
+    public logout() {
         localStorage.removeItem('tok');
     }
     private handleError(error: any): Promise<any> {
@@ -72,41 +43,11 @@ export class  AuthenticationService  {
         return Promise.reject(error.message || error);
       }
 
-  protected validarRutas(): boolean {
-    if (!this.base_url) {
-        console.error('Debe definir primero una url base');
-        return false;
-    }
-    if (!this.url_get_token) {
-        console.error('Debe definir una url para el token');
-        return false;
-    }
-  }
-  public getEventos(): Promise<Event[]> {
-    return this.http
-    .get(this.base_url + this.url_get_eventos + '/', {headers: this.headers } )
-    .toPromise()
-    .then(response =>  JSON.parse(response.text().toString()).results as Event[])
-    .catch(this.handleError);
-  }
-  public crearEvento(evento: Event): Promise<Event> {
-    return this.http
-    .post(this.base_url + this.url_get_eventos + '/', JSON.stringify(evento) ,  {headers: this.headers})
-    .toPromise()
-    .then(response => JSON.parse(response.text().toString()).results as Event )
-    .catch(this.handleError);
-  }
 
-  public getToken(): string | boolean {
-      if (this.token) {
-          return this.token;
-      }else {
-          console.log('No se ha obtenido el token');
-      }
-  }
+
+
+
+
 
 }
-export class Token {
-    token: string;
-    constructor(token: string) { this.token = token; }
-}
+

@@ -10,7 +10,8 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
 import { AuthenticationService } from './servicios/authentication.service';
-
+import { ConeccionInfo } from './servicios/coneccion.info';
+import { EventoService } from './servicios/events.service';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
@@ -36,7 +37,9 @@ export function HttpLoaderFactory(http: Http) {
         })
     ],
     providers: [AuthGuard,
-                AuthenticationService],
+                AuthenticationService,
+                EventoService,
+            ConeccionInfo],
     bootstrap: [AppComponent]
 })
 export class AppModule {

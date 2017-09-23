@@ -4,4 +4,12 @@ export class Event {
     public fechaInicio: string;
     public fechaFinalizacion: string;
     public estado: string;
+
+    constructor() {
+        this.nombre = '';
+        this.descripcion = '';
+        this.fechaInicio = '';
+        this.fechaFinalizacion = '';
+        this.estado = '';
+    }
 }

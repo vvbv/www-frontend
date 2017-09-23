@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
     model: User;
     constructor(public router: Router, private authenticationService: AuthenticationService) {
         this.model = new User();
-        this.authenticationService.init( 'http://localhost:8000/api/' , 'auth-jwt', '', '' , 'eventos', 'eventos/');
     }
 
     ngOnInit() {
@@ -23,7 +22,9 @@ export class LoginComponent implements OnInit {
 
     onLoggedin() {
         this.authenticationService.obtenerToken(this.model.username, this.model.password).then(
-            response => localStorage.getItem('tok') )
+            response => {
+                localStorage.getItem('tok');
+                this.router.navigate(['dashboard']); } )
         .catch(this.printError);
     }
     printError() {
