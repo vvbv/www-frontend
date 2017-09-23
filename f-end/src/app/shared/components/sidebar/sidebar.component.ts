@@ -18,4 +18,7 @@ export class SidebarComponent {
             this.showMenu = element;
         }
     }
+    onSwipeLeft() {
+        console.log('swipleft');
+    }
 }

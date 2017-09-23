@@ -73,17 +73,3 @@ $topnav-background-color: #222;
     background: $topnav-background-color !important;
 }
 
-.navbar {
-    @media screen and (max-width: 990px) {
-        .navbar-brand-right{
-            position: absolute;
-            right: 0px;
-        }
-    } 
-   
-}
-.navbar{
-    .navbar-toggler{
-        position: inherit;
-    }
-}
