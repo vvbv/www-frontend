@@ -21,9 +21,8 @@ export class LoginComponent implements OnInit {
     }
 
     onLoggedin() {
-        this.authenticationService.obtenerToken(this.model.username, this.model.password).then(
+        this.authenticationService.obtenerYAlmacenarToken(this.model.username, this.model.password).then(
             response => {
-                localStorage.getItem('tok');
                 this.router.navigate(['dashboard']); } )
         .catch(this.printError);
     }
