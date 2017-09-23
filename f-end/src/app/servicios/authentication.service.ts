@@ -1,3 +1,4 @@
+import { InjectorToken } from './injectorToken.service';
 import { JsonFormatter } from 'tslint/lib/formatters';
 
 import { Injectable } from '@angular/core';
@@ -10,7 +11,7 @@ import { ConeccionInfo } from './coneccion.info';
 
 @Injectable()
 export class  AuthenticationService  {
-    constructor (private http: Http, private coneccionInfo: ConeccionInfo) {}
+    constructor (private http: Http, private coneccionInfo: ConeccionInfo,  private injectorToken: InjectorToken) {}
   /*
    * Obtiene el token si exite, retorna falso en caso contrario
    * @returns string | boolean
@@ -20,17 +21,18 @@ export class  AuthenticationService  {
    * tanto la base url como la url para obtener el token
    */
 
-  public  obtenerToken(username: string, password: string): Promise<string> {
+  public  obtenerYAlmacenarToken(username: string, password: string): Promise<string> {
     var headers = new Headers();
     headers.append('username', username);
     headers.append('password', password);
     headers.append('Content-Type', 'application/json');
+   
     return this.http
                      .post(this.coneccionInfo.url_obtener_token , {'username': username, 'password': password})
                      .toPromise()
                      .then(response =>  {
                          localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
-                         this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
+                         this.injectorToken.inyectarTokenConeccionInfo();
                      })
                      .catch(this.handleError);
     }
