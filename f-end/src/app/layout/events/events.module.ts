@@ -5,7 +5,14 @@ import { EventsComponent } from './events.component';
 import { EventsRoutingModule } from './events-routing.module';
 import { PageHeaderModule } from './../../shared';
 
-import { MdInputModule,  MdSlideToggleModule, MdAutocompleteModule, } from '@angular/material';
+import {
+    MdInputModule,
+    MdSlideToggleModule,
+    MdAutocompleteModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MdNativeDateModule
+ } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @NgModule({
     imports: [
@@ -17,6 +24,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         FormsModule,
         ReactiveFormsModule,
         MdSlideToggleModule,
+        MatButtonModule,
+        MatDatepickerModule,
+        MdNativeDateModule
     ],
     declarations: [EventsComponent]
 })

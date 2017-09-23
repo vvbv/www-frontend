@@ -1,9 +1,39 @@
-<form class="example-form">
-    <md-form-field class="example-full-width">
-      <input mdInput placeholder="{{'Nombre del evento' }}" value="Sushi">
-    </md-form-field>
-    <md-form-field class="example-full-width">
-         <input mdInput placeholder="{{'Descripcion' }}" value="Sushi">
-    </md-form-field>
+<h1>Creacion de eventos</h1>
 
+<form #eventForm="ngForm" > 
+
+  <div class="form-group ">
+      <label for="nombre" >{{"Nombre"}}</label>
+      <input [(ngModel)]="event.nombre" id="nombre"  name="nombre" type="text" class="form-control" >
+  </div>
+  <div class="form-group">
+      <label for="descripcion" >{{"Descripcion"}}</label>
+      <textarea [(ngModel)]="event.descripcion" id="descripcion" name="descripcion" type="text" class="form-control"> </textarea>
+  </div>
+  <div class="form-group ">
+      <label for="example-datetime-local-input" class="col-8 col-form-label">{{"Fecha de inicio"}}</label>
+      <div class="col-12">
+        <input  [class.has-error] = "errores['fechaInicio']"[(ngModel)]="event.fechaInicio"  id="fechaInicio" name="fechaInicio" class="form-control" type="datetime-local" value="2011-08-19T13:45:00">
+          <div ngFor="let error of errores['fechaInicio']" >
+            <span class="help-block">{{errores['fechaInicio']}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" >
+        <label for="example-datetime-local-input" class="col-8 col-form-label">{{"Fecha de finalizaci&oacute;n"}}</label>
+        <div class="col-12 ">
+          <input [class.has-error] = "errores['fechaFinalizacion']" [(ngModel)]="event.fechaFinalizacion" id="fechaFinalizacion" name="fechaFinalizacion" class="form-control " type="datetime-local" value="2011-08-19T13:45:00" >
+          <div ngFor="let error of errores['fechaFinalizacion']" >
+            <span class="help-block">{{errores['fechaFinalizacion']}}</span>
+        </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="estado" >{{"Estado"}}</label>
+        <textarea [(ngModel)]="event.estado" id="estado" name="estado" class="form-control"> </textarea>
+    </div>
+      <div class="text-center">
+        <button (click)="newEvent()" type="button" class="btn btn-secondary">Crear</button>
+      </div>
   </form>
