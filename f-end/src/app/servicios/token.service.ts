@@ -20,30 +20,43 @@ export class TokenService {
         .post(this.coneccionInfo.url_obtener_token , {'username': username, 'password': password})
         .toPromise()
         .then(response =>  {
-            localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
-            this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
+            localStorage.setItem(this.coneccionInfo.token_name, (JSON.parse(response.text().toString())['token']));
+            this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem(this.coneccionInfo.token_name));
         })
         .catch();
     }
     updateToken() {
         return this.http
-        .get(this.coneccionInfo.url_actualizar_token)
+        .post(this.coneccionInfo.url_actualizar_token,
+            '{"token": "'
+        + localStorage.getItem('tok')
+       + '"}',
+    {headers: this.coneccionInfo.headers} )
         .toPromise()
         .then(response =>  {
-            localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
-            this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem('tok'));
+            localStorage.setItem(this.coneccionInfo.token_name, (JSON.parse(response.text().toString())['token']));
+            this.coneccionInfo.headers.append('Authorization', 'JWT ' + localStorage.getItem(this.coneccionInfo.token_name));
+            this.coneccionInfo.token = localStorage.getItem('tok');
         })
-        .catch();
+        .catch(res => {
+            console.log(res);
+        });
     }
     isValid(token: string): Promise<boolean> {
+        console.log('{"token": "' + localStorage.getItem(this.coneccionInfo.token_name) + '"}');
         return this.http
-        .post(this.coneccionInfo.url_validar_token, JSON.parse('{"token": "' + token + '"}'))
+        .post(this.coneccionInfo.url_validar_token,
+            '{"token": "'
+             + this.coneccionInfo.token
+            + '"}', {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(response =>  {
             if (JSON.parse(response.text())) {
                 return true;
             }
         })
-        .catch();
+        .catch(response => {
+        console.log(response);
+        return false; });
     }
 }

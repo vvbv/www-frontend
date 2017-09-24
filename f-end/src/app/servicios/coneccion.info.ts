@@ -4,7 +4,7 @@ import { Headers } from '@angular/http';
 @Injectable()
 export class ConeccionInfo {
     public token_name;
-    private token;
+    public token;
     private token_prefix;
     public url_base: string;
     public url_base_api: string;

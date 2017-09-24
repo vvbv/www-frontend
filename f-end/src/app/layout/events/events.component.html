@@ -1,17 +1,22 @@
 <h1>Creacion de eventos</h1>
-
+<div *ngIf="estructuraEvento">
 <form #eventForm="ngForm" > 
-
+    <div *ngFor="let error of errores['non_field_errors']" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Algo va mal! </strong> {{error}}
+      </div>
   <div class="form-group ">
-      <label for="nombre" >{{"Nombre"}}</label>
+      <label for="nombre" >{{estructuraEvento.nombre.label}}</label>
       <input [(ngModel)]="event.nombre" id="nombre"  name="nombre" type="text" class="form-control" >
   </div>
   <div class="form-group">
-      <label for="descripcion" >{{"Descripcion"}}</label>
+      <label for="descripcion" >{{estructuraEvento.descripcion.label}}</label>
       <textarea [(ngModel)]="event.descripcion" id="descripcion" name="descripcion" type="text" class="form-control"> </textarea>
   </div>
   <div class="form-group ">
-      <label for="example-datetime-local-input" class="col-8 col-form-label">{{"Fecha de inicio"}}</label>
+      <label for="example-datetime-local-input" class="col-8 col-form-label">{{estructuraEvento.fechaInicio.label}}</label>
       <div class="col-12">
         <input  [class.has-error] = "errores['fechaInicio']"[(ngModel)]="event.fechaInicio"  id="fechaInicio" name="fechaInicio" class="form-control" type="datetime-local" value="2011-08-19T13:45:00">
           <div ngFor="let error of errores['fechaInicio']" >
@@ -21,7 +26,7 @@
     </div>
 
     <div class="form-group" >
-        <label for="example-datetime-local-input" class="col-8 col-form-label">{{"Fecha de finalizaci&oacute;n"}}</label>
+        <label for="example-datetime-local-input" class="col-8 col-form-label">{{estructuraEvento.fechaFinalizacion.label}}</label>
         <div class="col-12 ">
           <input [class.has-error] = "errores['fechaFinalizacion']" [(ngModel)]="event.fechaFinalizacion" id="fechaFinalizacion" name="fechaFinalizacion" class="form-control " type="datetime-local" value="2011-08-19T13:45:00" >
           <div ngFor="let error of errores['fechaFinalizacion']" >
@@ -30,10 +35,13 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="estado" >{{"Estado"}}</label>
-        <textarea [(ngModel)]="event.estado" id="estado" name="estado" class="form-control"> </textarea>
+        <label for="estado" >{{estructuraEvento.estado.label}}</label>
+        <select [(ngModel)]="event.estado" id="estado" name="estado" class="form-control" > 
+          <option *ngFor="let opcion of estructuraEvento.estado.choices" [ngValue]="opcion.value">{{opcion.display_name}}</option>
+        </select>
     </div>
       <div class="text-center">
         <button (click)="newEvent()" type="button" class="btn btn-secondary">Crear</button>
       </div>
   </form>
+</div>
