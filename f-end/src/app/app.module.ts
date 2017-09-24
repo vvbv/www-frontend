@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
 import { AuthenticationService } from './servicios/authentication.service';
+import { UsuarioService } from './servicios/usuario.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
 import { InjectorToken } from './servicios/injectorToken.service';
@@ -40,6 +41,7 @@ export function HttpLoaderFactory(http: Http) {
     ],
     providers: [AuthGuard,
                 AuthenticationService,
+                UsuarioService,
                 EventoService,
                 ConeccionInfo,
                 InjectorToken,
