@@ -25,10 +25,13 @@ export class LoginComponent implements OnInit {
         
         this.authenticationService.obtenerYAlmacenarToken(this.model.username, this.model.password).then(
                 response => {
+                    console.log("USERNAME: " + this.model.username);
+                    console.log("PASSWORD: " + this.model.password);
                     this.usuarioService.getUsuario("administrator2").then(
                         res => {
                             this.usuario = res; 
-                            console.log(this.usuario.username);
+                            console.log(this.usuario.password);
+                            console.log(res);
                             this.router.navigate(['dashboard']); 
                         }
                     );
