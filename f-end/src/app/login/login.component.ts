@@ -22,12 +22,11 @@ export class LoginComponent implements OnInit {
     }
 
     onLoggedin() {
-        
         this.authenticationService.obtenerYAlmacenarToken(this.model.username, this.model.password).then(
                 response => {
-                    console.log("USERNAME: " + this.model.username);
-                    console.log("PASSWORD: " + this.model.password);
-                    this.usuarioService.getUsuario("administrator2").then(
+                    console.log('USERNAME: ' + this.model.username);
+                    console.log('PASSWORD: ' + this.model.password);
+                    this.usuarioService.getUsuario(this.model.username).then(
                         res => {
                             this.usuario = res; 
                             console.log(this.usuario.password);
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit {
                 } 
             )
         .catch(this.printError);
-        
     }
     printError() {
         console.log('error de logueo');
