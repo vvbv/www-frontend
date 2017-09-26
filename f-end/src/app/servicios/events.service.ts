@@ -31,7 +31,6 @@ export class EventoService {
     .then(response =>   {
       return (JSON.parse(response.text().toString()) as Evento)  ; }  )
     .catch(response => {
-      console.log('ya gg mrk')
       return  JSON.parse(response.text().toString());
     });
   }
