@@ -28,8 +28,10 @@ export class EventoService {
     return this.http
     .post(this.coneccionInfo.url_eventos , JSON.stringify(evento) ,  {headers: this.coneccionInfo.headers})
     .toPromise()
-    .then(response =>    JSON.parse(response.text().toString()) as Evento )
+    .then(response =>   {
+      return (JSON.parse(response.text().toString()) as Evento)  ; }  )
     .catch(response => {
+      console.log('ya gg mrk')
       return  JSON.parse(response.text().toString());
     });
   }

@@ -49,12 +49,12 @@ export class EventsComponent  {
    newEvent() {
      this.eventService.crearEvento(this.event).
      then(res => {
-      if (res instanceof Evento) {
+      if ((res as Evento).nombre === this.event.nombre) {
         this.eventoCreado = true;
-
+        this.event = new Evento();
+        this.errores =  JSON.parse('{}');
       } else {
-        this.errores = res;
-        console.log(res);
+        this.errores = res as JSON;
       }
      }
     )
