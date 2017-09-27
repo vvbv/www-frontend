@@ -19,7 +19,7 @@ export class ConeccionInfo {
         this.token_prefix = 'JWT';
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
-        this.url_base = 'http://127.0.0.1:8000';
+        this.url_base = 'http://192.168.1.4:8000';
         this.url_base_api = this.url_base + '/api/v1';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
