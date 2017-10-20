@@ -13,7 +13,7 @@ import { Usuario } from '../modelos/usuario.class';
 })
 export class LoginComponent implements OnInit {
     model: Usuario;
-    usuario:Usuario;
+    usuario: Usuario;
     constructor(public router: Router, private authenticationService: AuthenticationService, private usuarioService: UsuarioService) {
         this.model = new Usuario();
     }
@@ -28,13 +28,13 @@ export class LoginComponent implements OnInit {
                     console.log('PASSWORD: ' + this.model.password);
                     this.usuarioService.getUsuario(this.model.username).then(
                         res => {
-                            this.usuario = res; 
+                            this.usuario = res;
                             console.log(this.usuario.password);
                             console.log(res);
-                            this.router.navigate(['dashboard']); 
+                            this.router.navigate(['dashboard']);
                         }
                     );
-                } 
+                }
             )
         .catch(this.printError);
     }

@@ -1,7 +1,7 @@
 export interface EventoInterface {
-    nombre: string;
-    descripcion: string;
-    fechaInicio: string;
-    fechaFinalizacion: string;
-    estado?: string;
+    nombre: any;
+    descripcion: any;
+    fechaInicio: any;
+    fechaFinalizacion: any;
+    estado: any;
 }

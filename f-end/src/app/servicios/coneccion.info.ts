@@ -4,7 +4,7 @@ import { Headers } from '@angular/http';
 @Injectable()
 export class ConeccionInfo {
     public token_name;
-    private token;
+    public token;
     private token_prefix;
     public url_base: string;
     public url_base_api: string;
@@ -19,7 +19,7 @@ export class ConeccionInfo {
         this.token_prefix = 'JWT';
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');
-        this.url_base = 'http://127.0.0.1:8000';
+        this.url_base = 'http://localhost:8000';
         this.url_base_api = this.url_base + '/api/v1';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';

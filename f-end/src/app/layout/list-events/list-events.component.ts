@@ -19,12 +19,11 @@ import { ConeccionInfo } from '../../servicios/coneccion.info';
 
 @Component({
     selector: 'app-events',
-    templateUrl: './events.component.html',
-    styleUrls: ['./events.component.scss'],
+    templateUrl: './list-events.component.html',
+    styleUrls: ['./list-events.component.scss'],
     animations: [routerTransition()]
 })
-export class EventsComponent  {
-    event: Evento;
+export class ListEventsComponent  {
     eventos: Evento[];
     errores: JSON;
     submitted = false;
@@ -32,7 +31,7 @@ export class EventsComponent  {
     opcionesEvento: JSON;
     estructuraEvento: EventoEstructura;
     constructor(private eventService: EventoService) {
-      this.event = new Evento();
+      this.eventos =  [];
 
       this.errores =  JSON.parse('{}');
 
@@ -47,15 +46,9 @@ export class EventsComponent  {
     }
 
    newEvent() {
-     this.eventService.crearEvento(this.event).
+     this.eventService.getEventos().
      then(res => {
-      if ((res as Evento).nombre === this.event.nombre) {
-        this.eventoCreado = true;
-        this.event = new Evento();
-        this.errores =  JSON.parse('{}');
-      } else {
-        this.errores = res as JSON;
-      }
+      this.eventos = res;
      }
     )
      .catch(

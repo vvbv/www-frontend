@@ -31,14 +31,14 @@ export class  AuthenticationService  {
                      .post(this.coneccionInfo.url_obtener_token , {'username': username, 'password': password})
                      .toPromise()
                      .then(response =>  {
-                         localStorage.setItem('tok', (JSON.parse(response.text().toString())['token']));
+                         localStorage.setItem(this.coneccionInfo.token_name, (JSON.parse(response.text().toString())['token']));
                          this.injectorToken.inyectarTokenConeccionInfo();
                      })
                      .catch(this.handleError);
     }
 
     public logout() {
-        localStorage.removeItem('tok');
+        localStorage.removeItem(this.coneccionInfo.token_name);
     }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
