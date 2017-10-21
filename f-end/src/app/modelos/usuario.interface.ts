@@ -3,6 +3,7 @@ export interface UsuarioInterface {
     password: string;
     rol: string;
     imagenPerfil: string;
-    firstName?: string;
-    lastName?: string;
+    nombres: string;
+    apellidos: string;
+    email: string;
 }
