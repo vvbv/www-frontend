@@ -23,42 +23,18 @@ import { ConeccionInfo } from '../../servicios/coneccion.info';
     styleUrls: ['./list-events.component.scss'],
     animations: [routerTransition()]
 })
-export class ListEventsComponent  {
+export class ListEventsComponent implements OnInit {
     eventos: Evento[];
     errores: JSON;
-    submitted = false;
-    eventoCreado = false;
-    opcionesEvento: JSON;
-    estructuraEvento: EventoEstructura;
+
     constructor(private eventService: EventoService) {
       this.eventos =  [];
-
       this.errores =  JSON.parse('{}');
-
-    //  this.eventService.getEvento(2).subscribe(data => { this.event = data});
-        this.eventService.getOpciones().subscribe(
-          response => {
-            this.opcionesEvento = response;
-            this.estructuraEvento = this.opcionesEvento['actions']['POST'];
-            console.log(this.estructuraEvento.estado.choices);
-          }
-        );
     }
-
-   newEvent() {
-     this.eventService.getEventos().
-     then(res => {
-      this.eventos = res;
-     }
-    )
-     .catch(
-       response => {
-         console.log(response);
-       } );
+    ngOnInit() {
+      this.eventService.getEventos().then(res => {this.eventos = res})
+      .catch(error => console.log(error));
     }
-
-
-
   }
 
 

@@ -15,6 +15,7 @@ const routes: Routes = [
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule'},
+            { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
         ]
     }
 ];

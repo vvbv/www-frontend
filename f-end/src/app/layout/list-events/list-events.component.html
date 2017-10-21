@@ -1,4 +1,13 @@
-<div *ngFor="let evento of eventos" class="" role="">
-   {{evento.nombre}}
 
-  </div>
+<h1> Lista de eventos</h1>
+
+<div class="list-group">
+  <a *ngFor="let evento of eventos"  href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{evento.nombre}}</h5>
+      <small>3 days ago</small>
+    </div>
+    <p class="mb-1">{{evento.descripcion}}</p>
+    <small>Donec id elit non mi porta.</small>
+  </a>
+</div>
