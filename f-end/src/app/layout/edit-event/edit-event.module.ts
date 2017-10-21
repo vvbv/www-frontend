@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ListEventsComponent } from './list-events.component';
-import { ListEventsRoutingModule } from './list-events-routing.module';
+import { EditEventComponent } from './edit-event.component';
+import { EditEventsRoutingModule } from './edit-event-routing.module';
 import { PageHeaderModule } from './../../shared';
-import { MomentModule } from 'angular2-moment';
+
 import {
     MdInputModule,
     MdSlideToggleModule,
@@ -17,7 +17,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 @NgModule({
     imports: [
         CommonModule,
-        ListEventsRoutingModule,
+        EditEventsRoutingModule,
         PageHeaderModule,
         MdInputModule,
         MdAutocompleteModule,
@@ -26,9 +26,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MdSlideToggleModule,
         MatButtonModule,
         MatDatepickerModule,
-        MdNativeDateModule,
-        MomentModule
+        MdNativeDateModule
     ],
-    declarations: [ListEventsComponent]
+    declarations: [EditEventComponent]
 })
-export class ListEventsModule { }
+export class EditEventModule { }

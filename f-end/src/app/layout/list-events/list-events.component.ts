@@ -25,6 +25,7 @@ import { ConeccionInfo } from '../../servicios/coneccion.info';
 })
 export class ListEventsComponent implements OnInit {
     eventos: Evento[];
+    eventoSeleccionado: Evento;
     errores: JSON;
 
     constructor(private eventService: EventoService) {
@@ -34,6 +35,9 @@ export class ListEventsComponent implements OnInit {
     ngOnInit() {
       this.eventService.getEventos().then(res => {this.eventos = res})
       .catch(error => console.log(error));
+    }
+    seleccionarEvento(evento: Evento) {
+      this.eventoSeleccionado = evento;
     }
   }
 
