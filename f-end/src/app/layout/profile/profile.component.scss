@@ -2,7 +2,21 @@
 .img-perfil{
     border-radius: 5px;
 }
-@media(max-width: 720px){
+.mensaje-acciones-especiales{
+    background-color: #444;
+    color: #efefef;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 0.5em 0.5em 0 0.5em;
+    margin-bottom: 0px;
+}
+
+.grupo-acciones-especiales{
+    border:1px solid #444;
+    padding: 0.7em;
+}
+
+@media(max-width: 768px){
     .img-perfil{
         margin: auto;
         display: block;
@@ -12,7 +26,7 @@
     }
 }
 
-@media(min-width: 720px){
+@media(min-width: 768px){
     .formulario-perfil{
         border-left: 1px solid #efefef;
         margin-left: 5px;

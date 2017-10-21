@@ -42,4 +42,30 @@ export class UsuarioService{
         var username:string = localStorage.getItem('username');
         return this.getUsuario(username);
     }
+
+    public actualizarUsuario(usuario: Usuario): Promise< JSON > {
+            return this.http
+            .put(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + usuario.username + '/' , JSON.stringify(usuario) ,  {headers: this.coneccionInfo.headers})
+            .toPromise()
+            .then(response =>   {
+                return JSON.parse(response.text().toString())  ; 
+            })
+            .catch(response => {
+                return JSON.parse(response.text().toString());
+            });
+    }
+
+    /*
+    
+    public crearEvento(evento: Evento): Promise<Evento | JSON> {
+    return this.http
+    .post(this.coneccionInfo.url_eventos , JSON.stringify(evento) ,  {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response =>   {
+      return (JSON.parse(response.text().toString()) as Evento)  ; }  )
+    .catch(response => {
+      return  JSON.parse(response.text().toString());
+    });
+  }
+    */
 }

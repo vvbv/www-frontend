@@ -16,7 +16,12 @@ import { DashboardComponent } from '../layout/dashboard/dashboard.component';
 export class LoginComponent implements OnInit {
     model: Usuario;
     usuario: Usuario;
-    constructor(public router: Router, private authenticationService: AuthenticationService, private usuarioService: UsuarioService) {
+    constructor(
+            public router: Router,
+            private authenticationService: AuthenticationService,
+            private usuarioService: UsuarioService
+        ){
+
         this.model = new Usuario();
     }
 

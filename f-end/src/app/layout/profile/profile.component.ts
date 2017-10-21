@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../modelos/usuario.class';
+import { FormControl } from '@angular/forms';
 
 @Component({
     selector: 'app-profile',
@@ -12,12 +13,17 @@ import { Usuario } from '../../modelos/usuario.class';
     animations: [routerTransition()]
 })
 export class ProfileComponent implements OnInit {
-    private usuarioLogueado: Usuario;
+    usuarioLogueado: Usuario;
+
     public username: string;
     public nombres: string;
     public apellidos: string;
     public email: string;
     public urlImagen: string;
+    public nuevaPassword: string;
+    public passwordActual: string;
+
+    private usuarioActualizado: Usuario;
 
     constructor(private usuarioService: UsuarioService) {
         
@@ -25,6 +31,7 @@ export class ProfileComponent implements OnInit {
             .then(
                 response => {
                     this.usuarioLogueado = response;
+                    this.usuarioActualizado = this.usuarioLogueado;
                     this.username = this.usuarioLogueado.username;
                     this.nombres = this.usuarioLogueado.nombres;
                     this.apellidos = this.usuarioLogueado.apellidos;
@@ -38,6 +45,17 @@ export class ProfileComponent implements OnInit {
                 }
             );
         
+    }
+
+    public actualizarInformacionPerfil(){
+        this.usuarioActualizado.nombres = this.nombres;
+        this.usuarioService.actualizarUsuario(this.usuarioActualizado).then(
+            response => {
+                if(response['username'] == this.usuarioLogueado.username){
+
+                }
+            }
+        );
     }
 
     ngOnInit() {
