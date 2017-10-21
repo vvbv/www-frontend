@@ -5,12 +5,14 @@ export class Usuario implements UsuarioInterface {
     username: string;
     password: string;
     rol: string;
+    imagenPerfil: string;
 
     constructor() {
         
         this.username = '';
         this.password = '';
         this.rol = '';
+        this.imagenPerfil = '';
     }
 }
 

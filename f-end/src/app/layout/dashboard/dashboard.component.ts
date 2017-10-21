@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { ActivatedRoute, Params, Route } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { UsuarioService } from '../../servicios/usuario.service';
+import { Usuario } from '../../modelos/usuario.class';
 
 @Component({
     selector: 'app-dashboard',
@@ -10,8 +14,18 @@ import { routerTransition } from '../../router.animations';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
+    private usuarioLogueado: Usuario;
+    public username: string;
 
-    constructor() {
+    constructor(private usuarioService: UsuarioService) {
+        
+        this.usuarioService.recuperarUsuario()
+            .then(
+                response => {
+                    this.usuarioLogueado = response;
+                    this.username = this.usuarioLogueado.username;
+                }
+            );
         this.sliders.push({
             imagePath: 'assets/images/slider1.jpg',
             label: 'First slide label',
@@ -41,6 +55,7 @@ export class DashboardComponent implements OnInit {
                 consectetur velit culpa molestias dignissimos
                 voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
         });
+        
     }
 
     ngOnInit() {
