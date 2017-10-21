@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
     public sliders: Array<any> = [];
     private usuarioLogueado: Usuario;
     public username: string;
+    public nombres: string;
+    public apellidos:string;
 
     constructor(private usuarioService: UsuarioService) {
         
@@ -24,6 +26,8 @@ export class DashboardComponent implements OnInit {
                 response => {
                     this.usuarioLogueado = response;
                     this.username = this.usuarioLogueado.username;
+                    this.nombres = this.usuarioLogueado.nombres;
+                    this.apellidos = this.usuarioLogueado.apellidos;
                 }
             );
         this.sliders.push({

@@ -6,6 +6,9 @@ export class Usuario implements UsuarioInterface {
     password: string;
     rol: string;
     imagenPerfil: string;
+    nombres: string;
+    apellidos: string;
+    email: string;
 
     constructor() {
         
@@ -13,6 +16,9 @@ export class Usuario implements UsuarioInterface {
         this.password = '';
         this.rol = '';
         this.imagenPerfil = '';
+        this.nombres = '';
+        this.apellidos = '';
+        this.email = '';
     }
 }
 
