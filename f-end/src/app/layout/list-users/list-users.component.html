@@ -1,0 +1,25 @@
+<div [@routerTransition]>
+    <div class="container-fluid">
+        <h1>Lista de usuarios</h1><hr>
+        <div class="row">
+            <table class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>#</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Nick</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios">
+                        <th scope="row">1</th>
+                        <td>{{usuario.nombres}}</td>
+                        <td>{{usuario.apellidos}}</td>
+                        <td>@{{usuario.username}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
