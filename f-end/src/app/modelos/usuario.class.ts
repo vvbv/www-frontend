@@ -9,6 +9,7 @@ export class Usuario implements UsuarioInterface {
     nombres: string;
     apellidos: string;
     email: string;
+    estadoHabilitado: string;
 
     constructor() {
         
@@ -19,6 +20,7 @@ export class Usuario implements UsuarioInterface {
         this.nombres = '';
         this.apellidos = '';
         this.email = '';
+        this.estadoHabilitado = '';
     }
 }
 

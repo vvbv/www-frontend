@@ -2,6 +2,9 @@
     <div class="container-fluid">
         <h1>Lista de usuarios</h1><hr>
         <div class="row">
+            <div class="form-group">
+                <input (keyup)="filtrar($event)" type="" name="filtro" value="" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo">
+            </div>
             <table class="table">
                 <thead class="thead-inverse">
                     <tr>
@@ -9,14 +12,23 @@
                         <th>Nombres</th>
                         <th>Apellidos</th>
                         <th>Nick</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let usuario of usuarios">
-                        <th scope="row">1</th>
+                    <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
+                        <th scope="row">{{i+1}}</th>
                         <td>{{usuario.nombres}}</td>
                         <td>{{usuario.apellidos}}</td>
                         <td>@{{usuario.username}}</td>
+                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.rol}}</td>
+                        <td *ngIf="usuario.estadoHabilitado">Activo</td>
+                        <td *ngIf="!usuario.estadoHabilitado">Inactivo</td>
+                        <td><a href="" class="btn btn-sm btn-primary">Opciones</a></td>
                     </tr>
                 </tbody>
             </table>
