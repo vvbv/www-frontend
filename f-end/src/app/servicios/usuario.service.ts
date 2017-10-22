@@ -55,17 +55,15 @@ export class UsuarioService{
             });
     }
 
-    /*
-    
-    public crearEvento(evento: Evento): Promise<Evento | JSON> {
-    return this.http
-    .post(this.coneccionInfo.url_eventos , JSON.stringify(evento) ,  {headers: this.coneccionInfo.headers})
-    .toPromise()
-    .then(response =>   {
-      return (JSON.parse(response.text().toString()) as Evento)  ; }  )
-    .catch(response => {
-      return  JSON.parse(response.text().toString());
-    });
-  }
-    */
+    public getUsuarios(): Promise<Usuario[]>{
+        return this.http
+        .get(this.coneccionInfo.url_usuarios,  {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                return (JSON.parse(response.text().toString())['results'] as Usuario[]);
+            }
+        );
+    }
+
 }
