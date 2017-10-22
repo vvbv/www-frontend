@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/animations": "^4.3.6",
     "@angular/cdk": "^2.0.0-beta.11",
+    "angular2-moment": "^1.7.0",
     "@angular/common": "^4.3.6",
     "@angular/compiler": "^4.3.6",
     "@angular/core": "^4.3.6",
@@ -37,6 +38,7 @@
   "devDependencies": {
     "@angular/cli": "^1.4.1",
     "@angular/compiler-cli": "^4.3.1",
+    "angular2-moment": "^1.7.0", 
     "@angular/language-service": "^4.3.1",
     "@types/jasmine": "2.5.45",
     "@types/node": "^6.0.88",

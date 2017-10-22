@@ -15,7 +15,6 @@ import { Evento } from '../../modelos/evento.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
 
 import { JsonFormatter } from 'tslint/lib/formatters';
-import { ConeccionInfo } from '../../servicios/coneccion.info';
 
 @Component({
     selector: 'app-events',

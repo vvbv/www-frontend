@@ -1,4 +1,13 @@
-<div *ngFor="let evento of eventos" class="" role="">
-   {{evento.nombre}}
 
-  </div>
+<h1> Lista de eventos</h1>
+
+<div class="list-group">
+  <a [routerLink]="['/edit-event', evento]" *ngFor="let evento of eventos"  class="list-group-item list-group-item-action flex-column align-items-start " [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
+    <div class="d-flex w-100 justify-content-between" title="Click para editar">
+      <h5 class="mb-1">{{evento.nombre}}</h5>
+      <small><b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
+    </div>
+    <p class="mb-1">{{evento.descripcion}}</p>
+   <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->  
+  </a>
+</div>
