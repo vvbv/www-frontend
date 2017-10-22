@@ -2,6 +2,9 @@ export interface UsuarioInterface {
     username: string;
     password: string;
     rol: string;
-    firstName?: string;
-    lastName?: string;
+    imagenPerfil: string;
+    nombres: string;
+    apellidos: string;
+    email: string;
+    estadoHabilitado: string;
 }

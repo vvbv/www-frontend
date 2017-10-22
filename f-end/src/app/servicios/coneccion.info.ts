@@ -10,6 +10,7 @@ export class ConeccionInfo {
     public url_base_api: string;
     public url_eventos: string;
     public url_usuarios: string;
+    public url_imagenes: string;
     public url_obtener_token: string;
     public url_actualizar_token: string;
     public url_validar_token: string;
@@ -26,6 +27,7 @@ export class ConeccionInfo {
         this.url_validar_token = this.url_base_api + '/auth-jwt-verify/';
         this.url_eventos = this.url_base_api + '/eventos/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
+        this.url_imagenes = this.url_base_api + '/imagenes/';
     }
     setToken(token: string) {
         this.token = token;

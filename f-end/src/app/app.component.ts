@@ -9,6 +9,7 @@ import { InjectorToken } from './servicios/injectorToken.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+    
     constructor(private translate: TranslateService,
                 private coneccionInfo: ConeccionInfo,
                 private injectorToken: InjectorToken) {
