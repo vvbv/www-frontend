@@ -15,8 +15,13 @@ const routes: Routes = [
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule'},
+<<<<<<< HEAD
+            { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
+            { path: 'edit-event', loadChildren: './edit-event/edit-event.module#EditEventModule'},
+=======
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
             { path: 'listUsers', loadChildren: './list-users/list-users.module#ListUsersModule'},
+>>>>>>> alpha
         ]
     }
 ];

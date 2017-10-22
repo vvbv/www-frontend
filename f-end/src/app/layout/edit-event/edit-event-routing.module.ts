@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ListEventsComponent } from './list-events.component';
+import { EditEventComponent } from './edit-event.component';
 
 const routes: Routes = [
-    { path: '', component: ListEventsComponent }
+    { path: '', component: EditEventComponent }
 ];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule]
 })
-    export class ListEventsRoutingModule { }
+export class EditEventsRoutingModule { }
