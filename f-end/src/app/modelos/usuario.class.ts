@@ -8,7 +8,7 @@ export class Usuario implements UsuarioInterface {
     imagenPerfil: string;
     nombres: string;
     apellidos: string;
-    email: string;
+    custom_email: string;
     estadoHabilitado: string;
 
     constructor() {
@@ -19,7 +19,7 @@ export class Usuario implements UsuarioInterface {
         this.imagenPerfil = '';
         this.nombres = '';
         this.apellidos = '';
-        this.email = '';
+        this.custom_email = '';
         this.estadoHabilitado = '';
     }
 }

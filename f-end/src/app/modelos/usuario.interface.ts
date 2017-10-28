@@ -5,6 +5,6 @@ export interface UsuarioInterface {
     imagenPerfil: string;
     nombres: string;
     apellidos: string;
-    email: string;
+    custom_email: string;
     estadoHabilitado: string;
 }

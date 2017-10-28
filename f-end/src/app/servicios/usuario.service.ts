@@ -7,18 +7,46 @@ import { routerTransition } from '../router.animations';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+
 @Injectable()
 export class UsuarioService{
 
     constructor(private http: Http, private coneccionInfo: ConeccionInfo ){};
+    
 
-    public getUsuario(username:string): Promise<Usuario>{
+    public crearUsuario(usuario:Usuario): Promise<Usuario>{
         return this.http
-        .get(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + username,  {headers: this.coneccionInfo.headers})
+        .post(this.coneccionInfo.url_usuarios + 'usuario/nuevo/', JSON.stringify(usuario), {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
             response =>  {
                 return (JSON.parse(response.text().toString()) as Usuario);
+            }
+        ).catch(
+            response => {
+                return  (JSON.parse(response.text().toString()) as Usuario);
+            }
+        );
+    }
+
+    public getUsuario(username:string): Promise<Usuario>{
+        return this.http
+        .get(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + username, {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                return (JSON.parse(response.text().toString()) as Usuario);
+            }
+        );
+    }
+
+    public getEstructuraUsuario(): Promise<JSON>{
+        return this.http
+        .options(this.coneccionInfo.url_usuarios + 'usuario/nuevo/', {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                return (JSON.parse(response.text().toString())['actions']['POST']);
             }
         );
     }
@@ -45,7 +73,7 @@ export class UsuarioService{
 
     public actualizarUsuario(usuario: Usuario): Promise< JSON > {
             return this.http
-            .put(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + usuario.username + '/' , JSON.stringify(usuario) ,  {headers: this.coneccionInfo.headers})
+            .put(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + usuario.username + '/', JSON.stringify(usuario), {headers: this.coneccionInfo.headers})
             .toPromise()
             .then(response =>   {
                 return JSON.parse(response.text().toString())  ; 
@@ -57,7 +85,7 @@ export class UsuarioService{
 
     public getUsuarios(): Promise<Usuario[]>{
         return this.http
-        .get(this.coneccionInfo.url_usuarios,  {headers: this.coneccionInfo.headers})
+        .get(this.coneccionInfo.url_usuarios, {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
             response =>  {
