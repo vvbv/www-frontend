@@ -18,6 +18,7 @@ export class NewSystemUserComponent implements OnInit {
     roles: JSON;
     usuarioNuevo: Usuario;
     retornoRegistro: Usuario|JSON;
+    rol: string;
 
     constructor(private usuarioService: UsuarioService) {
         this.usuarioNuevo = new Usuario();
@@ -40,9 +41,10 @@ export class NewSystemUserComponent implements OnInit {
     }
 
     /*Esto sigue sin funcionar*/
-    registrarUSuario(){
-        this.usuarioNuevo.rol = 'AD';
+    registrarUSuario(): void{
+        this.usuarioNuevo.rol = this.rol;
         this.usuarioNuevo.estadoHabilitado = 'true';
+        this.usuarioNuevo.imagenPerfil = null;
         console.log(JSON.stringify(this.usuarioNuevo));
         this.usuarioService.crearUsuario(this.usuarioNuevo).then(
             response => {
@@ -50,11 +52,16 @@ export class NewSystemUserComponent implements OnInit {
                 if((this.retornoRegistro.nombres == this.usuarioNuevo.nombres)&&(this.retornoRegistro.nombres != null)){
                     console.log("Usuario registrado");
                     this.usuarioNuevo = new Usuario();
+                    this.retornoRegistro = new Usuario();
                 }else{
                     this.retornoRegistro;
                 };
             }
         );
+    }
+
+    actualizarRol(): void{
+        console.log(this.rol);
     }
 
     ngOnInit() {

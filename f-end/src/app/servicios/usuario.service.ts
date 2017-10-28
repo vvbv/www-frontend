@@ -7,10 +7,12 @@ import { routerTransition } from '../router.animations';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
+
 @Injectable()
 export class UsuarioService{
 
     constructor(private http: Http, private coneccionInfo: ConeccionInfo ){};
+    
 
     public crearUsuario(usuario:Usuario): Promise<Usuario>{
         return this.http
