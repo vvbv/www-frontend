@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +14,7 @@ import { AuthenticationService } from './servicios/authentication.service';
 import { UsuarioService } from './servicios/usuario.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
+import { PreInscripcionService } from './servicios/preInscripcion.service';
 import { InjectorToken } from './servicios/injectorToken.service';
 
 // AoT requires an exported function for factories
@@ -28,11 +29,12 @@ export function HttpLoaderFactory(http: Http) {
     ],
     imports: [
         BrowserModule,
-        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         AppRoutingModule,
         ReactiveFormsModule,
+        NoopAnimationsModule,
+        BrowserAnimationsModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -45,6 +47,7 @@ export function HttpLoaderFactory(http: Http) {
                 AuthenticationService,
                 UsuarioService,
                 EventoService,
+                PreInscripcionService,
                 ConeccionInfo,
                 InjectorToken,
                 TokenService],

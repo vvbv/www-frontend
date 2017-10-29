@@ -2,6 +2,7 @@ import { UsuarioInterface } from './usuario.interface';
 
 export class Usuario implements UsuarioInterface {
     
+    id: string;
     numero_identificacion: string;
     username: string;
     password: string;
@@ -13,6 +14,7 @@ export class Usuario implements UsuarioInterface {
     estadoHabilitado: string;
 
     constructor() {
+        this.id = '';
         this.numero_identificacion = '';
         this.username = '';
         this.password = '';

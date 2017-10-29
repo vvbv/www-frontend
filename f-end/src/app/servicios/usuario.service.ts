@@ -3,7 +3,6 @@ import { Usuario } from '../modelos/usuario.class';
 import { ConeccionInfo } from './coneccion.info';
 import { AuthenticationService } from './authentication.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { routerTransition } from '../router.animations';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
