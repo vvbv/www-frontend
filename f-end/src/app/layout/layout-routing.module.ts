@@ -19,11 +19,8 @@ const routes: Routes = [
             { path: 'edit-event', loadChildren: './edit-event/edit-event.module#EditEventModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
             { path: 'listUsers', loadChildren: './list-users/list-users.module#ListUsersModule'},
-<<<<<<< HEAD
-=======
             { path: 'newSystemUser', loadChildren: './new-system-user/new-system-user.module#NewSystemUserModule'},
             { path: 'editSystemUser', loadChildren: '../edit-system-user/edit-system-user.module#EditSystemUserModule'},
->>>>>>> alpha
         ]
     }
 ];
