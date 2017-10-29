@@ -1,6 +1,7 @@
 import { EventoInterface } from './evento.interface';
 
 export class Evento implements EventoInterface {
+    public idEvento: string;
     public nombre: string;
     public descripcion: string;
     public fechaInicio: string;
@@ -8,6 +9,7 @@ export class Evento implements EventoInterface {
     public estado: string;
 
     constructor() {
+        this.idEvento = '';
         this.nombre = '';
         this.descripcion = '';
         this.fechaFinalizacion = '';

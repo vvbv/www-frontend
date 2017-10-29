@@ -42,7 +42,7 @@ export class listUsersComponent implements OnInit {
         console.log(this.filtro.indexOf('@'));
         if(this.filtro.indexOf('@') > 0){
             this.usuariosFiltrados = this.usuarios.filter(
-                    usuario => usuario.email.indexOf(this.filtro) >= 0
+                    usuario => usuario.custom_email.indexOf(this.filtro) >= 0
                 );
         }else if(this.filtro == ""){
              this.usuariosFiltrados = this.usuarios;
@@ -52,6 +52,10 @@ export class listUsersComponent implements OnInit {
             this.usuariosFiltrados = this.usuarios.filter(
                     usuario => usuario.username.indexOf(filtro_temporal) >= 0
                 );
+            this.usuariosFiltrados = this.usuariosFiltrados.concat( this.usuarios.filter(
+                    usuario => usuario.numero_identificacion.indexOf(filtro_temporal) >= 0
+                ));
+            
         }
         
     }

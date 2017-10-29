@@ -20,15 +20,15 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
-                        <th scope="row">{{i+1}}</th>
+                        <th scope="row">{{usuario.numero_identificacion}}</th>
                         <td>{{usuario.nombres}}</td>
                         <td>{{usuario.apellidos}}</td>
                         <td>@{{usuario.username}}</td>
-                        <td>{{usuario.email}}</td>
+                        <td>{{usuario.custom_email}}</td>
                         <td>{{usuario.rol}}</td>
                         <td *ngIf="usuario.estadoHabilitado">Activo</td>
                         <td *ngIf="!usuario.estadoHabilitado">Inactivo</td>
-                        <td><a href="" class="btn btn-sm btn-primary">Opciones</a></td>
+                        <td><a href="" [routerLink]="['/editSystemUser']" [queryParams]="{username: usuario.username}" class="btn btn-sm btn-primary">Editar</a></td>
                     </tr>
                 </tbody>
             </table>

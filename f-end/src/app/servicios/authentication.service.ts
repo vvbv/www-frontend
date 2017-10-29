@@ -26,7 +26,7 @@ export class  AuthenticationService  {
     headers.append('username', username);
     headers.append('password', password);
     headers.append('Content-Type', 'application/json');
-   
+
     return this.http
                      .post(this.coneccionInfo.url_obtener_token , {'username': username, 'password': password})
                      .toPromise()
@@ -44,11 +44,6 @@ export class  AuthenticationService  {
         console.error('An error occurred', error); // for demo purposes only
         return Promise.reject(error.message || error);
       }
-
-
-
-
-
 
 
 }

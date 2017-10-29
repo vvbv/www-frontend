@@ -18,10 +18,11 @@ export class ProfileComponent implements OnInit {
     public username: string;
     public nombres: string;
     public apellidos: string;
-    public email: string;
+    public custom_email: string;
     public urlImagen: string;
     public nuevaPassword: string;
     public passwordActual: string;
+    public numero_identificacion: string;
 
     private usuarioActualizado: Usuario;
 
@@ -35,7 +36,8 @@ export class ProfileComponent implements OnInit {
                     this.username = this.usuarioLogueado.username;
                     this.nombres = this.usuarioLogueado.nombres;
                     this.apellidos = this.usuarioLogueado.apellidos;
-                    this.email = this.usuarioLogueado.email;
+                    this.custom_email = this.usuarioLogueado.custom_email;
+                    this.numero_identificacion = this.usuarioLogueado.numero_identificacion;
                     this.usuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil)
                         .then(
                             response => {
@@ -48,6 +50,7 @@ export class ProfileComponent implements OnInit {
     }
 
     public actualizarInformacionPerfil(){
+        /*Falta implementarlo para todos los campos*/
         this.usuarioActualizado.nombres = this.nombres;
         this.usuarioService.actualizarUsuario(this.usuarioActualizado).then(
             response => {
