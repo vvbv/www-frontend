@@ -20,7 +20,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
-                        <th scope="row">{{i+1}}</th>
+                        <th scope="row">{{usuario.numero_identificacion}}</th>
                         <td>{{usuario.nombres}}</td>
                         <td>{{usuario.apellidos}}</td>
                         <td>@{{usuario.username}}</td>

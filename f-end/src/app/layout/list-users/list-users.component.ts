@@ -52,6 +52,10 @@ export class listUsersComponent implements OnInit {
             this.usuariosFiltrados = this.usuarios.filter(
                     usuario => usuario.username.indexOf(filtro_temporal) >= 0
                 );
+            this.usuariosFiltrados = this.usuariosFiltrados.concat( this.usuarios.filter(
+                    usuario => usuario.numero_identificacion.indexOf(filtro_temporal) >= 0
+                ));
+            
         }
         
     }

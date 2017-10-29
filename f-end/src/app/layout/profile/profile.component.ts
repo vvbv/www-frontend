@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
     public urlImagen: string;
     public nuevaPassword: string;
     public passwordActual: string;
+    public numero_identificacion: string;
 
     private usuarioActualizado: Usuario;
 
@@ -36,6 +37,7 @@ export class ProfileComponent implements OnInit {
                     this.nombres = this.usuarioLogueado.nombres;
                     this.apellidos = this.usuarioLogueado.apellidos;
                     this.custom_email = this.usuarioLogueado.custom_email;
+                    this.numero_identificacion = this.usuarioLogueado.numero_identificacion;
                     this.usuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil)
                         .then(
                             response => {
