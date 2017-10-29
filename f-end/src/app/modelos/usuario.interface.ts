@@ -1,4 +1,5 @@
 export interface UsuarioInterface {
+    numero_identificacion: string;
     username: string;
     password: string;
     rol: string;

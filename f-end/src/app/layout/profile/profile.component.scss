@@ -1,6 +1,8 @@
 @import '../../app.component.scss';
 .img-perfil{
     border-radius: 5px;
+    margin: auto;
+    display: block;
 }
 .mensaje-acciones-especiales{
     background-color: #444;
@@ -17,10 +19,6 @@
 }
 
 @media(max-width: 768px){
-    .img-perfil{
-        margin: auto;
-        display: block;
-    }
     .actualizar-imagen{
         margin-bottom: 1em;
     }
