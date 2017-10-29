@@ -20,6 +20,7 @@ const routes: Routes = [
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
             { path: 'listUsers', loadChildren: './list-users/list-users.module#ListUsersModule'},
             { path: 'newSystemUser', loadChildren: './new-system-user/new-system-user.module#NewSystemUserModule'},
+            { path: 'editSystemUser', loadChildren: '../edit-system-user/edit-system-user.module#EditSystemUserModule'},
         ]
     }
 ];
