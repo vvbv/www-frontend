@@ -7,6 +7,7 @@ import { Usuario } from '../modelos/usuario.class';
 import { FormControl } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-edit-system-user',
   templateUrl: './edit-system-user.component.html',
@@ -19,7 +20,8 @@ export class EditSystemUserComponent implements OnInit {
   usuarioRetorno: Usuario;
 
   constructor(private usuarioService: UsuarioService, public activeRoute: ActivatedRoute) {
-      
+      this.usuarioEditar = new Usuario();
+      this.urlImagen = "";
   }
 
   ngOnInit() {
