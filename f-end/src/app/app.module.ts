@@ -14,6 +14,7 @@ import { AuthenticationService } from './servicios/authentication.service';
 import { UsuarioService } from './servicios/usuario.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
+import { PreInscripcionService } from './servicios/preInscripcion.service';
 import { InjectorToken } from './servicios/injectorToken.service';
 
 // AoT requires an exported function for factories
@@ -46,6 +47,7 @@ export function HttpLoaderFactory(http: Http) {
                 AuthenticationService,
                 UsuarioService,
                 EventoService,
+                PreInscripcionService,
                 ConeccionInfo,
                 InjectorToken,
                 TokenService],

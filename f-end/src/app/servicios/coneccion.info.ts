@@ -9,6 +9,7 @@ export class ConeccionInfo {
     public url_base: string;
     public url_base_api: string;
     public url_eventos: string;
+    public url_preinscripcion: string;
     public url_usuarios: string;
     public url_imagenes: string;
     public url_obtener_token: string;
@@ -26,6 +27,7 @@ export class ConeccionInfo {
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
         this.url_validar_token = this.url_base_api + '/auth-jwt-verify/';
         this.url_eventos = this.url_base_api + '/eventos/';
+        this.url_preinscripcion = this.url_base_api + '/eventos/preinscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
     }
