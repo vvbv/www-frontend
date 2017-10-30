@@ -14,7 +14,10 @@ export class ConeccionInfo {
     public url_imagenes: string;
     public url_obtener_token: string;
     public url_actualizar_token: string;
+    public url_actividades: string;
+    public url_actividades_crear: string;
     public url_validar_token: string;
+    public url_actividades_porEvento: string;
     public headers: Headers;
     constructor() {
         this.token_name = 'tok';
@@ -27,6 +30,9 @@ export class ConeccionInfo {
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
         this.url_validar_token = this.url_base_api + '/auth-jwt-verify/';
         this.url_eventos = this.url_base_api + '/eventos/';
+        this.url_actividades = this.url_base_api + '/actividades/';
+        this.url_actividades_crear = this.url_base_api + '/actividades/crear';
+        this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
         this.url_preinscripcion = this.url_base_api + '/eventos/preinscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';

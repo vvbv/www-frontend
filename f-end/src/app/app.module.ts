@@ -16,6 +16,8 @@ import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
 import { PreInscripcionService } from './servicios/preInscripcion.service';
 import { InjectorToken } from './servicios/injectorToken.service';
+import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.module';
+import { ActividadService } from './servicios/actividad.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -35,6 +37,7 @@ export function HttpLoaderFactory(http: Http) {
         ReactiveFormsModule,
         NoopAnimationsModule,
         BrowserAnimationsModule,
+        CrearActividadModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -50,6 +53,7 @@ export function HttpLoaderFactory(http: Http) {
                 PreInscripcionService,
                 ConeccionInfo,
                 InjectorToken,
+                ActividadService,
                 TokenService],
     bootstrap: [AppComponent]
 })

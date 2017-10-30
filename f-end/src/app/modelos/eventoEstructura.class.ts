@@ -1,6 +1,6 @@
 import { EventoInterface } from './evento.interface';
 export class EventoEstructura implements EventoInterface {
-    idEvento: any;
+    id: any;
     nombre: any;
     descripcion: any;
     fechaInicio: any;

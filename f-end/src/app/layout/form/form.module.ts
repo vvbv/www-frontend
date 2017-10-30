@@ -4,13 +4,12 @@ import { CommonModule } from '@angular/common';
 import { FormRoutingModule } from './form-routing.module';
 import { FormComponent } from './form.component';
 import { PageHeaderModule } from './../../shared';
-
+import { CrearActividadComponent } from '../../shared/crear-actividad/crear-actividad.component';
 @NgModule({
     imports: [
         CommonModule,
-        FormRoutingModule,
-        PageHeaderModule
+        FormRoutingModule
     ],
-    declarations: [FormComponent]
+    declarations: [FormComponent, CrearActividadComponent]
 })
 export class FormModule { }
