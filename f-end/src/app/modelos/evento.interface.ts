@@ -1,5 +1,5 @@
 export interface EventoInterface {
-    idEvento: any;
+    id: any;
     nombre: any;
     descripcion: any;
     fechaInicio: any;

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
-import { EditEventComponent } from './edit-event.component';
-import { EditEventsRoutingModule } from './edit-event-routing.module';
+
 import { PageHeaderModule } from './../../shared';
-import { DateTimePickerModule } from 'ng-pick-datetime';
 
 import {
     MdInputModule,
@@ -15,10 +15,14 @@ import {
     MdNativeDateModule
  } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { CrearActividadComponent } from './crear-actividad.component';
+import { ActividadRoutingModule } from './crear-actividad-routing.module';
 @NgModule({
     imports: [
         CommonModule,
-        EditEventsRoutingModule,
+        NgbDropdownModule.forRoot(),
+        TranslateModule,
+        CommonModule,
         PageHeaderModule,
         MdInputModule,
         MdAutocompleteModule,
@@ -27,9 +31,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         MdSlideToggleModule,
         MatButtonModule,
         MatDatepickerModule,
-        MdNativeDateModule,
-        DateTimePickerModule
+        ActividadRoutingModule,
+        MdNativeDateModule
     ],
-    declarations: [EditEventComponent]
+    declarations: [
+        CrearActividadComponent
+    ],
+    exports: [
+        CrearActividadComponent
+    ]
 })
-export class EditEventModule { }
+export class CrearActividadModule { }

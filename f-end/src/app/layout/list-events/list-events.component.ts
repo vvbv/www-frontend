@@ -35,10 +35,9 @@ export class ListEventsComponent implements OnInit {
     private usuarioLogueado: Usuario;
 
     constructor(
-        private eventService: EventoService, 
-        private preInscripcionService: PreInscripcionService, 
-        private usuarioService: UsuarioService) 
-    {
+        private eventService: EventoService,
+        private preInscripcionService: PreInscripcionService,
+        private usuarioService: UsuarioService) {
       this.preinscripcionNueva = new PreInscripcion();
       this.eventos =  [];
       this.eventoSeleccionado = new Evento();
@@ -59,16 +58,15 @@ export class ListEventsComponent implements OnInit {
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
     }
-    preinscripcion(idEvento: any): void{
+    preinscripcion(idEvento: any): void {
       this.preinscripcionNueva.evento = idEvento;
       this.preinscripcionNueva.participante = this.usuarioLogueado.id;
       this.preinscripcionNueva.estado = 'E';
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
-          
-          if (typeof response === 'object'){
+          if (typeof response === 'object') {
               console.log('Usuario preinscrito correctamente!');
-            }else{
+            }else {
               console.log('Ya tiene una preinscripción anterior en este evento!');
             }
         }
