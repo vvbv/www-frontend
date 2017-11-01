@@ -13,9 +13,14 @@ export class EventoService {
     return this.http
     .get(this.coneccionInfo.url_eventos , {headers: this.coneccionInfo.headers} )
     .toPromise()
-    .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
+    .then(response => {
+      console.log(response);
+      return JSON.parse(response.text().toString()).results as Evento[]
+    })
     .catch(response => {
+     
       return response;
+      
     });
   }
   public getEvento(id: number): Observable<Evento>  {

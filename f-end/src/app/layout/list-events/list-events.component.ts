@@ -6,8 +6,6 @@ import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material';
-
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -40,6 +38,7 @@ export class ListEventsComponent implements OnInit {
         private usuarioService: UsuarioService) {
       this.preinscripcionNueva = new PreInscripcion();
       this.eventos =  [];
+
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
 
@@ -52,7 +51,7 @@ export class ListEventsComponent implements OnInit {
 
     }
     ngOnInit() {
-      this.eventService.getEventos().then(res => {this.eventos = res})
+      this.eventService.getEventos().then(response => {this.eventos = response; console.log(response);})
       .catch(error => console.log(error));
     }
     seleccionarEvento(evento: Evento) {

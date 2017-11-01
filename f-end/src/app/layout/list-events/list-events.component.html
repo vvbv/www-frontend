@@ -1,22 +1,31 @@
 
 <h1> Lista de eventos</h1>
-
-<div class="list-group">
-  <div *ngFor="let evento of eventos" class="col-12 item-evento">
-    <div [routerLink]="['/edit-event/', evento.id]"   class="list-group-item list-group-item-action flex-column align-items-start " [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
-      <div class="d-flex w-100 justify-content-between" title="Click para editar">
-        <h5 class="mb-1">{{evento.nombre}}</h5>
-        <small><b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
-        <br>
+<div *ngIf="eventos">
+  <div class="list-group">
+    <div *ngIf="eventos.length > 0">
+      <div *ngFor="let evento of eventos" class="col-12 item-evento">
+        <div [routerLink]="['/edit-event/', evento.id]"   class="list-group-item list-group-item-action flex-column align-items-start " [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
+          <div class="d-flex w-100 justify-content-between" title="Click para editar">
+            <h5 class="mb-1">{{evento.nombre}}</h5>
+            <small><b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
+            <br>
+          </div>
+          <p class="mb-1">Descripción: {{evento.descripcion}}</p>
+        <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->  
+        </div>
+        <div class="opciones-evento">
+          <a (click)="preinscripcion(evento.idEvento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
+          <a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;
+          <a [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
+        </div>
       </div>
-      <p class="mb-1">Descripción: {{evento.descripcion}}</p>
-    <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->  
-    </div>
-    <div class="opciones-evento">
-      <a (click)="preinscripcion(evento.idEvento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
-      <a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;
-      <a [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
+      
     </div>
   </div>
-  
+  <div *ngIf="eventos.length == 0">
+      <div class="alert alert-warning" role="alert">
+          <strong>Opps!</strong> No hay registrados eventos aún
+          <a [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar uno ahora?</a>
+        </div>
+  </div>
 </div>
