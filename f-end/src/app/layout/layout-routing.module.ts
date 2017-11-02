@@ -20,7 +20,7 @@ const routes: Routes = [
             { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
             { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
-            { path: 'listUsers', loadChildren: './list-users-layout/list-users-layout.module#ListUsersLayoutModule'},
+            { path: 'listUserss', loadChildren: './list-users-layout/list-users-layout.module#ListUsersLayoutModule'},
             { path: 'newSystemUser', loadChildren: './new-system-user/new-system-user.module#NewSystemUserModule'},
             { path: 'editSystemUser', loadChildren: '../edit-system-user/edit-system-user.module#EditSystemUserModule'},
         ]

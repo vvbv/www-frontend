@@ -61,12 +61,12 @@ export class UsuarioService{
         );
     }
 
-    public almacenarUsuario(username:string): void{
+    public almacenarUsuario(username: string): void{
         localStorage.setItem('username', username);
     }
 
     public recuperarUsuario(): Promise<Usuario>{
-        var username:string = localStorage.getItem('username');
+        const username: string = localStorage.getItem('username');
         return this.getUsuario(username);
     }
 
@@ -88,7 +88,6 @@ export class UsuarioService{
         .toPromise()
         .then(
             response =>  {
-                console.log(JSON.parse(response.text().toString()) );
                 return (JSON.parse(response.text().toString()).results as Usuario[]);
             }
         );
