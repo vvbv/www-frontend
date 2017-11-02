@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
                 }
             )
         .catch(res => {
+            
             this._toastr.error('Datos invalidos', 'Error!', {toastLife: 3000, showCloseButton: false});
         });
     }

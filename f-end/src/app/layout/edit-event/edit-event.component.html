@@ -10,11 +10,7 @@
            <strong>Algo va mal! </strong> {{error}}
          </div>
  
-         <div *ngIf = "eventoEditado">
-           <div class="alert alert-success" role="alert">
-             Se ha editado el evento
-           </div>
-         </div>
+
      <div  [class.has-danger] = "errores.nombre" class="form-group col-12">
          <label class = "col-form-label" for="nombre" >{{estructuraEvento.nombre.label}}</label>
          <input  [class.form-control-danger] = "errores.nombre" [(ngModel)]="evento.nombre" id="nombre"  name="nombre" type="text" class="form-control" >
@@ -54,7 +50,7 @@
            </div>
        </div>
          <div class="text-center">
-           <button (click)="actualizarEvento(evento)" type="button" class="btn btn-secondary">Actualizar</button>
+           <button (click)="actualizarEvento(evento)" type="button" class="btn float-right btn-primary">Actualizar</button>
          </div>
      </form>
    </div>
