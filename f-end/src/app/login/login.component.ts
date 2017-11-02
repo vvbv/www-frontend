@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
             this._toastr.setRootViewContainerRef(vRef);
         this.model = new Usuario();
     }
-    printError(t: any) {
+    printError() {
         console.log('error de logueo');
 
         
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
                 }
             )
         .catch(res => {
-            this._toastr.error('Datos invalidos como tu abuela', 'Error!', {toastLife: 3000, showCloseButton: false});
+            this._toastr.error('Datos invalidos', 'Error!', {toastLife: 3000, showCloseButton: false});
         });
     }
 
