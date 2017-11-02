@@ -10,6 +10,7 @@ export class ConeccionInfo {
     public url_base_api: string;
     public url_eventos: string;
     public url_preinscripcion: string;
+    public url_inscripcion: string;
     public url_usuarios: string;
     public url_imagenes: string;
     public url_obtener_token: string;
@@ -34,6 +35,7 @@ export class ConeccionInfo {
         this.url_actividades_crear = this.url_base_api + '/actividades/crear';
         this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
         this.url_preinscripcion = this.url_base_api + '/eventos/preinscripciones/';
+        this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
     }

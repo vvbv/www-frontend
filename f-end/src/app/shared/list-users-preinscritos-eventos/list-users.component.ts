@@ -3,6 +3,8 @@ import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
+import { PreInscripcionService } from '../../servicios/preInscripcion.service';
+import { InscripcionService } from '../../servicios/inscripcion.service';
 import { Usuario } from '../../modelos/usuario.class';
 import { FormControl } from '@angular/forms';
 
@@ -18,7 +20,11 @@ export class listUsersComponent implements OnInit {
     @Input() public usuariosFiltrados: Usuario[];
     public filtro;
 
-    constructor(private usuarioService: UsuarioService) {
+    constructor(
+            private usuarioService: UsuarioService, 
+            private preinscripcionService: PreInscripcionService, 
+            private inscripcionService: InscripcionService
+        ) {
         this.usuarioService.recuperarUsuario()
             .then(
                 response => {
@@ -32,6 +38,7 @@ export class listUsersComponent implements OnInit {
     }
     aceptarPreinscripcion(usuario: Usuario): void {
         this.usuariosFiltrados = this.usuariosFiltrados.filter(obj => obj !== usuario);
+
     }
 
     filtrar(){
