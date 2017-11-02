@@ -1,8 +1,8 @@
 import { EventoService } from '../../servicios/events.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {FormControl} from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -30,9 +30,13 @@ export class EditEventComponent  implements OnInit {
   private errores: JSON;
   private opcionesEvento: JSON;
   constructor(
+    private _toastr: ToastsManager,
+    vRef: ViewContainerRef,
     private eventService: EventoService,
     private route: ActivatedRoute,
     private router: Router) {
+      this._toastr.setRootViewContainerRef(vRef);
+      
           this.errores =  JSON.parse('{}');
             this.eventService.getOpciones().subscribe(
               response => {
@@ -50,12 +54,17 @@ export class EditEventComponent  implements OnInit {
       res => {
         if ((res as Evento).nombre === evento.nombre) {
           this.eventoEditado = true;
+          this._toastr.success('Datos actualizados', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
           this.errores =  JSON.parse('{}');
         } else {
           this.errores = res as JSON;
+          this._toastr.error('Datos invalidos', 'Error!', {toastLife: 3000, showCloseButton: false});
         }
        }
-    ).catch(res => console.log(res));
+    ).catch(res => {
+      console.log(res);
+      this._toastr.error('Datos invalidos', 'Error!', {toastLife: 3000, showCloseButton: false});
+    });
   }
   ngOnInit() {
 
