@@ -1,0 +1,23 @@
+
+@import '../../app.component.scss';
+.example-form {
+    min-width: 150px;
+    max-width: 80%;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  .active > .d-flex, .active > .mb-1{
+    color: white;
+  }
+
+.opciones-evento{
+  padding: 0.3em;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.item-evento{
+  cursor: pointer;
+}

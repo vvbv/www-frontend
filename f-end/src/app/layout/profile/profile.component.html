@@ -1,0 +1,55 @@
+<div [@routerTransition]>
+    <div class="container-fluid">
+        <h1>Informaci&oacute;n personal</h1><hr>
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 actualizar-imagen">
+                <form>
+                    <div class="form-group">
+                        <img src="{{urlImagen}}" class="img-fluid img-perfil" alt="">
+                    </div>
+                    <button class="col btn btn-success"  (click)="actualizarImagenPerfil()" type=""><i class="fa fa-refresh"></i> Actualizar imagen</button>
+                </form>
+            </div>
+            <form #usuarioForm="ngForm" class="row col-sm-12 col-md-9 col-lg-7 col-xl-7 formulario-perfil">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Nombres:</label>
+                        <input type="" class="form-control" name="nombres" value="" [(ngModel)]="nombres">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Apellidos:</label>
+                        <input type="" class="form-control" name="apellidos" value="" [(ngModel)]="apellidos">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Identificacion:</label>
+                        <input type="" class="form-control" name="numero_identificacion" value="" [(ngModel)]="numero_identificacion" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nick:</label>
+                        <input type="" class="form-control" name="username" value="" [(ngModel)]="username" disabled>
+                    </div>
+                    <div class="form-group mensaje-acciones-especiales">
+                        <label for="">Para actualizar estos datos, necesita proveer la contraseña actual</label>
+                    </div>
+                    <div class="form-group grupo-acciones-especiales">
+                        <div class="form-group">
+                            <label for="">Correo electr&oacute;nico:</label>
+                            <input type="" class="form-control" name="custom_email" value="" [(ngModel)]="custom_email">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Nueva contrase&ntilde;a:</label>
+                            <input type="password" class="form-control" name="nuevaPassword" [(ngModel)]="nuevaPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Contrase&ntilde;a actual:</label>
+                            <input type="password" class="form-control" name="passwordActual" value="" [(ngModel)]="passwordActual">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button (click)="actualizarInformacionPerfil()" class="btn btn-primary float-right">Actualizar datos</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

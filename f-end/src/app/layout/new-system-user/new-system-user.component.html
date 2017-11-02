@@ -1,0 +1,47 @@
+<div [@routerTransition]>
+   <div class="container-fluid">
+       <div class="row">
+           <div class="col-12">
+               <h1>Crear nuevo usuario</h1>
+               <hr>
+           </div>
+           <div class="col-12">
+               <form #nuevoUsuarioForm="ngForm">
+                   <div class="form-group col-12">
+                       <label for="">Nombres:</label>
+                       <input type="" class="form-control" name="nombres" value="" [(ngModel)]="usuarioNuevo.nombres" placeholder="{{retornoRegistro.nombres}}" required>
+                   </div>
+                   <div class="form-group col-12">
+                       <label for="">Apellidos:</label>
+                       <input type="" class="form-control" name="apellidos" value="" [(ngModel)]="usuarioNuevo.apellidos" placeholder="{{retornoRegistro.apellidos}}" required>
+                   </div>
+                   <div class="form-group col-12">
+                       <label for="">Número de identificación:</label>
+                       <input type="" class="form-control" name="numero_identificacion" value="" [(ngModel)]="usuarioNuevo.numero_identificacion" placeholder="{{retornoRegistro.numero_identificacion}}" required>
+                   </div>
+                   <div class="form-group col-12">
+                       <label for="">Nombre de usuario:</label>
+                       <input type="" class="form-control" name="username" value="" [(ngModel)]="usuarioNuevo.username" placeholder="{{retornoRegistro.username}}" required>
+                   </div>
+                   <div class="form-group col-12">
+                       <label for="">Email:</label>
+                       <input type="email" class="form-control" name="custom_email" value="" [(ngModel)]="usuarioNuevo.custom_email" placeholder="{{retornoRegistro.custom_email}}" required>
+                   </div>
+                   <div class="form-group col-12">
+                       <label for="">Contrase&ntilde;a:</label>
+                       <input type="password" class="form-control" name="password" value="" [(ngModel)]="usuarioNuevo.password" placeholder="{{retornoRegistro.password}}" required>
+                   </div>
+                   <div class="form-group col-12">
+                       <label for="">Rol:</label>
+                       <select class="form-control" (change)="actualizarRol()" name="rol" [(ngModel)]="rol">
+                           <option *ngFor="let rol of roles; let i = index;" [value]="rol.value"  class="form-control">{{rol.display_name}}</option>
+                       </select>
+                   </div>
+                   <div class="form-group col-12">
+                       <button (click)="registrarUSuario()" type="" class="btn btn-primary float-right">Registrar usuario</button>
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
+</div>
