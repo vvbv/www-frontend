@@ -9,8 +9,7 @@
            </button>
            <strong>Algo va mal! </strong> {{error}}
          </div>
- 
-
+         
      <div  [class.has-danger] = "errores.nombre" class="form-group col-12">
          <label class = "col-form-label" for="nombre" >{{estructuraEvento.nombre.label}}</label>
          <input  [class.form-control-danger] = "errores.nombre" [(ngModel)]="evento.nombre" id="nombre"  name="nombre" type="text" class="form-control" >
