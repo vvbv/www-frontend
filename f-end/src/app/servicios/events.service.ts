@@ -9,13 +9,11 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class EventoService {
   constructor( private http: Http, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
-  public getEventos(): Promise<Evento[]> {
+  public getEventos(): Observable<Evento[]> {
     return this.http
     .get(this.coneccionInfo.url_eventos , {headers: this.coneccionInfo.headers} )
-    .toPromise()
-    .then(response =>  JSON.parse(response.text().toString()).results as Evento[])
-    .catch(response => {
-      return response;
+    .map (response => {
+      return JSON.parse(response.text()).results as Evento[]
     });
   }
   public getEvento(id: number): Observable<Evento>  {
@@ -35,13 +33,28 @@ export class EventoService {
     });
   }
   public getOpciones(): Observable<JSON> {
-    console.log(this.coneccionInfo.token);
     return this.http
     .options(this.coneccionInfo.url_eventos ,  {headers: this.coneccionInfo.headers})
-    .map(response => JSON.parse(response.text().toString()) )
+    .map(response => JSON.parse(response.text().toString())  )
 ;
   }
 
   deleteEvent(event: Evento) {}
-  updateEvent(event: Evento) {}
+  updateEvent(event: Evento): Promise<Evento | JSON> {
+     return this.http
+    .put(this.coneccionInfo.url_eventos + event.id +  '/', JSON.stringify(event) , {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(
+      response => {
+        console.log(response.text());
+        return (JSON.parse(response.text().toString()) as Evento);
+      }
+    )
+    .catch(
+      response => {
+        console.log(response.text());
+        return (JSON.parse(response.text().toString()));
+      }
+    );
+  }
 }

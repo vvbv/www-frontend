@@ -13,12 +13,14 @@ const routes: Routes = [
             { path: 'bs-element', loadChildren: './bs-element/bs-element.module#BsElementModule' },
             { path: 'grid', loadChildren: './grid/grid.module#GridModule' },
             { path: 'components', loadChildren: './bs-component/bs-component.module#BsComponentModule' },
+            { path: 'crearActEvento/:id', loadChildren:
+            '../shared/crear-actividad/crear-actividad.module#CrearActividadModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule'},
             { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
-            { path: 'edit-event', loadChildren: './edit-event/edit-event.module#EditEventModule'},
+            { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
-            { path: 'listUsers', loadChildren: './list-users/list-users.module#ListUsersModule'},
+            { path: 'listUsers', loadChildren: './list-users-layout/list-users-layout.module#ListUsersLayoutModule'},
             { path: 'newSystemUser', loadChildren: './new-system-user/new-system-user.module#NewSystemUserModule'},
             { path: 'editSystemUser', loadChildren: '../edit-system-user/edit-system-user.module#EditSystemUserModule'},
         ]

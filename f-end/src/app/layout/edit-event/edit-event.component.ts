@@ -4,12 +4,11 @@ import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-import 'hammerjs';
 
 import { Evento } from '../../modelos/evento.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
@@ -22,14 +21,19 @@ import { JsonFormatter } from 'tslint/lib/formatters';
   styleUrls: ['./edit-event.component.scss'],
   animations: [routerTransition()]
 })
-export class EditEventComponent  {
-  estructuraEvento: EventoEstructura;
-  @Input() evento: Evento;
-  errores: JSON;
-  opcionesEvento: JSON;
-  constructor(private eventService: EventoService) {
+export class EditEventComponent  implements OnInit {
+  private estructuraEvento: EventoEstructura;
+  @Input() idEvento: number;
+  private eventoEditado: boolean;
+  private evento$: Observable<Evento>;
+  private eventoRespuesto: Evento;
+  private errores: JSON;
+  private opcionesEvento: JSON;
+  constructor(
+    private eventService: EventoService,
+    private route: ActivatedRoute,
+    private router: Router) {
           this.errores =  JSON.parse('{}');
-        //  this.eventService.getEvento(2).subscribe(data => { this.event = data});
             this.eventService.getOpciones().subscribe(
               response => {
                 this.opcionesEvento = response;
@@ -37,6 +41,23 @@ export class EditEventComponent  {
                 console.log(this.estructuraEvento.estado.choices);
               }
             );
+            this.evento$ = this.route.paramMap
+            .switchMap((params: ParamMap) =>
+            this.eventService.getEvento(Number(params.get('id'))));
+  }
+  actualizarEvento(evento: Evento): void {
+    this.eventService.updateEvent(evento).then(
+      res => {
+        if ((res as Evento).nombre === evento.nombre) {
+          this.eventoEditado = true;
+          this.errores =  JSON.parse('{}');
+        } else {
+          this.errores = res as JSON;
+        }
+       }
+    ).catch(res => console.log(res));
+  }
+  ngOnInit() {
 
   }
 
