@@ -6,14 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { PageHeaderModule } from './../../shared';
 
-import {
-    MdInputModule,
-    MdSlideToggleModule,
-    MdAutocompleteModule,
-    MatButtonModule,
-    MatDatepickerModule,
-    MdNativeDateModule
- } from '@angular/material';
+
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CrearActividadComponent } from './crear-actividad.component';
 import { ActividadRoutingModule } from './crear-actividad-routing.module';
@@ -24,15 +17,9 @@ import { ActividadRoutingModule } from './crear-actividad-routing.module';
         TranslateModule,
         CommonModule,
         PageHeaderModule,
-        MdInputModule,
-        MdAutocompleteModule,
         FormsModule,
         ReactiveFormsModule,
-        MdSlideToggleModule,
-        MatButtonModule,
-        MatDatepickerModule,
         ActividadRoutingModule,
-        MdNativeDateModule
     ],
     declarations: [
         CrearActividadComponent

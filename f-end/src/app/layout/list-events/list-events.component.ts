@@ -6,8 +6,6 @@ import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material';
-
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -28,21 +26,22 @@ import { ConeccionInfo } from '../../servicios/coneccion.info';
     animations: [routerTransition()]
 })
 export class ListEventsComponent implements OnInit {
-    eventos: Evento[];
+    eventos$: Observable<Evento[]>;
     eventoSeleccionado: Evento;
     errores: JSON;
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
-
+    mensaje: string;
     constructor(
         private eventService: EventoService,
         private preInscripcionService: PreInscripcionService,
         private usuarioService: UsuarioService) {
       this.preinscripcionNueva = new PreInscripcion();
-      this.eventos =  [];
+
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
-
+      ;
+      this.eventos$ = this.eventService.getEventos();
       this.usuarioService.recuperarUsuario()
             .then(
                 response => {
@@ -52,8 +51,7 @@ export class ListEventsComponent implements OnInit {
 
     }
     ngOnInit() {
-      this.eventService.getEventos().then(res => {this.eventos = res})
-      .catch(error => console.log(error));
+     
     }
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
@@ -65,9 +63,11 @@ export class ListEventsComponent implements OnInit {
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
           if (typeof response === 'object') {
-              console.log('Usuario preinscrito correctamente!');
+              this.mensaje = 'Usuario preinscrito correctamente!'
+              console.log(this.mensaje);
             }else {
-              console.log('Ya tiene una preinscripción anterior en este evento!');
+              this.mensaje = 'Ya tiene una preinscripción anterior en este evento!';
+              console.log(this.mensaje);
             }
         }
       );

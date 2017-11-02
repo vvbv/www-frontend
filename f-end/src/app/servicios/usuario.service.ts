@@ -88,7 +88,8 @@ export class UsuarioService{
         .toPromise()
         .then(
             response =>  {
-                return (JSON.parse(response.text().toString())['results'] as Usuario[]);
+                console.log(JSON.parse(response.text().toString()) );
+                return (JSON.parse(response.text().toString()).results as Usuario[]);
             }
         );
     }

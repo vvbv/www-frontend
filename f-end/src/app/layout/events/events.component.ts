@@ -4,7 +4,6 @@ import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';

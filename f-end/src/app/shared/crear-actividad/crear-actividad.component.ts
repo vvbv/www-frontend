@@ -5,7 +5,6 @@ import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
 import {FormControl} from '@angular/forms';
-import {MatAutocompleteModule} from '@angular/material';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import {Observable} from 'rxjs/Observable';
