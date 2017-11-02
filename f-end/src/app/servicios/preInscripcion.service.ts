@@ -66,4 +66,12 @@ export class PreInscripcionService{
         );
     }
 
+    // Azucar
+    public aceptarPreinscripcion(idPreinscripcion): Promise<PreInscripcion|JSON>{
+        return this.cambiarEstadoPreInscripcion(idPreinscripcion, 'A');
+    }
+    public rechazarPreinscripcion(idPreinscripcion): Promise<PreInscripcion|JSON>{
+        return this.cambiarEstadoPreInscripcion(idPreinscripcion, 'R');
+    }
+
 }
