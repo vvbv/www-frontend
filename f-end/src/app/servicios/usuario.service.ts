@@ -89,7 +89,7 @@ export class UsuarioService{
         .then(
             response =>  {
                 console.log(JSON.parse(response.text().toString()) );
-                return (JSON.parse(response.text().toString()) as Usuario[]);
+                return (JSON.parse(response.text().toString()).results as Usuario[]);
             }
         );
     }

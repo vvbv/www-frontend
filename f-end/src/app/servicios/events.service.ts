@@ -13,8 +13,7 @@ export class EventoService {
     return this.http
     .get(this.coneccionInfo.url_eventos , {headers: this.coneccionInfo.headers} )
     .map (response => {
-    
-      return JSON.parse(response.text()) as Evento[]
+      return JSON.parse(response.text()).results as Evento[]
     });
   }
   public getEvento(id: number): Observable<Evento>  {
