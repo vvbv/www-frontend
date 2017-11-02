@@ -1,5 +1,5 @@
 import { EventoInterface } from './evento.interface';
-
+import { Usuario } from './usuario.class';
 export class Evento implements EventoInterface {
     public id: string;
     public nombre: string;
@@ -7,7 +7,7 @@ export class Evento implements EventoInterface {
     public fechaInicio: string;
     public fechaFinalizacion: string;
     public estado: string;
-
+    public usuariosPreinscritos: Usuario[];
     constructor() {
         this.id = '';
         this.nombre = '';
@@ -15,5 +15,6 @@ export class Evento implements EventoInterface {
         this.fechaFinalizacion = '';
         this.fechaInicio = '';
         this.estado = '';
+        this.usuariosPreinscritos = new Array<Usuario>();
     }
 }
