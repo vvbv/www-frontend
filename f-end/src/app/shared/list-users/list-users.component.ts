@@ -19,7 +19,6 @@ export class listUsersComponent implements OnInit {
     public filtro;
 
     constructor(private usuarioService: UsuarioService) {
-        
         this.usuarioService.recuperarUsuario()
             .then(
                 response => {

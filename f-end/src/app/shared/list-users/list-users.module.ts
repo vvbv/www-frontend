@@ -3,20 +3,19 @@ import { CommonModule } from '@angular/common';
 import { PageHeaderModule } from './../../shared';
 import { NgClass } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { listUsersRoutingModule } from './list-users-routing.module';
 import { listUsersComponent } from './list-users.component';
-
+import { Routes, RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
         CommonModule,
-        listUsersRoutingModule,
         PageHeaderModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule
     ],
     declarations: [
-        listUsersComponent
+        
     ]
 })
-export class ListUsersModule { }
+export class ListUsersModule {}
