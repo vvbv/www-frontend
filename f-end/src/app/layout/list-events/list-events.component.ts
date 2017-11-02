@@ -26,7 +26,7 @@ import { ConeccionInfo } from '../../servicios/coneccion.info';
     animations: [routerTransition()]
 })
 export class ListEventsComponent implements OnInit {
-    eventos$: Observable<Evento[]>;
+    eventos: Evento[];
     eventoSeleccionado: Evento;
     errores: JSON;
     preinscripcionNueva: PreInscripcion;
@@ -41,7 +41,11 @@ export class ListEventsComponent implements OnInit {
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
       ;
-      this.eventos$ = this.eventService.getEventos();
+      this.eventService.getEventos().then(response =>
+        {this.eventos = response
+         console.log(this.eventos);
+        }
+      );
       this.usuarioService.recuperarUsuario()
             .then(
                 response => {

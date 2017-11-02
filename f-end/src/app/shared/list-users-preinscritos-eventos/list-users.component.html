@@ -1,0 +1,46 @@
+ 
+<div class= "lista-usuarios">
+ <div  *ngIf="usuariosFiltrados.length > 0" [@routerTransition]>
+        <div class="container-fluid">
+            <h3>Lista de usuarios pre inscritos</h3><hr>
+
+            <div class="row">
+                    <div class="form-group">
+                            <input (keyup)="filtrar($event)" type="" name="filtro" value="" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo">
+                        </div>
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Nick</th>
+                            <th>Correo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
+                            <th scope="row">{{usuario.numero_identificacion}}</th>
+                            <td>{{usuario.nombres}}</td>
+                            <td>{{usuario.apellidos}}</td>
+                            <td>@{{usuario.username}}</td>
+                            <td>{{usuario.custom_email}}</td>
+                            <td *ngIf="!usuario.estadoHabilitado">Inactivo</td>
+                            <td>
+                                <div class="in-line" >
+                                <button (click)="aceptarPreinscripcion(usuario)"  class="btn btn-sm btn-primary">Aceptar</button>
+                                <button (click)="aceptarPreinscripcion(usuario)"  class="btn btn-sm btn-danger">Rechazar</button>
+                            </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class= "text-center" *ngIf="usuariosFiltrados.length == 0">
+        <h3>No hay usuarios pre inscritos en este evento</h3>
+    </div>
+</div> 

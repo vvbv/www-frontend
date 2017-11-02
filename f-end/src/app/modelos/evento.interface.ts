@@ -1,3 +1,4 @@
+import { Usuario } from './usuario.class';
 export interface EventoInterface {
     id: any;
     nombre: any;
@@ -5,4 +6,5 @@ export interface EventoInterface {
     fechaInicio: any;
     fechaFinalizacion: any;
     estado: any;
+    usuariosPreinscritos: Usuario[];
 }

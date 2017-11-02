@@ -9,10 +9,11 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class EventoService {
   constructor( private http: Http, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
-  public getEventos(): Observable<Evento[]> {
+  public getEventos(): Promise<Evento[]> {
     return this.http
     .get(this.coneccionInfo.url_eventos , {headers: this.coneccionInfo.headers} )
-    .map (response => {
+    .toPromise()
+    .then(response => {
       return JSON.parse(response.text()).results as Evento[]
     });
   }

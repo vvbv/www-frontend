@@ -7,7 +7,7 @@ export class PreInscripcion implements PreInscripcionInterface{
     public fechaPreInscripcion: string;
     public estado: string;
 
-    constructor(){
+    constructor() {
         this.id = '';
         this.evento = '';
         this.participante = '';
