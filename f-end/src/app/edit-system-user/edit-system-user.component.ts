@@ -20,6 +20,9 @@ export class EditSystemUserComponent implements OnInit {
   usuarioRetorno: Usuario;
   errorRetorno: JSON;
   private username: string;
+  estructuraUsuario: JSON;
+  rol: string;
+  roles: JSON;
 
   constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, private usuarioService: UsuarioService, public activeRoute: ActivatedRoute) {
       this._toastr.setRootViewContainerRef(vRef);
@@ -39,7 +42,15 @@ export class EditSystemUserComponent implements OnInit {
                                       this.urlImagen = response;
                                   }
                               );
+              this.usuarioService.getEstructuraUsuario()
+            .then(
+                  response => {
+                    this.estructuraUsuario = response;
+                    this.roles = this.estructuraUsuario['rol']['choices'];     
+                 }
+            );
             }
+            
           )
         }
      );
@@ -50,7 +61,7 @@ export class EditSystemUserComponent implements OnInit {
   }
 
   public actualizarInformacionPerfil(){
-   
+        this.usuarioEditar.rol = this.rol;
         this.usuarioService.actualizarUsuario(this.usuarioEditar).then(
               response => {
 
@@ -67,6 +78,10 @@ export class EditSystemUserComponent implements OnInit {
               });
      
         
+    }
+
+    actualizarRol(): void{
+        console.log(this.rol);
     }
 
 }

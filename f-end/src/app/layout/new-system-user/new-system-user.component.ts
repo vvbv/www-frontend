@@ -43,7 +43,6 @@ export class NewSystemUserComponent implements OnInit {
             );
     }
 
-    /*Esto sigue sin funcionar*/
     registrarUSuario(): void{
         this.usuarioNuevo.rol = this.rol;
         this.usuarioNuevo.estadoHabilitado = 'true';
