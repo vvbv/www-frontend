@@ -1,6 +1,6 @@
 <div [@routerTransition]>
     <div class="container-fluid">
-        <h1>Lista de usuasdfarios</h1><hr>
+        <h1>Lista de usuarios</h1><hr>
         <div class="row">
             <div class="form-group">
                 <input (keyup)="filtrar($event)" type="" name="filtro" value="" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo">
@@ -26,8 +26,8 @@
                         <td>@{{usuario.username}}</td>
                         <td>{{usuario.custom_email}}</td>
                         <td>{{usuario.rol}}</td>
-                        <td *ngIf="usuario.estadoHabilitado">Activo</td>
-                        <td *ngIf="!usuario.estadoHabilitado">Inactivo</td>
+                        <td *ngIf="!usuario.estadoHabilitado"><button (click)="activarUsuario(usuario.username, i)" class="btn btn-sm btn-primary">Activar</button></td>
+                        <td *ngIf="usuario.estadoHabilitado"><button (click)="desactivarUsuario(usuario.username, i)" class="btn btn-sm btn-danger">Inactivar</button></td>
                         <td><a href="" [routerLink]="['/editSystemUser']" [queryParams]="{username: usuario.username}" class="btn btn-sm btn-primary">Editar</a></td>
                     </tr>
                 </tbody>
