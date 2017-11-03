@@ -26,7 +26,7 @@
         </div>
         <div class="opciones-evento">
 
-          <a *ngIf="evento.estado != 'CC'"(click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
+          <a *ngIf="evento.estado == 'SI'"(click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
           <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
           <a [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
           <b *ngIf="evento.estado != 'CC'" class = "float-right" >{{getDisplayNameEstado(evento)}}</b>
