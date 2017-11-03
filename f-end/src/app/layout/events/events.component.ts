@@ -1,5 +1,5 @@
 import { EventoService } from '../../servicios/events.service';
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit,  ViewContainerRef} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
@@ -12,7 +12,7 @@ import 'hammerjs';
 
 import { Evento } from '../../modelos/evento.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { JsonFormatter } from 'tslint/lib/formatters';
 
 @Component({
@@ -21,6 +21,7 @@ import { JsonFormatter } from 'tslint/lib/formatters';
     styleUrls: ['./events.component.scss'],
     animations: [routerTransition()]
 })
+
 export class EventsComponent  {
     event: Evento;
     eventos: Evento[];
@@ -29,7 +30,12 @@ export class EventsComponent  {
     eventoCreado = false;
     opcionesEvento: JSON;
     estructuraEvento: EventoEstructura;
-    constructor(private eventService: EventoService) {
+    constructor(
+      private eventService: EventoService,
+      private _toastr: ToastsManager,
+      vRef: ViewContainerRef,
+    ) {
+      this._toastr.setRootViewContainerRef(vRef);
       this.event = new Evento();
 
       this.errores =  JSON.parse('{}');
@@ -51,7 +57,9 @@ export class EventsComponent  {
         this.eventoCreado = true;
         this.event = new Evento();
         this.errores =  JSON.parse('{}');
+        this._toastr.success('Se ha registrado el evento correctamente', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
       } else {
+        this._toastr.warning('No se ha podido ejecutar la acción ', 'Error!', {toastLife: 3000, showCloseButton: false});
         this.errores = res as JSON;
       }
      }

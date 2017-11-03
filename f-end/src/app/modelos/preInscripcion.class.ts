@@ -1,6 +1,6 @@
 import { PreInscripcionInterface } from './preInscripcion.interface';
 
-export class PreInscripcion implements PreInscripcionInterface{
+export class PreInscripcion implements PreInscripcionInterface {
     public id: string;
     public evento: string;
     public participante: string;
