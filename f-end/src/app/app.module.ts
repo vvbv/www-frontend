@@ -18,7 +18,9 @@ import { PreInscripcionService } from './servicios/preInscripcion.service';
 import { InjectorToken } from './servicios/injectorToken.service';
 import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.module';
 import { ActividadService } from './servicios/actividad.service';
-
+import { InscripcionService } from './servicios/inscripcion.service';
+import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
+import {DpDatePickerModule} from 'ng2-date-picker';
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
@@ -34,10 +36,12 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        DpDatePickerModule,
         ReactiveFormsModule,
         NoopAnimationsModule,
         BrowserAnimationsModule,
         CrearActividadModule,
+        ToastModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -52,7 +56,9 @@ export function HttpLoaderFactory(http: Http) {
                 EventoService,
                 PreInscripcionService,
                 ConeccionInfo,
+                InscripcionService,
                 InjectorToken,
+                ToastOptions,
                 ActividadService,
                 TokenService],
     bootstrap: [AppComponent]

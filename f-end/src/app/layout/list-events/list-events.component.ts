@@ -1,7 +1,7 @@
 import { EventoService } from '../../servicios/events.service';
 import { PreInscripcionService } from '../../servicios/preInscripcion.service';
 import { UsuarioService } from '../../servicios/usuario.service';
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit , ViewContainerRef  } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
@@ -15,7 +15,7 @@ import { Evento } from '../../modelos/evento.class';
 import { Usuario } from '../../modelos/usuario.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { JsonFormatter } from 'tslint/lib/formatters';
 import { ConeccionInfo } from '../../servicios/coneccion.info';
 
@@ -34,6 +34,8 @@ export class ListEventsComponent implements OnInit {
     mensaje: string;
     constructor(
         private eventService: EventoService,
+        private _toastr: ToastsManager,
+        vRef: ViewContainerRef,
         private preInscripcionService: PreInscripcionService,
         private usuarioService: UsuarioService) {
       this.preinscripcionNueva = new PreInscripcion();
@@ -41,9 +43,10 @@ export class ListEventsComponent implements OnInit {
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
       ;
-      this.eventService.getEventos().then(response =>
-        {this.eventos = response
+      this.eventService.getEventos().then(response => {
+          this.eventos = response
          console.log(this.eventos);
+         this._toastr.setRootViewContainerRef(vRef);
         }
       );
       this.usuarioService.recuperarUsuario()
@@ -55,23 +58,27 @@ export class ListEventsComponent implements OnInit {
 
     }
     ngOnInit() {
-     
     }
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
     }
-    preinscripcion(idEvento: any): void {
-      this.preinscripcionNueva.evento = idEvento;
+    preinscripcion(evento: Evento): void {
+      this.preinscripcionNueva.evento = evento.id;
       this.preinscripcionNueva.participante = this.usuarioLogueado.id;
       this.preinscripcionNueva.estado = 'E';
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
           if (typeof response === 'object') {
-              this.mensaje = 'Usuario preinscrito correctamente!'
-              console.log(this.mensaje);
+           let usuario: Usuario = new Usuario();
+                this.usuarioService.getUsuario(this.usuarioLogueado.username)
+                .then(res => {
+                  usuario = res;
+                evento.usuariosPreinscritos.push(usuario);
+                })
+                .catch();
+                this._toastr.success('Su incscripcion se ha registrado', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
             }else {
-              this.mensaje = 'Ya tiene una preinscripción anterior en este evento!';
-              console.log(this.mensaje);
+              this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
             }
         }
       );

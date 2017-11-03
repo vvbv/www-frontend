@@ -17,6 +17,7 @@ import { listUsersComponent } from '../../shared/list-users-preinscritos-eventos
         ReactiveFormsModule,
         MomentModule
     ],
-    declarations: [ListEventsComponent, listUsersComponent]
+    declarations: [ListEventsComponent, listUsersComponent],
+
 })
 export class ListEventsModule { }

@@ -29,8 +29,8 @@
                             <td *ngIf="!usuario.estadoHabilitado">Inactivo</td>
                             <td>
                                 <div class="in-line" >
-                                <button (click)="aceptarPreinscripcion(usuario)"  class="btn btn-sm btn-primary">Aceptar</button>
-                                <button (click)="aceptarPreinscripcion(usuario)"  class="btn btn-sm btn-danger">Rechazar</button>
+                                <button (click)="aceptarPreinscripcion(usuario, evento)"  class="btn btn-sm btn-primary">Aceptar</button>
+                                <button (click)="rechazarPreinscripcion(usuario, evento)"  class="btn btn-sm btn-danger">Rechazar</button>
                             </div>
                             </td>
                         </tr>
