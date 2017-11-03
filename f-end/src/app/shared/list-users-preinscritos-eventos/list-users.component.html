@@ -1,6 +1,6 @@
  
 <div class= "lista-usuarios">
- <div  *ngIf="usuariosFiltrados.length > 0" [@routerTransition]>
+ <div  *ngIf="usuariosYRegistros.length > 0" [@routerTransition]>
         <div class="container-fluid">
             <h3>Lista de usuarios pre inscritos</h3><hr>
 
@@ -20,17 +20,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
-                            <th scope="row">{{usuario.numero_identificacion}}</th>
-                            <td>{{usuario.nombres}}</td>
-                            <td>{{usuario.apellidos}}</td>
-                            <td>@{{usuario.username}}</td>
-                            <td>{{usuario.custom_email}}</td>
-                            <td *ngIf="!usuario.estadoHabilitado">Inactivo</td>
+                        <tr *ngFor="let usuarioYRegistro of usuariosYRegistros; let i = index;">
+                            <th scope="row">{{usuarioYRegistro[0].numero_identificacion}}</th>
+                            <td>{{usuarioYRegistro[0].nombres}}</td>
+                            <td>{{usuarioYRegistro[0].apellidos}}</td>
+                            <td>@{{usuarioYRegistro[0].username}}</td>
+                            <td>{{usuarioYRegistro[0].custom_email}}</td>
+
+                            <td *ngIf="!usuarioYRegistro[0].estadoHabilitado">Inactivo</td>
                             <td>
                                 <div class="in-line" >
-                                <button (click)="aceptarPreinscripcion(usuario, evento)"  class="btn btn-sm btn-primary">Aceptar</button>
-                                <button (click)="rechazarPreinscripcion(usuario, evento)"  class="btn btn-sm btn-danger">Rechazar</button>
+                                    
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-danger">Rechazar</button>
                             </div>
                             </td>
                         </tr>
@@ -40,7 +42,7 @@
         </div>
     </div>
 
-    <div class= "text-center" *ngIf="usuariosFiltrados.length == 0">
+    <div class= "text-center" *ngIf="usuariosYRegistros.length == 0">
         <h3>No hay usuarios pre inscritos en este evento</h3>
     </div>
 </div> 

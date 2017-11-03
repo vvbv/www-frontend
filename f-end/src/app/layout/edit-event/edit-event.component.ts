@@ -56,6 +56,9 @@ export class EditEventComponent  implements OnInit {
       res => {
         if ((res as Evento).nombre === evento.nombre) {
           this.eventoEditado = true;
+          if (evento === (res as Evento)) {
+            this._toastr.warning('No se han registrado cambios', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
+          }
           this._toastr.success('Datos actualizados', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
           this.errores =  JSON.parse('{}');
         } else {
