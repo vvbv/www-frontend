@@ -54,7 +54,9 @@ export class listUsersComponent implements OnInit {
             ).then(response => {
                if (response === null || response.estado === 'R') {
                     this.usuariosYRegistros.push([usuario, 'R']);
-                } this.usuariosYRegistros.push([usuario,  response.estado]);
+                }else {
+                    this.usuariosYRegistros.push([usuario,  response.estado])
+                };
             })
             .catch(response => {
             });
@@ -92,9 +94,10 @@ export class listUsersComponent implements OnInit {
         ).then(
             response => {
                 preinscripcionUsuario = response;
-                this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'A';
+               
                 this.preinscripcionService.aceptarPreinscripcion(preinscripcionUsuario)
                 .then(res => {
+                    this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'A';
                     this._toastr.success('El usuario ha sido inscrito al evento',
                      'En hora buena!', {toastLife: 3000, showCloseButton: false});
                      this.usuariosFiltrados = this.usuariosFiltrados.filter(obj => obj !== usuario);
@@ -108,27 +111,5 @@ export class listUsersComponent implements OnInit {
         ).catch(response => console.log('Ha ocurrido un error: ' + response));
 
 
-    }
-
-    filtrar(){
-        console.log(this.filtro.indexOf('@'));
-        if(this.filtro.indexOf('@') > 0){
-            this.usuariosFiltrados = this.usuarios.filter(
-                    usuario => usuario.custom_email.indexOf(this.filtro) >= 0
-                );
-        }else if(this.filtro == ""){
-             this.usuariosFiltrados = this.usuarios;
-        }else if((this.filtro.indexOf('@') == 0)||(this.filtro.indexOf('@') == -1)){
-            var filtro_temporal = this.filtro.replace("@", ""); 
-            
-            this.usuariosFiltrados = this.usuarios.filter(
-                    usuario => usuario.username.indexOf(filtro_temporal) >= 0
-                );
-            this.usuariosFiltrados = this.usuariosFiltrados.concat( this.usuarios.filter(
-                    usuario => usuario.numero_identificacion.indexOf(filtro_temporal) >= 0
-                ));
-            
-        }
-        
     }
 }
