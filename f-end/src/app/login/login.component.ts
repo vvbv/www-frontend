@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
             public router: Router,
             private authenticationService: AuthenticationService,
             private usuarioService: UsuarioService
-        ){
+        ) {
             this._toastr.setRootViewContainerRef(vRef);
         this.model = new Usuario();
     }

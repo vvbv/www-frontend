@@ -30,7 +30,7 @@ export class PreInscripcionService {
         );
     }
 
-    public getIdPreInscripcionByUserAndEvent(usuario: Usuario, evento: Evento): Promise<PreInscripcion>{
+    public getIdPreInscripcionByUserAndEvent(usuario: Usuario, evento: Evento): Promise<PreInscripcion | null> {
         return this.http
         .get(this.coneccionInfo.url_get_preinscricion_por_usuario_evento
              + usuario.id + '/' + evento.id + '/',
@@ -38,9 +38,16 @@ export class PreInscripcionService {
         .toPromise()
         .then(
             response => {
+               if (Number(JSON.parse(response.text().toString()).count) === 0) {
+                   return null;
+               }
                 return (JSON.parse(response.text().toString()).results[0] as PreInscripcion);
             }
-        )
+        ).catch(response =>
+            {
+                console.log(response);
+                return null;
+            });
     }
     public registrarPreInscripcion(preInscripcion: PreInscripcion): Promise<JSON|PreInscripcion> {
         return this.http
