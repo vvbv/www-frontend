@@ -31,6 +31,7 @@ export class ListEventsComponent implements OnInit {
     errores: JSON;
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
+    estructuraEvento: EventoEstructura;
     mensaje: string;
     constructor(
         private eventService: EventoService,
@@ -55,9 +56,21 @@ export class ListEventsComponent implements OnInit {
                     this.usuarioLogueado = response;
                 }
             );
+            //  this.eventService.getEvento(2).subscribe(data => { this.event = data});
+        this.eventService.getOpciones().subscribe(
+          response => {
+            this.estructuraEvento = response['actions']['POST'];
+            console.log(this.estructuraEvento.estado.choices);
+          }
+        );
 
     }
     ngOnInit() {
+    }
+    getDisplayNameEstado(evento: Evento): any {
+      
+     var  est:JSON = (this.estructuraEvento.estado.choices.filter( choice => choice.value === evento.estado));
+     return est['0'].display_name;
     }
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
