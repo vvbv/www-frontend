@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -6,7 +6,7 @@ import { UsuarioService } from '../servicios/usuario.service';
 import { Usuario } from '../modelos/usuario.class';
 import { FormControl } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'app-edit-system-user',
@@ -18,19 +18,21 @@ export class EditSystemUserComponent implements OnInit {
   usuarioEditar: Usuario;
   urlImagen: string;
   usuarioRetorno: Usuario;
+  errorRetorno: JSON;
+  private username: string;
 
-  constructor(private usuarioService: UsuarioService, public activeRoute: ActivatedRoute) {
+  constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, private usuarioService: UsuarioService, public activeRoute: ActivatedRoute) {
+      this._toastr.setRootViewContainerRef(vRef);
       this.usuarioEditar = new Usuario();
       this.urlImagen = "";
-  }
+      this.errorRetorno = JSON.parse('{}');
 
-  ngOnInit() {
-    this.activeRoute.queryParams.subscribe(
+      this.activeRoute.queryParams.subscribe(
         params => {
           this.usuarioService.getUsuario(params['username']).then(
             response => {
               this.usuarioEditar = response;
-              this.usuarioInicial = response;
+              this.username = this.usuarioEditar.username;
               this.usuarioService.getImagenPerfil(this.usuarioEditar.imagenPerfil)
                               .then(
                                   response => {
@@ -43,16 +45,27 @@ export class EditSystemUserComponent implements OnInit {
      );
   }
 
+  ngOnInit() {
+    
+  }
+
   public actualizarInformacionPerfil(){
-      if (this.usuarioEditar != this.usuarioInicial) {
+   
         this.usuarioService.actualizarUsuario(this.usuarioEditar).then(
               response => {
-                  console.log("Información de usuario actualizada!");
-              }
-          );
-      }else{
-        console.log("No se ha presentado ninguna modificación al usuario!");
-      }
+
+                  if(response['username'] != undefined){
+                    console.log(response);
+                    this.errorRetorno = JSON.parse('{}');
+                    this._toastr.success('Usuario "' + this.username + '" actualizado', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+                  }else{
+                    this.errorRetorno = response;
+                    console.log(response);
+                    this._toastr.error('No se pudo actualizar el usuario', 'Ups!', {toastLife: 3000, showCloseButton: false});
+                  }
+                  
+              });
+     
         
     }
 
