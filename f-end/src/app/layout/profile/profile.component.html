@@ -14,35 +14,35 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="">Nombres:</label>
-                        <input type="" class="form-control" name="nombres" value="" [(ngModel)]="nombres">
+                        <input type="" class="form-control" name="nombres" value="" [(ngModel)]="usuarioActualizado.nombres">
                     </div>
                     <div class="form-group">
                         <label for="">Apellidos:</label>
-                        <input type="" class="form-control" name="apellidos" value="" [(ngModel)]="apellidos">
+                        <input type="" class="form-control" name="apellidos" value="" [(ngModel)]="usuarioActualizado.apellidos">
                     </div>
                     <div class="form-group">
                         <label for="">Identificacion:</label>
-                        <input type="" class="form-control" name="numero_identificacion" value="" [(ngModel)]="numero_identificacion" disabled>
+                        <input type="" class="form-control" name="numero_identificacion" value="" [(ngModel)]="usuarioActualizado.numero_identificacion" disabled>
                     </div>
                     <div class="form-group">
                         <label for="">Nick:</label>
-                        <input type="" class="form-control" name="username" value="" [(ngModel)]="username" disabled>
+                        <input type="" class="form-control" name="username" value="" [(ngModel)]="usuarioActualizado.username" disabled>
                     </div>
-                    <div class="form-group mensaje-acciones-especiales">
-                        <label for="">Para actualizar estos datos, necesita proveer la contraseña actual</label>
-                    </div>
-                    <div class="form-group grupo-acciones-especiales">
-                        <div class="form-group">
+                    
+                    <div class="form-group">
+                        <div [class.has-danger] = "errorUsuario.custom_email" class="form-group">
                             <label for="">Correo electr&oacute;nico:</label>
-                            <input type="" class="form-control" name="custom_email" value="" [(ngModel)]="custom_email">
+                            <input [class.form-control-danger] = "errorUsuario.custom_email" type="" class="form-control" name="custom_email" value="" [(ngModel)]="usuarioActualizado.custom_email">
+                            <div ngFor="let error of errorUsuario" >
+                                <span class="help-block">{{errorUsuario.custom_email}}</span>
+                            </div>
                         </div>
-                        <div class="form-group">
+                        <div [class.has-danger] = "errorUsuario.password" class="form-group">
                             <label for="">Nueva contrase&ntilde;a:</label>
-                            <input type="password" class="form-control" name="nuevaPassword" [(ngModel)]="nuevaPassword">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Contrase&ntilde;a actual:</label>
-                            <input type="password" class="form-control" name="passwordActual" value="" [(ngModel)]="passwordActual">
+                            <input [class.form-control-danger] = "errorUsuario.password" type="password" class="form-control" name="password" [(ngModel)]="usuarioActualizado.password">
+                            <div ngFor="let error of errorUsuario" >
+                                <span class="help-block">{{errorUsuario.password}}</span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
