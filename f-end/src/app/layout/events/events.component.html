@@ -38,6 +38,19 @@
               <span class="help-block">{{errores.fechaFinalizacion}}</span>
           </div>
       </div>
+      <label  for="precio" class="col-8 col-form-label">Precio</label>
+      
+      <div  [class.has-danger] = "errores.precio" class="form-group input-group col-12">
+         <span class="input-group-addon">$</span>
+         <input [class.form-control-danger] = "errores.precio" type="text" [(ngModel)]="event.precio" id="precio" name="precio"class="form-control col-12" aria-label="Precio a pagar para participar en el evento">
+         <span class="input-group-addon">.00</span>
+     
+       </div>
+       <div ngFor="let error of errores.precio" >
+           <span class="help-block">{{errores.precio}}</span>
+       </div>
+
+
       <div  [class.has-danger] = "errores.estado" class="form-group col-12">
           <label for="estado" class="col-form-label">{{estructuraEvento.estado.label}}</label>
           <select [class.form-control-danger] = "errores.estado" [(ngModel)]="event.estado" id="estado" name="estado" class="form-control" > 

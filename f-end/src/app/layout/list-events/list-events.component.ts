@@ -68,7 +68,6 @@ export class ListEventsComponent implements OnInit {
     ngOnInit() {
     }
     getDisplayNameEstado(evento: Evento): any {
-      
      var  est:JSON = (this.estructuraEvento.estado.choices.filter( choice => choice.value === evento.estado));
      return est['0'].display_name;
     }
