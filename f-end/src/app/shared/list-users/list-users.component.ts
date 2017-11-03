@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../modelos/usuario.class';
 import { FormControl } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'app-listUsers',
@@ -18,7 +19,8 @@ export class listUsersComponent implements OnInit {
     @Input() public usuariosFiltrados: Usuario[];
     public filtro;
 
-    constructor(private usuarioService: UsuarioService) {
+    constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, private usuarioService: UsuarioService) {
+        this._toastr.setRootViewContainerRef(vRef);
         this.usuarioService.recuperarUsuario()
             .then(
                 response => {
@@ -51,6 +53,26 @@ export class listUsersComponent implements OnInit {
                 ));
             
         }
+    }
+
+    activarUsuario(username: string,  pos:string){
+        this.usuarioService.cambiarEstadoUsuario(username, true).then(
+            response=>{
+                this.usuariosFiltrados[pos] = response;
+                console.log(response);
+                this._toastr.success('Usuario activado', 'Información!', {toastLife: 3000, showCloseButton: false});
+            }
+        );
+        
+    }
+    desactivarUsuario(username: string, pos:string){
+        this.usuarioService.cambiarEstadoUsuario(username, false).then(
+            response=>{
+                this.usuariosFiltrados[pos] = response;
+                console.log(response);
+                this._toastr.warning('Cuenta desactivada', 'Alerta!', {toastLife: 3000, showCloseButton: false});
+            }
+        );
         
     }
 }

@@ -109,4 +109,18 @@ export class UsuarioService{
         );
     }
 
+    public cambiarEstadoUsuario(idUsuario: string, isActivo: boolean): Promise<JSON>{
+        let estadoActivo = 'true';
+        if(!isActivo){
+            estadoActivo = 'false'
+        }
+        return this.getUsuario(idUsuario).then(
+            response => {
+                let usuario = response;
+                usuario.estadoHabilitado = estadoActivo;
+                return this.actualizarUsuario(usuario);
+            }
+        )
+    }
+
 }
