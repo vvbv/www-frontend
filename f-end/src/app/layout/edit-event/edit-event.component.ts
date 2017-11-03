@@ -25,7 +25,7 @@ export class EditEventComponent  implements OnInit {
   private estructuraEvento: EventoEstructura;
   @Input() idEvento: number;
   private eventoEditado: boolean;
-  private evento$: Observable<Evento>;
+  public  evento$: Observable<Evento>;
   private eventoRespuesto: Evento;
   private errores: JSON;
   private finicio: string;
