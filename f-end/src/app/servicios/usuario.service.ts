@@ -75,6 +75,9 @@ export class UsuarioService{
             response => {
                 var usuarioLogueado = response;
                 if(usuarioLogueado.username == usuarioActualizado.username){
+                    usuarioActualizado.username = usuarioLogueado.username;
+                    usuarioActualizado.custom_email = usuarioLogueado.custom_email;
+                    usuarioActualizado.numero_identificacion = usuarioLogueado.numero_identificacion;
                     return this.actualizarUsuario(usuarioActualizado);
                 }else{
                     return JSON.parse('{}');
