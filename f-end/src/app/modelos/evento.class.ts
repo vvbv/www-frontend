@@ -7,6 +7,7 @@ export class Evento implements EventoInterface {
     public fechaInicio: string;
     public fechaFinalizacion: string;
     public estado: string;
+    public precio: number;
     public usuariosPreinscritos: Usuario[];
     constructor() {
         this.id = '';
@@ -15,6 +16,7 @@ export class Evento implements EventoInterface {
         this.fechaFinalizacion = '';
         this.fechaInicio = '';
         this.estado = '';
+        this.precio = 0;
         this.usuariosPreinscritos = new Array<Usuario>();
     }
 }

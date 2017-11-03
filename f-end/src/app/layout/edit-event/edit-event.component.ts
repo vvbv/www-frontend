@@ -49,7 +49,7 @@ export class EditEventComponent  implements OnInit {
             this.evento$ = this.route.paramMap
             .switchMap((params: ParamMap) =>
             this.eventService.getEvento(Number(params.get('id'))));
-            this.finicio = '2017-12-02T05:00:00';
+            
   }
   actualizarEvento(evento: Evento): void {
     this.eventService.updateEvent(evento).then(

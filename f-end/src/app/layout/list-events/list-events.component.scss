@@ -5,9 +5,19 @@
     max-width: 80%;
     width: 100%;
   }
-  
+  .head-evento-cancelado{
+    padding: 5px;
+    width: 100%;
+    background-color: #3a0000;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+  }
   .example-full-width {
     width: 100%;
+  }
+  .boton-editar-cancelado{
+    border-color:#3a0000;
   }
   .active > .d-flex, .active > .mb-1{
     color: white;
