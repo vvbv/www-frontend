@@ -83,6 +83,22 @@ export class PreInscripcionService {
                     }
                 );
     }
+    public cancelarPreinscripcion( preinsCripcion: PreInscripcion): Promise<PreInscripcion|JSON> {
+        return this.http
+        .delete(this.coneccionInfo.url_preinscripcion + preinsCripcion.id + '/' ,  {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                return  (response.text().toString());
+            }
+        ).catch(
+            response => {
+                console.log(response.text().toString());
+                return  (response.text().toString());
+
+            }
+        );
+    }
 
     // Azucar
     public aceptarPreinscripcion( preinsCripcion: PreInscripcion): Promise<PreInscripcion|JSON>{
