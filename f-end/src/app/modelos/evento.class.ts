@@ -15,7 +15,7 @@ export class Evento implements EventoInterface {
         this.descripcion = '';
         this.fechaFinalizacion = '';
         this.fechaInicio = '';
-        this.estado = '';
+        this.estado = 'SI';
         this.precio = 0;
         this.usuariosPreinscritos = new Array<Usuario>();
     }
