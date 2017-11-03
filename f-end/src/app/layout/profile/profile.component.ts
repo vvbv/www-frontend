@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../modelos/usuario.class';
 import { FormControl } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'app-profile',
@@ -14,30 +15,22 @@ import { FormControl } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
     usuarioLogueado: Usuario;
+    errorUsuario: any;
 
-    public username: string;
-    public nombres: string;
-    public apellidos: string;
-    public custom_email: string;
     public urlImagen: string;
-    public nuevaPassword: string;
-    public passwordActual: string;
-    public numero_identificacion: string;
 
-    private usuarioActualizado: Usuario;
+    usuarioActualizado: Usuario;
 
-    constructor(private usuarioService: UsuarioService) {
-        
+    constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, public usuarioService: UsuarioService) {
+        this._toastr.setRootViewContainerRef(vRef);
+        this.usuarioLogueado = new Usuario();
+        this.errorUsuario = JSON.parse('{}');
+        this.usuarioActualizado = new Usuario();
         this.usuarioService.recuperarUsuario()
             .then(
                 response => {
                     this.usuarioLogueado = response;
                     this.usuarioActualizado = this.usuarioLogueado;
-                    this.username = this.usuarioLogueado.username;
-                    this.nombres = this.usuarioLogueado.nombres;
-                    this.apellidos = this.usuarioLogueado.apellidos;
-                    this.custom_email = this.usuarioLogueado.custom_email;
-                    this.numero_identificacion = this.usuarioLogueado.numero_identificacion;
                     this.usuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil)
                         .then(
                             response => {
@@ -50,12 +43,19 @@ export class ProfileComponent implements OnInit {
     }
 
     public actualizarInformacionPerfil(){
-        /*Falta implementarlo para todos los campos*/
-        this.usuarioActualizado.nombres = this.nombres;
-        this.usuarioService.actualizarUsuario(this.usuarioActualizado).then(
-            response => {
-                if(response['username'] == this.usuarioLogueado.username){
 
+        this.usuarioService.actualizarMiPerfil(this.usuarioActualizado).then(
+            response => {
+                if((response != JSON.parse('{}'))&&(response['username'] != undefined)){
+                    console.log('Perfil actualizado.');
+                    console.log(response);
+                    this._toastr.success('Perfil actualizado', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+                }else{
+                    console.log('Error actualizando el perfil.');
+                    console.log(response);
+                    this.errorUsuario = response;
+                    this._toastr.error('No se pudo actualizar su perfil', 'Ups!', {toastLife: 3000, showCloseButton: false});
+                    
                 }
             }
         );

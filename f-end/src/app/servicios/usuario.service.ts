@@ -70,7 +70,20 @@ export class UsuarioService{
         return this.getUsuario(username);
     }
 
-    public actualizarUsuario(usuario: Usuario): Promise< JSON > {
+    public actualizarMiPerfil(usuarioActualizado: Usuario): Promise<JSON>{
+        return this.recuperarUsuario().then(
+            response => {
+                var usuarioLogueado = response;
+                if(usuarioLogueado.username == usuarioActualizado.username){
+                    return this.actualizarUsuario(usuarioActualizado);
+                }else{
+                    return JSON.parse('{}');
+                }
+            }
+        ).catch();
+    }
+
+   public actualizarUsuario(usuario: Usuario): Promise< JSON > {
             return this.http
             .put(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + usuario.username + '/', JSON.stringify(usuario), {headers: this.coneccionInfo.headers})
             .toPromise()
