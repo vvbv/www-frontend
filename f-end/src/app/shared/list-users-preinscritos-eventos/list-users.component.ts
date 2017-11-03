@@ -20,7 +20,7 @@ export class listUsersComponent implements OnInit {
     private usuarioLogueado: Usuario;
     public usuarios: Usuario[];
     @Input() public usuariosFiltrados: Usuario[];
-    public usuariosYRegistros: [Usuario, boolean][];
+    public usuariosYRegistros: [Usuario, string][];
     @Input() public evento: Evento;
     public filtro;
 
@@ -40,7 +40,7 @@ export class listUsersComponent implements OnInit {
                     this.usuarioLogueado = response;
                 }
             );
-            this.usuariosYRegistros = new Array<[Usuario, boolean]>();
+            this.usuariosYRegistros = new Array<[Usuario, string]>();
 
     }
 
@@ -52,15 +52,9 @@ export class listUsersComponent implements OnInit {
             this.preInscripcionService.getIdPreInscripcionByUserAndEvent(
                 usuario, this.evento
             ).then(response => {
-               
-                if (response === null || response.estado === 'R') {
-                   
-                    this.usuariosYRegistros.push([usuario, false]);
-
-                } else {
-                    this.usuariosYRegistros.push([usuario, true]);
-                }
-                
+               if (response === null || response.estado === 'R') {
+                    this.usuariosYRegistros.push([usuario, 'R']);
+                } this.usuariosYRegistros.push([usuario,  response.estado]);
             })
             .catch(response => {
             });
@@ -76,7 +70,7 @@ export class listUsersComponent implements OnInit {
 
             this.preinscripcionService.rechazarPreinscripcion(preinscripcionUsuario)
             .then(res => {
-                this.usuariosYRegistros.find(i => i[0] === usuario)[1] = false;
+                this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'R';
                 this._toastr.warning('Se ha rechazado una inscripción',
                  'Accion realizada', {toastLife: 3000, showCloseButton: false});
             })
@@ -98,7 +92,7 @@ export class listUsersComponent implements OnInit {
         ).then(
             response => {
                 preinscripcionUsuario = response;
-                this.usuariosYRegistros.find(i => i[0] === usuario)[1] = true;
+                this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'A';
                 this.preinscripcionService.aceptarPreinscripcion(preinscripcionUsuario)
                 .then(res => {
                     this._toastr.success('El usuario ha sido inscrito al evento',

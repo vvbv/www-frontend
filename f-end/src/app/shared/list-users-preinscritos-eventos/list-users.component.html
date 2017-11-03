@@ -31,8 +31,8 @@
                             <td>
                                 <div class="in-line" >
                                     
-                                <button *ngIf="!usuarioYRegistro[1]" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-primary">Aceptar</button>
-                                <button *ngIf="usuarioYRegistro[1]"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-danger">Rechazar</button>
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-danger">Rechazar</button>
                             </div>
                             </td>
                         </tr>
