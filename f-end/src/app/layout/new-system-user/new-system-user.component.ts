@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../modelos/usuario.class';
 import { FormControl } from '@angular/forms';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
     selector: 'app-profile',
@@ -18,13 +19,15 @@ export class NewSystemUserComponent implements OnInit {
     roles: JSON;
     usuarioNuevo: Usuario;
     retornoRegistro: Usuario|JSON;
+    errorRetorno: JSON;
     rol: string;
 
-    constructor(private usuarioService: UsuarioService) {
+    constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, private usuarioService: UsuarioService) {
+        this._toastr.setRootViewContainerRef(vRef);
         this.usuarioNuevo = new Usuario();
         this.usuarioNuevo.rol = 'AD';
         this.retornoRegistro = new Usuario();
-
+        this.errorRetorno = JSON.parse('{}');
         this.usuarioService.recuperarUsuario()
             .then(
                 response => {
@@ -53,8 +56,13 @@ export class NewSystemUserComponent implements OnInit {
                     console.log("Usuario registrado");
                     this.usuarioNuevo = new Usuario();
                     this.retornoRegistro = new Usuario();
+                    this.errorRetorno = JSON.parse('{}');
+                    console.log(response);
+                    this._toastr.success('Usuario "' + response.username + '" registrado correctamente', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
                 }else{
                     this.retornoRegistro;
+                    this.errorRetorno = JSON.parse(JSON.stringify(this.retornoRegistro));
+                    this._toastr.error('Error registrando el nuevo usuario', 'Ups!', {toastLife: 3000, showCloseButton: false});
                 };
             }
         );
