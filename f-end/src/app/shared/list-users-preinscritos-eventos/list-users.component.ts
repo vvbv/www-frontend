@@ -19,9 +19,11 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class listUsersComponent implements OnInit {
     private usuarioLogueado: Usuario;
     public usuarios: Usuario[];
-    @Input() public usuariosFiltrados: Usuario[];
-    public usuariosYRegistros: [Usuario, string][];
     @Input() public evento: Evento;
+    @Input() public usuariosFiltrados: Usuario[];
+   
+    public usuariosYRegistros: [Usuario, string][];
+    
     public filtro;
 
     constructor(

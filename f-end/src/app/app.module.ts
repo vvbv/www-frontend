@@ -21,6 +21,7 @@ import { ActividadService } from './servicios/actividad.service';
 import { InscripcionService } from './servicios/inscripcion.service';
 import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {DpDatePickerModule} from 'ng2-date-picker';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
