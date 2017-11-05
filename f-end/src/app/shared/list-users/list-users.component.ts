@@ -34,7 +34,7 @@ export class listUsersComponent implements OnInit {
     ngOnInit() {
     }
 
-    filtrar(){
+    filtrar($event: any) {
         console.log(this.filtro.indexOf('@'));
         if(this.filtro.indexOf('@') > 0){
             this.usuariosFiltrados = this.usuarios.filter(
