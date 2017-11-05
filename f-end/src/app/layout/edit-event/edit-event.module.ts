@@ -7,6 +7,7 @@ import { PageHeaderModule } from './../../shared';
 import { DateTimePickerModule } from 'ng-pick-datetime';
 import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
         PageHeaderModule,
         FormsModule,
         ReactiveFormsModule,
+        SharedModule,
         ToastModule.forRoot(),
         DateTimePickerModule
     ],

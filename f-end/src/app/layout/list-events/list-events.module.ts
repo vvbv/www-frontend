@@ -7,7 +7,7 @@ import { PageHeaderModule } from './../../shared';
 import { MomentModule } from 'angular2-moment';
 import { Routes, RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { listUsersComponent } from '../../shared/list-users-preinscritos-eventos/list-users.component';
+import { SharedModule } from '../../shared/shared.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -15,9 +15,10 @@ import { listUsersComponent } from '../../shared/list-users-preinscritos-eventos
         PageHeaderModule,
         FormsModule,
         ReactiveFormsModule,
+        SharedModule,
         MomentModule
     ],
-    declarations: [ListEventsComponent, listUsersComponent],
+    declarations: [ListEventsComponent],
 
 })
 export class ListEventsModule { }
