@@ -9,31 +9,41 @@
                 <table class="table">
                     <thead class="thead-inverse">
                         <tr>
-                            <th>#</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
+                            <th class = "hidden-sm-down" >#</th>
+                            <th class = "hidden-sm-down" >Nombres</th>
+                            <th class = "hidden-sm-down">Apellidos</th>
                             <th>Nick</th>
-                            <th>Correo</th>
-                            <th>Estado</th>
+                            <th class = "hidden-sm-down">Correo</th>
+                            <th class = "hidden-sm-down">Estado</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let usuarioYRegistro of usuariosYRegistros; let i = index;">
-                            <th scope="row">{{usuarioYRegistro[0].numero_identificacion}}</th>
-                            <td>{{usuarioYRegistro[0].nombres}}</td>
-                            <td>{{usuarioYRegistro[0].apellidos}}</td>
+                            <th class = "hidden-sm-down"  scope="row">{{usuarioYRegistro[0].numero_identificacion}}</th>
+                            <td class = "hidden-sm-down">{{usuarioYRegistro[0].nombres}}</td>
+                            <td class = "hidden-sm-down">{{usuarioYRegistro[0].apellidos}}</td>
                             <td>@{{usuarioYRegistro[0].username}}</td>
-                            <td>{{usuarioYRegistro[0].custom_email}}</td>
+                            <td class = "hidden-sm-down">{{usuarioYRegistro[0].custom_email}}</td>
 
-                            <td *ngIf="!usuarioYRegistro[0].estadoHabilitado">Inactivo</td>
-                            <td *ngIf="usuarioYRegistro[0].estadoHabilitado">Activo</td>
+                            <td class = "hidden-sm-down" *ngIf="!usuarioYRegistro[0].estadoHabilitado">Inactivo</td>
+                            <td class = "hidden-sm-down" *ngIf="usuarioYRegistro[0].estadoHabilitado">Activo</td>
                             <td>
-                                <div *ngIf="evento.estado === 'SI'"  class="in-line" >
-                                    
-                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-primary">Aceptar</button>
-                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn btn-sm btn-danger">Rechazar</button>
+
+                            <div class = "hidden-sm-down"  *ngIf="evento.estado === 'SI'"  class="in-line" >
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
                             </div>
+                            <div class="btn-group hidden-sm-up">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Opciones
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <a *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Aceptar</a>
+                                      <a *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Rechazar</a>
+                                    </div>
+                                  </div>
+
                             </td>
                         </tr>
                     </tbody>
