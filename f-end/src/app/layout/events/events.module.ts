@@ -13,7 +13,6 @@ import { SharedModule } from '../../shared/shared.module';
         EventsRoutingModule,
         PageHeaderModule,
         SharedModule,
-        FormsModule,
         ReactiveFormsModule,
     ],
     declarations: [EventsComponent]

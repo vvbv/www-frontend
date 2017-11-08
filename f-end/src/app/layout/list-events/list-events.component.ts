@@ -65,6 +65,20 @@ export class ListEventsComponent implements OnInit {
         );
 
     }
+    eliminarEvento(evento: Evento, index: number) {
+      this.eventService.deleteEvent(evento)
+      .then(
+        response => {
+          this._toastr.success('Evento borrado exitosamente', 'Exito!');
+          this.eventos.splice(index, 1);
+        }
+        )
+      .catch(
+        response => {
+          this._toastr.error( response['detail'], 'Error!');
+        }
+      );
+    }
     ngOnInit() {
       
 

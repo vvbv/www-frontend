@@ -40,7 +40,22 @@ export class EventoService {
 ;
   }
 
-  deleteEvent(event: Evento) {}
+  deleteEvent(event: Evento) {
+    return this.http
+    .delete(this.coneccionInfo.url_eventos + event.id +  '/' , {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(
+      response => {
+        console.log(response.text());
+        return (JSON.parse(response.text().toString()) as Evento);
+      }
+    )
+    .catch(
+      response => {
+        return response;
+      }
+    );
+  }
   updateEvent(event: Evento): Promise<Evento | JSON> {
      return this.http
     .put(this.coneccionInfo.url_eventos + event.id +  '/', JSON.stringify(event) , {headers: this.coneccionInfo.headers})
