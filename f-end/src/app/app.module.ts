@@ -1,5 +1,5 @@
 import { TokenService } from './servicios/token.service';
-import { NgModule } from '@angular/core';
+import { NgModule, ViewContainerRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,8 +19,9 @@ import { InjectorToken } from './servicios/injectorToken.service';
 import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.module';
 import { ActividadService } from './servicios/actividad.service';
 import { InscripcionService } from './servicios/inscripcion.service';
+import { MensajesToastService } from './servicios/mensajes-toast.service';
 import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
-import {DpDatePickerModule} from 'ng2-date-picker';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
@@ -36,7 +37,6 @@ export function HttpLoaderFactory(http: Http) {
         FormsModule,
         HttpModule,
         AppRoutingModule,
-        DpDatePickerModule,
         ReactiveFormsModule,
         NoopAnimationsModule,
         BrowserAnimationsModule,
@@ -60,6 +60,7 @@ export function HttpLoaderFactory(http: Http) {
                 InjectorToken,
                 ToastOptions,
                 ActividadService,
+                MensajesToastService,
                 TokenService],
     bootstrap: [AppComponent]
 })

@@ -125,10 +125,6 @@ export class PreInscripcionService {
                     );
             }
         );
-
-       
-        
-       
     }
     public rechazarPreinscripcion(idPreinscripcion): Promise<PreInscripcion|JSON> {
         return this.cambiarEstadoPreInscripcion(idPreinscripcion, 'R');

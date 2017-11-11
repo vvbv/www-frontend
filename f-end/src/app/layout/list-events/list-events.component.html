@@ -10,7 +10,7 @@
       </div>
   <div  class="list-group">
     <div *ngIf="eventos.length > 0">
-      <div class = " evento card-block" *ngFor="let evento of eventos" class="col-12 item-evento">
+      <div class = " evento card-block" *ngFor="let evento of eventos; let i = index" class="col-12 item-evento">
            <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
               Cancelado
             </div>
@@ -29,11 +29,23 @@
           <a *ngIf="evento.estado == 'SI'"(click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
           <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
           <a [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
+          <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>
           <b *ngIf="evento.estado != 'CC'" class = "float-right" >{{getDisplayNameEstado(evento)}}&nbsp;</b>
           
 
         </div>
-        <app-listUsers  [evento]="evento" [usuariosFiltrados]="evento.usuariosPreinscritos" ></app-listUsers>
+
+        <button class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+        
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-xl">
+            <div class="modal-content">
+              <app-listUsers  [evento]="evento" [usuariosFiltrados]="evento.usuariosPreinscritos" ></app-listUsers>
+            </div>
+          </div>
+        </div>
+        
+       
       </div>
       
     </div>
