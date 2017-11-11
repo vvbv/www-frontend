@@ -9,24 +9,24 @@
             <table class="table">
                 <thead class="thead-inverse">
                     <tr>
-                        <th>#</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
+                        <th class="hidden-sm-down">#</th>
+                        <th class="hidden-sm-down">Nombres</th>
+                        <th class="hidden-sm-down">Apellidos</th>
                         <th>Nick</th>
-                        <th>Correo</th>
-                        <th>Rol</th>
-                        <th>Estado</th>
+                        <th class="hidden-sm-down">Correo</th>
+                        <th class="hidden-sm-down">Rol</th>
+                        <th class="hidden-sm-down">Estado</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
                         <th scope="row">{{usuario.numero_identificacion}}</th>
-                        <td>{{usuario.nombres}}</td>
-                        <td>{{usuario.apellidos}}</td>
+                        <td class="hidden-sm-down">{{usuario.nombres}}</td>
+                        <td class="hidden-sm-down">{{usuario.apellidos}}</td>
                         <td>@{{usuario.username}}</td>
-                        <td>{{usuario.custom_email}}</td>
-                        <td>{{usuario.rol}}</td>
+                        <td class="hidden-sm-down">{{usuario.custom_email}}</td>
+                        <td class="hidden-sm-down">{{usuario.rol}}</td>
                         <td *ngIf="usuario.estadoHabilitado"><a class="btn btn-sm btn-primary">Activo</a></td>
                         <td *ngIf="!usuario.estadoHabilitado"><a class="btn btn-sm btn-danger">Inactivo</a></td>
                         <td><a href="" [routerLink]="['/editSystemUser']" [queryParams]="{username: usuario.username}" class="btn btn-sm btn-primary">Editar</a></td>
