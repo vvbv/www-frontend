@@ -51,7 +51,7 @@ export class NewSystemUserComponent implements OnInit {
         this.usuarioService.crearUsuario(this.usuarioNuevo).then(
             response => {
                 this.retornoRegistro = response;
-                if((this.retornoRegistro.nombres == this.usuarioNuevo.nombres)&&(this.retornoRegistro.nombres != null)){
+                if((this.retornoRegistro.nombres === this.usuarioNuevo.nombres)&&(this.retornoRegistro.nombres != null)){
                     console.log("Usuario registrado");
                     this.usuarioNuevo = new Usuario();
                     this.retornoRegistro = new Usuario();

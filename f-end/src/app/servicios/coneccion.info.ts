@@ -24,8 +24,6 @@ export class ConeccionInfo {
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
-        this.headers = new Headers();
-        this.headers.append('Content-Type', 'application/json');
         this.url_base = 'http://localhost:8000';
         this.url_base_api = this.url_base + '/api/v1';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
@@ -40,7 +38,25 @@ export class ConeccionInfo {
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
+
+        this.iniciarHeaders();
     }
+
+    iniciarHeaders() {
+        this.headers = new Headers();
+        this.headers.append('Content-Type', 'application/json');
+            // Website you wish to allow to connect
+      this.headers.delete('Access-Control-Allow-Origin');
+        // Request methods you wish to allow
+        this.headers.delete('Access-Control-Allow-Methods');
+        // Request headers you wish to allow
+        this.headers.delete('Access-Control-Allow-Headers');
+        // Set to true if you need the website to include cookies in the requests sent
+        // to the API (e.g. in case you use sessions)
+        this.headers.delete('Access-Control-Allow-Credentials');    
+    }
+
+
     setToken(token: string) {
         this.token = token;
         this.headers.delete('Authorization');

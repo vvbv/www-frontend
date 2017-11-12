@@ -47,3 +47,12 @@
        <div ngFor="let error of errores.precio" >
            <span class="help-block">{{errores.precio}}</span>
        </div>
+       <div  *ngIf ="editar" [class.has-danger] = "errores.estado" class="form-group col-12">
+        <label for="estado" class="col-form-label">{{estructuraEvento.estado.label}}</label>
+        <select [class.form-control-danger] = "errores.estado" [(ngModel)]="event.estado" id="estado" name="estado" class="form-control" > 
+          <option *ngFor="let opcion of estructuraEvento.estado.choices" [ngValue]="opcion.value">{{opcion.display_name}}</option>
+        </select>
+                  <div ngFor="let error of errores.estado" >
+            <span class="help-block">{{ errores.estado}}</span>
+        </div>
+    </div>
