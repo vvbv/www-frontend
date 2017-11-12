@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PageHeaderModule } from './../shared';
+import { PageHeaderModule } from '../../shared';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 
 import { CalendarRoutingModule } from './calendar-routing.module';
 import { CalendarComponent } from './calendar.component';
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'angular-calendar';
+
+
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -16,8 +18,10 @@ import { CalendarModule } from 'angular-calendar';
         CommonModule,
         CalendarRoutingModule,
         PageHeaderModule,
-        FormsModule,
-        ReactiveFormsModule
+        NgbModalModule.forRoot(),
+        ReactiveFormsModule,
+        FormsModule
+        CalendarModule.forRoot()
     ],
     declarations: [
         CalendarComponent
