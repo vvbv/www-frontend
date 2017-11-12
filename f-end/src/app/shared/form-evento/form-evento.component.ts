@@ -25,6 +25,7 @@ export class FormEventoComponent implements OnInit {
   @Input() public errores: JSON;
   opcionesEvento: JSON;
   estructuraEvento: EventoEstructura;
+  editar: boolean;
   constructor(
     private eventService: EventoService,
   ) {
@@ -43,6 +44,9 @@ export class FormEventoComponent implements OnInit {
       );
     }
     ngOnInit() {
+      if (this.event.nombre !== '') {
+        this.editar = true;
+      }
     }
   }
 
