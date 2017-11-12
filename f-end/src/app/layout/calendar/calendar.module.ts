@@ -20,7 +20,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
         PageHeaderModule,
         NgbModalModule.forRoot(),
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
         CalendarModule.forRoot()
     ],
     declarations: [
