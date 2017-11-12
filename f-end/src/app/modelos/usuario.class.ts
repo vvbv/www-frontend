@@ -15,15 +15,15 @@ export class Usuario implements UsuarioInterface {
 
     constructor() {
         this.id = '';
-        this.numero_identificacion = '';
+        this.numero_identificacion = '105884707';
         this.username = '';
         this.password = '';
-        this.rol = '';
-        this.imagenPerfil = '';
+        this.rol = 'UP';
+        this.imagenPerfil = '0';
         this.nombres = '';
         this.apellidos = '';
         this.custom_email = '';
-        this.estadoHabilitado = '';
+        this.estadoHabilitado = 'true';
     }
 }
 

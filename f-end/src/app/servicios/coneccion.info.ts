@@ -53,7 +53,7 @@ export class ConeccionInfo {
         this.headers.delete('Access-Control-Allow-Headers');
         // Set to true if you need the website to include cookies in the requests sent
         // to the API (e.g. in case you use sessions)
-        this.headers.delete('Access-Control-Allow-Credentials');
+        this.headers.delete('Access-Control-Allow-Credentials');    
     }
 
 
