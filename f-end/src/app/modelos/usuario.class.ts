@@ -15,7 +15,7 @@ export class Usuario implements UsuarioInterface {
 
     constructor() {
         this.id = '';
-        this.numero_identificacion = '105884707';
+        this.numero_identificacion = '';
         this.username = '';
         this.password = '';
         this.rol = 'UP';

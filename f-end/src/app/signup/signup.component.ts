@@ -13,11 +13,13 @@ import { FormControl } from '@angular/forms';
 export class SignupComponent implements OnInit {
     usuario: Usuario;
     errorRetorno: JSON;
+    pass_verificacion: string;
     constructor(private _toastr: ToastsManager,
                 vRef: ViewContainerRef,
                 private  usuariosService: UsuarioService ) {
         this._toastr.setRootViewContainerRef(vRef);
         this.usuario = new Usuario();
+        this.pass_verificacion = '';
         this.errorRetorno = JSON.parse('{}');
     }
     crearUsuario(usuario: Usuario) {
@@ -29,6 +31,7 @@ export class SignupComponent implements OnInit {
                     '" registrado correctamente, valla a login para iniciar sesión', 'En hora buena!',
                     {toastLife: 12000, showCloseButton: false});
                     this.errorRetorno = JSON.parse('{}');
+                    this.pass_verificacion = '';
                     this.usuario = new Usuario();
             } else {
                 this.errorRetorno = JSON.parse(JSON.stringify(response));

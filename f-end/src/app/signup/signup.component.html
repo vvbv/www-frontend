@@ -12,6 +12,13 @@
                                    <span class="help-block">{{errorRetorno['username']}}</span>
                            </div>
                        </div>
+                       <div class="form-group">
+                            
+                       <input [(ngModel)]="usuario.numero_identificacion" name = "numero_identificacion" [class.form-control-danger] = "errorRetorno['nombres']" type="text" class="form-control input-underline input-lg" id="" placeholder="Número de identificacion" required>
+                       <div ngFor="let error of errorRetorno" >
+                               <span class="help-block">{{errorRetorno['numero_identificacion']}}</span>
+                       </div>
+                   </div>
                     <div class="form-group">
                              
                         <input [(ngModel)]="usuario.nombres" name = "nombres" [class.form-control-danger] = "errorRetorno['nombres']" type="text" class="form-control input-underline input-lg" id="" placeholder="Nombres" required>
@@ -33,12 +40,12 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" [class.form-control-danger] = "errorRetorno['password']"id="" placeholder="Contraseña" required>
+                        <input type="password" [(ngModel)]="pass_verificacion" class="form-control input-underline input-lg" [class.form-control-danger] = "errorRetorno['password']"id="" placeholder="Contraseña" required>
                         <div ngFor="let error of errorRetorno" >
                                 <span class="help-block">{{errorRetorno['password']}}</span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" >
                         <input  [(ngModel)]="usuario.password" name = "password"  type="password" class="form-control input-underline input-lg" id="" placeholder="Repetir Contraseña" required>
 
                     </div>
