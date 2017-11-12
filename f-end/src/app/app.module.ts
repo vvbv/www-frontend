@@ -14,6 +14,7 @@ import { AuthenticationService } from './servicios/authentication.service';
 import { UsuarioService } from './servicios/usuario.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
+import { ImagenesService } from './servicios/imagenes.service';
 import { PreInscripcionService } from './servicios/preInscripcion.service';
 import { InjectorToken } from './servicios/injectorToken.service';
 import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.module';
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: Http) {
                 InjectorToken,
                 ToastOptions,
                 ActividadService,
+                ImagenesService,
                 MensajesToastService,
                 TokenService],
     bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ export class EventoEstructura implements EventoInterface {
     descripcion: any;
     fechaInicio: any;
     fechaFinalizacion: any;
+    imagen: any;
     precio: any;
     estado: any;
     usuariosPreinscritos: any;

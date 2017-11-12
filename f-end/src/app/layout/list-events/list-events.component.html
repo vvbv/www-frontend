@@ -1,6 +1,6 @@
 
 <h1> Lista de eventos</h1>
-<div *ngIf=" eventos && estructuraEvento" >
+<div class = "container" *ngIf=" eventos && estructuraEvento" >
 
     <div *ngIf="mensaje" class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -8,9 +8,11 @@
         </button>
          {{mensaje}}
       </div>
-  <div  class="list-group">
-    <div *ngIf="eventos.length > 0">
-      <div class = " evento card-block" *ngFor="let evento of eventos; let i = index" class="col-12 item-evento">
+    <div class="row" *ngIf="eventos.length > 0">
+
+      <div  *ngFor="let evento of eventos; let i = index" class="col-lg-6 evento card-block  item-evento">
+          <img width = "100%" src="{{evento.imagen}}" class="img-rounded" alt="imagen  {{evento.nombre}}">
+          
            <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
               Cancelado
             </div>
@@ -49,7 +51,7 @@
        
       </div>
       
-    </div>
+
   </div>
   <div *ngIf="eventos.length == 0">
       <div class="alert alert-warning" role="alert">

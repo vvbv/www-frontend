@@ -20,6 +20,9 @@ export class ConeccionInfo {
     public url_actividades_crear: string;
     public url_validar_token: string;
     public url_actividades_porEvento: string;
+    public url_static_imagenes;
+    public url_imagenes_crear;
+    public url_imagenes_modificar;
     public headers: Headers;
     constructor() {
         this.token_name = 'tok';
@@ -38,7 +41,9 @@ export class ConeccionInfo {
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
-
+        this.url_static_imagenes = this.url_base + '/static/';
+        this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
+        this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
         this.iniciarHeaders();
     }
 
