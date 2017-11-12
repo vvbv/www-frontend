@@ -39,6 +39,7 @@ export class  AuthenticationService  {
 
     public logout() {
         localStorage.removeItem(this.coneccionInfo.token_name);
+        
     }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only
