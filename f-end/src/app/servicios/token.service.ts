@@ -11,9 +11,7 @@ import { ConeccionInfo } from './coneccion.info';
 @Injectable()
 
 export class TokenService {
-    constructor (private http: Http, private coneccionInfo: ConeccionInfo) {
-
-    }
+    constructor (private http: Http, private coneccionInfo: ConeccionInfo) {}
 
     initToken(username: string, password: string) {
         return this.http
@@ -41,6 +39,10 @@ export class TokenService {
         .catch(res => {
             console.log(res);
         });
+    }
+    deleteToken(){
+        localStorage.removeItem('tok');
+        this.coneccionInfo.setToken("");
     }
     isValid(token: string): Promise<boolean> {
         console.log('{"token": "' + localStorage.getItem(this.coneccionInfo.token_name) + '"}');

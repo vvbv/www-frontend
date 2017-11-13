@@ -21,6 +21,9 @@
         <a [routerLink]="['/newSystemUser']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-plus"></i>&nbsp; NU del sistema
         </a>
+        <div id="salir" class="hidden-lg-up">
+            <a  [routerLink]="['/login']" [queryParams]="{logout: 'yes'}" [routerLinkActive]="['router-link-active']"> <i class="fa fa-sign-out"></i>&nbsp; Cerrar sesion</a>
+        </div>
         <!--<a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' | translate }}
         </a>-->
