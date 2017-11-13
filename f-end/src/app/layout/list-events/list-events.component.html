@@ -1,6 +1,6 @@
 
 <h1> Lista de eventos</h1>
-<div *ngIf=" eventos && estructuraEvento" >
+<div class = "container-fluid" *ngIf=" eventos && estructuraEvento" >
 
     <div *ngIf="mensaje" class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -8,30 +8,34 @@
         </button>
          {{mensaje}}
       </div>
-  <div  class="list-group">
-    <div *ngIf="eventos.length > 0">
-      <div class = " evento card-block" *ngFor="let evento of eventos; let i = index" class="col-12 item-evento">
+    <div class="row" *ngIf="eventos.length > 0">
+
+      <div  *ngFor="let evento of eventos; let i = index" class="col-lg-6 evento card-block  item-evento">
+          <img width = "100%" src="{{evento.imagen}}" class="img-rounded" alt="imagen  {{evento.nombre}}">
+          
            <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
               Cancelado
             </div>
         <div [class.boton-editar-cancelado]="evento.estado == 'CC'" [routerLink]="['/edit-event/', evento.id]"   class="list-group-item list-group-item-action flex-column align-items-start " [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
           <div class="d-flex w-100 justify-content-between" title="Click para editar">
             <h5 class="mb-1">{{evento.nombre}}</h5>
-            <small><b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
+            <small style = "margin-left: auto;" ><b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
             
             <br>
           </div>
           <p class="mb-1">Descripción: {{evento.descripcion}}</p>
+          <p class="mb-1">Precio: ${{evento.precio}}</p>
         <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->  
         </div>
         <div [class.opciones-cancelado]="evento.estado == 'CC'" class="opciones-evento">
 
-          <a *ngIf="evento.estado == 'SI'"(click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
+          <a  *ngIf="usuario.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
           <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
-          <a [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
-          <button class="btn btn-sm btn-primary" data-toggle="modal" data-target=".usuarios-preinscritos">Usuarios Preinscritos</button>
+          
+          <a *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
+          <button *ngIf="usuario.rol != 'UP'" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".usuarios-preinscritos">Usuarios Preinscritos</button>
         <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
-          <b *ngIf="evento.estado != 'CC'" class = "float-right" >{{getDisplayNameEstado(evento)}}&nbsp;</b>
+          <b  class = "float-right" >{{getDisplayNameEstado(evento)}}&nbsp;</b>
           
 
         </div>
@@ -49,7 +53,7 @@
        
       </div>
       
-    </div>
+
   </div>
   <div *ngIf="eventos.length == 0">
       <div class="alert alert-warning" role="alert">

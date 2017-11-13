@@ -54,12 +54,11 @@ export class PreInscripcionService {
         .post(this.coneccionInfo.url_preinscripcion, JSON.stringify(preInscripcion), {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
-            response =>  {  
+            response =>  {
                 return (JSON.parse(response.text().toString()) as PreInscripcion);
             }
         ).catch(
             response => {
-                console.log(response.text().toString());
                 return  (response.text().toString());
 
             }

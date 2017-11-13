@@ -1,6 +1,6 @@
 import { EventoService } from '../../servicios/events.service';
 import { MensajesToastService } from '../../servicios/mensajes-toast.service';
-import { Component, OnInit, Input,  ViewContainerRef} from '@angular/core';
+import { Component, OnInit, Input,  ViewContainerRef, ViewChild, ElementRef} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { routerTransition } from '../../router.animations';
 
@@ -22,7 +22,10 @@ import { JsonFormatter } from 'tslint/lib/formatters';
 
 export class FormEventoComponent implements OnInit {
   @Input() public event: Evento;
+  @Input() public eventForm ;
   @Input() public errores: JSON;
+  @ViewChild('fileInput') inputEl: ElementRef;
+
   opcionesEvento: JSON;
   estructuraEvento: EventoEstructura;
   editar: boolean;
@@ -43,6 +46,12 @@ export class FormEventoComponent implements OnInit {
         }
       );
     }
+    fileChange($event) {
+     console.log($event.target.files);
+     this.event.imagen = $event.target.files[0];
+     console.log(this.event.imagen);
+  }
+
     ngOnInit() {
       if (this.event.nombre !== '') {
         this.editar = true;

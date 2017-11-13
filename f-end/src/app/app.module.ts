@@ -14,6 +14,7 @@ import { AuthenticationService } from './servicios/authentication.service';
 import { UsuarioService } from './servicios/usuario.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
+import { ImagenesService } from './servicios/imagenes.service';
 import { PreInscripcionService } from './servicios/preInscripcion.service';
 import { InjectorToken } from './servicios/injectorToken.service';
 import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.module';
@@ -21,6 +22,7 @@ import { ActividadService } from './servicios/actividad.service';
 import { InscripcionService } from './servicios/inscripcion.service';
 import { MensajesToastService } from './servicios/mensajes-toast.service';
 import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
+import { NoticiasService } from './servicios/noticias.service';
 import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 
 // AoT requires an exported function for factories
@@ -35,6 +37,7 @@ export function HttpLoaderFactory(http: Http) {
         PaginaInicialComponent,
     ],
     imports: [
+
         BrowserModule,
         FormsModule,
         HttpModule,
@@ -62,6 +65,8 @@ export function HttpLoaderFactory(http: Http) {
                 InjectorToken,
                 ToastOptions,
                 ActividadService,
+                NoticiasService,
+                ImagenesService,
                 MensajesToastService,
                 TokenService],
     bootstrap: [AppComponent]
