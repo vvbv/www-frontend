@@ -10,12 +10,12 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'hammerjs';
-
+import 'tinymce/plugins/emoticons/plugin.js';
 import { Evento } from '../../modelos/evento.class';
 import { Usuario } from '../../modelos/usuario.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
-import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 import { JsonFormatter } from 'tslint/lib/formatters';
 import { ConeccionInfo } from '../../servicios/coneccion.info';
 
@@ -29,25 +29,30 @@ export class ListEventsComponent implements OnInit {
     eventos: Evento[];
     eventoSeleccionado: Evento;
     errores: JSON;
+    content: any;
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
     estructuraEvento: EventoEstructura;
+    usuario: Usuario;
     mensaje: string;
+    
+
+    
     constructor(
         private eventService: EventoService,
-        private _toastr: ToastsManager,
-        vRef: ViewContainerRef,
+        public _toastr: ToastsManager,
         private preInscripcionService: PreInscripcionService,
+        vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
-      this.preinscripcionNueva = new PreInscripcion();
 
+          this.content = '<p> hola madre</p>';
+          this.usuario = usuarioService.usuario;
+      this.preinscripcionNueva = new PreInscripcion();
+      this._toastr.setRootViewContainerRef(vRef);
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
-      ;
       this.eventService.getEventos().then(response => {
           this.eventos = response
-         console.log(this.eventos);
-         this._toastr.setRootViewContainerRef(vRef);
         }
       );
       this.usuarioService.recuperarUsuario()
@@ -79,10 +84,8 @@ export class ListEventsComponent implements OnInit {
         }
       );
     }
-    ngOnInit() {
+    ngOnInit(){
       
-
-
     }
     getDisplayNameEstado(evento: Evento): any {
      var  est:JSON = (this.estructuraEvento.estado.choices.filter( choice => choice.value === evento.estado));
@@ -90,6 +93,11 @@ export class ListEventsComponent implements OnInit {
     }
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
+      
+    }
+
+    keyupHandlerFunction(e): void {
+      console.log(e); //e is the HTML output from your TinyMCE component
     }
     preinscripcion(evento: Evento): void {
       this.preinscripcionNueva.evento = evento.id;
@@ -97,20 +105,12 @@ export class ListEventsComponent implements OnInit {
       this.preinscripcionNueva.estado = 'E';
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
-          if (typeof response === 'object') {
-           let usuario: Usuario = new Usuario();
-                this.usuarioService.getUsuario(this.usuarioLogueado.username)
-                .then(res => {
-                  usuario = res;
-                evento.usuariosPreinscritos.push(usuario);
-                })
-                .catch();
-                this._toastr.success('Su incscripcion se ha registrado', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
-            }else {
-              this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
-            }
+          console.log('que mierda');
+          this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
         }
-      );
+      ).catch(response => {
+        this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
+      });
     }
   }
 

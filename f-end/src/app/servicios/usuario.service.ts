@@ -8,12 +8,13 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class UsuarioService{
+export class UsuarioService {
+    public usuario: Usuario;
+    constructor(private http: Http, private coneccionInfo: ConeccionInfo ) {
+        this.usuario = new Usuario();
+    };
 
-    constructor(private http: Http, private coneccionInfo: ConeccionInfo ){};
-    
-
-    public crearUsuario(usuario:Usuario): Promise<Usuario>{
+    public crearUsuario(usuario: Usuario): Promise<Usuario> {
         return this.http
         .post(this.coneccionInfo.url_usuarios + 'usuario/nuevo/', JSON.stringify(usuario), {headers: this.coneccionInfo.headers})
         .toPromise()
@@ -61,13 +62,14 @@ export class UsuarioService{
         );
     }
 
-    public almacenarUsuario(username: string): void{
+    public almacenarUsuario(username: string): void {
         localStorage.setItem('username', username);
     }
 
-    public recuperarUsuario(): Promise<Usuario>{
+    public recuperarUsuario(): Promise<Usuario> {
         const username: string = localStorage.getItem('username');
-        return this.getUsuario(username);
+        this.getUsuario(username).then(response => {this.usuario = response; return this.usuario});
+        return  this.getUsuario(username);
     }
 
     public actualizarMiPerfil(usuarioActualizado: Usuario): Promise<JSON>{

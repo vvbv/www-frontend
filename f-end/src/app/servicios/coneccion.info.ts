@@ -20,6 +20,7 @@ export class ConeccionInfo {
     public url_actividades_crear: string;
     public url_validar_token: string;
     public url_actividades_porEvento: string;
+    public url_noticias: string;
     public url_static_imagenes;
     public url_imagenes_crear;
     public url_imagenes_modificar;
@@ -44,6 +45,7 @@ export class ConeccionInfo {
         this.url_static_imagenes = this.url_base + '/static/';
         this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
+        this.url_noticias = this.url_base_api + '/noticias/'
         this.iniciarHeaders();
     }
 
@@ -58,7 +60,7 @@ export class ConeccionInfo {
         this.headers.delete('Access-Control-Allow-Headers');
         // Set to true if you need the website to include cookies in the requests sent
         // to the API (e.g. in case you use sessions)
-        this.headers.delete('Access-Control-Allow-Credentials');    
+        this.headers.delete('Access-Control-Allow-Credentials');
     }
 
 

@@ -30,7 +30,7 @@
       </div>
 
       <div [class.has-danger] = "errores.fechaFinalizacion" class="form-group  col-12 " >
-          <label  for="example-datetime-local-input" class="col-8 col-form-label">{{estructuraEvento.fechaFinalizacion.label}} {{event.fechaFinalizacion}}</label>
+          <label  for="example-datetime-local-input" class="col-8 col-form-label">{{estructuraEvento.fechaFinalizacion.label}} </label>
             <input [class.form-control-danger] = "errores.fechaFinalizacion" [(ngModel)]="event.fechaFinalizacion" id="fechaFinalizacion" name="fechaFinalizacion" class="form-control " type="datetime-local" value="2011-08-19T13:45:00" >
             <div ngFor="let error of errores.fechaFinalizacion" >
               <span class="help-block">{{errores.fechaFinalizacion}}</span>
@@ -39,10 +39,10 @@
 
 
 
-      <label  for="imagen" class="col-8 col-form-label">Imagen {{event.imagen}}</label>
+      <label  for="imagen" class="col-8 col-form-label">Imagen </label>
       
       <div  [class.has-danger] = "errores.imagen" class="form-group input-group col-12">
-         <input  (change)="fileChange($event)" [class.form-control-danger] = "errores.imagen" type="file" accept="image/*" [(ngModel)]="event.imagen" id="imagen" name="imagen" class="form-control col-12" aria-label="Imagen del evento"  #fileInput>
+         <input  (change)="fileChange($event)" [class.form-control-danger] = "errores.imagen" type="file" accept="image/*" id="imagen" name="imagen" class="form-control col-12" aria-label="Imagen del evento"  #fileInput>
         
        </div>
        <div ngFor="let error of errores.imagen" >
@@ -74,3 +74,6 @@
 
 
     </div>
+    </form>
+    </div>
+    
