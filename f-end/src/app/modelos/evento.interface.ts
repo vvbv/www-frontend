@@ -6,6 +6,7 @@ export interface EventoInterface {
     fechaInicio: any;
     fechaFinalizacion: any;
     estado: any;
+    imagen: any;
     precio: any;
     usuariosPreinscritos: Usuario[];
 }

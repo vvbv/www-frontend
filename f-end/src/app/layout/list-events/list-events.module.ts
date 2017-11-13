@@ -8,6 +8,8 @@ import { MomentModule } from 'angular2-moment';
 import { Routes, RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { TinymceModule } from 'angular2-tinymce';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -15,6 +17,8 @@ import { SharedModule } from '../../shared/shared.module';
         PageHeaderModule,
         FormsModule,
         ReactiveFormsModule,
+        TinymceModule.withConfig({
+          }),
         SharedModule,
         MomentModule
     ],

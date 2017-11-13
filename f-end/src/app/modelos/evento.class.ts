@@ -9,10 +9,12 @@ export class Evento implements EventoInterface {
     public estado: string;
     public precio: number;
     public usuariosPreinscritos: Usuario[];
+    public imagen: string;
     constructor() {
         this.id = '';
         this.nombre = '';
         this.descripcion = '';
+        this.imagen = '';
         this.fechaFinalizacion = '';
         this.fechaInicio = '';
         this.estado = 'SI';

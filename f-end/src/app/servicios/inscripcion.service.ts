@@ -8,11 +8,10 @@ import 'rxjs/add/operator/map';
 
 
 @Injectable()
-export class InscripcionService{
+export class InscripcionService {
 
-    constructor(private http: Http, private coneccionInfo: ConeccionInfo ){};
-    
-    public getInscripcion(idInscripcion: string): Promise<Inscripcion>{
+    constructor(private http: Http, private coneccionInfo: ConeccionInfo ) {};
+    public getInscripcion(idInscripcion: string): Promise<Inscripcion> {
         return this.http
         .get(this.coneccionInfo.url_inscripcion + idInscripcion, {headers: this.coneccionInfo.headers})
         .toPromise()
@@ -23,7 +22,7 @@ export class InscripcionService{
         );
     }
 
-    public registrarInscripcion(inscripcion: Inscripcion): Promise<Inscripcion>{
+    public registrarInscripcion(inscripcion: Inscripcion): Promise<Inscripcion> {
         return this.http
         .post(this.coneccionInfo.url_inscripcion, JSON.stringify(inscripcion), {headers: this.coneccionInfo.headers})
         .toPromise()
