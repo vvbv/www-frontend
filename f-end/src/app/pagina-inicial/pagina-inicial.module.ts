@@ -4,6 +4,7 @@ import {
     NgbCarouselModule,
     NgbAlertModule
 } from '@ng-bootstrap/ng-bootstrap';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 import { PaginaInicialRoutingModule } from './pagina-inicial-routing.module';
@@ -14,6 +15,7 @@ import { StatModule } from '../shared';
 @NgModule({
     imports: [
         CommonModule,
+        AppRoutingModule,
         NgbCarouselModule.forRoot(),
     ],
     declarations: [

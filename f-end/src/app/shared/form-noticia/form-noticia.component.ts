@@ -10,6 +10,7 @@ import { NoticiasService } from 'app/servicios/noticias.service';
 export class FormNoticiaComponent implements OnInit {
   @Input() public noticia: Noticia;
   @Input() public noticiaForm ;
+  @Input() contenido: string;
   @Input() public errores: JSON;
   editar: boolean;
   constructor( noticiaService: NoticiasService) {
@@ -22,7 +23,9 @@ export class FormNoticiaComponent implements OnInit {
     console.log($event.target.files);
     this.noticia.imagen = $event.target.files[0];
  }
-
+ keyupHandlerFunction(e): void {
+  //console.log(e); //e is the HTML output from your TinyMCE component
+}
    ngOnInit() {
      if (this.noticia.resumen !== '') {
        this.editar = true;
