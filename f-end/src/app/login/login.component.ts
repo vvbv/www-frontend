@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { AuthenticationService } from '../servicios/authentication.service';
 import { UsuarioService } from '../servicios/usuario.service';
@@ -21,10 +21,14 @@ export class LoginComponent implements OnInit {
         vRef: ViewContainerRef,
             public router: Router,
             private authenticationService: AuthenticationService,
-            private usuarioService: UsuarioService
+            private usuarioService: UsuarioService,
+            public activeRoute: ActivatedRoute
         ) {
+
             this._toastr.setRootViewContainerRef(vRef);
-        this.model = new Usuario();
+            this.model = new Usuario();
+
+            
     }
     printError() {
         console.log('error de logueo');
@@ -33,7 +37,20 @@ export class LoginComponent implements OnInit {
         
     }
     ngOnInit() {
-        
+        this.activeRoute.queryParams.subscribe(
+            params => {
+                console.log(params['logout'] + 'asdsad');
+                if(params['logout'] == "yes"){
+                    console.log(params['logout'] + 'asdsad');
+                    this.logout();
+                }
+            }
+         );
+    }
+
+    logout(){
+        this.authenticationService.logout();
+        this._toastr.info('Ha salido correctamente.', 'Información!', {toastLife: 3000, showCloseButton: false});
     }
 
     onLoggedin() {

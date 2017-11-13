@@ -23,6 +23,8 @@ import { InscripcionService } from './servicios/inscripcion.service';
 import { MensajesToastService } from './servicios/mensajes-toast.service';
 import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
 import { NoticiasService } from './servicios/noticias.service';
+import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     // for development
@@ -32,6 +34,7 @@ export function HttpLoaderFactory(http: Http) {
 @NgModule({
     declarations: [
         AppComponent,
+        PaginaInicialComponent,
     ],
     imports: [
 

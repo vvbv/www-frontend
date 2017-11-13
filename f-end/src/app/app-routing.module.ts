@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './shared';
+import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component'
 
 const routes: Routes = [
     {
@@ -9,6 +10,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     { path: 'login', loadChildren: './login/login.module#LoginModule' },
+    { path: 'home', component: PaginaInicialComponent },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: '**', redirectTo: 'not-found' }
