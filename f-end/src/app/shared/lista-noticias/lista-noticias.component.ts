@@ -6,14 +6,16 @@ import { Usuario } from '../../modelos/usuario.class';
   selector: 'app-lista-noticias',
   templateUrl: './lista-noticias.component.html',
   styleUrls: ['./lista-noticias.component.scss'],
-  encapsulation: ViewEncapsulation.None
 })
 export class ListaNoticiasComponent implements OnInit {
   @Input() public noticias: Noticia[];
   @Input() public usuario: Usuario;
   constructor() { }
-
+  desactivarNoticia(noticia: Noticia){
+    alert('en proceso');
+  }
   ngOnInit() {
+    console.log(this.noticias);
   }
 
 }

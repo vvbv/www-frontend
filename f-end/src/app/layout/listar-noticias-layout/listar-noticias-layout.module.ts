@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListarNoticiasLayoutRoutingModule } from './listar-noticias-layout-routing.module';
 import { SharedModule } from '../../shared/shared.module';
+import { Routes, RouterModule } from '@angular/router';
 import { ListarNoticiasLayoutComponent } from './listar-noticias-layout.component';
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { ListarNoticiasLayoutComponent } from './listar-noticias-layout.componen
         ListarNoticiasLayoutRoutingModule,
         FormsModule,
         SharedModule,
+        RouterModule,
         ReactiveFormsModule
     ],
     declarations: [

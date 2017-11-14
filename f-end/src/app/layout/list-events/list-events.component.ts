@@ -29,7 +29,6 @@ export class ListEventsComponent implements OnInit {
     eventos: Evento[];
     eventoSeleccionado: Evento;
     errores: JSON;
-    content: any;
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
     estructuraEvento: EventoEstructura;
@@ -45,7 +44,6 @@ export class ListEventsComponent implements OnInit {
         vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
 
-          this.content = '<p> hola madre</p>';
           this.usuario = usuarioService.usuario;
       this.preinscripcionNueva = new PreInscripcion();
       this._toastr.setRootViewContainerRef(vRef);

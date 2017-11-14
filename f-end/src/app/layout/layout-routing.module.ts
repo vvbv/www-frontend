@@ -20,6 +20,7 @@ const routes: Routes = [
              { path: 'noticias', loadChildren: './listar-noticias-layout/listar-noticias-layout.module#LisarNoticiasLayoutModule'},
             { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
             { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventModule'},
+            { path: 'editarNoticia/:id', loadChildren: './editar-noticia/editar-noticia.module#EditarNoticiaModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},
             { path: 'listUsers', loadChildren: './list-users-layout/list-users-layout.module#ListUsersLayoutModule'},
             { path: 'newSystemUser', loadChildren: './new-system-user/new-system-user.module#NewSystemUserModule'},

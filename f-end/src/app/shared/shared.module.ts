@@ -7,6 +7,7 @@ import { FormEventoComponent } from './form-evento/form-evento.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { TinyComponent } from './tinymc/tinymc.component';
+import { Routes, RouterModule } from '@angular/router';
 import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
 import { PreviewNoticiaComponent } from './preview-noticia/preview-noticia.component';
 import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
@@ -15,6 +16,7 @@ import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.componen
         CommonModule,
         NgbDropdownModule.forRoot(),
         TranslateModule,
+        RouterModule,
         FormsModule
     ],
     declarations: [
@@ -22,6 +24,7 @@ import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.componen
         FormEventoComponent,
         EventoDetalleComponent,
         TinyComponent,
+        
         FormNoticiaComponent,
         PreviewNoticiaComponent,
         ListaNoticiasComponent,
