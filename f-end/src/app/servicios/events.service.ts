@@ -16,7 +16,7 @@ export class EventoService {
     .get(this.coneccionInfo.url_eventos , {headers: this.coneccionInfo.headers} )
     .toPromise()
     .then(response => {
-      return JSON.parse(response.text()).results as Evento[]
+      return JSON.parse(response.text()) as Evento[]
     });
   }
   public getEvento(id: number): Observable<Evento>  {
@@ -30,6 +30,7 @@ export class EventoService {
     myParams.append('file', evento.imagen);*/
     var headersBetha = new Headers(this.coneccionInfo.headers);
     headersBetha.delete('Content-Type');
+    
     let formData = new FormData();
     formData.append("nombre", evento.nombre);
     formData.append('descripcion', evento.descripcion);
@@ -40,7 +41,7 @@ export class EventoService {
     return this.http
     .post(this.coneccionInfo.url_eventos ,
        formData ,
-        {headers: this.coneccionInfo.headers,
+        {headers: headersBetha,
         },
       )
     .toPromise()

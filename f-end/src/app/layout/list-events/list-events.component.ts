@@ -52,7 +52,8 @@ export class ListEventsComponent implements OnInit {
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
       this.eventService.getEventos().then(response => {
-          this.eventos = response
+          this.eventos = response;
+          console.log (response);
         }
       );
       this.usuarioService.recuperarUsuario()

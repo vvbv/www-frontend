@@ -1,0 +1,23 @@
+<div  *ngFor="let evento of eventos; let i = index" class="col-lg-6 evento card-block  item-evento">
+          <img width = "100%" src="{{evento.imagen}}" class="img-rounded" alt="imagen  {{evento.nombre}}">
+          
+           <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
+              Cancelado
+            </div>
+        <div [routerLink]="['/edit-event/', evento.id]"   class="list-group-item list-group-item-action flex-column align-items-start ">
+          <div class="d-flex w-100 justify-content-between" title="Click para editar">
+            <h5 class="mb-1">{{noticia.titulo}}</h5>
+            <small style = "margin-left: auto;" ><b>Publicada el </b> {{noticia.fechaRegistro| date:'MM/dd/yyyy'}} </small>
+            
+            <br>
+          </div>
+          <p class="mb-1">Resumen: {{noticia.resumen}}</p>
+        <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->  
+        </div>
+          <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
+          
+          <a *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
+          <a *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Desactivar</a>
+        <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
+
+ </div>

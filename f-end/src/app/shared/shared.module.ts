@@ -8,6 +8,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { TinyComponent } from './tinymc/tinymc.component';
 import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
+import { PreviewNoticiaComponent } from './preview-noticia/preview-noticia.component';
+import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -21,7 +23,9 @@ import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
         EventoDetalleComponent,
         TinyComponent,
         FormNoticiaComponent,
+        PreviewNoticiaComponent,
+        ListaNoticiasComponent,
     ],
-    exports: [listUsersComponent, FormEventoComponent, FormNoticiaComponent, TinyComponent]
+    exports: [listUsersComponent, FormEventoComponent, FormNoticiaComponent, TinyComponent, ListaNoticiasComponent, PreviewNoticiaComponent]
 })
 export class SharedModule { }

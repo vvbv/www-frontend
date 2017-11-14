@@ -17,6 +17,7 @@ const routes: Routes = [
             '../shared/crear-actividad/crear-actividad.module#CrearActividadModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule'},
+             { path: 'noticias', loadChildren: './listar-noticias-layout/listar-noticias-layout.module#LisarNoticiasLayoutModule'},
             { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
             { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},

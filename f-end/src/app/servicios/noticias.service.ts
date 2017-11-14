@@ -16,7 +16,7 @@ export class NoticiasService {
     .get(this.coneccionInfo.url_noticias , {headers: this.coneccionInfo.headers} )
     .toPromise()
     .then(response => {
-      return JSON.parse(response.text()).results as Noticia[]
+      return JSON.parse(response.text()) as Noticia[]
     });
   }
   public getNoticia(id: number): Observable<Noticia>  {
@@ -30,16 +30,18 @@ export class NoticiasService {
     myParams.append('file', evento.imagen);*/
     var headersBetha = new Headers(this.coneccionInfo.headers);
     headersBetha.delete('Content-Type');
-    let formData = new FormData();
+    var formData = new FormData();
     formData.append('titulo', noticia.titulo);
+     console.log(formData );
     formData.append('resumen', noticia.resumen);
     formData.append('contenido', noticia.contenido);
     formData.append('usuarioRegistra', noticia.usuarioRegistra);
+    
     formData.append('imagen', noticia.imagen);
     return this.http
     .post(this.coneccionInfo.url_noticias ,
        formData ,
-        {headers: this.coneccionInfo.headers,
+        {headers: headersBetha,
         },
       )
     .toPromise()
