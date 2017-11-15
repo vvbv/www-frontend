@@ -29,11 +29,10 @@ export class ListEventsComponent implements OnInit {
     eventos: Evento[];
     eventoSeleccionado: Evento;
     errores: JSON;
-    content: any;
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
     estructuraEvento: EventoEstructura;
-    usuario: Usuario;
+    usuario$: Promise <Usuario>;
     mensaje: string;
     
 
@@ -45,14 +44,14 @@ export class ListEventsComponent implements OnInit {
         vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
 
-          this.content = '<p> hola madre</p>';
-          this.usuario = usuarioService.usuario;
+          this.usuario$ = usuarioService.recuperarUsuario();
       this.preinscripcionNueva = new PreInscripcion();
       this._toastr.setRootViewContainerRef(vRef);
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
       this.eventService.getEventos().then(response => {
-          this.eventos = response
+          this.eventos = response;
+          console.log (response);
         }
       );
       this.usuarioService.recuperarUsuario()
@@ -70,6 +69,7 @@ export class ListEventsComponent implements OnInit {
         );
 
     }
+
     eliminarEvento(evento: Evento, index: number) {
       this.eventService.deleteEvent(evento)
       .then(

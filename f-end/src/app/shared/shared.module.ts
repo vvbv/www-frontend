@@ -7,12 +7,16 @@ import { FormEventoComponent } from './form-evento/form-evento.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { TinyComponent } from './tinymc/tinymc.component';
+import { Routes, RouterModule } from '@angular/router';
 import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
+import { PreviewNoticiaComponent } from './preview-noticia/preview-noticia.component';
+import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
 @NgModule({
     imports: [
         CommonModule,
         NgbDropdownModule.forRoot(),
         TranslateModule,
+        RouterModule,
         FormsModule
     ],
     declarations: [
@@ -21,7 +25,9 @@ import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
         EventoDetalleComponent,
         TinyComponent,
         FormNoticiaComponent,
+        PreviewNoticiaComponent,
+        ListaNoticiasComponent,
     ],
-    exports: [listUsersComponent, FormEventoComponent, FormNoticiaComponent, TinyComponent]
+    exports: [listUsersComponent, FormEventoComponent, FormNoticiaComponent, TinyComponent, ListaNoticiasComponent, PreviewNoticiaComponent]
 })
 export class SharedModule { }

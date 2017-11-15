@@ -106,7 +106,7 @@ export class UsuarioService {
         .toPromise()
         .then(
             response =>  {
-                return (JSON.parse(response.text().toString()).results as Usuario[]);
+                return (JSON.parse(response.text().toString()) as Usuario[]);
             }
         );
     }

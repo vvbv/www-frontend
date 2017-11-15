@@ -13,13 +13,13 @@
     a:hover{
         text-decoration: none;
     }
-    #ingresar-principal{
+    #ingresar-principal, #singup-principal{
         font-size: 1rem;
         border: 1px solid #999;
         padding: 0.2rem 0.4rem 0.2rem 0.4rem;
         border-radius: 5px;
     }
-    #ingresar-principal:hover{
+    #ingresar-principal:hover, #singup-principal:hover{
         border-color: #FFF;
         color: #FFF;
     }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { InjectorToken } from './servicios/injectorToken.service';
+import { UsuarioService } from './servicios/usuario.service';
 
 @Component({
     selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent {
     
     constructor(private translate: TranslateService,
                 private coneccionInfo: ConeccionInfo,
+                private usuariosService: UsuarioService,
                 private injectorToken: InjectorToken) {
         translate.addLangs(['en', 'fr', 'ur', 'es', 'it', 'fa']);
         translate.setDefaultLang('en');

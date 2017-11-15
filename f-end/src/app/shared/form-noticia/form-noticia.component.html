@@ -8,29 +8,47 @@
         <strong>Algo va mal! </strong> {{error}}
       </div>
 
-  <div  [class.has-danger] = "errores.nombre" class="form-group col-12">
+  <div  [class.has-danger] = "errores['titulo']" class="form-group col-12">
       <label class = "col-form-label" for="titulo" >Titulo</label>
-      <input  [class.form-control-danger] = "errores.titulo" [(ngModel)]="noticia.titulo" id="titulo"  name="titulo" type="text" class="form-control" >
-      <div ngFor="let error of errores.titulo" >
-        <span class="help-block">{{errores.titulo}}</span>
+      <input  [class.form-control-danger] = "errores['titulo']" [(ngModel)]="noticia.titulo" id="titulo"  name="titulo" type="text" class="form-control" >
+      <div ngFor="let error of errores['titulo']" >
+        <span class="help-block">{{errores['titulo']}}</span>
     </div>
   </div>
-  <div [class.has-danger] = "errores.descripcion" class="form-group col-12">
-      <label class = "col-form-label" for="descripcion" >Resumen</label>
-      <textarea [class.form-control-danger] = "errores.descripcion" [(ngModel)]="noticia.resumen" id="resumen" name="resumen" type="text" class="form-control"> </textarea>
-      <div ngFor="let error of errores.resumen" >
-        <span class="help-block">{{errores.resumen}}</span>
-    </div>
-  </div>
-  <label class = "col-form-label" for="contenido" >Contenido</label>
-  <app-simple-tiny
-  [elementId]="'my-editor-id'"
-  [contenido]="content"
-  (onEditorKeyup)="keyupHandlerFunction($event)"
-  >
-  </app-simple-tiny>
   
+        <label  [class.has-danger-label] = "errores['imagen']" for="imagen" class=" col-form-label">Imagen </label>
+      
+      <div  [class.has-danger] = "errores['imagen']" class="form-group input-group col-12">
+          
+         <input  (change)="fileChange($event)" [class.form-control-danger] = "errores['imagen']" type="file" accept="image/*" id="imagen" name="imagen" class="form-control" aria-label="Imagen del evento"  #fileInput>
 
+       </div>
+                  <div ngFor="let error of errores['imagen']" >
+        <span class="help-block">{{errores['imagen']}}</span>
+    </div>
+  
+  <div [class.has-danger] = "errores['resumen']" class="form-group col-12">
+      <label class = "col-form-label" for="descripcion" >Resumen</label>
+      <textarea [class.form-control-danger] = "errores['descripcion']" [(ngModel)]="noticia.resumen" id="resumen" name="resumen" type="text" class="form-control"> </textarea>
+      <div ngFor="let error of errores['resumen']" >
+        <span class="help-block">{{errores['resumen']}}</span>
+    </div>
+               
+  </div>
+  
+  
+    <div [class.has-danger] = "errores['contenido']" class="form-group col-12">
+        <label class = "col-form-label" for="contenido" >Contenido</label>
+        <app-simple-tiny
+        [elementId]="idEditor"
+        [contenido]="noticia.contenido"
+        (onEditorKeyup)="keyupHandlerFunction($event)"
+        >
+        </app-simple-tiny>
+              <div ngFor="let error of errores['contenido']" >
+        <span class="help-block">{{errores['contenido']}}</span>
+    </div>
+ </div>
 
 
 
