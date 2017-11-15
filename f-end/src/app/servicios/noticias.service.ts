@@ -11,13 +11,13 @@ import { Observable } from 'rxjs/Observable';
 export class NoticiasService {
   constructor( private http: Http,
     imagenesService: ImagenesService, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
-  public getNoticias(): Promise<Noticia[]> {
+  public getNoticias(): Promise<Noticia[] | JSON> {
     return this.http
     .get(this.coneccionInfo.url_noticias , {headers: this.coneccionInfo.headers} )
     .toPromise()
     .then(response => {
-      return JSON.parse(response.text()).results as Noticia[]
-    });
+      return JSON.parse(response.text()) as Noticia[]
+    }).catch(response=> {console.log(response);return JSON.parse(response.text().toString())});
   }
   public getNoticia(id: number): Observable<Noticia>  {
     return this.http
@@ -30,16 +30,18 @@ export class NoticiasService {
     myParams.append('file', evento.imagen);*/
     var headersBetha = new Headers(this.coneccionInfo.headers);
     headersBetha.delete('Content-Type');
-    let formData = new FormData();
+    var formData = new FormData();
     formData.append('titulo', noticia.titulo);
+     console.log(formData );
     formData.append('resumen', noticia.resumen);
     formData.append('contenido', noticia.contenido);
     formData.append('usuarioRegistra', noticia.usuarioRegistra);
+    
     formData.append('imagen', noticia.imagen);
     return this.http
     .post(this.coneccionInfo.url_noticias ,
        formData ,
-        {headers: this.coneccionInfo.headers,
+        {headers: headersBetha,
         },
       )
     .toPromise()
@@ -53,7 +55,7 @@ export class NoticiasService {
   }
 
 
-  deleteEvent(noticia: Noticia) {
+  delteNoticia(noticia: Noticia) {
     return this.http
     .delete(this.coneccionInfo.url_eventos + noticia.id +  '/' , {headers: this.coneccionInfo.headers})
     .toPromise()
@@ -69,7 +71,7 @@ export class NoticiasService {
       }
     );
   }
-  updateEvent(noticia: Noticia): Promise<Noticia | JSON> {
+  actualizarNoticia(noticia: Noticia): Promise<Noticia | JSON> {
     var headersBetha = new Headers(this.coneccionInfo.headers);
     headersBetha.delete('Content-Type');
     let formData = new FormData();

@@ -9,7 +9,7 @@
             <table class="table">
                 <thead class="thead-inverse">
                     <tr>
-                        <th class="hidden-xs-down">#</th>
+                        <th class="hidden-lg-down">#</th>
                         <th class="hidden-sm-down">Nombres</th>
                         <th class="hidden-sm-down">Apellidos</th>
                         <th>Nick</th>
@@ -23,14 +23,14 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
-                        <th class="hidden-xs-down" scope="row">{{usuario.numero_identificacion}}</th>
+                        <th class="hidden-lg-down" scope="row">{{usuario.numero_identificacion}}</th>
                         <td class="hidden-sm-down">{{usuario.nombres}}</td>
                         <td class="hidden-sm-down">{{usuario.apellidos}}</td>
                         <td>@{{usuario.username}}</td>
                         <td class="hidden-md-down">{{usuario.custom_email}}</td>
                         <td class="hidden-md-down">{{usuario.rol}}</td>
-                        <td class="hidden-md-down" *ngIf="!usuario.estadoHabilitado"><button (click)="activarUsuario(usuario.username, i)" class="btn btn-sm btn-primary">Activar</button></td>
-                        <td class="hidden-md-down" *ngIf="usuario.estadoHabilitado"><button (click)="desactivarUsuario(usuario.username, i)" class="btn btn-sm btn-danger">Inactivar</button></td>
+                        <td class="hidden-sm-down" *ngIf="!usuario.estadoHabilitado"><button (click)="activarUsuario(usuario.username, i)" class="btn btn-sm btn-primary">Activar</button></td>
+                        <td class="hidden-sm-down" *ngIf="usuario.estadoHabilitado"><button (click)="desactivarUsuario(usuario.username, i)" class="btn btn-sm btn-danger">Inactivar</button></td>
                         <td class="hidden-sm-down">
                             <a href="" [routerLink]="['/editSystemUser']" [queryParams]="{username: usuario.username}" class="btn btn-sm btn-primary">Editar</a>
                         </td>

@@ -20,6 +20,7 @@ export class ConeccionInfo {
     public url_actividades_crear: string;
     public url_validar_token: string;
     public url_actividades_porEvento: string;
+    public url_pre_inscripciones_por_evento: string;
     public url_noticias: string;
     public url_static_imagenes;
     public url_imagenes_crear;
@@ -44,6 +45,7 @@ export class ConeccionInfo {
         this.url_imagenes = this.url_base_api + '/imagenes/';
         this.url_static_imagenes = this.url_base + '/static/';
         this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
+        this.url_pre_inscripciones_por_evento = this.url_preinscripcion + 'byEvent/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
         this.url_noticias = this.url_base_api + '/noticias/'
         this.iniciarHeaders();

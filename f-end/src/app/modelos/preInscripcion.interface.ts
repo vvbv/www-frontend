@@ -1,7 +1,7 @@
 export interface PreInscripcionInterface{
     id: string;
     evento: string;
-    participante: string;
+    participante: any;
     fechaPreInscripcion: string;
     estado: string;
 }

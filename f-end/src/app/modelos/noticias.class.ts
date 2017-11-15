@@ -7,11 +7,13 @@ export class Noticia implements NoticiaInterfaz {
     imagen: string;
     contenido: string;
     fechaRegistro: string;
+    estado: string;
     fechaModificacion: string;
     usuarioRegistra: string;
     constructor() {
         this.id = '';
         this.titulo = '';
+        this.estado = '';
         this.resumen = '';
         this.imagen = '';
         this.contenido = '';
