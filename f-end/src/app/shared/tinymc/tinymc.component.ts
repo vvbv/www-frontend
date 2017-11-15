@@ -28,9 +28,8 @@ export class TinyComponent implements AfterViewInit, OnDestroy, OnInit {
       skin_url: 'assets/skins/lightgray',
       setup: editor => {
         this.editor = editor;
-        editor.on('keyup', () => {
+          editor.on('Change', () => {
           const content = editor.getContent();
-          this.contenido = content;
           this.onEditorKeyup.emit(content);
         });
       },

@@ -20,7 +20,7 @@ export class listUsersComponent implements OnInit {
     private usuarioLogueado: Usuario;
     public usuarios: Usuario[];
     @Input() public evento: Evento;
-    @Input() public usuariosFiltrados: Usuario[];
+     public usuariosFiltrados: Usuario[];
    
     public usuariosYRegistros: [Usuario, string][];
     
@@ -34,7 +34,7 @@ export class listUsersComponent implements OnInit {
             private preinscripcionService: PreInscripcionService,
             private inscripcionService: InscripcionService
         ) {
-
+        this.usuariosFiltrados = new Array<Usuario>();
         this._toastr.setRootViewContainerRef(vRef);
         this.usuarioService.recuperarUsuario()
             .then(
@@ -50,7 +50,17 @@ export class listUsersComponent implements OnInit {
         this.construirUsuariosParticipacion();
     }
     construirUsuariosParticipacion(): void {
-        for ( let usuario of this.usuariosFiltrados){
+        var preInscripciones: PreInscripcion[];
+        this.preInscripcionService.getPreInscripcionesPorEvento(this.evento)
+        .then(
+            response=>{
+            if(response!==null){        
+                for(let preInscripcion of response as PreInscripcion[]){
+                    console.log(preInscripcion);
+                    this.usuariosFiltrados.push(preInscripcion.participante);
+                }
+                
+             for ( let usuario of this.usuariosFiltrados){
             this.preInscripcionService.getIdPreInscripcionByUserAndEvent(
                 usuario, this.evento
             ).then(response => {
@@ -63,6 +73,14 @@ export class listUsersComponent implements OnInit {
             .catch(response => {
             });
         }
+            }
+            
+            
+            
+            }
+            )
+            .catch();
+
     }
     rechazarPreinscripcion(usuario: Usuario, evento: Evento): void{
         
@@ -90,6 +108,7 @@ export class listUsersComponent implements OnInit {
     }
 
     aceptarPreinscripcion(usuario: Usuario, evento: Evento): void {
+        
         let preinscripcionUsuario = new PreInscripcion();
         this.preInscripcionService.getIdPreInscripcionByUserAndEvent(
             usuario, evento

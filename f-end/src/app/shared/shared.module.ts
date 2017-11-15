@@ -24,7 +24,6 @@ import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.componen
         FormEventoComponent,
         EventoDetalleComponent,
         TinyComponent,
-        
         FormNoticiaComponent,
         PreviewNoticiaComponent,
         ListaNoticiasComponent,

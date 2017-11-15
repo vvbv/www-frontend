@@ -82,6 +82,7 @@ export class EventoService {
     let formData = new FormData();
     formData.append('nombre', event.nombre);
     formData.append('descripcion', event.descripcion);
+     formData.append('estado', event.estado);
     formData.append('precio', event.precio.toString());
     formData.append('fechaInicio', event.fechaInicio);
     formData.append('fechaFinalizacion', event.fechaFinalizacion);

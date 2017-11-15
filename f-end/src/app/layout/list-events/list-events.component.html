@@ -1,5 +1,6 @@
 
 <h1> Lista de eventos</h1>
+<div *ngIf =" usuario$ | async as usuario">
 <div class = "container-fluid" *ngIf=" eventos && estructuraEvento" >
 
     <div *ngIf="mensaje" class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,8 +33,19 @@
           <a  *ngIf="usuario.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
           <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
           
-          <a *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="btn btn-sm btn-success">Editar</a>
-          <button *ngIf="usuario.rol != 'UP'" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".usuarios-preinscritos">Usuarios Preinscritos</button>
+          
+          
+            <div class=" btn-group dropup">
+                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Opciones
+                </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+             <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
+          <button *ngIf="usuario.rol != 'UP'"  class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
+          <button *ngIf="usuario.rol != 'UP'" class="dropdown-item" data-toggle="modal" data-target=".usuarios-inscritos">Usuarios Inscritos</button>
+          </div>
+        </div>
+         
         <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
           <b  class = "float-right" >{{getDisplayNameEstado(evento)}}&nbsp;</b>
           
@@ -42,14 +54,21 @@
 
       
         
-        <div class="modal fade usuarios-preinscritos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal fade usuarios-preinscritos{{i}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg modal-xl">
             <div class="modal-content">
-              <app-listUsers  [evento]="evento" [usuariosFiltrados]="evento.usuariosPreinscritos" ></app-listUsers>
+              <app-listUsers  [evento]="evento"  ></app-listUsers>
             </div>
           </div>
         </div>
         
+       <div class="modal fade usuarios-inscritos" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-xl">
+            <div class="modal-content">
+              <app-listUsers  [evento]="evento"  ></app-listUsers>
+            </div>
+          </div>
+        </div>
        
       </div>
       
@@ -61,4 +80,5 @@
           <a [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar uno ahora?</a>
         </div>
   </div>
+</div>
 </div>

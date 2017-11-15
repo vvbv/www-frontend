@@ -16,7 +16,7 @@ import {Observable} from 'rxjs/Observable';
 })
 export class EditarNoticiaComponent implements OnInit {
   public noticia$: Observable<Noticia>;
-  
+  public noticiaEditada: boolean;
   public usuario: Usuario;
   errores: JSON;
   constructor(public _toastr: ToastsManager,
@@ -25,7 +25,7 @@ export class EditarNoticiaComponent implements OnInit {
     private router: Router,
     private usuariosService: UsuarioService,
     vRef: ViewContainerRef) {
-
+      this._toastr.setRootViewContainerRef(vRef);
        this.errores =  JSON.parse('{}');
           this.noticia$ = this.route.paramMap
    .switchMap((params: ParamMap) =>
@@ -33,8 +33,25 @@ export class EditarNoticiaComponent implements OnInit {
     }
     
     
-    editarNoticia(noticia: Noticia){
-      
+    actualizarNoticia(noticia: Noticia){
+      this.noticiaService.actualizarNoticia(noticia)
+      .then(      res => {
+        if ((res as Noticia).resumen === noticia.resumen) {
+          this.noticiaEditada = true;
+          if (noticia === (res as Noticia)) {
+            this._toastr.warning('No se han registrado cambios', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
+          }
+          this._toastr.success('Datos actualizados', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+          this.errores =  JSON.parse('{}');
+        } else {
+          this.errores = res as JSON;
+          this._toastr.error('Datos invalidos', 'Error!', {toastLife: 3000, showCloseButton: false});
+        }
+       }
+    ).catch(res => {
+      console.log(res);
+      this._toastr.error('Datos invalidos', 'Error!', {toastLife: 3000, showCloseButton: false});
+    });
     }
 
   ngOnInit() {

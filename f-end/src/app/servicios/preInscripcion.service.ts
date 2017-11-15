@@ -41,9 +41,26 @@ export class PreInscripcionService {
                if (Number(JSON.parse(response.text().toString()).count) === 0) {
                    return null;
                }
-                return (JSON.parse(response.text().toString()).results[0] as PreInscripcion);
+                return (JSON.parse(response.text().toString())[0] as PreInscripcion);
             }
         ).catch(response =>
+            {
+                console.log(response);
+                return null;
+            });
+    }
+    public getPreInscripcionesPorEvento(evento: Evento): Promise<PreInscripcion[] | null>{
+        return this.http
+        .get(this.coneccionInfo.url_pre_inscripciones_por_evento  + evento.id + '/',
+        {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response=> {
+               
+                return (JSON.parse(response.text().toString()) as PreInscripcion[]);
+            }
+            )
+            .catch(response=>
             {
                 console.log(response);
                 return null;

@@ -71,7 +71,7 @@ export class NoticiasService {
       }
     );
   }
-  updateNoticia(noticia: Noticia): Promise<Noticia | JSON> {
+  actualizarNoticia(noticia: Noticia): Promise<Noticia | JSON> {
     var headersBetha = new Headers(this.coneccionInfo.headers);
     headersBetha.delete('Content-Type');
     let formData = new FormData();

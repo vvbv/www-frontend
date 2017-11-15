@@ -40,8 +40,8 @@
     <div [class.has-danger] = "errores['contenido']" class="form-group col-12">
         <label class = "col-form-label" for="contenido" >Contenido</label>
         <app-simple-tiny
-        [elementId]="'my-editor-id'"
-        [contenido]="contenido"
+        [elementId]="idEditor"
+        [contenido]="noticia.contenido"
         (onEditorKeyup)="keyupHandlerFunction($event)"
         >
         </app-simple-tiny>

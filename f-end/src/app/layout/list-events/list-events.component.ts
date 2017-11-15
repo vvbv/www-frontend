@@ -32,7 +32,7 @@ export class ListEventsComponent implements OnInit {
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
     estructuraEvento: EventoEstructura;
-    usuario: Usuario;
+    usuario$: Promise <Usuario>;
     mensaje: string;
     
 
@@ -44,7 +44,7 @@ export class ListEventsComponent implements OnInit {
         vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
 
-          this.usuario = usuarioService.usuario;
+          this.usuario$ = usuarioService.recuperarUsuario();
       this.preinscripcionNueva = new PreInscripcion();
       this._toastr.setRootViewContainerRef(vRef);
       this.eventoSeleccionado = new Evento();
@@ -69,6 +69,7 @@ export class ListEventsComponent implements OnInit {
         );
 
     }
+
     eliminarEvento(evento: Evento, index: number) {
       this.eventService.deleteEvent(evento)
       .then(
