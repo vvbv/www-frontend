@@ -16,11 +16,11 @@
     </div>
   </div>
   
-        <label  [class.has-danger-label] = "errores.imagen"for="imagen" class=" col-form-label">Imagen </label>
+        <label  [class.has-danger-label] = "errores['imagen']" for="imagen" class=" col-form-label">Imagen </label>
       
-      <div  [class.has-danger] = "errores.imagen" class="form-group input-group col-12">
+      <div  [class.has-danger] = "errores['imagen']" class="form-group input-group col-12">
           
-         <input  (change)="fileChange($event)" [class.form-control-danger] = "errores.imagen" type="file" accept="image/*" id="imagen" name="imagen" class="form-control" aria-label="Imagen del evento"  #fileInput>
+         <input  (change)="fileChange($event)" [class.form-control-danger] = "errores['imagen']" type="file" accept="image/*" id="imagen" name="imagen" class="form-control" aria-label="Imagen del evento"  #fileInput>
 
        </div>
                   <div ngFor="let error of errores['imagen']" >

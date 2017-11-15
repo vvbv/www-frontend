@@ -5,6 +5,7 @@ export interface NoticiaInterfaz {
      imagen: any;
      fechaRegistro: any;
      fechaModificacion: any;
+     estado: any;
      usuarioRegistra: any;
      contenido: any;
 }

@@ -31,9 +31,8 @@ export class EditarNoticiaComponent implements OnInit {
    .switchMap((params: ParamMap) =>
             this.noticiaService.getNoticia(Number(params.get('id'))));
     }
-    
-    
-    actualizarNoticia(noticia: Noticia){
+
+    actualizarNoticia(noticia: Noticia) {
       this.noticiaService.actualizarNoticia(noticia)
       .then(      res => {
         if ((res as Noticia).resumen === noticia.resumen) {
