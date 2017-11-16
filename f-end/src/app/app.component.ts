@@ -10,7 +10,6 @@ import { UsuarioService } from './servicios/usuario.service';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    
     constructor(private translate: TranslateService,
                 private coneccionInfo: ConeccionInfo,
                 private usuariosService: UsuarioService,
