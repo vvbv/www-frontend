@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../../../modelos/usuario.class';
+import { UsuarioService } from '../../../servicios/usuario.service';
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
@@ -12,7 +13,7 @@ export class SidebarComponent {
     showMenu = '';
     private usuario$: Promise<Usuario>;
     
-    constructor(private usuariosService: UsuarioService):void {
+    constructor(private usuariosService: UsuarioService) {
         this.usuario$ = this.usuariosService.recuperarUsuario();
     }
     
