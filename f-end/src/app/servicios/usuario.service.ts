@@ -29,9 +29,20 @@ export class UsuarioService {
         );
     }
 
+    public getUsuarioById(id: number): Promise<Usuario>{
+        return this.http
+        .get(this.coneccionInfo.url_usuarios + 'usuario/'  + id +'/', {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                return (JSON.parse(response.text().toString()) as Usuario);
+            }
+        );
+    }
+
     public getUsuario(username:string): Promise<Usuario>{
         return this.http
-        .get(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + username, {headers: this.coneccionInfo.headers})
+        .get(this.coneccionInfo.url_usuarios + 'usuario/byUsername/' + username + '/', {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
             response =>  {
