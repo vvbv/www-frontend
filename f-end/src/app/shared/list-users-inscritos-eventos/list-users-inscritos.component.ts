@@ -1,4 +1,6 @@
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
+import { Inscripcion } from '../../modelos/inscripcion.class';
+
 import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
@@ -11,12 +13,12 @@ import { Evento } from '../../modelos/evento.class';
 import { FormControl } from '@angular/forms';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 @Component({
-    selector: 'app-listUsers',
-    templateUrl: './list-users.component.html',
-    styleUrls: ['./list-users.component.scss'],
+    selector: 'app-listUsers-inscritos',
+    templateUrl: './list-users-inscritos.component.html',
+    styleUrls: ['./list-users-inscritos.component.scss'],
     animations: [routerTransition()]
 })
-export class listUsersComponent implements OnInit {
+export class listUsersInscritosComponent implements OnInit {
     private usuarioLogueado: Usuario;
     public usuarios: Usuario[];
     @Input() public evento: Evento;
@@ -30,7 +32,6 @@ export class listUsersComponent implements OnInit {
             private _toastr: ToastsManager,
             vRef: ViewContainerRef,
             private preInscripcionService: PreInscripcionService,
-            private preinscripcionService: PreInscripcionService,
             private usuairosService: UsuarioService,
             private inscripcionService: InscripcionService
         ) {
@@ -41,22 +42,21 @@ export class listUsersComponent implements OnInit {
                     this.usuarioLogueado = response;
                 }
             );
-            this.usuariosYRegistros = new Array<[Usuario, string]>();
 
     }
 
     ngOnInit() {
     }
-   
-    rechazarPreinscripcion(usuario: Usuario, evento: Evento): void{
+
+    rechazarInscripcion(usuario: Usuario, evento: Evento): void{
         
-        let preinscripcionUsuario = new PreInscripcion();
-        this.preInscripcionService.getPreInscripcionByUserAndEvent(
+        let inscripcionUsuario = new Inscripcion();
+        this.inscripcionService.getInscripcionByUserAndEvent(
             usuario, evento
         ).then(response => {
-            preinscripcionUsuario = response;
+            inscripcionUsuario = response;
 
-            this.preinscripcionService.rechazarPreinscripcion(preinscripcionUsuario)
+            this.inscripcionService.rechazarInscripcion(inscripcionUsuario)
             .then(res => {
                 this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'R';
                 this._toastr.warning('Se ha rechazado una inscripción',
@@ -72,16 +72,16 @@ export class listUsersComponent implements OnInit {
 
     }
 
-    aceptarPreinscripcion(usuario: Usuario, evento: Evento): void {
+    aceptarInscripcion(usuario: Usuario, evento: Evento): void {
         
-        let preinscripcionUsuario = new PreInscripcion();
-        this.preInscripcionService.getPreInscripcionByUserAndEvent(
+        let inscripcionUsuario = new Inscripcion();
+        this.inscripcionService.getInscripcionByUserAndEvent(
             usuario, evento
         ).then(
             response => {
-                preinscripcionUsuario = response;
+                inscripcionUsuario = response;
                
-                this.preinscripcionService.aceptarPreinscripcion(preinscripcionUsuario)
+                this.inscripcionService.aceptarInscripcion(inscripcionUsuario)
                 .then(res => {
                     this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'A';
                     this._toastr.success('El usuario ha sido inscrito al evento',

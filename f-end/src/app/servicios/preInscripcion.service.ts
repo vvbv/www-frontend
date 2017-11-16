@@ -30,7 +30,7 @@ export class PreInscripcionService {
         );
     }
 
-    public getIdPreInscripcionByUserAndEvent(usuario: Usuario, evento: Evento): Promise<PreInscripcion | null> {
+    public getPreInscripcionByUserAndEvent(usuario: Usuario, evento: Evento): Promise<PreInscripcion | null> {
         return this.http
         .get(this.coneccionInfo.url_get_preinscricion_por_usuario_evento
              + usuario.id + '/' + evento.id + '/',

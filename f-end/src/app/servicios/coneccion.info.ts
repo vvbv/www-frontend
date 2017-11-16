@@ -26,10 +26,12 @@ export class ConeccionInfo {
     public url_imagenes_crear;
     public url_imagenes_modificar;
     public headers: Headers;
+    public url_inscripciones_por_evento:string;
+    public url_get_inscricion_por_usuario_evento: string;
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
-        this.url_base = 'http://localhost:8000';
+        this.url_base = 'https://www-client-regalia-luchoman.c9users.io';
         this.url_base_api = this.url_base + '/api/v1';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
@@ -39,13 +41,15 @@ export class ConeccionInfo {
         this.url_actividades_crear = this.url_base_api + '/actividades/crear';
         this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
         this.url_preinscripcion = this.url_base_api + '/eventos/preinscripciones/';
-        this.url_get_preinscricion_por_usuario_evento = this.url_base_api + '/getIdPreinscripcion/porIdUsuarioIdEvento/';
+        this.url_get_preinscricion_por_usuario_evento = this.url_base_api + '/getPreinscripcion/porIdUsuarioIdEvento/';
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
+        this.url_get_inscricion_por_usuario_evento = this.url_base_api + '/getInscripcion/porIdUsuarioIdEvento/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
         this.url_static_imagenes = this.url_base + '/static/';
         this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
         this.url_pre_inscripciones_por_evento = this.url_preinscripcion + 'byEvent/';
+        this.url_inscripciones_por_evento = this.url_inscripcion + 'byEvent/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
         this.url_noticias = this.url_base_api + '/noticias/'
         this.iniciarHeaders();

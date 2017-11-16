@@ -1,4 +1,4 @@
-<nav class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}">
+<nav *ngIf = "usuario$ | async as usuario" class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}">
     <ul class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
@@ -15,18 +15,19 @@
         <a [routerLink]="['/crearNoticia']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-plus"></i>&nbsp;{{ 'Crear noticia' | translate }}
         </a>
-        <a [routerLink]="['/list-events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-th-list"></i>&nbsp;{{ 'Lista de eventos' | translate }}
-        </a>
-        <a [routerLink]="['/listUsers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-th-list"></i>&nbsp; Lista de usuarios
-        </a>
-        <a [routerLink]="['/noticias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-th-list"></i>&nbsp; Lista de noticias
-        </a>
-        <a [routerLink]="['/newSystemUser']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+       <a [routerLink]="['/newSystemUser']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-plus"></i>&nbsp; NU del sistema
         </a>
+        <a [routerLink]="['/list-events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp;{{ 'Eventos' | translate }}
+        </a>
+        <a [routerLink]="['/listUsers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp; Usuarios
+        </a>
+        <a [routerLink]="['/noticias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp; Noticias
+        </a>
+
         <div id="salir" class="hidden-lg-up">
             <a  [routerLink]="['/login']" [queryParams]="{logout: 'yes'}" [routerLinkActive]="['router-link-active']"> <i class="fa fa-sign-out"></i>&nbsp; Cerrar sesion</a>
         </div>

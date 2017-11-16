@@ -2,7 +2,7 @@
 <div class= "lista-usuarios">
  <div  *ngIf="usuariosYRegistros.length > 0" [@routerTransition]>
         <div class="container-fluid">
-            <h3>Lista de usuarios pre inscritos</h3><hr>
+            <h3>Lista de usuarios inscritos</h3><hr>
 
             <div class="row">
  
@@ -17,7 +17,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuarioYRegistro of usuariosYRegistros; let i = index;" >
+                        <tr *ngFor="let usuarioYRegistro of usuariosYRegistros; let i = index;">
                             <td class = "hidden-sm-down">{{usuarioYRegistro[0].nombres}}</td>
                             <td class = "hidden-sm-down">{{usuarioYRegistro[0].apellidos}}</td>
                             <td>@{{usuarioYRegistro[0].username}}</td>
@@ -25,16 +25,16 @@
                             <td>
 
                             <div class = "hidden-sm-down"  *ngIf="evento.estado === 'SI'"  class="in-line" >
-                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
-                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarInscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarInscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
                             </div>
                             <div class="dropdown hidden-md-up">
                                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Opciones
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"   class="dropdown-item">Aceptar</button>
-                                      <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Rechazar</button>
+                                      <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'R'" (click)="aceptarInscripcion(usuarioYRegistro[0], evento)"   class="dropdown-item">Aceptar</button>
+                                      <button *ngIf="usuarioYRegistro[1] === 'E' || usuarioYRegistro[1] === 'A'"  (click)="rechazarInscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Rechazar</button>
                                     </div>
                                   </div>
 
@@ -47,6 +47,6 @@
     </div>
 
     <div class= "text-center" *ngIf="usuariosYRegistros.length == 0">
-        <h3>No hay usuarios pre inscritos en este evento</h3>
+        <h3>No hay usuarios inscritos en este evento</h3>
     </div>
 </div> 

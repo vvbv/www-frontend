@@ -4,7 +4,7 @@ export class Inscripcion implements InscripcionInterface {
     
     id: string;
     evento: string;
-    participante: string;
+    participante: any;
     estado: string;
     fechaRegistro: string;
     fechaModificacion: string;
@@ -12,7 +12,6 @@ export class Inscripcion implements InscripcionInterface {
     constructor() {
         this.id = '';
         this.evento = '';
-        this.participante = '';
         this.estado = '';
         this.fechaRegistro = '';
         this.fechaModificacion = '';
