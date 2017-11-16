@@ -9,6 +9,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ActividadService {
   constructor( private http: Http, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
+  
   public getActividades(idEvento: number): Promise<Actividad[]> {
     return this.http
     .get(this.coneccionInfo.url_actividades_porEvento + idEvento + '/' , {headers: this.coneccionInfo.headers} )
@@ -18,6 +19,17 @@ export class ActividadService {
       return response;
     });
   }
+
+  public getActividadesByEvent(idEvento: number): Promise<Actividad[]> {
+    return this.http
+    .get(this.coneccionInfo.url_actividades_byEvent + idEvento.toString() + '/' , {headers: this.coneccionInfo.headers} )
+    .toPromise()
+    .then(response =>  JSON.parse(response.text().toString()).results as Actividad[])
+    .catch(response => {
+      return response;
+    });
+  }
+
   public getActividad(id: number): Observable<Actividad>  {
     return this.http
     .get(this.coneccionInfo.url_actividades + id.toString() + '/', {headers: this.coneccionInfo.headers})

@@ -17,7 +17,7 @@ export class NoticiasService {
     .toPromise()
     .then(response => {
       return JSON.parse(response.text()) as Noticia[]
-    }).catch(response=> {console.log(response);return JSON.parse(response.text().toString())});
+    }).catch(response=> {console.log("alv" + response.text().toString());return JSON.parse(response.text().toString())});
   }
   public getNoticia(id: number): Observable<Noticia>  {
     return this.http

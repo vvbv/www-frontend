@@ -13,6 +13,8 @@ import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
 import { PreviewNoticiaComponent } from './preview-noticia/preview-noticia.component';
 import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
 import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.component';
+import { ListActivitiesComponent } from './list-activities/list-activities.component';
+
 @NgModule({
     imports: [
         CommonModule,
@@ -30,6 +32,7 @@ import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.compo
         FormNoticiaComponent,
         PreviewNoticiaComponent,
         ListaNoticiasComponent,
+        ListActivitiesComponent,
         DetalleNoticiaComponent,
     ],
     exports: [
@@ -38,6 +41,7 @@ import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.compo
         FormNoticiaComponent, 
         TinyComponent,
         ListaNoticiasComponent,
+        ListActivitiesComponent,
         PreviewNoticiaComponent,
         listUsersInscritosComponent]
 })
