@@ -1,5 +1,6 @@
 import { EventoService } from '../../servicios/events.service';
 import { PreInscripcionService } from '../../servicios/preInscripcion.service';
+import { InscripcionService } from '../../servicios/inscripcion.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Component, OnInit , ViewContainerRef  } from '@angular/core';
 import { NgClass } from '@angular/common';
@@ -14,6 +15,7 @@ import 'tinymce/plugins/emoticons/plugin.js';
 import { Evento } from '../../modelos/evento.class';
 import { Usuario } from '../../modelos/usuario.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
+import { Inscripcion } from '../../modelos/inscripcion.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
 import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
 import { JsonFormatter } from 'tslint/lib/formatters';
@@ -35,17 +37,17 @@ export class ListEventsComponent implements OnInit {
     usuario$: Promise <Usuario>;
     mensaje: string;
     
-
-    
+    public usuariosYRegistros: [Usuario, string][];
+    public usuariosYRegistrosInscritos: [Usuario, string][];
     constructor(
         private eventService: EventoService,
         public _toastr: ToastsManager,
         private preInscripcionService: PreInscripcionService,
+        private inscripcionService: InscripcionService,
         vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
-
+        
           this.usuario$ = usuarioService.recuperarUsuario();
-      this.preinscripcionNueva = new PreInscripcion();
       this._toastr.setRootViewContainerRef(vRef);
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
@@ -67,7 +69,8 @@ export class ListEventsComponent implements OnInit {
             console.log(this.estructuraEvento.estado.choices);
           }
         );
-
+       this.usuariosYRegistros = null;
+      this.usuariosYRegistrosInscritos = null;
     }
 
     eliminarEvento(evento: Evento, index: number) {
@@ -85,7 +88,84 @@ export class ListEventsComponent implements OnInit {
       );
     }
     ngOnInit(){
-      
+       
+    }
+    
+        construirUsuariosInscritos(evento: Evento): void {
+            this.usuariosYRegistros = null;
+          
+        var inscripciones:Inscripcion[];
+        this.inscripcionService.getInscripcionesPorEvento(evento)
+        .then(
+            response=>{
+            if(response!==null){        
+                for(let inscripcion of response as Inscripcion[]){
+                    this.usuarioService.getUsuarioById(inscripcion.participante as number)
+                    .then(response => {
+                        var usuario : Usuario = response;
+                                        this.inscripcionService.getInscripcionByUserAndEvent(
+                usuario, evento
+            ).then(response => {
+                this.usuariosYRegistrosInscritos = new Array<[Usuario, string]>();
+               if (response === null || response.estado === 'R') {
+                    this.usuariosYRegistrosInscritos.push([usuario, 'R']);
+                }else {
+                    this.usuariosYRegistrosInscritos.push([usuario,  response.estado])
+                };
+            })
+            .catch(response => {
+            });
+                        
+                    })
+                    .catch(response => console.log(response));
+                }
+            }
+           if((response as Inscripcion[]).length == 0){
+                this.usuariosYRegistrosInscritos = new Array<[Usuario, string]>();
+            }
+            }
+            )
+            .catch();
+
+    }
+    
+     construirUsuariosPreInscritos (evento: Evento): void {
+       this.usuariosYRegistros = null;
+        var preInscripciones: PreInscripcion[];
+        this.preInscripcionService.getPreInscripcionesPorEvento(evento)
+        .then(
+            response=>{
+            if(response!==null){        
+                for(let preInscripcion of response as PreInscripcion[]){
+                    
+                    this.usuarioService.getUsuarioById(preInscripcion.participante as number)
+                    .then(response => {
+                        var usuario : Usuario = response;
+                                        this.preInscripcionService.getPreInscripcionByUserAndEvent(
+                usuario, evento
+            ).then(response => {
+                 this.usuariosYRegistros = new Array<[Usuario, string]>();
+               if (response === null || response.estado === 'R') {
+                    this.usuariosYRegistros.push([usuario, 'R']);
+                }else {
+                    this.usuariosYRegistros.push([usuario,  response.estado])
+                };
+            })
+            .catch(response => {
+            });
+                        
+                    })
+                    .catch(response => console.log(response));
+                }
+
+            }
+            if((response as PreInscripcion[]).length == 0){
+                this.usuariosYRegistros = new Array<[Usuario, string]>();
+            }
+            }
+            )
+            .catch();
+
     }
     getDisplayNameEstado(evento: Evento): any {
      var  est:JSON = (this.estructuraEvento.estado.choices.filter( choice => choice.value === evento.estado));
