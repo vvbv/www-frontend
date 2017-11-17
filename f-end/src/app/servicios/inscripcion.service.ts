@@ -1,18 +1,23 @@
+import { InscripcionEstructura } from '../modelos/inscripcionEstructura.class';
 import { Injectable } from '@angular/core';
 import { Inscripcion } from '../modelos/inscripcion.class';
 import { Evento } from '../modelos/evento.class';
 import { Usuario } from '../modelos/usuario.class';
 import { ConeccionInfo } from './coneccion.info';
+import { PreInscripcionService } from './preInscripcion.service';
 import { AuthenticationService } from './authentication.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { PreInscripcion } from '../modelos/preInscripcion.class';
 
 
 @Injectable()
 export class InscripcionService {
-
-    constructor(private http: Http, private coneccionInfo: ConeccionInfo ) {};
+    private preinscripcionService: PreInscripcionService
+    constructor(private http: Http,
+        private coneccionInfo: ConeccionInfo,
+        ) {};
     public getInscripcion(idInscripcion: string): Promise<Inscripcion> {
         return this.http
         .get(this.coneccionInfo.url_inscripcion + idInscripcion, {headers: this.coneccionInfo.headers})
@@ -23,7 +28,15 @@ export class InscripcionService {
             }
         );
     }
-    
+    public getOpciones(): Promise <InscripcionEstructura> {
+        return this.http
+        .options(this.coneccionInfo.url_inscripcion,
+        {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(response => {
+            return JSON.parse(response.text().toString())['actions']['POST'] as InscripcionEstructura; })
+        .catch(response => {console.log(response); return response; } );
+}
         public getInscripcionByUserAndEvent(usuario: Usuario, evento: Evento): Promise<Inscripcion | null> {
         return this.http
         .get(this.coneccionInfo.url_get_inscricion_por_usuario_evento
@@ -50,13 +63,11 @@ export class InscripcionService {
         {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
-            response=> {
-               
+            response => {
                 return (JSON.parse(response.text().toString()) as Inscripcion[]);
             }
             )
-            .catch(response=>
-            {
+            .catch(response => {
                 console.log(response);
                 return null;
             });
@@ -75,10 +86,6 @@ export class InscripcionService {
             }
         );
     }
-    
-    
-    
-    
     /*
         Estados posibles:
         A: Aceptado.
@@ -114,31 +121,19 @@ export class InscripcionService {
     }
 
     // Azucar
-    public aceptarInscripcion( inscripcion: Inscripcion): Promise<Inscripcion|JSON>{
+    public aceptarInscripcion( inscripcion: Inscripcion): Promise<Inscripcion|JSON> {
         return this.cambiarEstadoInscripcion(inscripcion, 'A').then(
             response => {
-             
-                var inscripcion = response;
-                const INSCRIPCION = new Inscripcion();
-                INSCRIPCION.evento = inscripcion.evento;
-                INSCRIPCION.estado = 'E';
-                INSCRIPCION.participante = inscripcion.participante;
-                 return this.http
-                    .post(this.coneccionInfo.url_inscripcion, JSON.stringify(INSCRIPCION), {headers: this.coneccionInfo.headers})
-                    .toPromise()
-                    .then(
-                        retorno => {
-                            return JSON.parse(retorno.text().toString()) as Inscripcion;
+             return response;
                         }
                     )
                     .catch(
-                        retorno => {  
+                        retorno => {
                             return JSON.parse(retorno.text().toString());
                         }
                     );
             }
-        );
-    }
+
     public rechazarInscripcion(idInscripcion): Promise<Inscripcion|JSON> {
         return this.cambiarEstadoInscripcion(idInscripcion, 'R');
     }

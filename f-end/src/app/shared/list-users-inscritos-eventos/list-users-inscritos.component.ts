@@ -1,3 +1,4 @@
+import { InscripcionEstructura } from '../../modelos/inscripcionEstructura.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
 import { Inscripcion } from '../../modelos/inscripcion.class';
 
@@ -21,10 +22,9 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class listUsersInscritosComponent implements OnInit {
     private usuarioLogueado: Usuario;
     public usuarios: Usuario[];
+    public estructuraInscripcion$: Promise<InscripcionEstructura>;
     @Input() public evento: Evento;
-   
-    @Input() public usuariosYRegistros: [Usuario, string][];
-    
+    @Input() public usuariosYRegistros: [Usuario, Inscripcion][];
     public filtro;
 
     constructor(
@@ -42,14 +42,16 @@ export class listUsersInscritosComponent implements OnInit {
                     this.usuarioLogueado = response;
                 }
             );
-
+        this.estructuraInscripcion$ = this.inscripcionService.getOpciones();
     }
 
     ngOnInit() {
     }
-
-    rechazarInscripcion(usuario: Usuario, evento: Evento): void{
-        
+    getDisplayNameEstadoInscripcion(inscripcion: Inscripcion, estructura): any {
+        const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === inscripcion.estado));
+        return est['0'].display_name;
+    }
+    rechazarInscripcion(usuario: Usuario, evento: Evento): void {
         let inscripcionUsuario = new Inscripcion();
         this.inscripcionService.getInscripcionByUserAndEvent(
             usuario, evento
@@ -58,7 +60,7 @@ export class listUsersInscritosComponent implements OnInit {
 
             this.inscripcionService.rechazarInscripcion(inscripcionUsuario)
             .then(res => {
-                this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'R';
+                this.usuariosYRegistros.find(i => i[0] === usuario)[1].estado = 'R';
                 this._toastr.warning('Se ha rechazado una inscripción',
                  'Accion realizada', {toastLife: 3000, showCloseButton: false});
             })
@@ -69,21 +71,17 @@ export class listUsersInscritosComponent implements OnInit {
             });
         }
     ).catch(response => console.log('Ha ocurrido un error: ' + response));
-
     }
-
     aceptarInscripcion(usuario: Usuario, evento: Evento): void {
-        
         let inscripcionUsuario = new Inscripcion();
         this.inscripcionService.getInscripcionByUserAndEvent(
             usuario, evento
         ).then(
             response => {
                 inscripcionUsuario = response;
-               
                 this.inscripcionService.aceptarInscripcion(inscripcionUsuario)
                 .then(res => {
-                    this.usuariosYRegistros.find(i => i[0] === usuario)[1] = 'A';
+                    this.usuariosYRegistros.find(i => i[0] === usuario)[1].estado = 'A';
                     this._toastr.success('El usuario ha sido inscrito al evento',
                      'En hora buena!', {toastLife: 3000, showCloseButton: false});
                 })
