@@ -25,7 +25,8 @@ export class ListActivitiesComponent implements OnInit {
     constructor(public usuarioService: UsuarioService, public actividadService: ActividadService, public _toastr: ToastsManager, vRef: ViewContainerRef) {
         this._toastr.setRootViewContainerRef(vRef);
         this.cargarUsuario();
-        this.actividades = null;
+        this.actividades = [] ;
+        
     }
 
     private cargarUsuario() {
@@ -36,14 +37,14 @@ export class ListActivitiesComponent implements OnInit {
     }
 
     ngOnInit() {
-        for (var key of this.actividades) {
+        /*for (var key of this.actividades) {
                 var fechaFinalizacionActividad = new Date(key.fechaFinalizacion).getTime();
                 if(this.now.getTime() < fechaFinalizacionActividad){
                     this.estadoActividad.push(false);
                 }else{
                     this.estadoActividad.push(true);
                 }
-            }
+            }*/
     }
 
     participar(idActividad: string){
