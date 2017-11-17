@@ -25,7 +25,7 @@ export class ListActivitiesComponent implements OnInit {
     constructor(public usuarioService: UsuarioService, public actividadService: ActividadService, public _toastr: ToastsManager, vRef: ViewContainerRef) {
         this._toastr.setRootViewContainerRef(vRef);
         this.cargarUsuario();
-        this.actividades = [] ;
+        this.actividades = [];
         
     }
 
@@ -50,10 +50,15 @@ export class ListActivitiesComponent implements OnInit {
     participar(idActividad: string){
         this.actividadService.registrarParticipanteActividad(idActividad, this.usuario.id).then(
             response => {
-                console.log("Respuesta " + response);
+                console.log("Respuesta " + JSON.stringify(response));
+                if(response['non_field_errors'] != null){
+                    this._toastr.error('Ya se encuentra como participante de esta actividad.', 'Ups!', {toastLife: 3000, showCloseButton: false});
+                }else if(response['id'] != null){
+                    this._toastr.success('Registrado como participante de la actividad.', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+                }
             }
         );
-       // this._toastr.success('I"m broken', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+        
     }
 
 }
