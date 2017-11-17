@@ -11,9 +11,9 @@
       </div>
     <div class="row" *ngIf="eventos.length > 0">
 <div class="card-columns">
-      <div  *ngFor="let evento of eventos; let i = index" class="col-lg-6  card "  [@routerTransition]>
-          <img width = "100%" src="{{evento.imagen}}" class=" card-img-top" alt="imagen  {{evento.nombre}}">
-          
+      <div  *ngFor="let evento of eventos; let i = index" class="col-6  card "  [@routerTransition]>
+          <!--<img src="{{evento.imagen}}" class="card-img-top" alt="imagen  {{evento.nombre}}">-->
+          <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
            <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
               Cancelado
             </div>
