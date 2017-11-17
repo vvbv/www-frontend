@@ -188,7 +188,7 @@ export class ListEventsComponent implements OnInit {
           this.sendEmailService.sendEmail(jsonEmail);
         }
       ).catch(response => { 
-        this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
+          console.log(response);
       });
     }
 

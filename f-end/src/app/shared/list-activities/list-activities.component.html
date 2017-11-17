@@ -1,4 +1,4 @@
-<div [@routerTransition]>
+<div *ngIf="usuario && actividades" [@routerTransition]>
         <h1>Lista de actividades</h1>
         <hr>
         <div class="actividad" *ngFor="let actividad of actividades; let i = index;">
@@ -12,4 +12,11 @@
                 </a>
             </div>
         </div>
+        
+        
+     <div *ngIf="actividades.length == 0">
+      <div class="alert alert-warning" role="alert">
+          <strong>Opps!</strong> No hay actividades registradas aún
+        </div>
+  </div>
 </div>

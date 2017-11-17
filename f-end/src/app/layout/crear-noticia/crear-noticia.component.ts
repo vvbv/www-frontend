@@ -32,6 +32,7 @@ export class CrearNoticiaComponent  {
    console.log(this.noticia.titulo);
    this.noticiaService.crearNoticia(this.noticia).
    then(res => {
+     console.log(res);
     if ((res as Noticia).resumen === this.noticia.resumen) {
       this.noticiaCreada = true;
       this.noticia = new Noticia();
