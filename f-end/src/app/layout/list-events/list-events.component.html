@@ -1,8 +1,8 @@
 
-<h1> Lista de eventos</h1>
-<div *ngIf =" usuario$ | async as usuario" >
-<div class = "container-fluid" *ngIf=" eventos " >
 
+<div *ngIf =" usuario$ | async as usuario" [@routerTransition]>
+<div class = "container-fluid" *ngIf=" eventos " >
+    <h1 *ngIf=" eventos.length > 0 "> Lista de eventos</h1>
     <div *ngIf="mensaje" class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -34,7 +34,7 @@
           
           
           
-            <div class=" btn-group dropup">
+            <div *ngIf = "usuario.rol != 'UP'" class=" btn-group dropup">
                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Opciones
                 </button>
@@ -78,7 +78,7 @@
   <div *ngIf="eventos.length == 0">
       <div class="alert alert-warning" role="alert">
           <strong>Opps!</strong> No hay eventos registrados aún
-          <a [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar uno ahora?</a>
+          <a *ngIf="usuario.rol !== 'UP'" [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar uno ahora?</a>
         </div>
   </div>
 </div>

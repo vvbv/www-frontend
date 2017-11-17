@@ -171,15 +171,16 @@ export class ListEventsComponent implements OnInit {
       console.log(e); //e is the HTML output from your TinyMCE component
     }
     preinscripcion(evento: Evento): void {
+      this.preinscripcionNueva = new PreInscripcion();
       this.preinscripcionNueva.evento = evento.id;
       this.preinscripcionNueva.participante = this.usuarioLogueado.id;
-      this.preinscripcionNueva.estado = 'E';
+      this.preinscripcionNueva.estado = 'EA';
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
-          console.log('que mierda');
-          this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
+          console.log(response);
+          this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
         }
-      ).catch(response => {
+      ).catch(response => { 
         this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
       });
     }
