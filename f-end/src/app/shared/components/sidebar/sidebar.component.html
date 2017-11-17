@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<nav *ngIf = "usuario$ | async as usuario" class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}" [@routerTransitionToButtom]>
-=======
-<nav class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}">
->>>>>>> alpha
+<nav *ngIf = "usuario$ | async as usuario"  class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}"  [@routerTransitionToButtom]>
     <ul class="list-group">
         <a *ngIf = "usuario.rol !== 'UP' " routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
