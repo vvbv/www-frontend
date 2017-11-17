@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { Usuario } from '../../../modelos/usuario.class';
 import { UsuarioService } from '../../../servicios/usuario.service';
-
+import { slideToBottom } from '../../../router.animations';
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
-    styleUrls: ['./sidebar.component.scss']
+    styleUrls: ['./sidebar.component.scss'],
+    animations: [slideToBottom()]
 })
 export class SidebarComponent {
     

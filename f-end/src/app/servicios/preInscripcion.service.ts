@@ -9,6 +9,7 @@ import { InscripcionService } from './inscripcion.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { PreInscripcionEstructura } from '../modelos/preInscripcionEstructura';
 
 
 @Injectable()
@@ -49,6 +50,27 @@ export class PreInscripcionService {
                 return null;
             });
     }
+
+    public getPreInscripcionByUserAndEventIds(idUsuario: string, idEvento: string): Promise<PreInscripcion | null> {
+        return this.http
+        .get(this.coneccionInfo.url_get_preinscricion_por_usuario_evento
+             + idUsuario + '/' + idEvento + '/',
+             {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response => {
+               if (Number(JSON.parse(response.text().toString()).count) === 0) {
+                   return null;
+               }
+                return (JSON.parse(response.text().toString())[0] as PreInscripcion);
+            }
+        ).catch(response =>
+            {
+                console.log(response);
+                return null;
+            });
+    }
+
     public getPreInscripcionesPorEvento(evento: Evento): Promise<PreInscripcion[] | null>{
         return this.http
         .get(this.coneccionInfo.url_pre_inscripciones_por_evento  + evento.id + '/',
@@ -66,9 +88,35 @@ export class PreInscripcionService {
                 return null;
             });
     }
+    public getOpciones(): Promise <PreInscripcionEstructura> {
+        return this.http
+        .options(this.coneccionInfo.url_preinscripcion,
+        {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(response =>{
+            return JSON.parse(response.text().toString())['actions']['POST'] as PreInscripcionEstructura; })
+        .catch(response => {console.log(response); return response; } );
+}
+
     public registrarPreInscripcion(preInscripcion: PreInscripcion): Promise<JSON|PreInscripcion> {
         return this.http
         .post(this.coneccionInfo.url_preinscripcion, JSON.stringify(preInscripcion), {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                return (JSON.parse(response.text().toString()) as PreInscripcion);
+            }
+        ).catch(
+            response => {
+                return  (response.text().toString());
+
+            }
+        );
+    }
+    public actualizarPreinscripcion(preInscripcion: PreInscripcion): Promise<JSON|PreInscripcion> {
+        return this.http
+        .put(this.coneccionInfo.url_preinscripcion + '/' + preInscripcion.id,
+         JSON.stringify(preInscripcion), {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
             response =>  {
@@ -118,29 +166,7 @@ export class PreInscripcionService {
 
     // Azucar
     public aceptarPreinscripcion( preinsCripcion: PreInscripcion): Promise<PreInscripcion|JSON>{
-        return this.cambiarEstadoPreInscripcion(preinsCripcion, 'A').then(
-            response => {
-             
-                var preInscripcion = response;
-                const INSCRIPCION = new Inscripcion();
-                INSCRIPCION.evento = preInscripcion.evento;
-                INSCRIPCION.estado = 'E';
-                INSCRIPCION.participante = preInscripcion.participante;
-                 return this.http
-                    .post(this.coneccionInfo.url_inscripcion, JSON.stringify(INSCRIPCION), {headers: this.coneccionInfo.headers})
-                    .toPromise()
-                    .then(
-                        retorno => {
-                            return JSON.parse(retorno.text().toString()) as PreInscripcion;
-                        }
-                    )
-                    .catch(
-                        retorno => {  
-                            return JSON.parse(retorno.text().toString());
-                        }
-                    );
-            }
-        );
+        return this.cambiarEstadoPreInscripcion(preinsCripcion, 'A');
     }
     public rechazarPreinscripcion(idPreinscripcion): Promise<PreInscripcion|JSON> {
         return this.cambiarEstadoPreInscripcion(idPreinscripcion, 'R');
