@@ -30,6 +30,7 @@ export class ConeccionInfo {
     public headers: Headers;
     public url_inscripciones_por_evento:string;
     public url_get_inscricion_por_usuario_evento: string;
+    public url_sendEmail: string;
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
@@ -55,7 +56,8 @@ export class ConeccionInfo {
         this.url_pre_inscripciones_por_evento = this.url_preinscripcion + 'byEvent/';
         this.url_inscripciones_por_evento = this.url_inscripcion + 'byEvent/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
-        this.url_noticias = this.url_base_api + '/noticias/'
+        this.url_noticias = this.url_base_api + '/noticias/';
+        this.url_sendEmail = this.url_base_api + '/funcionesExtra/sendEmail';
         this.iniciarHeaders();
     }
 
