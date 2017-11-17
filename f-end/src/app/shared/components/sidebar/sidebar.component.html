@@ -1,4 +1,4 @@
-<nav *ngIf = "usuario$ | async as usuario" class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}">
+<nav *ngIf = "usuario$ | async as usuario" class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}" [@routerTransitionToButtom]>
     <ul class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}

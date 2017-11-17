@@ -1,7 +1,7 @@
 
 <h1> Lista de eventos</h1>
 <div *ngIf =" usuario$ | async as usuario" >
-<div class = "container-fluid" *ngIf=" eventos && estructuraEvento" >
+<div class = "container-fluid" *ngIf=" eventos " >
 
     <div *ngIf="mensaje" class="alert alert-success alert-dismissible fade show" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

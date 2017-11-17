@@ -37,8 +37,8 @@ export class ListEventsComponent implements OnInit {
     usuario$: Promise <Usuario>;
     mensaje: string;
     
-    public usuariosYRegistros: [Usuario, string][];
-    public usuariosYRegistrosInscritos: [Usuario, string][];
+    public usuariosYRegistros: [Usuario, PreInscripcion][];
+    public usuariosYRegistrosInscritos: [Usuario, Inscripcion][];
     constructor(
         private eventService: EventoService,
         public _toastr: ToastsManager,
@@ -97,31 +97,27 @@ export class ListEventsComponent implements OnInit {
         var inscripciones:Inscripcion[];
         this.inscripcionService.getInscripcionesPorEvento(evento)
         .then(
-            response=>{
-            if(response!==null){        
-                for(let inscripcion of response as Inscripcion[]){
+            response => {
+            if (response !== null) {
+                for (const inscripcion of response as Inscripcion[]){
                     this.usuarioService.getUsuarioById(inscripcion.participante as number)
-                    .then(response => {
-                        var usuario : Usuario = response;
+                    .then(respo => {
+                        const usuario: Usuario = respo;
                                         this.inscripcionService.getInscripcionByUserAndEvent(
                 usuario, evento
-            ).then(response => {
-                this.usuariosYRegistrosInscritos = new Array<[Usuario, string]>();
-               if (response === null || response.estado === 'R') {
-                    this.usuariosYRegistrosInscritos.push([usuario, 'R']);
-                }else {
-                    this.usuariosYRegistrosInscritos.push([usuario,  response.estado])
-                };
+            ).then(res => {
+                this.usuariosYRegistrosInscritos = new Array<[Usuario, Inscripcion]>();
+                    this.usuariosYRegistrosInscritos.push([usuario,  res])
             })
-            .catch(response => {
+            .catch(res => {
+                console.log(res);
             });
-                        
-                    })
-                    .catch(response => console.log(response));
+                            })
+                    .catch(res => console.log(response));
                 }
             }
-           if((response as Inscripcion[]).length == 0){
-                this.usuariosYRegistrosInscritos = new Array<[Usuario, string]>();
+           if ((response as Inscripcion[]).length === 0) {
+                this.usuariosYRegistrosInscritos = new Array<[Usuario, Inscripcion]>();
             }
             }
             )
@@ -131,7 +127,7 @@ export class ListEventsComponent implements OnInit {
     
      construirUsuariosPreInscritos (evento: Evento): void {
        this.usuariosYRegistros = null;
-        var preInscripciones: PreInscripcion[];
+        let preInscripciones: PreInscripcion[];
         this.preInscripcionService.getPreInscripcionesPorEvento(evento)
         .then(
             response=>{
@@ -139,28 +135,23 @@ export class ListEventsComponent implements OnInit {
                 for(let preInscripcion of response as PreInscripcion[]){
                     
                     this.usuarioService.getUsuarioById(preInscripcion.participante as number)
-                    .then(response => {
-                        var usuario : Usuario = response;
+                    .then(resp => {
+                        const usuario: Usuario = resp;
                                         this.preInscripcionService.getPreInscripcionByUserAndEvent(
                 usuario, evento
-            ).then(response => {
-                 this.usuariosYRegistros = new Array<[Usuario, string]>();
-               if (response === null || response.estado === 'R') {
-                    this.usuariosYRegistros.push([usuario, 'R']);
-                }else {
-                    this.usuariosYRegistros.push([usuario,  response.estado])
-                };
+            ).then(res => {
+                 this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
+                    this.usuariosYRegistros.push([usuario,  res]);
             })
-            .catch(response => {
+            .catch(res => {
             });
-                        
                     })
-                    .catch(response => console.log(response));
+                    .catch(resp => console.log(resp));
                 }
 
             }
             if((response as PreInscripcion[]).length == 0){
-                this.usuariosYRegistros = new Array<[Usuario, string]>();
+                this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
             }
             }
             )
