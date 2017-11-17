@@ -12,6 +12,7 @@ import { AuthGuard } from './shared';
 
 import { AuthenticationService } from './servicios/authentication.service';
 import { UsuarioService } from './servicios/usuario.service';
+import { SendEmailService } from './servicios/sendEmail.service';
 import { ConeccionInfo } from './servicios/coneccion.info';
 import { EventoService } from './servicios/events.service';
 import { ImagenesService } from './servicios/imagenes.service';
@@ -67,6 +68,7 @@ export function HttpLoaderFactory(http: Http) {
                 ActividadService,
                 NoticiasService,
                 ImagenesService,
+                SendEmailService,
                 MensajesToastService,
                 TokenService],
     bootstrap: [AppComponent]

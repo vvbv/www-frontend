@@ -103,6 +103,62 @@ export class ActividadService {
     });
   }
 
+  public  getAsistenciasPromesa(idAsistencia: number): Promise<JSON>{
+    return this.http
+    .get(this.coneccionInfo.url_asistencia + idAsistencia.toString() + '/', {headers: this.coneccionInfo.headers} )
+    .toPromise()
+    .then(response =>  JSON.parse(response.text().toString()) as JSON[])
+    .catch(response => {
+      return response;
+    });
+  }
+
+  public  getTodasAsistenciasPromesa(): Promise<JSON[]>{
+    return this.http
+    .get(this.coneccionInfo.url_asistencia, {headers: this.coneccionInfo.headers} )
+    .toPromise()
+    .then(response =>  JSON.parse(response.text().toString()) as JSON[])
+    .catch(response => {
+      return response;
+    });
+  }
+
+  public eliminarParticipanteActividad(idActividad: string, idUsuario: string): Promise<JSON>{
+    
+    return this.getTodasAsistenciasPromesa().then(
+      response => {
+        for(var key of response){
+          console.log(key);
+          if((key['actividad'] == idActividad)&&(key['participante'] == idUsuario)){
+            
+            return this.http
+            .delete(this.coneccionInfo.url_asistencia + key['id'], {headers: this.coneccionInfo.headers})
+            .toPromise()
+            .then( 
+              response_asistencia =>  {
+                console.log("Log 2:" + response_asistencia);
+                return JSON.parse('{}');
+              }
+            );
+          }
+        };
+      }
+    );
+
+    /*return this.http
+    .post(this.coneccionInfo.url_asistencia, JSON.stringify(asistencia), {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then( 
+      response_asistencia =>  {
+        return JSON.parse(response_asistencia.text().toString())
+      }
+    ).catch(
+      response_asistencia =>  {
+        return JSON.parse(response_asistencia.text().toString())
+      }
+    );*/
+  }
+
   public registrarParticipanteActividad(idActividad: string, idUsuario: string): Promise<JSON> {
 
           let asistencia = new Asistencia();

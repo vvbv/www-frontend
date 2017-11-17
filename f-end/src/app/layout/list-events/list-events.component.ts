@@ -1,3 +1,5 @@
+import { SendEmailService } from '../../servicios/sendEmail.service';
+
 import { EventoService } from '../../servicios/events.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PreInscripcionService } from '../../servicios/preInscripcion.service';
@@ -42,6 +44,7 @@ export class ListEventsComponent implements OnInit {
     public usuariosYRegistrosInscritos: [Usuario, Inscripcion][];
     constructor(
         private eventService: EventoService,
+        public sendEmailService: SendEmailService,
         public _toastr: ToastsManager,
         public router: Router,
         private preInscripcionService: PreInscripcionService,
@@ -181,6 +184,8 @@ export class ListEventsComponent implements OnInit {
         response => {
           console.log(response);
           this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+          let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+this.usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
+          this.sendEmailService.sendEmail(jsonEmail);
         }
       ).catch(response => { 
         this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
