@@ -52,8 +52,14 @@ export class ListActivitiesComponent implements OnInit {
             response => {
                 console.log("Respuesta " + JSON.stringify(response));
                 if(response['non_field_errors'] != null){
-                    this._toastr.error('Ya se encuentra como participante de esta actividad.', 'Ups!', {toastLife: 3000, showCloseButton: false});
+                    this.actividadService.eliminarParticipanteActividad(idActividad, this.usuario.id).then(
+                        responsex=>{
+                            console.log("Log 1:" + responsex);
+                        }
+                    );
+                    this._toastr.error('Eliminado como participante.', 'Ups!', {toastLife: 3000, showCloseButton: false});
                 }else if(response['id'] != null){
+
                     this._toastr.success('Registrado como participante de la actividad.', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
                 }
             }
