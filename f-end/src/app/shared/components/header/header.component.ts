@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
     
     pushRightClass = 'push-right';
     constructor(private translate: TranslateService, public router: Router, private authenticationService: AuthenticationService, private UsuarioService: UsuarioService) {
+        this.urlImagenPerfil = 'assets/images/no-picture.png';
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -29,11 +30,13 @@ export class HeaderComponent implements OnInit {
             response => {
                 this.usuarioLogueado = response;
                 this.username = this.usuarioLogueado.username;
-                this.UsuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil).then(
-                    res => {
-                        this.urlImagenPerfil = res;
-                    }
-                );
+                if(this.usuarioLogueado.imagenPerfil != null){
+                    this.UsuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil).then(
+                        res => {
+                            this.urlImagenPerfil = res;
+                        }
+                    );
+                }
             }
         );
 

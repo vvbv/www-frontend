@@ -5,7 +5,10 @@ import { AuthenticationService } from './authentication.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Actividad } from '../modelos/actividad.class';
+import { Asistencia } from '../modelos/asistencia.class';
 import { Observable } from 'rxjs/Observable';
+
+
 @Injectable()
 export class ActividadService {
   constructor( private http: Http, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
@@ -24,7 +27,7 @@ export class ActividadService {
     return this.http
     .get(this.coneccionInfo.url_actividades_byEvent + idEvento.toString() + '/' , {headers: this.coneccionInfo.headers} )
     .toPromise()
-    .then(response =>  JSON.parse(response.text().toString()).results as Actividad[])
+    .then(response =>  JSON.parse(response.text().toString()) as Actividad[])
     .catch(response => {
       return response;
     });
@@ -34,8 +37,9 @@ export class ActividadService {
     return this.http
     .get(this.coneccionInfo.url_actividades + id.toString() + '/', {headers: this.coneccionInfo.headers})
     .map( response =>   JSON.parse(response.text().toString()) as Actividad) ;
-
   }
+  
+
   public crearActividad(actividad: Actividad): Promise<Actividad | JSON> {
     return this.http
     .post(this.coneccionInfo.url_actividades_crear , JSON.stringify(actividad) ,  {headers: this.coneccionInfo.headers})
@@ -53,7 +57,7 @@ export class ActividadService {
 ;
   }
 
-  deleteActividad(actividad: Actividad): Promise < JSON > {
+  public deleteActividad(actividad: Actividad): Promise < JSON > {
     return this.http
     .delete(this.coneccionInfo.url_actividades + actividad.id +  '/' , {headers: this.coneccionInfo.headers})
     .toPromise()
@@ -71,7 +75,7 @@ export class ActividadService {
     );
 
   }
-  updateActividad(actividad: Actividad): Promise<Actividad | JSON> {
+  public updateActividad(actividad: Actividad): Promise<Actividad | JSON> {
      return this.http
     .put(this.coneccionInfo.url_actividades + actividad.id +  '/', JSON.stringify(event) , {headers: this.coneccionInfo.headers})
     .toPromise()
@@ -88,4 +92,33 @@ export class ActividadService {
       }
     );
   }
+
+  public  getActividadPromesa(idActiviad: number): Promise<Actividad>{
+    return this.http
+    .get(this.coneccionInfo.url_actividades + idActiviad.toString() + '/', {headers: this.coneccionInfo.headers} )
+    .toPromise()
+    .then(response =>  JSON.parse(response.text().toString()) as Actividad[])
+    .catch(response => {
+      return response;
+    });
+  }
+
+  public registrarParticipanteActividad(idActividad: string, idUsuario: string): Promise<JSON> {
+
+          let asistencia = new Asistencia();
+          asistencia.participante = idUsuario;
+          asistencia.actividad = idActividad;
+          asistencia.fechaModificacion = null;
+          asistencia.fechaRegistro = null;
+
+          return this.http
+          .post(this.coneccionInfo.url_asistencia, JSON.stringify(asistencia), {headers: this.coneccionInfo.headers})
+          .toPromise()
+          .then( 
+            response_asistencia =>  {
+              return JSON.parse(response_asistencia.text().toString())
+            }
+          );
+  };
+
 }
