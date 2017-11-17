@@ -108,7 +108,7 @@ export class PreInscripcionService {
             }
         ).catch(
             response => {
-                return  (response.text().toString());
+                return  (JSON.parse(response.text().toString()));
 
             }
         );

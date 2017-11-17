@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
     crearUsuario(usuario: Usuario) {
         this.usuariosService.crearUsuario(usuario)
         .then(response =>  {
-            if (this.usuario.nombres === response.nombres && (response.nombres != null)) {
+            if (this.usuario.nombres === response.nombres) {
                 this._toastr.success
                     ('Usuario "' + this.usuario.username +
                     '" registrado correctamente, valla a login para iniciar sesión', 'En hora buena!',
@@ -34,8 +34,13 @@ export class SignupComponent implements OnInit {
                     this.pass_verificacion = '';
                     this.usuario = new Usuario();
             } else {
+                 if (this.usuario.nombres === response.nombres) {
+                   this.errorRetorno = JSON.parse('{}');  
+                 }else{
                 this.errorRetorno = JSON.parse(JSON.stringify(response));
+                
                 console.log(this.errorRetorno);
+                 }
 
                 this._toastr.error('Error registrando el nuevo usuario', 'Ups!', {toastLife: 3000, showCloseButton: false});
             }

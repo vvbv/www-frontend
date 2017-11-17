@@ -179,11 +179,17 @@ export class ListEventsComponent implements OnInit {
       this.preinscripcionNueva.estado = 'EA';
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
-          console.log(response);
-          this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
+            console.log("alv");
+          console.log( response);
+          if(response['non_field_errors']){
+            this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: true});
+          }
+          else{
+          this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: true});
+          }
         }
       ).catch(response => { 
-        this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
+          console.log(response);
       });
     }
 

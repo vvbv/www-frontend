@@ -34,7 +34,7 @@
           
           
           
-            <div *ngIf = "usuario.rol != 'UP'" class=" btn-group dropup">
+            <div  class=" btn-group dropup">
                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Opciones
                 </button>
@@ -42,7 +42,7 @@
               <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
               <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
               <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
-              <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
+              <button  [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
           </div>
         </div>
          

@@ -33,7 +33,7 @@ export class ConeccionInfo {
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
-        this.url_base = 'http://ec2-54-244-74-163.us-west-2.compute.amazonaws.com:8000';
+        this.url_base = 'https://www-client-regalia-luchoman.c9users.io';
         this.url_base_api = this.url_base + '/api/v1';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
