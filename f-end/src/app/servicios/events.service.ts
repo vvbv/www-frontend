@@ -21,9 +21,8 @@ export class EventoService {
   }
   public getEvento(id: number): Observable<Evento>  {
     return this.http
-    .get(this.coneccionInfo.url_eventos + id.toString(), {headers: this.coneccionInfo.headers})
-    .map( response =>   JSON.parse(response.text().toString()) as Evento) ;
-
+    .get(this.coneccionInfo.url_eventos + id.toString() + '/', {headers: this.coneccionInfo.headers})
+    .map( response =>   JSON.parse(response.text().toString()) as Evento);
   }
   public crearEvento(evento: Evento): Promise<Evento | JSON> {
     /*let myParams = new URLSearchParams();
