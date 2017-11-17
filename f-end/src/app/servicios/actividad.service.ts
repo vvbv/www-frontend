@@ -118,6 +118,10 @@ export class ActividadService {
             response_asistencia =>  {
               return JSON.parse(response_asistencia.text().toString())
             }
+          ).catch(
+            response_asistencia =>  {
+              return JSON.parse(response_asistencia.text().toString())
+            }
           );
   };
 

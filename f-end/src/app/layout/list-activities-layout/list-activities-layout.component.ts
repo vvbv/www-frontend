@@ -29,7 +29,6 @@ export class ListActivitiesLayoutComponent implements OnInit {
         console.log(evento);
         this.actividadService.getActividadesByEvent(evento).then(response => {
             this.actividades = response;
-            console.log(JSON.stringify(response));
         });
     }
 
