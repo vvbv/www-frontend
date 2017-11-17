@@ -15,26 +15,12 @@
           <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
             <h3>Noticias</h3>
             <hr>
-            <div class="noticia-principal col-12">
-              <div class="img-noticia" style="background-image: url('https://www.hotelschool.co/wp-content/uploads/2017/08/Conference-and-Events-Management.png')"></div>
-              <span>Titulo de la noticia</span>
-              <p>Nostrud qui velit id aute ipsum laboris cupidatat deserunt ad minim aute quis. Sit commodo deserunt sunt sunt ea et ex irure magna. Occaecat et occaecat veniam dolor dolor ullamco aute laboris sunt officia magna dolor deserunt dolor.</p>
+            <div *ngFor="let noticia of noticias; let i = index;" class="noticia-principal col-12">
+              <div class="img-noticia" [style.backgroundImage]="'url('+ noticia.imagen +')'"></div>
+              <span>{{noticia.titulo}}</span>
+              <p>{{noticia.resumen}}</p>
             </div>
-            <div class="noticia-principal col-12">
-              <div class="img-noticia" style="background-image: url('http://ak4.picdn.net/shutterstock/videos/11293514/thumb/1.jpg')"></div>
-              <span>Titulo de la noticia</span>
-              <p>Nostrud qui velit id aute ipsum laboris cupidatat deserunt ad minim aute quis. Sit commodo deserunt sunt sunt ea et ex irure magna. Occaecat et occaecat veniam dolor dolor ullamco aute laboris sunt officia magna dolor deserunt dolor.</p>
-            </div>
-            <div class="noticia-principal col-12">
-              <div class="img-noticia" style="background-image: url('https://img.youtube.com/vi/h0Ymewi0YNg/maxresdefault.jpg')"></div>
-              <span>Titulo de la noticia</span>
-              <p>Nostrud qui velit id aute ipsum laboris cupidatat deserunt ad minim aute quis. Sit commodo deserunt sunt sunt ea et ex irure magna. Occaecat et occaecat veniam dolor dolor ullamco aute laboris sunt officia magna dolor deserunt dolor.</p>
-            </div>
-              <div class="noticia-principal col-12">
-              <div class="img-noticia" style="background-image: url('http://hd.wallpaperswide.com/thumbs/los_angeles_natural_history_museum-t2.jpg')"></div>
-              <span>Titulo de la noticia</span>
-              <p>Nostrud qui velit id aute ipsum laboris cupidatat deserunt ad minim aute quis. Sit commodo deserunt sunt sunt ea et ex irure magna. Occaecat et occaecat veniam dolor dolor ullamco aute laboris sunt officia magna dolor deserunt dolor.</p>
-            </div>
+            
               
           </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">

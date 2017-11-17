@@ -19,6 +19,14 @@ export class NoticiasService {
       return JSON.parse(response.text()) as Noticia[]
     }).catch(response=> {console.log("alv" + response.text().toString());return JSON.parse(response.text().toString())});
   }
+  public getNoticiasJSON(): Promise<JSON> {
+    return this.http
+    .get(this.coneccionInfo.url_noticias , {headers: this.coneccionInfo.headers} )
+    .toPromise()
+    .then(response => {
+      return JSON.parse(response.text())
+    }).catch(response=> {return JSON.parse(response.text().toString())});
+  }
   public getNoticia(id: number): Observable<Noticia>  {
     return this.http
     .get(this.coneccionInfo.url_noticias + id.toString(), {headers: this.coneccionInfo.headers})
