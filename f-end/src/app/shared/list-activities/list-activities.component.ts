@@ -25,6 +25,7 @@ export class ListActivitiesComponent implements OnInit {
     constructor(public usuarioService: UsuarioService, public actividadService: ActividadService, public _toastr: ToastsManager, vRef: ViewContainerRef) {
         this._toastr.setRootViewContainerRef(vRef);
         this.cargarUsuario();
+        this.actividades = null;
     }
 
     private cargarUsuario() {
