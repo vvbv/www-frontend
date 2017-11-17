@@ -11,9 +11,9 @@
       </div>
     <div class="row" *ngIf="eventos.length > 0">
 <div class="card-columns">
-      <div  *ngFor="let evento of eventos; let i = index" class="col-lg-6  card "  [@routerTransition]>
-          <img width = "100%" src="{{evento.imagen}}" class=" card-img-top" alt="imagen  {{evento.nombre}}">
+      <div  *ngFor="let evento of eventos; let i = index" class="col-6  card "  [@routerTransition]>
           
+          <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
            <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
               Cancelado
             </div>
@@ -32,16 +32,21 @@
           <a  *ngIf="usuario.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
           <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
           
+<<<<<<< HEAD
           
           
             <div *ngIf = "usuario.rol != 'UP'" class=" btn-group dropup">
+=======
+            <div class=" btn-group dropup">
+>>>>>>> alpha
                 <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Opciones
                 </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-             <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
-          <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
-          <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
+              <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
+              <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
+              <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
+              <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
           </div>
         </div>
          

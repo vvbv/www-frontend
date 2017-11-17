@@ -13,13 +13,18 @@ import { FormNoticiaComponent } from './form-noticia/form-noticia.component';
 import { PreviewNoticiaComponent } from './preview-noticia/preview-noticia.component';
 import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
 import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.component';
+import { ListActivitiesComponent } from './list-activities/list-activities.component';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+
 @NgModule({
     imports: [
         CommonModule,
         NgbDropdownModule.forRoot(),
         TranslateModule,
         RouterModule,
-        FormsModule
+        FormsModule,
+        ToastModule.forRoot(),
     ],
     declarations: [
         listUsersComponent,
@@ -30,6 +35,7 @@ import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.compo
         FormNoticiaComponent,
         PreviewNoticiaComponent,
         ListaNoticiasComponent,
+        ListActivitiesComponent,
         DetalleNoticiaComponent,
     ],
     exports: [
@@ -38,6 +44,7 @@ import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.compo
         FormNoticiaComponent, 
         TinyComponent,
         ListaNoticiasComponent,
+        ListActivitiesComponent,
         PreviewNoticiaComponent,
         listUsersInscritosComponent]
 })

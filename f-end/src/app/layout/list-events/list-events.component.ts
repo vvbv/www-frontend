@@ -1,4 +1,5 @@
 import { EventoService } from '../../servicios/events.service';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PreInscripcionService } from '../../servicios/preInscripcion.service';
 import { InscripcionService } from '../../servicios/inscripcion.service';
 import { UsuarioService } from '../../servicios/usuario.service';
@@ -42,6 +43,7 @@ export class ListEventsComponent implements OnInit {
     constructor(
         private eventService: EventoService,
         public _toastr: ToastsManager,
+        public router: Router,
         private preInscripcionService: PreInscripcionService,
         private inscripcionService: InscripcionService,
         vRef: ViewContainerRef,
@@ -184,6 +186,7 @@ export class ListEventsComponent implements OnInit {
         this._toastr.warning('Usted ya se ha registrado para este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: false});
       });
     }
+
   }
 
 

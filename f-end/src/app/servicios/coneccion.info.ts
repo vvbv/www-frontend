@@ -20,6 +20,8 @@ export class ConeccionInfo {
     public url_actividades_crear: string;
     public url_validar_token: string;
     public url_actividades_porEvento: string;
+    public url_actividades_byEvent: string;
+    public url_asistencia: string;
     public url_pre_inscripciones_por_evento: string;
     public url_noticias: string;
     public url_static_imagenes;
@@ -31,7 +33,11 @@ export class ConeccionInfo {
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
+<<<<<<< HEAD
         this.url_base = 'http://localhost:8000';
+=======
+        this.url_base = 'http://127.0.0.1:8000';
+>>>>>>> alpha
         this.url_base_api = this.url_base + '/api/v1';
         this.url_obtener_token = this.url_base_api + '/auth-jwt/';
         this.url_actualizar_token = this.url_base_api + '/auth-jwt-refresh/';
@@ -40,6 +46,8 @@ export class ConeccionInfo {
         this.url_actividades = this.url_base_api + '/actividades/';
         this.url_actividades_crear = this.url_base_api + '/actividades/crear';
         this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
+        this.url_actividades_byEvent = this.url_base_api + '/actividades/byEvent/';
+        this.url_asistencia = this.url_base_api + '/asistencias/';
         this.url_preinscripcion = this.url_base_api + '/eventos/preinscripciones/';
         this.url_get_preinscricion_por_usuario_evento = this.url_base_api + '/getPreinscripcion/porIdUsuarioIdEvento/';
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';

@@ -21,7 +21,7 @@ import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.m
 import { ActividadService } from './servicios/actividad.service';
 import { InscripcionService } from './servicios/inscripcion.service';
 import { MensajesToastService } from './servicios/mensajes-toast.service';
-import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { NoticiasService } from './servicios/noticias.service';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
 

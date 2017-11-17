@@ -27,6 +27,7 @@ const routes: Routes = [
             { path: 'editSystemUser', loadChildren: '../edit-system-user/edit-system-user.module#EditSystemUserModule'},
             { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarEventsModule'},
             { path: 'crearNoticia', loadChildren: './crear-noticia/crear-noticia.module#CrearNoticiaModule'},
+            { path: 'listActivities', loadChildren: './list-activities-layout/list-activities-layout.module#ListActivitiesLayoutModule'},
         ]
     }
 ];
