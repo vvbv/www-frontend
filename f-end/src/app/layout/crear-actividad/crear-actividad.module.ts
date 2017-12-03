@@ -11,6 +11,7 @@ import { CrearActividadComponent } from './crear-actividad.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 
+
 @NgModule({
     imports: [
         CommonModule,
@@ -18,8 +19,9 @@ import { SharedModule } from '../../shared/shared.module';
         NgbAlertModule.forRoot(),
         CrearActividadRoutingModule,
         FormsModule,
+        ReactiveFormsModule,
         StatModule,
-        SharedModule,
+        SharedModule
     ],
     declarations: [
         CrearActividadComponent,

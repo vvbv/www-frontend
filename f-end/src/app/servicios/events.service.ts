@@ -23,8 +23,15 @@ export class EventoService {
     return this.http
     .get(this.coneccionInfo.url_eventos + id.toString(), {headers: this.coneccionInfo.headers})
     .map( response =>   JSON.parse(response.text().toString()) as Evento) ;
-
   }
+
+  public getEventov2(id: number): Promise<Evento>  {
+    return this.http
+    .get(this.coneccionInfo.url_eventos + id.toString(), {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then( response =>   JSON.parse(response.text().toString()) as Evento) ;
+  }
+
   public crearEvento(evento: Evento): Promise<Evento | JSON> {
     /*let myParams = new URLSearchParams();
     myParams.append('file', evento.imagen);*/

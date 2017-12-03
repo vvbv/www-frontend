@@ -1,24 +1,42 @@
 <div [@routerTransition]>
-<h1>Creacion de nueva actividad</h1>
+<h1>Creación de nueva actividad</h1>
+<hr>
+<h5>Evento: {{evento.nombre}}</h5>
+<hr>
   <div id="formulario-nueva-actividad">
-    <form #nuevaActividad="ngForm">
-      <div class="form-group">
+    <form #actividadNuevaForm="ngForm">
+      <div [class.has-danger] = "actividadError['nombre']" class="form-group">
         <label for="nombre">Nombre</label>
-        <input type="text" class="form-control" name="nombre">
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="actividadNueva.nombre" required>
+        <div ngFor="let error of actividadError" >
+            <span class="help-block">{{actividadError['nombre']}}</span>
+        </div>
       </div>
-      <div class="form-group">
+      <div [class.has-danger] = "actividadError['descripcion']" class="form-group">
           <label for="descripcion">Descripción</label>
-          <textarea name="descripcion" class="form-control"></textarea>
+          <textarea name="descripcion" class="form-control" [(ngModel)]="actividadNueva.descripcion" required></textarea>
+          <div ngFor="let error of actividadError" >
+              <span class="help-block">{{actividadError['descripcion']}}</span>
+          </div>
+       </div>
+      <div [class.has-danger] = "actividadError['fechaInicio']" class="form-group">
+          <label for="fechaInicio">Fecha y hora de inicio</label>
+          <input type="datetime-local" class="form-control" name="fechaInicio" [(ngModel)]="actividadNueva.fechaInicio" required>
+          <div ngFor="let error of actividadError" >
+              <span class="help-block">{{actividadError['fechaInicio']}}</span>
+          </div>
       </div>
+      <div [class.has-danger] = "actividadError['fechaFinalizacion']" class="form-group">
+          <label for="fechaFinalizacion">Fecha y hora de finalización</label>
+          <input type="datetime-local" class="form-control" name="fechaFinalizacion" [(ngModel)]="actividadNueva.fechaFinalizacion" required>
+          <div ngFor="let error of actividadError" >
+              <span class="help-block">{{actividadError['fechaFinalizacion']}}</span>
+          </div>
+       </div>
+      <hr>
       <div class="form-group">
-          <label for="fechaHoraInicio">Fecha y hora de inicio</label>
-          <input type="datetime-local" class="form-control" name="fechaHoraInicio">
-      </div>
-      <div class="form-group">
-          <label for="fechaHoraFinalizaciono">Fecha y hora de finalización</label>
-          <input type="datetime-local" class="form-control" name="fechaHoraFinalizaciono">
-      </div>
         <button (click)="crearActividad()" type="button" class="btn btn-primary float-right">Registrar actividad</button>
+      </div>
     </form>
   </div>
 </div>
