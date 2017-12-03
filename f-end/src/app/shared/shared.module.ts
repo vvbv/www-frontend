@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { listUsersComponent } from './list-users-preinscritos-eventos/list-users.component';
 import { listUsersInscritosComponent } from './list-users-inscritos-eventos/list-users-inscritos.component';
 import { FormEventoComponent } from './form-evento/form-evento.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventoDetalleComponent } from './evento-detalle/evento-detalle.component';
 import { TinyComponent } from './tinymc/tinymc.component';
 import { Routes, RouterModule } from '@angular/router';

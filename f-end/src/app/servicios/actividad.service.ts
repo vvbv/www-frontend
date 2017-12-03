@@ -5,6 +5,7 @@ import { AuthenticationService } from './authentication.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Actividad } from '../modelos/actividad.class';
+import { ActividadV2 } from '../modelos/actividadV2.class';
 import { Asistencia } from '../modelos/asistencia.class';
 import { Observable } from 'rxjs/Observable';
 
@@ -50,6 +51,19 @@ export class ActividadService {
       return  JSON.parse(response.text().toString());
     });
   }
+
+  //Retorna solo un JSON, para facilitar el manejo.
+  public crearActividadV2(actividad: ActividadV2): Promise<JSON> {
+    return this.http
+    .post(this.coneccionInfo.url_actividades_crear , JSON.stringify(actividad) ,  {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response =>   {
+      return JSON.parse(response.text().toString());})
+    .catch(response => {
+      return  JSON.parse(response.text().toString());
+    });
+  }
+
   public getOpciones(): Observable<JSON> {
     return this.http
     .options(this.coneccionInfo.url_actividades_crear  ,  {headers: this.coneccionInfo.headers})
