@@ -40,7 +40,7 @@ export class ConeccionInfo {
         this.url_validar_token = this.url_base_api + '/auth-jwt-verify/';
         this.url_eventos = this.url_base_api + '/eventos/';
         this.url_actividades = this.url_base_api + '/actividades/';
-        this.url_actividades_crear = this.url_base_api + '/actividades/crear';
+        this.url_actividades_crear = this.url_base_api + '/actividades/crear/';
         this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
         this.url_actividades_byEvent = this.url_base_api + '/actividades/byEvent/';
         this.url_asistencia = this.url_base_api + '/asistencias/';

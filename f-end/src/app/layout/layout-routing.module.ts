@@ -17,7 +17,7 @@ const routes: Routes = [
             '../shared/crear-actividad/crear-actividad.module#CrearActividadModule' },
             { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
             { path: 'events', loadChildren: './events/events.module#EventsModule'},
-             { path: 'noticias', loadChildren: './listar-noticias-layout/listar-noticias-layout.module#LisarNoticiasLayoutModule'},
+            { path: 'noticias', loadChildren: './listar-noticias-layout/listar-noticias-layout.module#LisarNoticiasLayoutModule'},
             { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
             { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventModule'},
             { path: 'editarNoticia/:id', loadChildren: './editar-noticia/editar-noticia.module#EditarNoticiaModule'},
@@ -28,6 +28,7 @@ const routes: Routes = [
             { path: 'calendar', loadChildren: './calendar/calendar.module#CalendarEventsModule'},
             { path: 'crearNoticia', loadChildren: './crear-noticia/crear-noticia.module#CrearNoticiaModule'},
             { path: 'listActivities', loadChildren: './list-activities-layout/list-activities-layout.module#ListActivitiesLayoutModule'},
+            { path: 'newActivity', loadChildren: './crear-actividad/crear-actividad.module#CrearActividadModule'},
         ]
     }
 ];
