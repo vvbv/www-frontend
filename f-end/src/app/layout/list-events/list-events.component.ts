@@ -14,7 +14,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'hammerjs';
-import 'ce/plugins/emoticons/plugin.js';
+//import 'ce/plugins/emoticons/plugin.js';
 import { Evento } from '../../modelos/evento.class';
 import { Usuario } from '../../modelos/usuario.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
@@ -37,7 +37,7 @@ export class ListEventsComponent implements OnInit {
     errores: JSON;
     preinscripcionNueva: PreInscripcion;
     private usuarioLogueado: Usuario;
-    estructuraEvento: EventoEstructura;
+   
     usuario$: Promise <Usuario>;
     mensaje: string;
     
@@ -68,13 +68,6 @@ export class ListEventsComponent implements OnInit {
                     this.usuarioLogueado = response;
                 }
             );
-            //  this.eventService.getEvento(2).subscribe(data => { this.event = data});
-        this.eventService.getOpciones().subscribe(
-          response => {
-            this.estructuraEvento = response['actions']['POST'];
-            console.log(this.estructuraEvento.estado.choices);
-          }
-        );
        this.usuariosYRegistros = null;
       this.usuariosYRegistrosInscritos = null;
     }
@@ -170,10 +163,7 @@ export class ListEventsComponent implements OnInit {
             .catch();
 
     }
-    getDisplayNameEstado(evento: Evento): any {
-     var  est:JSON = (this.estructuraEvento.estado.choices.filter( choice => choice.value === evento.estado));
-     return est['0'].display_name;
-    }
+
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
       

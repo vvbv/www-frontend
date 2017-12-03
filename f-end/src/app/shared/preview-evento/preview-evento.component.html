@@ -1,4 +1,4 @@
-<div class="card ">
+<div *ngIf = "estructuraEvento && evento" class="card col-lg-6 col-xl-6 col-md-12 col-sm-12">
   
   <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
    <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
@@ -24,7 +24,18 @@
 </div>
 
 
+<div  class=" btn-group dropup">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Opciones
+    </button>
+<!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
+  <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
+  <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
+  <button  [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
+</div>
+</div>
+-->
 
-
-
+</div>
 </div>

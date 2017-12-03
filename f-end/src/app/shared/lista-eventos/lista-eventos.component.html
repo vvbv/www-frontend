@@ -1,10 +1,10 @@
-
+<div clasa="row"  >
 <div *ngIf="eventos" class="card-columns"  [@routerTransition]>
-<div class = "container-fluid" *ngIf=" eventos " >
-    <h1 *ngIf=" eventos.length > 0 "> Lista de eventos</h1>
-    <div class="row" *ngFor="let evento of eventos">
-        
-    </div>
+<div class = "container-fluid" *ngIf=" eventos " >   
+
+   
+            <app-preview-evento  *ngFor="let evento of eventos" [evento] = "evento"> </app-preview-evento>
+</div>
 </div>
 </div>
 

@@ -18,24 +18,17 @@
           <strong>Opps!</strong> No hay eventos registrados aún
           <a *ngIf="usuario.rol !== 'UP'" [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar uno ahora?</a>
         </div>
-        
-        
+   </div>
+
+  <div *ngIf="eventos.length > 0">
+      <app-lista-eventos  [eventos] = "eventos"> </app-lista-eventos>
+  </div>      
           
-    <div  class=" btn-group dropup">
-        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Opciones
-        </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
-      <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
-      <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
-      <button  [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
-  </div>
-</div>
+
         
         
   </div>
-</div>
+
 
 <div class="modal fade usuarios-preinscritos{{i}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-xl">
@@ -62,7 +55,6 @@
   
   
 
-
-
 </div>
+
 </div>
