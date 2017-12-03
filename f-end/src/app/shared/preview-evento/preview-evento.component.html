@@ -1,0 +1,30 @@
+<div class="card ">
+  
+  <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
+   <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">
+      Cancelado
+    </div>
+    <div [class.boton-editar-cancelado]="evento.estado == 'CC'"   class="card-block" [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
+    
+      <h4 class="card-title">{{evento.nombre}}</h4>
+    
+      <p class="card-text text-justify">Descripción: {{evento.descripcion}}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> <p class="mb-1">Precio: ${{evento.precio}}</p></li>
+          <li class="list-group-item">  <p class="card-text"><small class="text-muted"><b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small></p></li>
+        </ul>
+    </div>
+<div [class.opciones-cancelado]="evento.estado == 'CC'" class="card-footer " style = "width: 100%">
+
+ 
+<!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
+  <b  class = "float-right" >{{getDisplayNameEstado(evento)}}&nbsp;</b>
+  
+
+</div>
+
+
+
+
+
+</div>

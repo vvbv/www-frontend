@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 export class UsuarioService {
     public usuario: Usuario;
     constructor(private http: Http, private coneccionInfo: ConeccionInfo ) {
-        this.usuario = new Usuario();
+        this.usuario = null;
     };
 
     public crearUsuario(usuario: Usuario): Promise<Usuario> {
@@ -76,6 +76,16 @@ export class UsuarioService {
     public almacenarUsuario(username: string): void {
         localStorage.setItem('username', username);
     }
+
+    public recuperarUsuarioGlobal(): boolean{
+        let retorno: boolean;
+        const username: string = localStorage.getItem('username');
+        this.getUsuario(username).
+        then(response => {this.usuario = response; retorno = true})
+        .catch(response => {console.log(response); retorno = false;});
+        return retorno;
+    }
+
 
     public recuperarUsuario(): Promise<Usuario> {
         const username: string = localStorage.getItem('username');

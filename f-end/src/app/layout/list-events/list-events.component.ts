@@ -14,10 +14,11 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import 'hammerjs';
-import 'tinymce/plugins/emoticons/plugin.js';
+import 'ce/plugins/emoticons/plugin.js';
 import { Evento } from '../../modelos/evento.class';
 import { Usuario } from '../../modelos/usuario.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
+import { PreInscripcionConUsuario } from '../../modelos/preInscripcionConUsuario.class';
 import { Inscripcion } from '../../modelos/inscripcion.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
 import { ToastsManager, Toast } from 'ng2-toastr/ng2-toastr';
@@ -97,13 +98,14 @@ export class ListEventsComponent implements OnInit {
     }
     
         construirUsuariosInscritos(evento: Evento): void {
-            this.usuariosYRegistros = null;
+        this.usuariosYRegistrosInscritos = null;  
           
         var inscripciones:Inscripcion[];
         this.inscripcionService.getInscripcionesPorEvento(evento)
         .then(
             response => {
             if (response !== null) {
+                 this.usuariosYRegistrosInscritos = null;
                 for (const inscripcion of response as Inscripcion[]){
                     this.usuarioService.getUsuarioById(inscripcion.participante as number)
                     .then(respo => {
@@ -111,7 +113,9 @@ export class ListEventsComponent implements OnInit {
                                         this.inscripcionService.getInscripcionByUserAndEvent(
                 usuario, evento
             ).then(res => {
-                this.usuariosYRegistrosInscritos = new Array<[Usuario, Inscripcion]>();
+                    if(this.usuariosYRegistrosInscritos === null){
+                        this.usuariosYRegistrosInscritos = new Array<[Usuario, Inscripcion]>();
+                    }
                     this.usuariosYRegistrosInscritos.push([usuario,  res])
             })
             .catch(res => {
@@ -136,16 +140,19 @@ export class ListEventsComponent implements OnInit {
         this.preInscripcionService.getPreInscripcionesPorEvento(evento)
         .then(
             response=>{
-            if(response!==null){        
+            if(response!==null){   
+                this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
                 for(let preInscripcion of response as PreInscripcion[]){
                     
                     this.usuarioService.getUsuarioById(preInscripcion.participante as number)
                     .then(resp => {
                         const usuario: Usuario = resp;
-                                        this.preInscripcionService.getPreInscripcionByUserAndEvent(
+                                        this.preInscripcionService.getPreInscripcionConParticipanteByUserAndEvent(
                 usuario, evento
             ).then(res => {
-                 this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
+                       if(this.usuariosYRegistros === null){
+                        this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
+                    }
                     this.usuariosYRegistros.push([usuario,  res]);
             })
             .catch(res => {
@@ -173,7 +180,7 @@ export class ListEventsComponent implements OnInit {
     }
 
     keyupHandlerFunction(e): void {
-      console.log(e); //e is the HTML output from your TinyMCE component
+      console.log(e); //e is the HTML output from your CE component
     }
     preinscripcion(evento: Evento): void {
       this.preinscripcionNueva = new PreInscripcion();
@@ -183,9 +190,15 @@ export class ListEventsComponent implements OnInit {
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
           console.log(response);
-          this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
-          let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+this.usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
-          this.sendEmailService.sendEmail(jsonEmail);
+          if(!response['non_field_errors']){
+              this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: true});
+              let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+this.usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
+              this.sendEmailService.sendEmail(jsonEmail);
+          }
+          
+          else{
+            this._toastr.warning('Ya esta preinscrito en este evento', 'Advertencia!', {toastLife: 3000, showCloseButton: true});
+          }
         }
       ).catch(response => { 
           console.log(response);

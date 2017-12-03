@@ -16,6 +16,8 @@ import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.compo
 import { ListActivitiesComponent } from './list-activities/list-activities.component';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { PreviewEventoComponent } from './preview-evento/preview-evento.component';
+import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
 
 @NgModule({
     imports: [
@@ -37,6 +39,8 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
         ListaNoticiasComponent,
         ListActivitiesComponent,
         DetalleNoticiaComponent,
+        PreviewEventoComponent,
+        ListaEventosComponent,
     ],
     exports: [
         listUsersComponent, 

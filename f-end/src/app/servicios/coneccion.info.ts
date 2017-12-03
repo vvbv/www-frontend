@@ -15,7 +15,6 @@ export class ConeccionInfo {
     public url_imagenes: string;
     public url_obtener_token: string;
     public url_actualizar_token: string;
-    public url_get_preinscricion_por_usuario_evento: string;
     public url_actividades: string;
     public url_actividades_crear: string;
     public url_validar_token: string;
@@ -45,22 +44,29 @@ export class ConeccionInfo {
         this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
         this.url_actividades_byEvent = this.url_base_api + '/actividades/byEvent/';
         this.url_asistencia = this.url_base_api + '/asistencias/';
-        this.url_preinscripcion = this.url_base_api + '/eventos/preinscripciones/';
-        this.url_get_preinscricion_por_usuario_evento = this.url_base_api + '/getPreinscripcion/porIdUsuarioIdEvento/';
+        this.url_preinscripcion = this.url_eventos + '/preinscripciones/';
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
-        this.url_get_inscricion_por_usuario_evento = this.url_base_api + '/getInscripcion/porIdUsuarioIdEvento/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
         this.url_static_imagenes = this.url_base + '/static/';
         this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
-        this.url_pre_inscripciones_por_evento = this.url_preinscripcion + 'byEvent/';
         this.url_inscripciones_por_evento = this.url_inscripcion + 'byEvent/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
         this.url_noticias = this.url_base_api + '/noticias/';
         this.url_sendEmail = this.url_base_api + '/funcionesExtra/sendEmail';
         this.iniciarHeaders();
     }
-
+    
+    getUrlPreinscripcionesPorEventoPorUsuario(idEvento: number, idUsuario: number){
+        return this.url_eventos + idEvento + '/preinscripciones/usuario/' + idUsuario + '/';
+    }
+    
+    getUrlInscripcionesPorEvento(idEvento: number): string{
+        return this.url_eventos + idEvento + '/inscripciones/' ;
+    }
+    getUrlPreinscripcionesPorEvento(idEvento: number): string{
+        return this.url_eventos + idEvento + '/preinscripciones/' ;
+    }
     iniciarHeaders() {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');

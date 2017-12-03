@@ -53,7 +53,7 @@ export class listUsersComponent implements OnInit {
     }
     rechazarPreinscripcion(usuario: Usuario, evento: Evento): void{
         let preinscripcionUsuario = new PreInscripcion();
-        this.preInscripcionService.getPreInscripcionByUserAndEvent(
+        this.preInscripcionService.getPreInscripcionConParticipanteByUserAndEvent(
             usuario, evento
         ).then(response => {
             preinscripcionUsuario = response;
@@ -77,7 +77,7 @@ export class listUsersComponent implements OnInit {
     aceptarPreinscripcion(usuario: Usuario, evento: Evento): void {
         
         let preinscripcionUsuario = new PreInscripcion();
-        this.preInscripcionService.getPreInscripcionByUserAndEvent(
+        this.preInscripcionService.getPreInscripcionConParticipanteByUserAndEvent(
             usuario, evento
         ).then(
             response => {
