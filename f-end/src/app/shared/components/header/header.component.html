@@ -1,4 +1,4 @@
-<div class="pos-f-t fixed-top header">
+<div *ngIf="usuarioLogueado$ | async as usuarioLogueado" class="pos-f-t fixed-top header">
     <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
         <button class="navbar-toggler navbar-toggler-right" (click)="toggleSidebar()">
             <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,12 @@
                 <li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                         <!--<i class="fa fa-user"></i>-->
-                        <img src="{{urlImagenPerfil}}"  class="miniatura-perfil" alt=""> {{username}} <b class="caret"></b>
+                        <ng-container *ngIf = "urlImagenPerfil$ | async as urlImagenPerfil">
+                            <img  src="{{urlImagenPerfil}}"  class="miniatura-perfil" alt=""> {{usuarioLogueado.username}} <b class="caret"></b>
+                        </ng-container>
+                        <ng-container *ngIf = "!urlImagenPerfil$">
+                                <img  src="assets/images/no-picture.png"  class="miniatura-perfil" alt=""> {{usuarioLogueado.username}} <b class="caret"></b>
+                            </ng-container>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</a>-->

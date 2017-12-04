@@ -20,7 +20,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     animations: [routerTransition()]
 })
 export class listUsersInscritosComponent implements OnInit {
-    private usuarioLogueado: Usuario;
+    private usuarioLogueado$: Promise<Usuario>;
     public usuarios: Usuario[];
     public estructuraInscripcion$: Promise<InscripcionEstructura>;
     @Input() public evento: Evento;
@@ -36,12 +36,7 @@ export class listUsersInscritosComponent implements OnInit {
             private inscripcionService: InscripcionService
         ) {
         this._toastr.setRootViewContainerRef(vRef);
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                }
-            );
+        this.usuarioLogueado$ = this.usuairosService.obtenerUsuarioActualCache();
         this.estructuraInscripcion$ = this.inscripcionService.getOpciones();
     }
 

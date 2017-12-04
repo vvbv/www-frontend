@@ -13,10 +13,10 @@ export class SidebarComponent {
 
     isActive = false;
     showMenu = '';
-    public usuario$: Promise<Usuario>;
+    public usuarioLogueado$: Promise<Usuario>;
     
     constructor(private usuariosService: UsuarioService) {
-        this.usuario$ = this.usuariosService.recuperarUsuario();
+        this.usuarioLogueado$ = this.usuariosService.obtenerUsuarioActualCache();
     }
     
     

@@ -1,9 +1,9 @@
 import { InjectorToken } from './injectorToken.service';
+import { UsuarioService } from './usuario.service';
 import { JsonFormatter } from 'tslint/lib/formatters';
 
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Evento } from '../modelos/evento.class';
 import 'rxjs/add/operator/toPromise';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -11,7 +11,10 @@ import { ConeccionInfo } from './coneccion.info';
 
 @Injectable()
 export class  AuthenticationService  {
-    constructor (private http: Http, private coneccionInfo: ConeccionInfo,  private injectorToken: InjectorToken) {}
+    constructor (private http: Http, 
+    private coneccionInfo: ConeccionInfo,
+    private injectorToken: InjectorToken,
+    private usuariosService: UsuarioService) {}
   /*
    * Obtiene el token si exite, retorna falso en caso contrario
    * @returns string | boolean
@@ -35,11 +38,13 @@ export class  AuthenticationService  {
                          this.injectorToken.inyectarTokenConeccionInfo();
                      })
                      .catch(this.handleError);
+                    
     }
 
     public logout() {
         localStorage.removeItem(this.coneccionInfo.token_name);
         this.coneccionInfo.token = '';
+        this.usuariosService.usuario = null;
     }
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error); // for demo purposes only

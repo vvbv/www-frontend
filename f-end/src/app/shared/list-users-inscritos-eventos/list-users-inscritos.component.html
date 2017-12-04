@@ -1,5 +1,5 @@
  
-<div *ngIf="estructuraInscripcion$ | async as estructuraInscripcion"class= "lista-usuarios">
+<div *ngIf="estructuraInscripcion$ | async as estructuraInscripcion" class= "lista-usuarios">
  <div  *ngIf="usuariosYRegistros.length > 0" [@routerTransition]>
         <div class="container-fluid">
             <h3>Lista de usuarios inscritos</h3><hr>
@@ -25,16 +25,16 @@
                             <td>
 
                             <div class = "hidden-sm-down"  *ngIf="evento.estado === 'SI'"  class="in-line" >
-                                <button *ngIf="usuarioYRegistro[1] === 'EA' || usuarioYRegistro[1] === 'R'" (click)="aceptarInscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
-                                <button *ngIf="usuarioYRegistro[1] === 'EA'"  (click)="rechazarInscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
+                                <button *ngIf="usuarioYRegistro[1].estado === 'EA' || usuarioYRegistro[1].estado === 'R'" (click)="aceptarInscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="usuarioYRegistro[1].estado === 'EA'"  (click)="rechazarInscripcion(usuarioYRegistro[0], evento)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
                             </div>
-                            <div *ngIf="usuarioYRegistro[1] === 'EA' || usuarioYRegistro[1] === 'R'" class="dropdown hidden-md-up">
+                            <div *ngIf="usuarioYRegistro[1].estado === 'EA' || usuarioYRegistro[1].estado === 'R'" class="dropdown hidden-md-up">
                                     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       Opciones
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                      <button *ngIf="usuarioYRegistro[1] === 'EA' || usuarioYRegistro[1] === 'R'" (click)="aceptarInscripcion(usuarioYRegistro[0], evento)"   class="dropdown-item">Aceptar</button>
-                                      <button *ngIf="usuarioYRegistro[1] === 'EA'"  (click)="rechazarInscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Rechazar</button>
+                                      <button *ngIf="usuarioYRegistro[1].estado === 'EA' || usuarioYRegistro[1].estado=== 'R'" (click)="aceptarInscripcion(usuarioYRegistro[0], evento)"   class="dropdown-item">Aceptar</button>
+                                      <button *ngIf="usuarioYRegistro[1].estado === 'EA'"  (click)="rechazarInscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Rechazar</button>
                                     </div>
                              </div>
                              <p *ngIf="usuarioYRegistro[1].estado !== 'EA' && usuarioYRegistro[1].estado !== 'R'"> {{getDisplayNameEstadoInscripcion(usuarioYRegistro[1], estructuraInscripcion) }}</p>

@@ -14,37 +14,28 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     animations: [routerTransition()]
 })
 export class ProfileComponent implements OnInit {
-    usuarioLogueado: Usuario;
+    usuarioLogueado$: Promise<Usuario>;
     errorUsuario: any;
-
-    public urlImagen: string;
-
-    usuarioActualizado: Usuario;
-
+    usuarioActualizado$: Promise< Usuario>;
     constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, public usuarioService: UsuarioService) {
         this._toastr.setRootViewContainerRef(vRef);
-        this.usuarioLogueado = new Usuario();
         this.errorUsuario = JSON.parse('{}');
-        this.usuarioActualizado = new Usuario();
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                    this.usuarioActualizado = this.usuarioLogueado;
-                    this.usuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil)
-                        .then(
-                            response => {
-                                this.urlImagen = response;
-                            }
-                        )
-                }
-            );
+        this.usuarioActualizado$ = this.usuarioService.obtenerUsuarioActualCache();
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+        
         
     }
 
-    public actualizarInformacionPerfil(){
+    public getImagenPerfil(usuario: Usuario) {
+        this.usuarioService.getImagenPerfil(usuario.imagenPerfil)
+        .then(response => {
+            return response ;
+        });
+    }
 
-        this.usuarioService.actualizarMiPerfil(this.usuarioActualizado).then(
+    public actualizarInformacionPerfil(usuarioActualizado: Usuario){
+
+        this.usuarioService.actualizarMiPerfil(usuarioActualizado).then(
             response => {
                 if((response != JSON.parse('{}'))&&(response['username'] != undefined)){
                     console.log('Perfil actualizado.');

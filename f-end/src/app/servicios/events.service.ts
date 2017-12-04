@@ -21,8 +21,8 @@ export class EventoService {
   }
   public getEvento(id: number): Observable<Evento>  {
     return this.http
-    .get(this.coneccionInfo.url_eventos + id.toString(), {headers: this.coneccionInfo.headers})
-    .map( response =>   JSON.parse(response.text().toString()) as Evento) ;
+    .get(this.coneccionInfo.url_eventos + id.toString() + '/', {headers: this.coneccionInfo.headers})
+    .map( response =>   JSON.parse(response.text().toString()) as Evento);
   }
 
   public getEventov2(id: number): Promise<Evento>  {

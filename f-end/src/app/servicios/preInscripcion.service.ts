@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { PreInscripcion } from '../modelos/preInscripcion.class';
+import { PreInscripcionConUsuario } from '../modelos/preInscripcionConUsuario.class';
 import { Inscripcion } from '../modelos/inscripcion.class';
 import { Usuario } from '../modelos/usuario.class';
 import { Evento } from '../modelos/evento.class';
@@ -20,6 +21,19 @@ export class PreInscripcionService {
         private inscripcionService: InscripcionService
     ){};
 
+    public getPreinscripcionesPorEventoConUsuarios(evento: Evento): Promise <PreInscripcionConUsuario[]> {
+        return this.http
+        .get(this.coneccionInfo.getUrlPreinscripcionesPorEventoConUsuarios(Number(evento.id)), {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response=>{
+                return (JSON.parse(response.text().toString()) as PreInscripcionConUsuario[]);
+            }
+        )
+        .catch(response => {console.log(response); return response;})
+        
+    }
+
     public getPreinscripcion(idPreinscripcion: string): Promise<PreInscripcion>{
         return this.http
         .get(this.coneccionInfo.url_preinscripcion + idPreinscripcion, {headers: this.coneccionInfo.headers})
@@ -31,10 +45,9 @@ export class PreInscripcionService {
         );
     }
 
-    public getPreInscripcionByUserAndEvent(usuario: Usuario, evento: Evento): Promise<PreInscripcion | null> {
+    public getPreInscripcionConParticipanteByUserAndEvent(usuario: Usuario, evento: Evento): Promise<PreInscripcionConUsuario | null> {
         return this.http
-        .get(this.coneccionInfo.url_get_preinscricion_por_usuario_evento
-             + usuario.id + '/' + evento.id + '/',
+        .get(this.coneccionInfo.getUrlPreinscripcionesPorEventoPorUsuario(Number(usuario.id), Number(evento.id )),
              {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
@@ -42,7 +55,7 @@ export class PreInscripcionService {
                if (Number(JSON.parse(response.text().toString()).count) === 0) {
                    return null;
                }
-                return (JSON.parse(response.text().toString())[0] as PreInscripcion);
+                return (JSON.parse(response.text().toString())[0] as PreInscripcionConUsuario);
             }
         ).catch(response =>
             {
@@ -51,10 +64,9 @@ export class PreInscripcionService {
             });
     }
 
-    public getPreInscripcionByUserAndEventIds(idUsuario: string, idEvento: string): Promise<PreInscripcion | null> {
+    public getPreInscripcionConParticipanteByUserAndEventIds(idUsuario: string, idEvento: string): Promise<PreInscripcion | null> {
         return this.http
-        .get(this.coneccionInfo.url_get_preinscricion_por_usuario_evento
-             + idUsuario + '/' + idEvento + '/',
+        .get(this.coneccionInfo.getUrlPreinscripcionesPorEventoPorUsuario(Number(idUsuario) , Number(idEvento)),
              {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
@@ -73,7 +85,7 @@ export class PreInscripcionService {
 
     public getPreInscripcionesPorEvento(evento: Evento): Promise<PreInscripcion[] | null>{
         return this.http
-        .get(this.coneccionInfo.url_pre_inscripciones_por_evento  + evento.id + '/',
+        .get(this.coneccionInfo.getUrlPreinscripcionesPorEvento(Number(evento.id)),
         {headers: this.coneccionInfo.headers})
         .toPromise()
         .then(
@@ -108,7 +120,7 @@ export class PreInscripcionService {
             }
         ).catch(
             response => {
-                return  (response.text().toString());
+                return  (JSON.parse(response.text().toString()));
 
             }
         );

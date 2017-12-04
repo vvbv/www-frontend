@@ -1,5 +1,5 @@
-<div [@routerTransition]>
-    <h2 class="text-muted">Bienvenido: <strong>{{nombres}} {{apellidos}}</strong> (@{{username}})<!--<small>Statistics Overview</small>--></h2>
+<div *ngIf="usuarioLogueado$ | async as usuarioLogueado"[@routerTransition]>
+    <h2 class="text-muted">Bienvenido: <strong>{{usuarioLogueado.nombres}} {{usuarioLogueado.apellidos}}</strong> (@{{usuarioLogueado.username}})<!--<small>Statistics Overview</small>--></h2>
     <div class="row">
         <div class="col-md-12">
             <ngb-carousel>

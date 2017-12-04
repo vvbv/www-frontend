@@ -1,6 +1,6 @@
 
 
-<div *ngIf = "usuario"  [@routerTransition]>
+<div *ngIf = "usuario$ | async as usuario"  [@routerTransition]>
   <div *ngIf="(noticias$ | async) as noticias">
   
         <div *ngIf="noticias.length == 0">

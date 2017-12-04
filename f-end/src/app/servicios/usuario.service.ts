@@ -5,13 +5,18 @@ import { AuthenticationService } from './authentication.service';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
+import { async } from 'q';
 
 
 @Injectable()
 export class UsuarioService {
+    public usuario$: Promise<Usuario>;
     public usuario: Usuario;
+    public urlImagenUsuario$: Promise<string>;
     constructor(private http: Http, private coneccionInfo: ConeccionInfo ) {
-        this.usuario = new Usuario();
+        this.usuario$ = null;
+        this.usuario = null;
+        this.urlImagenUsuario$ = null;
     };
 
     public crearUsuario(usuario: Usuario): Promise<Usuario> {
@@ -68,6 +73,7 @@ export class UsuarioService {
         .toPromise()
         .then(
             response => {
+                console.log(JSON.parse(response.text())['imagen']);
                 return JSON.parse(response.text())['imagen'];
             }
         );
@@ -77,10 +83,60 @@ export class UsuarioService {
         localStorage.setItem('username', username);
     }
 
+    public recuperarUsuarioGlobal(): boolean{
+        let retorno: boolean;
+        const username: string = localStorage.getItem('username');
+        this.getUsuario(username).
+        then(response => {retorno = true})
+        .catch(response => {console.log(response); retorno = false;});
+        return retorno;
+    }
+
+    public obtenerUrlImgenUsuarioActualCache(): Promise<string>{
+        if(this.urlImagenUsuario$ === null && this.usuario===null) {
+            return  this.recuperarUsuario()
+                .then(response=> {
+                    this.urlImagenUsuario$ =  this.getImagenPerfil(this.usuario.imagenPerfil);
+                    return this.urlImagenUsuario$;
+                }
+                );
+                
+            }
+
+
+            else{       
+                if(this.urlImagenUsuario$ === null) {
+                    this.urlImagenUsuario$ =  this.getImagenPerfil(this.usuario.imagenPerfil);
+                    return this.urlImagenUsuario$;
+                
+                }else{
+                    return this.urlImagenUsuario$;
+                    }
+                
+            }
+            
+        }
+    
+
+    public obtenerUsuarioActualCache(): Promise<Usuario> {
+        if(this.usuario$ === null){
+            this.usuario$ = this.recuperarUsuario ().
+            then(response => {
+                this.usuario = response; 
+                console.log(this.usuario);
+                this.obtenerUrlImgenUsuarioActualCache();
+                return response;});
+
+            return this.usuario$;
+            }
+        else{
+            return this.usuario$;
+        }
+    }
     public recuperarUsuario(): Promise<Usuario> {
         const username: string = localStorage.getItem('username');
-        this.getUsuario(username).then(response => {this.usuario = response; return this.usuario});
-        return  this.getUsuario(username);
+        this.usuario$ =  this.getUsuario(username);
+        return this.usuario$;
     }
 
     public actualizarMiPerfil(usuarioActualizado: Usuario): Promise<JSON>{
