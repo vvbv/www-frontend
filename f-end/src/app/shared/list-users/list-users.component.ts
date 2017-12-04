@@ -14,7 +14,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     animations: [routerTransition()]
 })
 export class listUsersComponent implements OnInit {
-    private usuarioLogueado$: Promise<Usuario>;
+    public usuarioLogueado$: Promise<Usuario>;
     public usuarios: Usuario[];
     @Input() public usuariosFiltrados: Usuario[];
     public filtro;

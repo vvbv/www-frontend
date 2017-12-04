@@ -20,7 +20,7 @@ export class ListActivitiesComponent implements OnInit {
     @Input() public actividades: Actividad[];
     public estadoActividad: boolean[];
     public now: Date = new Date();
-    private usuarioLogueado$: Promise<Usuario>;
+    public usuarioLogueado$: Promise<Usuario>;
 
     constructor(public usuarioService: UsuarioService, public actividadService: ActividadService, public _toastr: ToastsManager, vRef: ViewContainerRef) {
         this._toastr.setRootViewContainerRef(vRef);

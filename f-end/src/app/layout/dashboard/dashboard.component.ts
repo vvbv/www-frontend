@@ -14,7 +14,7 @@ import { Usuario } from '../../modelos/usuario.class';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    private usuarioLogueado$: Promise<Usuario>;
+    public usuarioLogueado$: Promise<Usuario>;
     public username: string;
     public nombres: string;
     public apellidos:string;
