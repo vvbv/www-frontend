@@ -15,7 +15,7 @@ import { Usuario } from '../../../modelos/usuario.class';
 export class HeaderComponent implements OnInit {
     public username: string;
     public urlImagenPerfil$: Promise<string>;
-    private usuarioLogueado$: Promise<Usuario>;
+    public  usuarioLogueado$: Promise<Usuario>;
     
     pushRightClass = 'push-right';
     constructor(private translate: TranslateService, public router: Router, private authenticationService: AuthenticationService, private UsuarioService: UsuarioService) {

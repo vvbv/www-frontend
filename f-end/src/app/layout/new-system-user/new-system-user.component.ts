@@ -15,7 +15,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class NewSystemUserComponent implements OnInit {
     estructuraUsuario: JSON;
-    private usuarioLogueado$: Promise<Usuario>;
+    public usuarioLogueado$: Promise<Usuario>;
     roles: JSON;
     usuarioNuevo: Usuario;
     retornoRegistro: Usuario|JSON;

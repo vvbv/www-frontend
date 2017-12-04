@@ -36,7 +36,7 @@ export class ListEventsComponent implements OnInit {
     eventoSeleccionado: Evento;
     errores: JSON;
     preinscripcionNueva: PreInscripcion;
-    private usuarioLogueado$: Promise<Usuario>;
+    public usuarioLogueado$: Promise<Usuario>;
     mensaje: string;
     
     public usuariosYRegistrosInscritos: [Usuario, Inscripcion][];
