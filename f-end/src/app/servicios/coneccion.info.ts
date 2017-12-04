@@ -28,6 +28,7 @@ export class ConeccionInfo {
     public url_imagenes_crear;
     public url_imagenes_modificar;
     public url_estadisticas_eventos;
+    public url_cinco_eventos_mas_proximos;
     public headers: Headers;
     public url_inscripciones_por_evento:string;
     public url_inscripciones_por_evento_con_usuario:string;
@@ -59,6 +60,7 @@ export class ConeccionInfo {
         this.url_noticias = this.url_base_api + '/noticias/';
         this.url_sendEmail = this.url_base_api + '/funcionesExtra/sendEmail';
 
+        this.url_cinco_eventos_mas_proximos = this.url_eventos + 'cincoUltimos/';
         this.url_estadisticas_eventos = this.url_eventos + 'estadisticas/';
 
         this.iniciarHeaders();

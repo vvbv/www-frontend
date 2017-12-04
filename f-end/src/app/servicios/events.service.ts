@@ -20,6 +20,15 @@ export class EventoService {
       return JSON.parse(response.text()) as Evento[]
     });
   }
+
+  public getCincoEventosMaxProximos(): Promise <Evento[]>{
+    return this.http
+    .get(this.coneccionInfo.url_cinco_eventos_mas_proximos, {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response => JSON.parse(response.text().toString()) as Evento[])
+    .catch (response => {console.log(response); return response;});
+  }
+
   public getEvento(id: number): Observable<Evento>  {
     return this.http
     .get(this.coneccionInfo.url_eventos + id.toString() + '/', {headers: this.coneccionInfo.headers})
