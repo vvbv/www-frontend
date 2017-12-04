@@ -18,7 +18,7 @@ import { PreInscripcionEstructura } from 'app/modelos/preInscripcionEstructura';
     animations: [routerTransition()]
 })
 export class listUsersComponent implements OnInit {
-    private usuarioLogueado: Usuario;
+    private usuarioLogueado$: Promise<Usuario>;
     public usuarios: Usuario[];
     @Input() public evento: Evento;
     public estructuraPreinscripcion$: Promise<PreInscripcionEstructura>;
@@ -35,14 +35,9 @@ export class listUsersComponent implements OnInit {
             private inscripcionService: InscripcionService
         ) {
         this._toastr.setRootViewContainerRef(vRef);
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                }
-            );
-            this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
-            this.estructuraPreinscripcion$ = this.preinscripcionService.getOpciones();
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+        this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
+        this.estructuraPreinscripcion$ = this.preinscripcionService.getOpciones();
     }
     getDisplayNameEstado(preinscripcion: PreInscripcion, estructura): any {
         const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === preinscripcion.estado));

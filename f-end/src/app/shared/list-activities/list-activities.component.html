@@ -1,4 +1,6 @@
-<div *ngIf="usuario && actividades" [@routerTransition]>
+
+<ng-container *ngIf = "usuarioLogueado$  | async as usuarioLogueado">
+<div *ngIf="actividades" [@routerTransition]>
         <h1>Lista de actividades</h1>
         <hr>
         <div class="actividad" *ngFor="let actividad of actividades; let i = index;">
@@ -7,7 +9,7 @@
             <div class="actividad-fecha"><strong>Inicio:</strong> {{actividad.fechaInicio|date:'dd/MM/yyyy hh:mm:ss'}}</div>
             <div class="actividad-fecha"><strong>Finalización:</strong> {{actividad.fechaFinalizacion|date: 'dd/MM/yyyy hh:mm:ss' }}</div>
             <div class="actividad-opciones">
-                <a *ngIf ="usuario.rol == 'UP'" href="javascript:void(0);" (click)='participar(actividad.id);' class="btn btn-success btn-sm btn-participar-2">
+                <a *ngIf ="usuarioLogueado.rol == 'UP'" href="javascript:void(0);" (click)='participar(actividad.id, usuarioLogueado);' class="btn btn-success btn-sm btn-participar-2">
                     Participar/retirarse
                 </a>
             </div>
@@ -20,3 +22,4 @@
         </div>
   </div>
 </div>
+</ng-container>

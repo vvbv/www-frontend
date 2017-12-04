@@ -14,22 +14,15 @@ import { Usuario } from '../../modelos/usuario.class';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    private usuarioLogueado: Usuario;
+    private usuarioLogueado$: Promise<Usuario>;
     public username: string;
     public nombres: string;
     public apellidos:string;
 
     constructor(private usuarioService: UsuarioService) {
         
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                    this.username = this.usuarioLogueado.username;
-                    this.nombres = this.usuarioLogueado.nombres;
-                    this.apellidos = this.usuarioLogueado.apellidos;
-                }
-            );
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+
         this.sliders.push({
             imagePath: 'assets/images/slider1.jpg',
             label: 'First slide label',

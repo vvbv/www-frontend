@@ -20,21 +20,15 @@ export class ListActivitiesComponent implements OnInit {
     @Input() public actividades: Actividad[];
     public estadoActividad: boolean[];
     public now: Date = new Date();
-    private usuario: Usuario;
+    private usuarioLogueado$: Promise<Usuario>;
 
     constructor(public usuarioService: UsuarioService, public actividadService: ActividadService, public _toastr: ToastsManager, vRef: ViewContainerRef) {
         this._toastr.setRootViewContainerRef(vRef);
-        this.cargarUsuario();
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
         this.actividades = [];
         
     }
 
-    private cargarUsuario() {
-        this.usuarioService.recuperarUsuario()
-            .then(response => {
-                this.usuario = response;
-            });
-    }
 
     ngOnInit() {
         /*for (var key of this.actividades) {
@@ -47,12 +41,12 @@ export class ListActivitiesComponent implements OnInit {
             }*/
     }
 
-    participar(idActividad: string){
-        this.actividadService.registrarParticipanteActividad(idActividad, this.usuario.id).then(
+    participar(idActividad: string, usuario: Usuario){
+        this.actividadService.registrarParticipanteActividad(idActividad, usuario.id).then(
             response => {
                 console.log("Respuesta " + JSON.stringify(response));
                 if(response['non_field_errors'] != null){
-                    this.actividadService.eliminarParticipanteActividad(idActividad, this.usuario.id).then(
+                    this.actividadService.eliminarParticipanteActividad(idActividad, usuario.id).then(
                         responsex=>{
                             console.log("Log 1:" + responsex);
                         }

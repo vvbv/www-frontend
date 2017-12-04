@@ -24,18 +24,18 @@
 </div>
 
 
-<div  class=" btn-group dropup">
+<div *ngIf = "usuarioLogueado$ | async as  usuario"  class=" btn-group dropup">
     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Opciones
     </button>
-<!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+<div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
   <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
   <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
   <button  [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
+  <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/newActivity']" [queryParams]="{idEvent: evento.id}" class="dropdown-item">Crear actividad</button>
 </div>
-</div>
--->
+
 
 </div>
 </div>

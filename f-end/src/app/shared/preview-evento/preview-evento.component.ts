@@ -11,6 +11,7 @@ import { EventoService } from '../../servicios/events.service';
 })
 export class PreviewEventoComponent implements OnInit {
   @Input() public evento: Evento;
+  public usuarioLogueado$: Promise<Usuario>;
   estructuraEvento: EventoEstructura;
   constructor(private usuarioService: UsuarioService,  private eventService: EventoService) {
             //  this.eventService.getEvento(2).subscribe(data => { this.event = data});
@@ -20,6 +21,8 @@ export class PreviewEventoComponent implements OnInit {
                 console.log(this.estructuraEvento.estado.choices);
               }
             );
+          
+          this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();  
 
    }
   getDisplayNameEstado(evento: Evento): any {

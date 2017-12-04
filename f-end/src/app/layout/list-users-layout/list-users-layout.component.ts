@@ -13,19 +13,14 @@ import { FormControl } from '@angular/forms';
     animations: [routerTransition()]
 })
 export class listUsersLayoutComponent implements OnInit {
-    private usuarioLogueado: Usuario;
+    private usuarioLogueado$: Promise<Usuario>;
     public usuarios$: Usuario[];
     public usuariosFiltrados: Usuario[];
     public filtro;
 
     constructor(private usuarioService: UsuarioService) {
        
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                }
-            );
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
        
     }
 

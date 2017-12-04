@@ -36,9 +36,7 @@ export class ListEventsComponent implements OnInit {
     eventoSeleccionado: Evento;
     errores: JSON;
     preinscripcionNueva: PreInscripcion;
-    private usuarioLogueado: Usuario;
-   
-    usuario$: Promise <Usuario>;
+    private usuarioLogueado$: Promise<Usuario>;
     mensaje: string;
     
     public usuariosYRegistros: [Usuario, PreInscripcion][];
@@ -53,7 +51,7 @@ export class ListEventsComponent implements OnInit {
         vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
         
-          this.usuario$ = usuarioService.recuperarUsuario();
+          this.usuarioLogueado$ = usuarioService.obtenerUsuarioActualCache();
       this._toastr.setRootViewContainerRef(vRef);
       this.eventoSeleccionado = new Evento();
       this.errores =  JSON.parse('{}');
@@ -62,12 +60,6 @@ export class ListEventsComponent implements OnInit {
           console.log (response);
         }
       );
-      this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                }
-            );
        this.usuariosYRegistros = null;
       this.usuariosYRegistrosInscritos = null;
     }
@@ -172,17 +164,17 @@ export class ListEventsComponent implements OnInit {
     keyupHandlerFunction(e): void {
       console.log(e); //e is the HTML output from your CE component
     }
-    preinscripcion(evento: Evento): void {
+    preinscripcion(evento: Evento, usuarioLogueado: Usuario): void {
       this.preinscripcionNueva = new PreInscripcion();
       this.preinscripcionNueva.evento = evento.id;
-      this.preinscripcionNueva.participante = this.usuarioLogueado.id;
+      this.preinscripcionNueva.participante = usuarioLogueado.id;
       this.preinscripcionNueva.estado = 'EA';
       this.preInscripcionService.registrarPreInscripcion(this.preinscripcionNueva).then(
         response => {
           console.log(response);
           if(!response['non_field_errors']){
               this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: true});
-              let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+this.usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
+              let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
               this.sendEmailService.sendEmail(jsonEmail);
           }
           

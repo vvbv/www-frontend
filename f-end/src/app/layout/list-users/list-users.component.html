@@ -1,4 +1,4 @@
-<div [@routerTransition]>
+<div *ngIf = "usuarioLogueado$ | async as usuario" [@routerTransition]>
     <div class="container-fluid">
         <h1>Lista de usuarios</h1><hr>
         <div class="row">
