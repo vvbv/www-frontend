@@ -27,8 +27,10 @@ export class ConeccionInfo {
     public url_static_imagenes;
     public url_imagenes_crear;
     public url_imagenes_modificar;
+    public url_estadisticas_eventos;
     public headers: Headers;
     public url_inscripciones_por_evento:string;
+    public url_inscripciones_por_evento_con_usuario:string;
     public url_get_inscricion_por_usuario_evento: string;
     public url_sendEmail: string;
     constructor() {
@@ -56,6 +58,9 @@ export class ConeccionInfo {
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
         this.url_noticias = this.url_base_api + '/noticias/';
         this.url_sendEmail = this.url_base_api + '/funcionesExtra/sendEmail';
+
+        this.url_estadisticas_eventos = this.url_eventos + 'estadisticas/';
+
         this.iniciarHeaders();
     }
     
@@ -70,7 +75,10 @@ export class ConeccionInfo {
         return this.url_eventos + idEvento + '/preinscripciones/' ;
     }
     getUrlPreinscripcionesPorEventoConUsuarios(idEvento: number): string{
-        return this.url_eventos + idEvento+ '/preinscripcionesConUsuario';
+        return this.url_eventos + idEvento+ '/preinscripcionesConUsuario/';
+    }
+    getUrlInscripcionesPorEventoConUsuarios(idEvento: number): string{
+        return this.url_eventos + idEvento+ '/inscripcionesConUsuario/';
     }
     iniciarHeaders() {
         this.headers = new Headers();
