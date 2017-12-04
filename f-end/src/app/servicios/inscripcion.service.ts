@@ -10,6 +10,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { PreInscripcion } from '../modelos/preInscripcion.class';
+import { InscripcionConUsuario } from '../modelos/inscripcionConUsuario.class';
 
 
 @Injectable()
@@ -72,6 +73,24 @@ export class InscripcionService {
                 return null;
             });
     }
+
+    public getInscripcionesPorEventoConUsuario(evento: Evento): Promise<InscripcionConUsuario[] | null>{
+        const idEvento: number = Number(evento.id);
+        return this.http
+        .get(this.coneccionInfo.getUrlInscripcionesPorEventoConUsuarios(idEvento),
+        {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response => {
+                return (JSON.parse(response.text().toString()) as InscripcionConUsuario[]);
+            }
+            )
+            .catch(response => {
+                console.log(response);
+                return null;
+            });
+    }
+
     public registrarInscripcion(inscripcion: Inscripcion): Promise<Inscripcion> {
         return this.http
         .post(this.coneccionInfo.url_inscripcion, JSON.stringify(inscripcion), {headers: this.coneccionInfo.headers})

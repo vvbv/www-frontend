@@ -7,6 +7,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Evento } from '../modelos/evento.class';
 import { Observable } from 'rxjs/Observable';
+import { EstadisticasEventos } from '../modelos/estadisticasEventos.class';
 @Injectable()
 export class EventoService {
   constructor( private http: Http,
@@ -30,6 +31,17 @@ export class EventoService {
     .get(this.coneccionInfo.url_eventos + id.toString(), {headers: this.coneccionInfo.headers})
     .toPromise()
     .then( response =>   JSON.parse(response.text().toString()) as Evento) ;
+  }
+
+  public getEstadisticasEventos(): Promise < EstadisticasEventos> {
+    return this.http
+    .get(this.coneccionInfo.url_estadisticas_eventos, {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response => JSON.parse(response.text().toString()) as EstadisticasEventos)
+    .catch(response => {
+      console.log(response);
+      return response;
+    })
   }
 
   public crearEvento(evento: Evento): Promise<Evento | JSON> {

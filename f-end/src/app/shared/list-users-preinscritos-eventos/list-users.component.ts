@@ -48,7 +48,15 @@ export class listUsersComponent implements OnInit {
         this.preinscripcionesConUsuario$ = this.preinscripcionService.getPreinscripcionesPorEventoConUsuarios(this.evento);
     }
     rechazarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void{
-            this.preinscripcionService.rechazarPreinscripcion(preinscripcionConUsuario)
+        let preinscripcion: PreInscripcion = new PreInscripcion();
+        preinscripcion.init(
+            preinscripcionConUsuario.id,
+            preinscripcionConUsuario.evento, 
+            preinscripcionConUsuario.participante.id, 
+            preinscripcionConUsuario.fechaPreInscripcion, 
+            preinscripcionConUsuario.estado
+        );
+            this.preinscripcionService.rechazarPreinscripcion(preinscripcion)
             .then(res => {
                 preinscripcionConUsuario.estado = 'R';
                 this._toastr.warning('Se ha rechazado una inscripción',
@@ -65,7 +73,15 @@ export class listUsersComponent implements OnInit {
     
 
     aceptarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void {
-        this.preinscripcionService.aceptarPreinscripcion(preinscripcionConUsuario)
+        let preinscripcion: PreInscripcion = new PreInscripcion();
+        preinscripcion.init(
+            preinscripcionConUsuario.id,
+            preinscripcionConUsuario.evento, 
+            preinscripcionConUsuario.participante.id, 
+            preinscripcionConUsuario.fechaPreInscripcion, 
+            preinscripcionConUsuario.estado
+        );
+        this.preinscripcionService.aceptarPreinscripcion(preinscripcion)
                 .then(res => {
                     preinscripcionConUsuario.estado = 'A';
                     this._toastr.success('El usuario ha sido inscrito al evento',
@@ -73,8 +89,8 @@ export class listUsersComponent implements OnInit {
                 })
                 .catch(res => {
                     console.log(res.text().toString());
-                    this._toastr.error('Ha ocurrido un error en la incripción',
-                    'No son horas tan buenas!', {toastLife: 3000, showCloseButton: false});
+                    this._toastr.error('No se ha podido realizar la incripción',
+                    'Error!', {toastLife: 3000, showCloseButton: false});
                 });
             }
 }

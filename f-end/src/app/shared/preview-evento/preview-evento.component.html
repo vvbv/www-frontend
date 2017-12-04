@@ -30,8 +30,8 @@
     </button>
 <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
-  <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+evento.id">Usuarios Preinscritos</button>
-  <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+evento.id">Usuarios Inscritos</button>
+  <button *ngIf="usuario.rol != 'UP'"   class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+evento.id">Usuarios Preinscritos</button>
+  <button *ngIf="usuario.rol != 'UP'"  class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+evento.id">Usuarios Inscritos</button>
   <button  [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
   <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/newActivity']" [queryParams]="{idEvent: evento.id}" class="dropdown-item">Crear actividad</button>
 </div>
@@ -41,19 +41,17 @@
     <div class="modal-dialog modal-lg modal-xl">
       <div class="modal-content">
         <app-listUsers-preinscritos  [evento]="evento"  ></app-listUsers-preinscritos>
-        <p *ngIf="!usuariosYRegistros"> <br>Cargando ...  <br></p>
       </div>
     </div>
   </div>
   
-  <!--div class="modal fade usuarios-inscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal fade usuarios-inscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-xl">
       <div class="modal-content">
-        <app-listUsers-inscritos *ngIf="usuarioLogueadosYRegistrosInscritos" [usuariosYRegistros] = "usuariosYRegistrosInscritos" [evento]="evento"  ></app-listUsers-inscritos>
-         <p *ngIf="!usuariosYRegistrosInscritos"> <br>Cargando ...  <br></p>
+        <app-listUsers-inscritos  [evento]="evento"  ></app-listUsers-inscritos>
       </div>
     </div>
-  </div-->
+  </div>
   
   
   
