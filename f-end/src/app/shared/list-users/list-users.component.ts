@@ -22,7 +22,7 @@ export class listUsersComponent implements OnInit {
     constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, private usuarioService: UsuarioService) {
         this._toastr.setRootViewContainerRef(vRef);
         this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
-        console.log(this.usuariosFiltrados);
+        
 
     }
 

@@ -39,7 +39,6 @@ export class ListEventsComponent implements OnInit {
     private usuarioLogueado$: Promise<Usuario>;
     mensaje: string;
     
-    public usuariosYRegistros: [Usuario, PreInscripcion][];
     public usuariosYRegistrosInscritos: [Usuario, Inscripcion][];
     constructor(
         private eventService: EventoService,
@@ -60,7 +59,6 @@ export class ListEventsComponent implements OnInit {
           console.log (response);
         }
       );
-       this.usuariosYRegistros = null;
       this.usuariosYRegistrosInscritos = null;
     }
 
@@ -119,43 +117,7 @@ export class ListEventsComponent implements OnInit {
 
     }
     
-     construirUsuariosPreInscritos (evento: Evento): void {
-       this.usuariosYRegistros = null;
-        let preInscripciones: PreInscripcion[];
-        this.preInscripcionService.getPreInscripcionesPorEvento(evento)
-        .then(
-            response=>{
-            if(response!==null){   
-                this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
-                for(let preInscripcion of response as PreInscripcion[]){
-                    
-                    this.usuarioService.getUsuarioById(preInscripcion.participante as number)
-                    .then(resp => {
-                        const usuario: Usuario = resp;
-                                        this.preInscripcionService.getPreInscripcionConParticipanteByUserAndEvent(
-                usuario, evento
-            ).then(res => {
-                       if(this.usuariosYRegistros === null){
-                        this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
-                    }
-                    this.usuariosYRegistros.push([usuario,  res]);
-            })
-            .catch(res => {
-            });
-                    })
-                    .catch(resp => console.log(resp));
-                }
-
-            }
-            if((response as PreInscripcion[]).length == 0){
-                this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
-            }
-            }
-            )
-            .catch();
-
-    }
-
+ 
     seleccionarEvento(evento: Evento) {
       this.eventoSeleccionado = evento;
       

@@ -30,12 +30,35 @@
     </button>
 <div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
   <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]"  class="dropdown-item">Editar</button>
-  <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+i">Usuarios Preinscritos</button>
-  <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+i">Usuarios Inscritos</button>
+  <button *ngIf="usuario.rol != 'UP'"  (click) = "construirUsuariosPreInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+evento.id">Usuarios Preinscritos</button>
+  <button *ngIf="usuario.rol != 'UP'" (click) = "construirUsuariosInscritos(evento)" class="dropdown-item" data-toggle="modal" [attr.data-target] ="'.usuarios-inscritos'+evento.id">Usuarios Inscritos</button>
   <button  [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
   <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/newActivity']" [queryParams]="{idEvent: evento.id}" class="dropdown-item">Crear actividad</button>
 </div>
 
-
+<ng-container *ngIf = "usuarioLogueado$| async as usuarioLogueado">
+  <div class="modal fade usuarios-preinscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-xl">
+      <div class="modal-content">
+        <app-listUsers-preinscritos  [evento]="evento"  ></app-listUsers-preinscritos>
+        <p *ngIf="!usuariosYRegistros"> <br>Cargando ...  <br></p>
+      </div>
+    </div>
+  </div>
+  
+  <!--div class="modal fade usuarios-inscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-xl">
+      <div class="modal-content">
+        <app-listUsers-inscritos *ngIf="usuarioLogueadosYRegistrosInscritos" [usuariosYRegistros] = "usuariosYRegistrosInscritos" [evento]="evento"  ></app-listUsers-inscritos>
+         <p *ngIf="!usuariosYRegistrosInscritos"> <br>Cargando ...  <br></p>
+      </div>
+    </div>
+  </div-->
+  
+  
+  
+    <a  *ngIf="usuarioLogueado.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento, usuarioLogueado)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
+    <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
+</ng-container>
 </div>
 </div>

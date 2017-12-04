@@ -11,8 +11,9 @@ import { Evento } from '../../modelos/evento.class';
 import { FormControl } from '@angular/forms';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { PreInscripcionEstructura } from 'app/modelos/preInscripcionEstructura';
+import { PreInscripcionConUsuario } from 'app/modelos/preInscripcionConUsuario.class';
 @Component({
-    selector: 'app-listUsers',
+    selector: 'app-listUsers-preinscritos',
     templateUrl: './list-users.component.html',
     styleUrls: ['./list-users.component.scss'],
     animations: [routerTransition()]
@@ -22,7 +23,7 @@ export class listUsersComponent implements OnInit {
     public usuarios: Usuario[];
     @Input() public evento: Evento;
     public estructuraPreinscripcion$: Promise<PreInscripcionEstructura>;
-    @Input() public usuariosYRegistros: [Usuario, PreInscripcion][];
+    public preinscripcionesConUsuario$: Promise<PreInscripcionConUsuario[]>;
     public filtro;
 
     constructor(
@@ -36,26 +37,20 @@ export class listUsersComponent implements OnInit {
         ) {
         this._toastr.setRootViewContainerRef(vRef);
         this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
-        this.usuariosYRegistros = new Array<[Usuario, PreInscripcion]>();
+        this.preinscripcionesConUsuario$ = null;
         this.estructuraPreinscripcion$ = this.preinscripcionService.getOpciones();
     }
-    getDisplayNameEstado(preinscripcion: PreInscripcion, estructura): any {
-        const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === preinscripcion.estado));
+    getDisplayNameEstado(preinscripcionConUsuario: PreInscripcionConUsuario, estructura): any {
+        const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === preinscripcionConUsuario.estado));
         return est['0'].display_name;
     }
     ngOnInit() {
-        console.log(this.usuariosYRegistros);
+        this.preinscripcionesConUsuario$ = this.preinscripcionService.getPreinscripcionesPorEventoConUsuarios(this.evento);
     }
-    rechazarPreinscripcion(usuario: Usuario, evento: Evento): void{
-        let preinscripcionUsuario = new PreInscripcion();
-        this.preInscripcionService.getPreInscripcionConParticipanteByUserAndEvent(
-            usuario, evento
-        ).then(response => {
-            preinscripcionUsuario = response;
-
-            this.preinscripcionService.rechazarPreinscripcion(preinscripcionUsuario)
+    rechazarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void{
+            this.preinscripcionService.rechazarPreinscripcion(preinscripcionConUsuario)
             .then(res => {
-                this.usuariosYRegistros.find(i => i[0] === usuario)[1].estado = 'R';
+                preinscripcionConUsuario.estado = 'R';
                 this._toastr.warning('Se ha rechazado una inscripción',
                  'Accion realizada', {toastLife: 3000, showCloseButton: false});
             })
@@ -65,22 +60,14 @@ export class listUsersComponent implements OnInit {
                 'No son horas tan buenas!', {toastLife: 3000, showCloseButton: false});
             });
         }
-    ).catch(response => console.log('Ha ocurrido un error: ' + response));
+    
 
-    }
+    
 
-    aceptarPreinscripcion(usuario: Usuario, evento: Evento): void {
-        
-        let preinscripcionUsuario = new PreInscripcion();
-        this.preInscripcionService.getPreInscripcionConParticipanteByUserAndEvent(
-            usuario, evento
-        ).then(
-            response => {
-                preinscripcionUsuario = response;
-               
-                this.preinscripcionService.aceptarPreinscripcion(preinscripcionUsuario)
+    aceptarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void {
+        this.preinscripcionService.aceptarPreinscripcion(preinscripcionConUsuario)
                 .then(res => {
-                    this.usuariosYRegistros.find(i => i[0] === usuario)[1].estado = 'A';
+                    preinscripcionConUsuario.estado = 'A';
                     this._toastr.success('El usuario ha sido inscrito al evento',
                      'En hora buena!', {toastLife: 3000, showCloseButton: false});
                 })
@@ -90,8 +77,4 @@ export class listUsersComponent implements OnInit {
                     'No son horas tan buenas!', {toastLife: 3000, showCloseButton: false});
                 });
             }
-        ).catch(response => console.log('Ha ocurrido un error: ' + response));
-
-
-    }
 }

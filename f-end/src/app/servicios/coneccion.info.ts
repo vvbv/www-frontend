@@ -22,6 +22,7 @@ export class ConeccionInfo {
     public url_actividades_byEvent: string;
     public url_asistencia: string;
     public url_pre_inscripciones_por_evento: string;
+    public url_pre_inscripciones_por_evento_con_usuarios: string;
     public url_noticias: string;
     public url_static_imagenes;
     public url_imagenes_crear;
@@ -44,7 +45,8 @@ export class ConeccionInfo {
         this.url_actividades_porEvento = this.url_base_api + '/actividades/porEvento/';
         this.url_actividades_byEvent = this.url_base_api + '/actividades/byEvent/';
         this.url_asistencia = this.url_base_api + '/asistencias/';
-        this.url_preinscripcion = this.url_eventos + '/preinscripciones/';
+        this.url_preinscripcion = this.url_eventos + 'preinscripciones/';
+
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
@@ -66,6 +68,9 @@ export class ConeccionInfo {
     }
     getUrlPreinscripcionesPorEvento(idEvento: number): string{
         return this.url_eventos + idEvento + '/preinscripciones/' ;
+    }
+    getUrlPreinscripcionesPorEventoConUsuarios(idEvento: number): string{
+        return this.url_eventos + idEvento+ '/preinscripcionesConUsuario';
     }
     iniciarHeaders() {
         this.headers = new Headers();

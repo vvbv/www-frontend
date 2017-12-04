@@ -21,6 +21,19 @@ export class PreInscripcionService {
         private inscripcionService: InscripcionService
     ){};
 
+    public getPreinscripcionesPorEventoConUsuarios(evento: Evento): Promise <PreInscripcionConUsuario[]> {
+        return this.http
+        .get(this.coneccionInfo.getUrlPreinscripcionesPorEventoConUsuarios(Number(evento.id)), {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response=>{
+                return (JSON.parse(response.text().toString()) as PreInscripcionConUsuario[]);
+            }
+        )
+        .catch(response => {console.log(response); return response;})
+        
+    }
+
     public getPreinscripcion(idPreinscripcion: string): Promise<PreInscripcion>{
         return this.http
         .get(this.coneccionInfo.url_preinscripcion + idPreinscripcion, {headers: this.coneccionInfo.headers})
