@@ -7,26 +7,27 @@
                 <a [routerLink]="['/login']"  id="ingresar-principal" class="float-right">Ingresar</a>
             </div>
         </div>
-        <div class="row">
-          <div class="col-12 carousel-principal">
-              
-          </div>
           <div class="separador col-12"></div>
-          <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
-            <h3>Noticias</h3>
-            <hr>
-            <div *ngFor="let noticia of noticias; let i = index;" class="noticia-principal col-12">
-              <div class="img-noticia" [style.backgroundImage]="'url('+ noticia.imagen +')'"></div>
-              <span>{{noticia.titulo}}</span>
-              <p>{{noticia.resumen}}</p>
-            </div>
-            
+          <div class="row carrusel-noticias">
               
-          </div>
+            <div class="col-md-12 align-self-center justify-content-center align-items-center">
+                <h2>Ultimas noticias</h2>
+                <ngb-carousel *ngIf = "cincoUltimasNoticias$ | async as cincoUltimasNoticias">
+                    <ng-template ngbSlide *ngFor="let noticia of cincoUltimasNoticias">
+                        <img class="img-fluid mx-auto d-block" [src]="noticia.imagen" alt="noticia.titulo" width="100%">
+                        <div class="carousel-caption">
+                            <h3>{{noticia.titulo}}</h3>
+                            <p>{{noticia.resumen  | slice:0:50}}...</p>
+                            <a [routerLink]="['/noticia/', noticia.id]" >Seguir leyendo</a>
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+            </div>
+           
+        </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
             
           </div>
-        </div>
         <div class="row">
           <div class="footer-principal col-12">
               <footer>

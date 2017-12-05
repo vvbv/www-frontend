@@ -34,6 +34,7 @@ export class ConeccionInfo {
     public url_inscripciones_por_evento_con_usuario:string;
     public url_get_inscricion_por_usuario_evento: string;
     public url_sendEmail: string;
+    public url_cinco_ultimas_noticias_publicadas: string;
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
@@ -62,7 +63,7 @@ export class ConeccionInfo {
 
         this.url_cinco_eventos_mas_proximos = this.url_eventos + 'cincoUltimos/';
         this.url_estadisticas_eventos = this.url_eventos + 'estadisticas/';
-
+        this.url_cinco_ultimas_noticias_publicadas = this.url_noticias + 'cincoUltimas/';
         this.iniciarHeaders();
     }
     
