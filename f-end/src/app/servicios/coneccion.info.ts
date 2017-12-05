@@ -83,6 +83,9 @@ export class ConeccionInfo {
     getUrlInscripcionesPorEventoConUsuarios(idEvento: number): string{
         return this.url_eventos + idEvento+ '/inscripcionesConUsuario/';
     }
+    getUrlEventosPorUsuario(idUsuario: number): string {
+        return this.url_usuarios + idUsuario + '/eventos/';
+    }
     iniciarHeaders() {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json');

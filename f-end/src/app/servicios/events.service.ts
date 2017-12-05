@@ -8,9 +8,12 @@ import 'rxjs/add/operator/map';
 import { Evento } from '../modelos/evento.class';
 import { Observable } from 'rxjs/Observable';
 import { EstadisticasEventos } from '../modelos/estadisticasEventos.class';
+import { MockupServicios } from './servicios.mockup';
+
 @Injectable()
 export class EventoService {
   constructor( private http: Http,
+    private mockupServicios: MockupServicios,
     imagenesService: ImagenesService, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
   public getEventos(): Promise<Evento[]> {
     return this.http
@@ -51,6 +54,10 @@ export class EventoService {
       console.log(response);
       return response;
     })
+  }
+
+  public getEventosPorUsuario(idUsuario: number): Promise<Evento[]>{
+    return this.mockupServicios.get(this.coneccionInfo.getUrlEventosPorUsuario(idUsuario));
   }
 
   public crearEvento(evento: Evento): Promise<Evento | JSON> {

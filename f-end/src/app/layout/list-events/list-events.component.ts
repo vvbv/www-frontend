@@ -32,100 +32,28 @@ import { ConeccionInfo } from '../../servicios/coneccion.info';
     animations: [routerTransition()]
 })
 export class ListEventsComponent implements OnInit {
-    eventos: Evento[];
-    eventoSeleccionado: Evento;
-    errores: JSON;
+    eventos$: Promise<Evento[]>;
     preinscripcionNueva: PreInscripcion;
     public usuarioLogueado$: Promise<Usuario>;
     mensaje: string;
-    
-    public usuariosYRegistrosInscritos: [Usuario, Inscripcion][];
     constructor(
         private eventService: EventoService,
         public sendEmailService: SendEmailService,
         public _toastr: ToastsManager,
         public router: Router,
         private preInscripcionService: PreInscripcionService,
-        private inscripcionService: InscripcionService,
         vRef: ViewContainerRef,
         private usuarioService: UsuarioService) {
-        
-          this.usuarioLogueado$ = usuarioService.obtenerUsuarioActualCache();
+      this.usuarioLogueado$ = usuarioService.obtenerUsuarioActualCache();
       this._toastr.setRootViewContainerRef(vRef);
-      this.eventoSeleccionado = new Evento();
-      this.errores =  JSON.parse('{}');
-      this.eventService.getEventos().then(response => {
-          this.eventos = response;
-          console.log (response);
-        }
-      );
-      this.usuariosYRegistrosInscritos = null;
+      this.eventos$ = this.eventService.getEventos();
     }
 
-    eliminarEvento(evento: Evento, index: number) {
-      this.eventService.deleteEvent(evento)
-      .then(
-        response => {
-          this._toastr.success('Evento borrado exitosamente', 'Exito!');
-          this.eventos.splice(index, 1);
-        }
-        )
-      .catch(
-        response => {
-          this._toastr.error( response['detail'], 'Error!');
-        }
-      );
-    }
+  
     ngOnInit(){
        
     }
     
-        construirUsuariosInscritos(evento: Evento): void {
-        this.usuariosYRegistrosInscritos = null;  
-          
-        var inscripciones:Inscripcion[];
-        this.inscripcionService.getInscripcionesPorEvento(evento)
-        .then(
-            response => {
-            if (response !== null) {
-                 this.usuariosYRegistrosInscritos = null;
-                for (const inscripcion of response as Inscripcion[]){
-                    this.usuarioService.getUsuarioById(inscripcion.participante as number)
-                    .then(respo => {
-                        const usuario: Usuario = respo;
-                                        this.inscripcionService.getInscripcionByUserAndEvent(
-                usuario, evento
-            ).then(res => {
-                    if(this.usuariosYRegistrosInscritos === null){
-                        this.usuariosYRegistrosInscritos = new Array<[Usuario, Inscripcion]>();
-                    }
-                    this.usuariosYRegistrosInscritos.push([usuario,  res])
-            })
-            .catch(res => {
-                console.log(res);
-            });
-                            })
-                    .catch(res => console.log(response));
-                }
-            }
-           if ((response as Inscripcion[]).length === 0) {
-                this.usuariosYRegistrosInscritos = new Array<[Usuario, Inscripcion]>();
-            }
-            }
-            )
-            .catch();
-
-    }
-    
- 
-    seleccionarEvento(evento: Evento) {
-      this.eventoSeleccionado = evento;
-      
-    }
-
-    keyupHandlerFunction(e): void {
-      console.log(e); //e is the HTML output from your CE component
-    }
     preinscripcion(evento: Evento, usuarioLogueado: Usuario): void {
       this.preinscripcionNueva = new PreInscripcion();
       this.preinscripcionNueva.evento = evento.id;
