@@ -18,12 +18,16 @@
        <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/newSystemUser']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-plus"></i>&nbsp; NU del sistema
         </a>
-        <a  [routerLink]="['/list-events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/list-events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;{{ 'Eventos' | translate }}
+        </a>
+        <a  *ngIf = "usuarioLogueado.rol === 'UP' " [routerLink]="['/eventos-por-ver']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp;{{ 'Eventos por Ver' | translate }}
         </a>
         <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/listUsers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp; Usuarios
         </a>
+
         <a [routerLink]="['/noticias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp; Noticias
         </a>
@@ -50,10 +54,10 @@
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Inscritos' | translate }}</span></a>
+                        <a [routerLink]="['/eventos-inscritos']" ><span>{{ 'Inscritos' | translate }}</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Preinscritos' | translate }}</span></a>
+                        <a [routerLink]="['/eventos-preinscritos']" ><span>{{ 'Preinscritos' | translate }}</span></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)"><span>{{ 'Aceptados' | translate }}</span></a>

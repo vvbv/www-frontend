@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Evento } from '../../modelos/evento.class';
 import { routerTransition } from '../../router.animations';
+import { Usuario } from '../../modelos/usuario.class';
+import { UsuarioService } from 'app/servicios/usuario.service';
 
 @Component({
   selector: 'app-lista-eventos',
@@ -10,7 +12,12 @@ import { routerTransition } from '../../router.animations';
 })
 export class ListaEventosComponent implements OnInit {
   @Input() public eventos: Array<Evento>;
-  constructor() { }
+  public usuarioLogueado$: Promise<Usuario>;
+  @Input() public eventosUsuario: boolean;
+  constructor(private usuarioService: UsuarioService) { 
+    this.eventosUsuario = true;
+    this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+  }
 
   ngOnInit() {
   }

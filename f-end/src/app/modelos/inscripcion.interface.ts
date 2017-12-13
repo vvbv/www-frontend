@@ -1,6 +1,6 @@
 export interface InscripcionInterface {
     id: string;
-    evento: string;
+    evento: any;
     participante: any;
     estado: string;
     fechaRegistro: string;
