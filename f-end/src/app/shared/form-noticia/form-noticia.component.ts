@@ -16,9 +16,6 @@ export class FormNoticiaComponent implements OnInit {
   editar: boolean;
   constructor( noticiaService: NoticiasService, private usuarioService: UsuarioService) {
     this.noticia = new Noticia();
-    this.usuarioService.recuperarUsuario().
-    then(res => this.noticia.usuarioRegistra = res.id)
-    .catch(res => console.log(res));
     this.errores =  JSON.parse('{}');
     this.idEditor = (Math.floor(Math.random() * 600000) + 1).toString();
    }

@@ -15,7 +15,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 })
 export class NewSystemUserComponent implements OnInit {
     estructuraUsuario: JSON;
-    private usuarioLogueado: Usuario;
+    public usuarioLogueado$: Promise<Usuario>;
     roles: JSON;
     usuarioNuevo: Usuario;
     retornoRegistro: Usuario|JSON;
@@ -28,12 +28,7 @@ export class NewSystemUserComponent implements OnInit {
         this.usuarioNuevo.rol = 'AD';
         this.retornoRegistro = new Usuario();
         this.errorRetorno = JSON.parse('{}');
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                }
-            );
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
         this.usuarioService.getEstructuraUsuario()
             .then(
                   response => {

@@ -25,6 +25,7 @@ import { MensajesToastService } from './servicios/mensajes-toast.service';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { NoticiasService } from './servicios/noticias.service';
 import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
+import { MockupServicios } from 'app/servicios/servicios.mockup';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -66,6 +67,7 @@ export function HttpLoaderFactory(http: Http) {
                 InjectorToken,
                 ToastOptions,
                 ActividadService,
+                MockupServicios,
                 NoticiasService,
                 ImagenesService,
                 SendEmailService,

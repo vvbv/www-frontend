@@ -14,8 +14,13 @@ import { PreviewNoticiaComponent } from './preview-noticia/preview-noticia.compo
 import { ListaNoticiasComponent } from './lista-noticias/lista-noticias.component';
 import { DetalleNoticiaComponent } from './detalle-noticia/detalle-noticia.component';
 import { ListActivitiesComponent } from './list-activities/list-activities.component';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { PreviewEventoComponent } from './preview-evento/preview-evento.component';
+import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
+import { NoticiaPreviewComponent } from './noticia-preview/noticia-preview.component';
+import { UserPreviewComponent } from './user-preview/user-preview.component';
+import { UsersPreviewComponent } from './users-preview/users-preview.component';
 
 @NgModule({
     imports: [
@@ -37,6 +42,11 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
         ListaNoticiasComponent,
         ListActivitiesComponent,
         DetalleNoticiaComponent,
+        PreviewEventoComponent,
+        ListaEventosComponent,
+        NoticiaPreviewComponent,
+        UserPreviewComponent,
+        UsersPreviewComponent,
     ],
     exports: [
         listUsersComponent, 
@@ -44,7 +54,10 @@ import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
         FormNoticiaComponent, 
         TinyComponent,
         ListaNoticiasComponent,
+        NoticiaPreviewComponent,
         ListActivitiesComponent,
+        ListaEventosComponent,
+        PreviewEventoComponent,
         PreviewNoticiaComponent,
         listUsersInscritosComponent]
 })

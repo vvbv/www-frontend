@@ -11,6 +11,7 @@ import { Observable } from 'rxjs/Observable';
 export class NoticiasService {
   constructor( private http: Http,
     imagenesService: ImagenesService, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
+
   public getNoticias(): Promise<Noticia[] | JSON> {
     return this.http
     .get(this.coneccionInfo.url_noticias , {headers: this.coneccionInfo.headers} )
@@ -19,6 +20,15 @@ export class NoticiasService {
       return JSON.parse(response.text()) as Noticia[]
     }).catch(response=> {console.log("alv" + response.text().toString());return JSON.parse(response.text().toString())});
   }
+
+  public getCincoUltimasNoticiasPublicadas(): Promise<Noticia[]>{
+    return this.http
+    .get(this.coneccionInfo.url_cinco_ultimas_noticias_publicadas, {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response => JSON.parse(response.text().toString()) as Noticia[])
+    .catch(response => {console.log(response); return response});
+  }
+
   public getNoticiasJSON(): Promise<JSON> {
     return this.http
     .get(this.coneccionInfo.url_noticias , {headers: this.coneccionInfo.headers} )

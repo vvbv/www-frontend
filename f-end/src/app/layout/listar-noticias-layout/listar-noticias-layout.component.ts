@@ -14,7 +14,7 @@ import { routerTransition } from '../../router.animations';
 })
 export class ListarNoticiasLayoutComponent implements OnInit {
   public noticias$: Promise<Noticia[]|JSON>;
-  public usuario: Usuario;
+  public usuario$: Promise<Usuario>;
   
   
   constructor(private noticiaService : NoticiasService, private usuarioService: UsuarioService) {
@@ -24,9 +24,8 @@ export class ListarNoticiasLayoutComponent implements OnInit {
 
   ngOnInit() {
     this.noticias$ =   this.noticiaService.getNoticias();
-    this.usuarioService.recuperarUsuario()
-    .then(response => this.usuario = response)
-    .catch(response => console.log(response));
+    this.usuario$ = this.usuarioService.obtenerUsuarioActualCache()
+
   }
 
 }

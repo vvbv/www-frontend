@@ -13,14 +13,18 @@ import {
   endOfMonth,
   isSameDay,
   isSameMonth,
-  addHours
+  addHours,
+  getISOWeek
 } from 'date-fns';
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustomDateFormatter } from './customConfig.class';
 import {
   CalendarEvent,
   CalendarEventAction,
-  CalendarEventTimesChangedEvent
+  CalendarDateFormatter, DateFormatterParams ,
+  CalendarEventTimesChangedEvent,
+  DAYS_OF_WEEK
 } from 'angular-calendar';
 
 const colors: any = {
@@ -44,13 +48,30 @@ const colors: any = {
   styleUrls: [
       './calendar.component.scss',
       /*'node_modules/angular-calendar/dist/css/angular-calendar.css'*/
+    ],
+    providers: [
+      {
+        provide: CalendarDateFormatter,
+        useClass: CustomDateFormatter
+      }
     ]
 })
+
+
+
 
 export class CalendarComponent  {
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
     view = 'month';
-    viewDate: Date = new Date();
+    locale = 'es';
+
+
+    
+      viewDate: Date = new Date();
+  
+      weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+    
+      weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
     modalData: {
       action: string;
       event: CalendarEvent;

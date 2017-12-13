@@ -4,7 +4,7 @@ import { ListEventsComponent } from './list-events.component';
 
 const routes: Routes = [
     { path: '', component: ListEventsComponent }
-];
+]; 
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

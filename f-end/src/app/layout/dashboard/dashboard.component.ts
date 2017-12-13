@@ -4,6 +4,9 @@ import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../modelos/usuario.class';
+import { Evento } from '../../modelos/evento.class';
+import { EventoService } from 'app/servicios/events.service';
+import { EstadisticasEventos } from '../../modelos/estadisticasEventos.class';
 
 @Component({
     selector: 'app-dashboard',
@@ -14,22 +17,21 @@ import { Usuario } from '../../modelos/usuario.class';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    private usuarioLogueado: Usuario;
+    public usuarioLogueado$: Promise<Usuario>;
+    public cincoEventosMasProximos$: Promise<Evento[]>;
     public username: string;
     public nombres: string;
+    public estadisticasEventos$: Promise<EstadisticasEventos>;
     public apellidos:string;
 
-    constructor(private usuarioService: UsuarioService) {
+    constructor(
+        private usuarioService: UsuarioService,
+        private eventosService: EventoService
+    ) {
         
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                    this.username = this.usuarioLogueado.username;
-                    this.nombres = this.usuarioLogueado.nombres;
-                    this.apellidos = this.usuarioLogueado.apellidos;
-                }
-            );
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+        this.estadisticasEventos$ = this.eventosService.getEstadisticasEventos();
+        this.cincoEventosMasProximos$  = this.eventosService.getCincoEventosMaxProximos();
         this.sliders.push({
             imagePath: 'assets/images/slider1.jpg',
             label: 'First slide label',

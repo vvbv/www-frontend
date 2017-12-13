@@ -14,20 +14,15 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
     animations: [routerTransition()]
 })
 export class listUsersComponent implements OnInit {
-    private usuarioLogueado: Usuario;
+    public usuarioLogueado$: Promise<Usuario>;
     public usuarios: Usuario[];
     @Input() public usuariosFiltrados: Usuario[];
     public filtro;
 
     constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, private usuarioService: UsuarioService) {
         this._toastr.setRootViewContainerRef(vRef);
-        this.usuarioService.recuperarUsuario()
-            .then(
-                response => {
-                    this.usuarioLogueado = response;
-                }
-            );
-            console.log(this.usuariosFiltrados);
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+        
 
     }
 

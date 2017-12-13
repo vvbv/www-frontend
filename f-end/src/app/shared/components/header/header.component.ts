@@ -14,42 +14,27 @@ import { Usuario } from '../../../modelos/usuario.class';
 })
 export class HeaderComponent implements OnInit {
     public username: string;
-    public urlImagenPerfil: string;
-    private usuarioLogueado: Usuario;
+    public urlImagenPerfil$: Promise<string>;
+    public  usuarioLogueado$: Promise<Usuario>;
     
     pushRightClass = 'push-right';
     constructor(private translate: TranslateService, public router: Router, private authenticationService: AuthenticationService, private UsuarioService: UsuarioService) {
-        this.urlImagenPerfil = 'assets/images/no-picture.png';
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
             }
         });
 
-        this.UsuarioService.recuperarUsuario().then(
-            response => {
-                this.usuarioLogueado = response;
-                this.username = this.usuarioLogueado.username;
-                if(this.usuarioLogueado.imagenPerfil != null){
-                    this.UsuarioService.getImagenPerfil(this.usuarioLogueado.imagenPerfil).then(
-                        res => {
-                            this.urlImagenPerfil = res;
-                        }
-                    );
-                }
-            }
-        );
-
-        
+        this.usuarioLogueado$ = this.UsuarioService.obtenerUsuarioActualCache();
+        this.urlImagenPerfil$ = this.UsuarioService.obtenerUrlImgenUsuarioActualCache()
+        .then(response => {console.log(response); return response});
     }
 
     ngOnInit() {}
-
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
         return dom.classList.contains(this.pushRightClass);
     }
-
     toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);

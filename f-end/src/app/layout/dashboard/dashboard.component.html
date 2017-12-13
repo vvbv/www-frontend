@@ -1,31 +1,32 @@
-<div [@routerTransition]>
-    <h2 class="text-muted">Bienvenido: <strong>{{nombres}} {{apellidos}}</strong> (@{{username}})<!--<small>Statistics Overview</small>--></h2>
+<div *ngIf="usuarioLogueado$ | async as usuarioLogueado"[@routerTransition]>
+    <h2 class="text-muted">Bienvenido: <strong>{{usuarioLogueado.nombres}} {{usuarioLogueado.apellidos}}</strong> (@{{usuarioLogueado.username}})<!--<small>Statistics Overview</small>--></h2>
     <div class="row">
         <div class="col-md-12">
-            <ngb-carousel>
-                <ng-template ngbSlide *ngFor="let slider of sliders">
-                    <img class="img-fluid mx-auto d-block" [src]="slider.imagePath" alt="Random first slide" width="100%">
+            <ngb-carousel *ngIf = "cincoEventosMasProximos$ | async as cincoEventosMasProximos">
+                <ng-template ngbSlide *ngFor="let evento of cincoEventosMasProximos">
+                    <img class="img-fluid mx-auto d-block" [src]="evento.imagen" alt="evento.nombre" width="100%">
                     <div class="carousel-caption">
-                        <h3>{{slider.label}}</h3>
-                        <p>{{slider.text}}</p>
+                        <h3>{{evento.nombre}}</h3>
+                        <p>{{evento.descripcion}}</p>
                     </div>
                 </ng-template>
             </ngb-carousel>
         </div>
+        <h2>Estos son los cinco eventos que estan por iniciar</h2>
     </div>
     <hr>
-    <div class="row">
+    <div *ngIf = "estadisticasEventos$ | async as estadisticasEventos" class="row">
         <div class="col-xl-3 col-lg-6">
-            <app-stat [bgClass]="'card-primary'" [icon]="'fa-comments'" [count]="26" [label]="'New Comments!'" ></app-stat>
+            <app-stat [bgClass]="'card-primary'" [icon]="'fa-calendar-plus-o'" [count]="estadisticasEventos.cantidadEventosSinIniciar" [label]="'Eventos Nuevos'" ></app-stat>
         </div>
         <div class="col-xl-3 col-lg-6">
-            <app-stat [bgClass]="'card-info'" [icon]="'fa-tasks'" [count]="12" [label]="'New task!'" ></app-stat>
+            <app-stat [bgClass]="'card-info'" [icon]="'fa-tasks'" [count]="estadisticasEventos.cantidadEventosEnCurso" [label]="'Eventos en Curso'" ></app-stat>
         </div>
         <div class="col-xl-3 col-lg-6">
-            <app-stat [bgClass]="'card-success'" [icon]="'fa-shopping-cart'" [count]="124" [label]="'New Orders!'" ></app-stat>
+            <app-stat [bgClass]="'card-success'" [icon]="'fa-calendar-times-o'" [count]="estadisticasEventos.cantidadEventosTerminados" [label]="'Eventos Terminados'" ></app-stat>
         </div>
         <div class="col-xl-3 col-lg-6">
-            <app-stat [bgClass]="'card-danger'" [icon]="'fa-support'" [count]="13" [label]="'New Tickets!'"></app-stat>
+            <app-stat [bgClass]="'card-danger'" [icon]="'fa-lock'" [count]="estadisticasEventos.cantidadEventosCancelados" [label]="'Eventos Cancelados'"></app-stat>
         </div>
     </div>
     <hr />

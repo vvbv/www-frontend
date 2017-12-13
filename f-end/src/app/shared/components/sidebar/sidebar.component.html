@@ -1,6 +1,6 @@
-<nav *ngIf = "usuario$ | async as usuario"  class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}"  [@routerTransitionToButtom]>
+<nav *ngIf = "usuarioLogueado$ | async as usuarioLogueado"  class="sidebar" md-swipe-left="onSwipeLeft()" [ngClass]="{sidebarPushLeft: isActive}"  [@routerTransitionToButtom]>
     <ul class="list-group">
-        <a *ngIf = "usuario.rol !== 'UP' " routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' " routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
         <!--<a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
@@ -9,19 +9,19 @@
         <!--<a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' | translate }}
         </a>-->
-        <a *ngIf = "usuario.rol !== 'UP' " [routerLink]="['/events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-plus"></i>&nbsp;{{ 'Crear evento' | translate }}
         </a>
-        <a *ngIf = "usuario.rol !== 'UP' " [routerLink]="['/crearNoticia']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/crearNoticia']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-plus"></i>&nbsp;{{ 'Crear noticia' | translate }}
         </a>
-       <a *ngIf = "usuario.rol !== 'UP' " [routerLink]="['/newSystemUser']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+       <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/newSystemUser']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-plus"></i>&nbsp; NU del sistema
         </a>
         <a  [routerLink]="['/list-events']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;{{ 'Eventos' | translate }}
         </a>
-        <a *ngIf = "usuario.rol !== 'UP' " [routerLink]="['/listUsers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' " [routerLink]="['/listUsers']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp; Usuarios
         </a>
         <a [routerLink]="['/noticias']" [routerLinkActive]="['router-link-active']" class="list-group-item">
@@ -43,24 +43,24 @@
         <!--<a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
         </a>-->
-        <!--<div class="nested-menu">
+        <div *ngIf = "usuarioLogueado.rol === 'UP' " class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
-                <span><i class="fa fa-bars "></i>&nbsp; {{ 'Menu' | translate }}</span>
+                <span><i class="fa fa-bars "></i>&nbsp; {{ 'Mis eventos' | translate }}</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                        <a href="javascript:void(0)"><span>{{ 'Inscritos' | translate }}</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                        <a href="javascript:void(0)"><span>{{ 'Preinscritos' | translate }}</span></a>
                     </li>
                     <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                        <a href="javascript:void(0)"><span>{{ 'Aceptados' | translate }}</span></a>
                     </li>
                 </ul>
             </li>
-        </div>-->
+        </div>
         <!--<!--<a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
         </a>-->-->
