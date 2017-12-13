@@ -99,7 +99,7 @@ export class PreInscripcionService {
                 console.log(response);
                 return null;
             });
-    }
+    } 
 
     public getPreinscripcionesConEvento(usuario: Usuario): Promise<PreinscripcionConEvento[] | null>{
         return this.http

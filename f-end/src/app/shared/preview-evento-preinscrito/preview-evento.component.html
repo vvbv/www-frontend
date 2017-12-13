@@ -12,14 +12,14 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item"> <p class="mb-1">Precio: ${{preinscripcionConEvento.evento.precio}}</p></li>
           <li class="list-group-item">  <p class="card-text"><small class="text-muted"><b>Desde el</b> {{preinscripcionConEvento.evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{preinscripcionConEvento.evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small></p></li>
-        </ul>
+        </ul> 
     </div>
 <div [class.opciones-cancelado]="preinscripcionConEvento.evento.estado == 'CC'" class="card-footer " style = "width: 100%">
 
  
 <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
   <b  class = "float-right" >{{getDisplayNameEstado(preinscripcionConEvento.evento)}}&nbsp;</b>
-  <b> {{preinscripcionConEvento.estado}}</b>
+  <b *ngIf = "estructuraPreinscripcion$ | async as estructuraPreinscripcion"> {{getDisplayNameEstadoPreinscripcion(preinscripcionConEvento, estructuraPreinscripcion)}}</b>
 
 </div>
 

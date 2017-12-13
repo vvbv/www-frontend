@@ -21,6 +21,7 @@ const routes: Routes = [
             { path: 'list-events', loadChildren: './list-events/list-events.module#ListEventsModule'},
             { path: 'eventos-por-ver', loadChildren: './lista-eventos-usuario/lista-eventos-usuario.module#ListaEventosUsuarioModule'},
             { path: 'eventos-preinscritos', loadChildren: './lista-eventos-preinscritos-usuario/lista-eventos-preinscritos-usuario.module#ListaEventosPreinscritosUsuarioModule'},
+            { path: 'eventos-inscritos', loadChildren: './lista-eventos-inscritos-usuario/lista-eventos-inscritos-usuario.module#ListaEventosInscritosUsuarioModule'},
             { path: 'edit-event/:id', loadChildren: './edit-event/edit-event.module#EditEventModule'},
             { path: 'editarNoticia/:id', loadChildren: './editar-noticia/editar-noticia.module#EditarNoticiaModule'},
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule'},

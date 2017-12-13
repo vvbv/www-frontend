@@ -23,6 +23,8 @@ import { UserPreviewComponent } from './user-preview/user-preview.component';
 import { UsersPreviewComponent } from './users-preview/users-preview.component';
 import { ListaEventosPreinscritosComponent } from './lista-eventos-preinscritos/lista-eventos-preinscritos.component';
 import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscrito/preview-evento.component';
+import { ListaEventosInscritosComponent } from './lista-eventos-inscritos/lista-eventos-inscritos.component';
+import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/preview-evento.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -37,6 +39,7 @@ import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscri
         FormEventoComponent,
         listUsersInscritosComponent,
         EventoDetalleComponent,
+        ListaEventosInscritosComponent,
         PreviewEventoPreinscripcionComponent,
         TinyComponent,
         FormNoticiaComponent,
@@ -46,6 +49,7 @@ import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscri
         DetalleNoticiaComponent,
         PreviewEventoComponent,
         ListaEventosComponent,
+        PreviewEventoInscripcionComponent,
         NoticiaPreviewComponent,
         UserPreviewComponent,
         ListaEventosPreinscritosComponent,
@@ -58,10 +62,12 @@ import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscri
         TinyComponent,
         ListaNoticiasComponent,
         ListaEventosPreinscritosComponent,
+        ListaEventosInscritosComponent,
         NoticiaPreviewComponent,
         ListActivitiesComponent,
         ListaEventosComponent,
         PreviewEventoPreinscripcionComponent,
+        PreviewEventoInscripcionComponent,
         PreviewEventoComponent,
         PreviewNoticiaComponent,
         listUsersInscritosComponent

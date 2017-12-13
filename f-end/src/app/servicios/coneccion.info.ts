@@ -89,7 +89,7 @@ export class ConeccionInfo {
     }
 
     getUrlInscripcionesConEvento(idUsuario: number): string{
-        return this.url_usuarios + idUsuario + 'inscripcionesConEvento/';
+        return this.url_usuarios + idUsuario + '/inscripcionesConEvento/';
     }
     getUrlEventosSinSeguimientoPorUsuario(idUsuario: number): string {
         return this.url_usuarios + idUsuario + '/eventosSinSeguimiento/';

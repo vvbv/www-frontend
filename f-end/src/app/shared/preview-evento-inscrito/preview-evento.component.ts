@@ -4,26 +4,26 @@ import { Usuario } from '../../modelos/usuario.class';
 import { Evento } from '../../modelos/evento.class';
 import { EventoEstructura } from '../../modelos/eventoEstructura.class';
 import { EventoService } from '../../servicios/events.service';
-import { PreinscripcionConEvento } from '../../modelos/preInscripcionConEvento.class';
-import { PreInscripcionEstructura } from 'app/modelos/preInscripcionEstructura';
-import { PreInscripcionService } from 'app/servicios/preInscripcion.service';
+import { InscripcionConEvento } from 'app/modelos/inscripcionConEvento.class';
+import { InscripcionEstructura } from 'app/modelos/inscripcionEstructura.class';
+import { InscripcionService } from '../../servicios/inscripcion.service';
 
 
 @Component({
-  selector: 'app-preview-evento-preinscripcion',
+  selector: 'app-preview-evento-inscripcion',
   templateUrl: './preview-evento.component.html',
   styleUrls: ['./preview-evento.component.scss']
 })
-export class PreviewEventoPreinscripcionComponent implements OnInit {
-  @Input() public preinscripcionConEvento: PreinscripcionConEvento;
+export class PreviewEventoInscripcionComponent implements OnInit {
+  @Input() public inscripcionConEvento: InscripcionConEvento;
   public usuarioLogueado$: Promise<Usuario>;
-  public estructuraPreinscripcion$: Promise<PreInscripcionEstructura>;
+  public estructuraInscripcion$: Promise<InscripcionEstructura>;
   estructuraEvento: EventoEstructura;
   constructor(private usuarioService: UsuarioService, 
      private eventService: EventoService,
-     private preinscripcionService: PreInscripcionService
+     private inscripcionService: InscripcionService
     ) {
-    this.estructuraPreinscripcion$ = this.preinscripcionService.getOpciones();
+    this.estructuraInscripcion$ = this.inscripcionService.getOpciones();
             //  this.eventService.getEvento(2).subscribe(data => { this.event = data});
             this.eventService.getOpciones().subscribe(
               response => {
@@ -37,8 +37,8 @@ export class PreviewEventoPreinscripcionComponent implements OnInit {
 
    }
 
-  getDisplayNameEstadoPreinscripcion(preinscripcion: PreinscripcionConEvento, estructura: PreInscripcionEstructura): string {
-    const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === preinscripcion.estado));
+  getDisplayNameEstadoInscripcion(inscripcion: InscripcionConEvento, estructura: InscripcionEstructura): string {
+    const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === inscripcion.estado));
     return est['0'].display_name;
   }
   getDisplayNameEstado(evento: Evento): any {

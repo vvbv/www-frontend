@@ -3,6 +3,7 @@ import { Evento } from '../../modelos/evento.class';
 import { routerTransition } from '../../router.animations';
 import { PreinscripcionConEvento } from '../../modelos/preInscripcionConEvento.class';
 
+
 @Component({
   selector: 'app-lista-eventos-preinscritos',
   templateUrl: './lista-eventos-preinscritos.component.html',
@@ -11,7 +12,9 @@ import { PreinscripcionConEvento } from '../../modelos/preInscripcionConEvento.c
 })
 export class ListaEventosPreinscritosComponent implements OnInit {
   @Input() public preinscripcionesConEvento: Array<PreinscripcionConEvento>;
-  constructor() { }
+  constructor(
+  ) {
+   }
 
   ngOnInit() {
   }

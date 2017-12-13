@@ -21,11 +21,11 @@ export class PreviewEventoComponent implements OnInit {
   constructor(private usuarioService: UsuarioService,  
               private eventService: EventoService,
               private preInscripcionService: PreInscripcionService,
-              public _toastr: ToastsManager,
-              public vRef: ViewContainerRef,
+              private _toastr: ToastsManager,
+              vRef: ViewContainerRef,
               private sendEmailService: SendEmailService) {
                 this.preinscrito = false;
-                this._toastr.setRootViewContainerRef(this.vRef);
+                this._toastr.setRootViewContainerRef(vRef);
                 this.eventService.getOpciones().subscribe(
                 response => {
                   this.estructuraEvento = response['actions']['POST'];
@@ -46,7 +46,8 @@ export class PreviewEventoComponent implements OnInit {
         console.log(response);
         if(!response['non_field_errors']){
             let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
-            this._toastr.success('Se ha registrado para este evento', 'En hora buena!', {toastLife: 3000, showCloseButton: true});            
+            this._toastr.success('El usuario ha sido inscrito al evento',
+            'En hora buena!', {toastLife: 3000, showCloseButton: false});         
             this.sendEmailService.sendEmail(jsonEmail);
             this.preinscrito = true;
         }
@@ -64,7 +65,6 @@ export class PreviewEventoComponent implements OnInit {
     return est['0'].display_name;
    }
   ngOnInit() {
-    this._toastr.setRootViewContainerRef(this.vRef);
   }
 
 }
