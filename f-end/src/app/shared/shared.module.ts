@@ -21,7 +21,10 @@ import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
 import { NoticiaPreviewComponent } from './noticia-preview/noticia-preview.component';
 import { UserPreviewComponent } from './user-preview/user-preview.component';
 import { UsersPreviewComponent } from './users-preview/users-preview.component';
-
+import { ListaEventosPreinscritosComponent } from './lista-eventos-preinscritos/lista-eventos-preinscritos.component';
+import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscrito/preview-evento.component';
+import { ListaEventosInscritosComponent } from './lista-eventos-inscritos/lista-eventos-inscritos.component';
+import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/preview-evento.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -36,6 +39,8 @@ import { UsersPreviewComponent } from './users-preview/users-preview.component';
         FormEventoComponent,
         listUsersInscritosComponent,
         EventoDetalleComponent,
+        ListaEventosInscritosComponent,
+        PreviewEventoPreinscripcionComponent,
         TinyComponent,
         FormNoticiaComponent,
         PreviewNoticiaComponent,
@@ -44,8 +49,10 @@ import { UsersPreviewComponent } from './users-preview/users-preview.component';
         DetalleNoticiaComponent,
         PreviewEventoComponent,
         ListaEventosComponent,
+        PreviewEventoInscripcionComponent,
         NoticiaPreviewComponent,
         UserPreviewComponent,
+        ListaEventosPreinscritosComponent,
         UsersPreviewComponent,
     ],
     exports: [
@@ -54,11 +61,18 @@ import { UsersPreviewComponent } from './users-preview/users-preview.component';
         FormNoticiaComponent, 
         TinyComponent,
         ListaNoticiasComponent,
+        ListaEventosPreinscritosComponent,
+        ListaEventosInscritosComponent,
         NoticiaPreviewComponent,
         ListActivitiesComponent,
         ListaEventosComponent,
+        PreviewEventoPreinscripcionComponent,
+        PreviewEventoInscripcionComponent,
         PreviewEventoComponent,
         PreviewNoticiaComponent,
-        listUsersInscritosComponent]
+        listUsersInscritosComponent
+    ],
+     providers: [ToastOptions],
+    
 })
 export class SharedModule { }

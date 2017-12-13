@@ -1,4 +1,4 @@
-<div *ngIf = "estructuraEvento && evento" class="card col-lg-6 col-xl-6 col-md-12 col-sm-12">
+<div *ngIf = "estructuraEvento && evento && !preinscrito" class="card col-lg-6 col-xl-6 col-md-12 col-sm-12">
   
   <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
    <div  *ngIf="evento.estado == 'CC'" class= "head-evento-cancelado">

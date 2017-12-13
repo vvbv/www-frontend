@@ -3,11 +3,12 @@ import { UsuarioService } from 'app/servicios/usuario.service';
 import { EventoService } from 'app/servicios/events.service';
 import { Evento } from '../../modelos/evento.class';
 import { Usuario } from '../../modelos/usuario.class';
-
+import { routerTransition } from '../../router.animations';
 @Component({
   selector: 'app-lista-eventos-usuario',
   templateUrl: './lista-eventos-usuario.component.html',
-  styleUrls: ['./lista-eventos-usuario.component.scss']
+  styleUrls: ['./lista-eventos-usuario.component.scss'],
+  animations : [routerTransition()]
 })
 export class ListaEventosUsuarioComponent implements OnInit {
   eventos$: Promise<Evento[]>;
@@ -19,7 +20,7 @@ export class ListaEventosUsuarioComponent implements OnInit {
     this.usuarioService.obtenerUsuarioActualCache()
     .then(response => {
       this.usuarioLogueado = response;
-      this.eventos$ = this.eventosService.getEventosPorUsuario(Number(this.usuarioLogueado.id));
+      this.eventos$ = this.eventosService.getEventosSinSeguimientoPorUsuario(Number(this.usuarioLogueado.id));
     });
    
 

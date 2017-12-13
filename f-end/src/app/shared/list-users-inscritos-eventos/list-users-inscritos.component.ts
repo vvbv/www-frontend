@@ -36,7 +36,7 @@ export class listUsersInscritosComponent implements OnInit {
             private usuairosService: UsuarioService,
             private inscripcionService: InscripcionService
         ) {
-        this._toastr.setRootViewContainerRef(vRef);
+        this._toastr.setRootViewContainerRef(vRef); 
         this.inscripcionesConUsuario$ = null;
         this.usuarioLogueado$ = this.usuairosService.obtenerUsuarioActualCache();
         this.estructuraInscripcion$ = this.inscripcionService.getOpciones();

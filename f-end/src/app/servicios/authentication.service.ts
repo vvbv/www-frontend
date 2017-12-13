@@ -43,6 +43,7 @@ export class  AuthenticationService  {
 
     public logout() {
         localStorage.removeItem(this.coneccionInfo.token_name);
+        localStorage.removeItem('username');
         this.coneccionInfo.token = '';
         this.usuariosService.usuario = null;
     }
