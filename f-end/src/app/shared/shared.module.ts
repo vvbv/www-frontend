@@ -21,7 +21,8 @@ import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
 import { NoticiaPreviewComponent } from './noticia-preview/noticia-preview.component';
 import { UserPreviewComponent } from './user-preview/user-preview.component';
 import { UsersPreviewComponent } from './users-preview/users-preview.component';
-
+import { ListaEventosPreinscritosComponent } from './lista-eventos-preinscritos/lista-eventos-preinscritos.component';
+import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscrito/preview-evento.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -36,6 +37,7 @@ import { UsersPreviewComponent } from './users-preview/users-preview.component';
         FormEventoComponent,
         listUsersInscritosComponent,
         EventoDetalleComponent,
+        PreviewEventoPreinscripcionComponent,
         TinyComponent,
         FormNoticiaComponent,
         PreviewNoticiaComponent,
@@ -46,6 +48,7 @@ import { UsersPreviewComponent } from './users-preview/users-preview.component';
         ListaEventosComponent,
         NoticiaPreviewComponent,
         UserPreviewComponent,
+        ListaEventosPreinscritosComponent,
         UsersPreviewComponent,
     ],
     exports: [
@@ -54,11 +57,16 @@ import { UsersPreviewComponent } from './users-preview/users-preview.component';
         FormNoticiaComponent, 
         TinyComponent,
         ListaNoticiasComponent,
+        ListaEventosPreinscritosComponent,
         NoticiaPreviewComponent,
         ListActivitiesComponent,
         ListaEventosComponent,
+        PreviewEventoPreinscripcionComponent,
         PreviewEventoComponent,
         PreviewNoticiaComponent,
-        listUsersInscritosComponent]
+        listUsersInscritosComponent
+    ],
+     providers: [ToastOptions],
+    
 })
 export class SharedModule { }

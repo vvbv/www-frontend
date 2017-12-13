@@ -56,8 +56,10 @@ export class EventoService {
     })
   }
 
-  public getEventosPorUsuario(idUsuario: number): Promise<Evento[]>{
-    return this.mockupServicios.get(this.coneccionInfo.getUrlEventosPorUsuario(idUsuario));
+  
+
+  public getEventosSinSeguimientoPorUsuario(idUsuario: number): Promise<Evento[]>{
+    return this.mockupServicios.get(this.coneccionInfo.getUrlEventosSinSeguimientoPorUsuario(idUsuario));
   }
 
   public crearEvento(evento: Evento): Promise<Evento | JSON> {

@@ -10,7 +10,7 @@
           <a *ngIf="usuarioLogueado.rol !== 'UP'" [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar uno ahora?</a>
         </div>
    </div>
-      <app-lista-eventos  [eventos] = "eventos"> </app-lista-eventos>              
+      <app-lista-eventos [eventosUsuario] = "false" [eventos] = "eventos"> </app-lista-eventos>              
   </div>
 </div>
 

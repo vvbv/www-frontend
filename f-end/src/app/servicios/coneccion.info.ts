@@ -85,14 +85,14 @@ export class ConeccionInfo {
     }
 
     getUrlPreinscripcionesConEvento(idUsuario: number): string{
-        return this.url_usuarios + idUsuario + 'preinscripcionesConEvento/';
+        return this.url_usuarios + idUsuario + '/preinscripcionesConEvento/';
     }
 
     getUrlInscripcionesConEvento(idUsuario: number): string{
         return this.url_usuarios + idUsuario + 'inscripcionesConEvento/';
     }
-    getUrlEventosPorUsuario(idUsuario: number): string {
-        return this.url_usuarios + idUsuario + '/eventos/';
+    getUrlEventosSinSeguimientoPorUsuario(idUsuario: number): string {
+        return this.url_usuarios + idUsuario + '/eventosSinSeguimiento/';
     }
     iniciarHeaders() {
         this.headers = new Headers();
