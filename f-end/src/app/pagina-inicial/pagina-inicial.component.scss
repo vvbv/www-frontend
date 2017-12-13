@@ -2,6 +2,26 @@
     background-color: #FFF;
     
 }
+
+
+
+footer  {
+    div {
+        @media  screen and  (min-width:350px) {
+            mergin-top: 30px;
+        }
+        text-align: center;
+        a {
+            color : white;
+            padding-top: 20 px;
+        }
+    }
+    background-color: #222;
+    height: 250px;
+    margin: 0px;
+    padding-top: 80px;
+    
+}
 .nav-principal{
     padding: 8px 16px 8px 16px;
     width: 100%;
@@ -33,9 +53,19 @@
 }
 
 .carrusel-noticias{
-    width: 70%;
+    @media  screen and  (min-width:350px) {
+        width: 70%;
+    }
+    margin: auto;
+    
 }
-
+.carousel-caption{
+    background-color: rgba(0,0,0,0.8) ;
+    border-radius: 10px;
+    a {
+        color: white;
+    }
+}
 .noticia-principal{
     margin-top: 10px;
     border-bottom: 1px solid #a8a8a8;
@@ -61,11 +91,7 @@
     border-bottom-width: 0px;
 }
 
-footer{
-    background-color: #222;
-    height: 250px;
-    margin: 0px;
-}
+
 
 .footer-principal{
     padding: 0px;

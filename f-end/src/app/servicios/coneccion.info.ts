@@ -83,6 +83,14 @@ export class ConeccionInfo {
     getUrlInscripcionesPorEventoConUsuarios(idEvento: number): string{
         return this.url_eventos + idEvento+ '/inscripcionesConUsuario/';
     }
+
+    getUrlPreinscripcionesConEvento(idUsuario: number): string{
+        return this.url_usuarios + idUsuario + 'preinscripcionesConEvento/';
+    }
+
+    getUrlInscripcionesConEvento(idUsuario: number): string{
+        return this.url_usuarios + idUsuario + 'inscripcionesConEvento/';
+    }
     getUrlEventosPorUsuario(idUsuario: number): string {
         return this.url_usuarios + idUsuario + '/eventos/';
     }

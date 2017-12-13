@@ -18,6 +18,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
 import { PreviewEventoComponent } from './preview-evento/preview-evento.component';
 import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
+import { NoticiaPreviewComponent } from './noticia-preview/noticia-preview.component';
+import { UserPreviewComponent } from './user-preview/user-preview.component';
 
 @NgModule({
     imports: [
@@ -41,6 +43,8 @@ import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
         DetalleNoticiaComponent,
         PreviewEventoComponent,
         ListaEventosComponent,
+        NoticiaPreviewComponent,
+        UserPreviewComponent,
     ],
     exports: [
         listUsersComponent, 

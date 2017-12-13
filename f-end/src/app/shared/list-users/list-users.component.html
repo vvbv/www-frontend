@@ -6,7 +6,7 @@
                 <!-- <input (keyup)="filtrar($event)" type="" name="filtro" value="" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo"> -->
                <!-- <input  type="text" name="filtro"  id="filtro" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo">-->
             </div>
-            <table class="table">
+            <table id = "lista-usuarios" class="table">
                 <thead class="thead-inverse">
                     <tr>
                         <th class="hidden-lg-down">#</th>
@@ -52,3 +52,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+    $('#lista-usuarios').DataTable();
+} );
+</script>
