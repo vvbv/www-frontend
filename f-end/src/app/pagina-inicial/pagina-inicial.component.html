@@ -38,12 +38,17 @@
                         <div class="carousel-caption">
                             <h3>{{noticia.titulo}}</h3>
                             <p>{{noticia.resumen  | slice:0:50}}...</p>
-                            <a [routerLink]="['/noticia/', noticia.id]" >Seguir leyendo</a>
+                            <button data-toggle="modal" [attr.data-target] ="'.noticia-'+noticia.id" >Seguir leyendo</button>
                         </div>
                     </ng-template>
                 </ngb-carousel>
+                
             </div>
-           
+        <ng-container *ngIf = "cincoUltimasNoticias$ | async as cincoUltimasNoticias">
+            <ng-container *ngFor = "let noticia of cincoUltimasNoticias">
+                <app-noticia-preview [noticia] = "noticia" ></app-noticia-preview>
+            </ng-container>
+        </ng-container>  
         </div>
           <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
             

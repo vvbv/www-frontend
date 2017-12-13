@@ -20,6 +20,7 @@ import { PreviewEventoComponent } from './preview-evento/preview-evento.componen
 import { ListaEventosComponent } from './lista-eventos/lista-eventos.component';
 import { NoticiaPreviewComponent } from './noticia-preview/noticia-preview.component';
 import { UserPreviewComponent } from './user-preview/user-preview.component';
+import { UsersPreviewComponent } from './users-preview/users-preview.component';
 
 @NgModule({
     imports: [
@@ -45,6 +46,7 @@ import { UserPreviewComponent } from './user-preview/user-preview.component';
         ListaEventosComponent,
         NoticiaPreviewComponent,
         UserPreviewComponent,
+        UsersPreviewComponent,
     ],
     exports: [
         listUsersComponent, 
@@ -52,6 +54,7 @@ import { UserPreviewComponent } from './user-preview/user-preview.component';
         FormNoticiaComponent, 
         TinyComponent,
         ListaNoticiasComponent,
+        NoticiaPreviewComponent,
         ListActivitiesComponent,
         ListaEventosComponent,
         PreviewEventoComponent,

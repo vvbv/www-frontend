@@ -1,19 +1,18 @@
 
-<div *ngIf="noticia" class="modal fade noticia-id-{{noticia.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div *ngIf="noticia" class="modal fade noticia-{{noticia.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-xl">
       <div class="modal-content">
-        <img src = "{{noticia.imagen}}" alt = "{{noticia.titulo}}">
-        <div class ="titulo">
-          {{noticia.titulo}}
-        </div>
+        <div class="container">
+          <img src = "{{noticia.imagen}}" alt = "{{noticia.titulo}}">
+          <div class ="titulo">
+          <b> {{noticia.titulo}} </b>
+          </div> 
+      </div>
         <div class = "resumen">
           {{noticia.resumen}}
         </div>
-        <div class = "contenido text-justify " >
-          {{noticia.contenido}}
+        <div  ng-bind-html="noticia.contenido" class = "contenido text-justify " >
         </div>
-        
-
       </div>
     </div>
   </div>

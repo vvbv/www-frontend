@@ -1,3 +1,25 @@
-<p>
-  user-preview works!
-</p>
+
+<div *ngIf="usuario" class="modal fade usuario-{{usuario.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-xl">
+      <div class="modal-content">
+          <table class="table">
+
+            <div class ="fila">
+              <b>Número de identificación:</b> {{usuario.numero_identificacion}}
+            </div>           
+            <div class ="fila">
+                <b>Nombre de usuario:</b>  @{{usuario.username}}
+            </div>
+            <div class ="fila">
+             <b>Nombres: </b>  {{usuario.nombres}}
+            </div>
+            <div class ="fila">
+              <b>Apellidos</b>{{usuario.apellidos}}
+            </div>
+            <div class ="fila">
+              <b>Email: </b>{{usuario.custom_email}}
+            </div>
+          </table>
+      </div>
+    </div>
+  </div>
