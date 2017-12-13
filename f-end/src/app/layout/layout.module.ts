@@ -7,7 +7,6 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { HeaderComponent, SidebarComponent } from '../shared';
 import { EditEventComponent } from './edit-event/edit-event.component';
-
 @NgModule({
     imports: [
         CommonModule,

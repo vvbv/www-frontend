@@ -28,11 +28,13 @@ export class ConeccionInfo {
     public url_imagenes_crear;
     public url_imagenes_modificar;
     public url_estadisticas_eventos;
+    public url_cinco_eventos_mas_proximos;
     public headers: Headers;
     public url_inscripciones_por_evento:string;
     public url_inscripciones_por_evento_con_usuario:string;
     public url_get_inscricion_por_usuario_evento: string;
     public url_sendEmail: string;
+    public url_cinco_ultimas_noticias_publicadas: string;
     constructor() {
         this.token_name = 'tok';
         this.token_prefix = 'JWT';
@@ -59,8 +61,9 @@ export class ConeccionInfo {
         this.url_noticias = this.url_base_api + '/noticias/';
         this.url_sendEmail = this.url_base_api + '/funcionesExtra/sendEmail';
 
+        this.url_cinco_eventos_mas_proximos = this.url_eventos + 'cincoUltimos/';
         this.url_estadisticas_eventos = this.url_eventos + 'estadisticas/';
-
+        this.url_cinco_ultimas_noticias_publicadas = this.url_noticias + 'cincoUltimas/';
         this.iniciarHeaders();
     }
     
@@ -79,6 +82,17 @@ export class ConeccionInfo {
     }
     getUrlInscripcionesPorEventoConUsuarios(idEvento: number): string{
         return this.url_eventos + idEvento+ '/inscripcionesConUsuario/';
+    }
+
+    getUrlPreinscripcionesConEvento(idUsuario: number): string{
+        return this.url_usuarios + idUsuario + 'preinscripcionesConEvento/';
+    }
+
+    getUrlInscripcionesConEvento(idUsuario: number): string{
+        return this.url_usuarios + idUsuario + 'inscripcionesConEvento/';
+    }
+    getUrlEventosPorUsuario(idUsuario: number): string {
+        return this.url_usuarios + idUsuario + '/eventos/';
     }
     iniciarHeaders() {
         this.headers = new Headers();

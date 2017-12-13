@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { Usuario } from '../../modelos/usuario.class';
+import { Evento } from '../../modelos/evento.class';
 import { EventoService } from 'app/servicios/events.service';
 import { EstadisticasEventos } from '../../modelos/estadisticasEventos.class';
 
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     public usuarioLogueado$: Promise<Usuario>;
+    public cincoEventosMasProximos$: Promise<Evento[]>;
     public username: string;
     public nombres: string;
     public estadisticasEventos$: Promise<EstadisticasEventos>;
@@ -29,6 +31,7 @@ export class DashboardComponent implements OnInit {
         
         this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
         this.estadisticasEventos$ = this.eventosService.getEstadisticasEventos();
+        this.cincoEventosMasProximos$  = this.eventosService.getCincoEventosMaxProximos();
         this.sliders.push({
             imagePath: 'assets/images/slider1.jpg',
             label: 'First slide label',

@@ -8,9 +8,12 @@ import 'rxjs/add/operator/map';
 import { Evento } from '../modelos/evento.class';
 import { Observable } from 'rxjs/Observable';
 import { EstadisticasEventos } from '../modelos/estadisticasEventos.class';
+import { MockupServicios } from './servicios.mockup';
+
 @Injectable()
 export class EventoService {
   constructor( private http: Http,
+    private mockupServicios: MockupServicios,
     imagenesService: ImagenesService, private authenticationService: AuthenticationService, private coneccionInfo: ConeccionInfo ) { }
   public getEventos(): Promise<Evento[]> {
     return this.http
@@ -20,6 +23,15 @@ export class EventoService {
       return JSON.parse(response.text()) as Evento[]
     });
   }
+
+  public getCincoEventosMaxProximos(): Promise <Evento[]>{
+    return this.http
+    .get(this.coneccionInfo.url_cinco_eventos_mas_proximos, {headers: this.coneccionInfo.headers})
+    .toPromise()
+    .then(response => JSON.parse(response.text().toString()) as Evento[])
+    .catch (response => {console.log(response); return response;});
+  }
+
   public getEvento(id: number): Observable<Evento>  {
     return this.http
     .get(this.coneccionInfo.url_eventos + id.toString() + '/', {headers: this.coneccionInfo.headers})
@@ -42,6 +54,10 @@ export class EventoService {
       console.log(response);
       return response;
     })
+  }
+
+  public getEventosPorUsuario(idUsuario: number): Promise<Evento[]>{
+    return this.mockupServicios.get(this.coneccionInfo.getUrlEventosPorUsuario(idUsuario));
   }
 
   public crearEvento(evento: Evento): Promise<Evento | JSON> {

@@ -8,16 +8,12 @@ import { Noticia } from '../modelos/noticias.class';
   styleUrls: ['./pagina-inicial.component.scss']
 })
 export class PaginaInicialComponent implements OnInit {
-  public noticias: any;
-  public sliders: Array<any> = [];
-  constructor(public noticiaService: NoticiasService) {
-    this.noticiaService.getNoticias().then(
-      response => {
-        this.noticias = response;
-      }
-    );
-   }
+  public cincoUltimasNoticias$: Promise <Noticia[]>;
 
+  constructor(public noticiaService: NoticiasService) {
+    this.cincoUltimasNoticias$ = this.noticiaService.getCincoUltimasNoticiasPublicadas();
+   }
+   
   ngOnInit() {
   }
 
