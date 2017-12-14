@@ -26,12 +26,7 @@ export class InscripcionService {
         .toPromise()
         .then(
             response =>  {
-<<<<<<< HEAD
                 return (JSON.parse(response.text().toString()) as Inscripcion);
-=======
-                console.log(response.text().toString());
-                return (JSON.parse(response.text().toString()).results as Inscripcion);
->>>>>>> alpha
             }
         );
     }

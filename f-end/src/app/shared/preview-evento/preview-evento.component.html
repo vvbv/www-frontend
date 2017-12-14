@@ -1,17 +1,15 @@
-<div *ngIf="estructuraEvento && evento && !preinscrito" class="preview-evento col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div *ngIf="estructuraEvento && evento && !preinscrito" class="card col-lg-6 col-xl-6 col-md-12 col-sm-12">
 
-  
-  <div class="preview-evento-title">
-    <span>{{evento.nombre}}</span>
-  </div>
   <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
-  <hr>
   <div *ngIf="evento.estado == 'CC'" class="head-evento-cancelado">
     Cancelado
   </div>
-  <div [class.boton-editar-cancelado]="evento.estado == 'CC'" class="" [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
-    
-    <p class="card-text text-justify preview-descripcion"><strong>Descripción</strong><br> {{evento.descripcion}}</p>
+  <div [class.boton-editar-cancelado]="evento.estado == 'CC'" class="card-block" [class.active]="evento === eventoSeleccionado"
+    (click)="seleccionarEvento(evento)">
+
+    <h4 class="card-title">{{evento.nombre}}</h4>
+
+    <p class="card-text text-justify">Descripción: {{evento.descripcion}}</p>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">
         <p class="mb-1">Precio: ${{evento.precio}}</p>
@@ -25,12 +23,17 @@
       </li>
     </ul>
   </div>
-  <div [class.opciones-cancelado]="evento.estado == 'CC'" class="card-footer preview-estado" style="width: 100%">
+  <div [class.opciones-cancelado]="evento.estado == 'CC'" class="card-footer " style="width: 100%">
+
+
     <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
-    <b class="preview-estado-b">{{getDisplayNameEstado(evento)}}&nbsp;</b>
+    <b class="float-right">{{getDisplayNameEstado(evento)}}&nbsp;</b>
+
+
   </div>
-  <hr>
-  <div *ngIf="usuarioLogueado$ | async as  usuario" class="preview-opciones btn-group dropup">
+
+
+  <div *ngIf="usuarioLogueado$ | async as  usuario" class=" btn-group dropup">
     <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Opciones
     </button>
