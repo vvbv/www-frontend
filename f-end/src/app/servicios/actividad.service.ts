@@ -39,6 +39,12 @@ export class ActividadService {
     .get(this.coneccionInfo.url_actividades + id.toString() + '/', {headers: this.coneccionInfo.headers})
     .map( response =>   JSON.parse(response.text().toString()) as Actividad) ;
   }
+
+  public getActividadV2(id: number): Observable<ActividadV2>  {
+    return this.http
+    .get(this.coneccionInfo.url_actividades + id.toString() + '/', {headers: this.coneccionInfo.headers})
+    .map( response =>   JSON.parse(response.text().toString()) as ActividadV2) ;
+  }
   
 
   public crearActividad(actividad: Actividad): Promise<Actividad | JSON> {
@@ -107,11 +113,37 @@ export class ActividadService {
     );
   }
 
+  public updateActividadV2(actividad: ActividadV2): Promise<ActividadV2> {
+    return this.http
+   .put(this.coneccionInfo.url_actividades + actividad.id +  '/', JSON.stringify(actividad) , {headers: this.coneccionInfo.headers})
+   .toPromise()
+   .then(
+     response => {
+       return (JSON.parse(response.text().toString())as ActividadV2);
+     }
+   )
+   .catch(
+     response => {
+       return (JSON.parse(response.text().toString()))as ActividadV2;
+     }
+   );
+ }
+
   public  getActividadPromesa(idActiviad: number): Promise<Actividad>{
     return this.http
     .get(this.coneccionInfo.url_actividades + idActiviad.toString() + '/', {headers: this.coneccionInfo.headers} )
     .toPromise()
     .then(response =>  JSON.parse(response.text().toString()) as Actividad[])
+    .catch(response => {
+      return response;
+    });
+  }
+
+  public  getActividadPromesaV2(idActiviad: number): Promise<ActividadV2>{
+    return this.http
+    .get(this.coneccionInfo.url_actividades + idActiviad.toString() + '/', {headers: this.coneccionInfo.headers} )
+    .toPromise()
+    .then(response =>  JSON.parse(response.text().toString()) as ActividadV2)
     .catch(response => {
       return response;
     });

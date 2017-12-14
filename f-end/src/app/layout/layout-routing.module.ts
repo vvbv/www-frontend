@@ -32,6 +32,8 @@ const routes: Routes = [
             { path: 'crearNoticia', loadChildren: './crear-noticia/crear-noticia.module#CrearNoticiaModule'},
             { path: 'listActivities', loadChildren: './list-activities-layout/list-activities-layout.module#ListActivitiesLayoutModule'},
             { path: 'newActivity', loadChildren: './crear-actividad/crear-actividad.module#CrearActividadModule'},
+            { path: 'editActivity', loadChildren: './editar-actividad/editar-actividad.module#EditarActividadModule'},
+            { path: 'generarEscarapela', loadChildren: './generar-escarapela/generar-escarapela.module#GenerarEscarapelaModule'},
         ]
     }
 ];

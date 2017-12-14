@@ -1,0 +1,40 @@
+<div [@routerTransition]>
+<h1>Editar actividad</h1>
+<hr>
+  <div id="formulario-nueva-actividad">
+    <form #actividadNuevaForm="ngForm">
+      <div [class.has-danger] = "actividadError['nombre']" class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="actividad.nombre" required>
+        <div ngFor="let error of actividadError" >
+            <span class="help-block">{{actividadError['nombre']}}</span>
+        </div>
+      </div>
+      <div [class.has-danger] = "actividadError['descripcion']" class="form-group">
+          <label for="descripcion">Descripción</label>
+          <textarea name="descripcion" class="form-control" [(ngModel)]="actividad.descripcion" required></textarea>
+          <div ngFor="let error of actividadError" >
+              <span class="help-block">{{actividadError['descripcion']}}</span>
+          </div>
+       </div>
+      <div [class.has-danger] = "actividadError['fechaInicio']" class="form-group">
+          <label for="fechaInicio">Fecha y hora de inicio</label>
+          <input type="datetime-local" class="form-control" name="fechaInicio" [(ngModel)]="actividad.fechaInicio" required>
+          <div ngFor="let error of actividadError" >
+              <span class="help-block">{{actividadError['fechaInicio']}}</span>
+          </div>
+      </div>
+      <div [class.has-danger] = "actividadError['fechaFinalizacion']" class="form-group">
+          <label for="fechaFinalizacion">Fecha y hora de finalización</label>
+          <input type="datetime-local" class="form-control" name="fechaFinalizacion" [(ngModel)]="actividad.fechaFinalizacion" required>
+          <div ngFor="let error of actividadError" >
+              <span class="help-block">{{actividadError['fechaFinalizacion']}}</span>
+          </div>
+       </div>
+      <hr>
+      <div class="form-group">
+        <button (click)="actualizarActividad()" type="button" class="btn btn-primary float-right">Actualizar actividad</button>
+      </div>
+    </form>
+  </div>
+</div>
