@@ -12,9 +12,11 @@
                 <a *ngIf ="usuarioLogueado.rol == 'UP'" href="javascript:void(0);" (click)='participar(actividad.id, usuarioLogueado);' class="btn btn-success btn-sm btn-participar-2">
                     Participar/retirarse
                 </a>
+                <a href="javascript:void(0);" [routerLink]="['/editActivity']" [queryParams]="{idActivity: actividad.id}" class="btn btn-default btn-sm btn-secondary">
+                    Editar
+                </a>
             </div>
         </div>
-        
         
      <div *ngIf="actividades.length == 0">
       <div class="alert alert-warning" role="alert">
