@@ -1,0 +1,13 @@
+<div [@routerTransition]>
+    <h1>Validar escarapela</h1>
+    <hr>
+    <div class="container">
+        <div class="form-group">
+            <label class="label-codigo" for="codigo-seguridad">Código de la escarapela</label>
+            <input type="text" [(ngModel)]="codigoSeguridad" name="codigoSeguridad" class="form-control codigo" placeholder="[#]*-[#]*-[#]*" required>
+        </div>
+        <div class="form-group">
+            <button (click)="verificar()" class="btn btn-lg btn-secondary">Verificar código</button>
+        </div>
+    </div>
+</div>

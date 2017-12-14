@@ -1,0 +1,76 @@
+.help-block{
+    color:#d9534f;
+}
+
+.container{
+    padding: 2em 20% 2em 20%;
+}
+
+.container strong{
+    text-align: center;
+}
+
+
+.gancho{
+    width: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1em;
+    background-color: white;
+    margin-bottom: 2em;
+    margin-top: 1em;
+}
+
+.caja-escarapela{
+    background-color: #444;
+    border-radius: 5px;
+    border:1px solid #444;
+    //padding: 2em 4em 2em 4em;
+}
+
+#foto-perfil{
+    padding: 1em;
+    width: 100%;
+}
+
+#foto-perfil img{
+    height: 60%;
+    width: 60%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #eeeeee;
+    border: 5px solid #eeeeee;
+    border-radius: 2px;
+}
+
+#nombres-apellidos{
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: white;
+    color: #444;
+    font-weight: bold;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+#acceso{
+    margin-top: 1.5em;
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: white;
+    color: #444;
+    font-weight: bold;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+#centro-eventos{
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 1em;
+}
+
+#centro-eventos hr{
+    border-color: white;
+}
