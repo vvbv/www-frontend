@@ -32,11 +32,11 @@
             <i class="fa fa-th-list"></i>&nbsp; Noticias
         </a>
 
-        <a [routerLink]="['/generarEscarapela']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' "  [routerLink]="['/generarEscarapela']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp; G. Escarapela
         </a>
 
-        <a [routerLink]="['/verificarEscarapela']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngIf = "usuarioLogueado.rol !== 'UP' "  [routerLink]="['/verificarEscarapela']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp; V. Escarapela
         </a>
 
@@ -62,11 +62,12 @@
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
-                        <a [routerLink]="['/eventos-inscritos']" ><span>{{ 'Inscritos' | translate }}</span></a>
-                    </li>
-                    <li>
                         <a [routerLink]="['/eventos-preinscritos']" ><span>{{ 'Preinscritos' | translate }}</span></a>
                     </li>
+                    <li>
+                        <a [routerLink]="['/eventos-inscritos']" ><span>{{ 'Inscritos' | translate }}</span></a>
+                    </li>
+
                     <li>
                         <a href="javascript:void(0)"><span>{{ 'Aceptados' | translate }}</span></a>
                     </li>

@@ -1,5 +1,5 @@
-<div clasa="row">
-    <div *ngIf="eventos" class="" [@routerTransition]>
+<div class="row">
+    <div *ngIf="eventos" class="card-columns" [@routerTransition]>
         <div class="container-fluid" *ngIf=" eventos ">
             <app-preview-evento *ngFor="let evento of eventos;" [evento]="evento"> </app-preview-evento>
         </div>
@@ -14,7 +14,7 @@
             </ng-container>
             <ng-container *ngIf="eventosUsuario">
                 Se ha inscrito o preinscrito a todos nuestros eventos!
-                <br> Puede ver sus eventos en la barra lateral
+                <br> Puede ver sus eventos en el menú "Mis Eventos" en la barra lateral
             </ng-container>
         </div>
     </div>

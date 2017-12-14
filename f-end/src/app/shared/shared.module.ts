@@ -29,12 +29,13 @@ import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/pre
     imports: [
         CommonModule,
         NgbDropdownModule.forRoot(),
+        ToastModule.forRoot(),
         TranslateModule,
         RouterModule,
         FormsModule,
-        ToastModule.forRoot(),
     ],
     declarations: [
+        PreviewEventoComponent,
         listUsersComponent,
         FormEventoComponent,
         listUsersInscritosComponent,
@@ -47,7 +48,6 @@ import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/pre
         ListaNoticiasComponent,
         ListActivitiesComponent,
         DetalleNoticiaComponent,
-        PreviewEventoComponent,
         ListaEventosComponent,
         PreviewEventoInscripcionComponent,
         NoticiaPreviewComponent,
@@ -56,6 +56,7 @@ import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/pre
         UsersPreviewComponent,
     ],
     exports: [
+        PreviewEventoComponent,
         listUsersComponent, 
         FormEventoComponent, 
         FormNoticiaComponent, 
@@ -68,7 +69,6 @@ import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/pre
         ListaEventosComponent,
         PreviewEventoPreinscripcionComponent,
         PreviewEventoInscripcionComponent,
-        PreviewEventoComponent,
         PreviewNoticiaComponent,
         listUsersInscritosComponent
     ],

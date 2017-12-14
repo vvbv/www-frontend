@@ -25,7 +25,6 @@ export class listUsersComponent implements OnInit {
     public estructuraPreinscripcion$: Promise<PreInscripcionEstructura>;
     public preinscripcionesConUsuario$: Promise<PreInscripcionConUsuario[]>;
     public filtro;
-
     constructor(
             private usuarioService: UsuarioService,
             private _toastr: ToastsManager,
@@ -44,16 +43,21 @@ export class listUsersComponent implements OnInit {
         const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === preinscripcionConUsuario.estado));
         return est['0'].display_name;
     }
-    ngOnInit() {
+    obtenerPreinscripcionesConUsuario$(): string {
+        this.preinscripcionesConUsuario$ = null;
         this.preinscripcionesConUsuario$ = this.preinscripcionService.getPreinscripcionesPorEventoConUsuarios(this.evento);
+        return '<!-- -->';
     }
-    rechazarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void{
-        let preinscripcion: PreInscripcion = new PreInscripcion();
+    ngOnInit() {
+        this.obtenerPreinscripcionesConUsuario$();
+    }
+    rechazarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void {
+        const preinscripcion: PreInscripcion = new PreInscripcion();
         preinscripcion.init(
             preinscripcionConUsuario.id,
-            preinscripcionConUsuario.evento, 
-            preinscripcionConUsuario.participante.id, 
-            preinscripcionConUsuario.fechaPreInscripcion, 
+            preinscripcionConUsuario.evento,
+            preinscripcionConUsuario.participante.id,
+            preinscripcionConUsuario.fechaPreInscripcion,
             preinscripcionConUsuario.estado
         );
             this.preinscripcionService.rechazarPreinscripcion(preinscripcion)
@@ -68,17 +72,15 @@ export class listUsersComponent implements OnInit {
                 'No son horas tan buenas!', {toastLife: 3000, showCloseButton: false});
             });
         }
-    
 
-    
 
     aceptarPreinscripcion(preinscripcionConUsuario: PreInscripcionConUsuario): void {
-        let preinscripcion: PreInscripcion = new PreInscripcion();
+        const preinscripcion: PreInscripcion = new PreInscripcion();
         preinscripcion.init(
             preinscripcionConUsuario.id,
-            preinscripcionConUsuario.evento, 
-            preinscripcionConUsuario.participante.id, 
-            preinscripcionConUsuario.fechaPreInscripcion, 
+            preinscripcionConUsuario.evento,
+            preinscripcionConUsuario.participante.id,
+            preinscripcionConUsuario.fechaPreInscripcion,
             preinscripcionConUsuario.estado
         );
         this.preinscripcionService.aceptarPreinscripcion(preinscripcion)

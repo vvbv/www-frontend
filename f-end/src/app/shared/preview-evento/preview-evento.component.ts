@@ -8,6 +8,7 @@ import { PreInscripcion } from '../../modelos/preInscripcion.class';
 import { PreInscripcionService } from 'app/servicios/preInscripcion.service';
 import { SendEmailService } from 'app/servicios/sendEmail.service';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
+import { viewClassName } from '@angular/compiler';
 @Component({
   selector: 'app-preview-evento',
   templateUrl: './preview-evento.component.html',
@@ -16,16 +17,17 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class PreviewEventoComponent implements OnInit {
   @Input() public evento: Evento;
   public preinscrito: boolean;
+  
   public usuarioLogueado$: Promise<Usuario>;
   estructuraEvento: EventoEstructura;
   constructor(private usuarioService: UsuarioService,  
               private eventService: EventoService,
+              viewContainerRef: ViewContainerRef,
+              private _toastr : ToastsManager,
               private preInscripcionService: PreInscripcionService,
-              private _toastr: ToastsManager,
-              vRef: ViewContainerRef,
               private sendEmailService: SendEmailService) {
                 this.preinscrito = false;
-                this._toastr.setRootViewContainerRef(vRef);
+                this._toastr.setRootViewContainerRef(viewContainerRef);
                 this.eventService.getOpciones().subscribe(
                 response => {
                   this.estructuraEvento = response['actions']['POST'];
@@ -46,8 +48,9 @@ export class PreviewEventoComponent implements OnInit {
         console.log(response);
         if(!response['non_field_errors']){
             let jsonEmail = JSON.parse('{"html": "true","subject": "Notificación de Preinscripción a evento","to": "'+usuarioLogueado.custom_email+'","message": "Gracias por su preinscripción e interés en nuestros eventos, se acaba de preinscribir para: <strong>' + evento.nombre + '</strong>. Att: IEDB"}');
-            this._toastr.success('El usuario ha sido inscrito al evento',
-            'En hora buena!', {toastLife: 3000, showCloseButton: false});         
+            console.log(this._toastr);
+            this._toastr.success('Se ha preinscrito al evento ' + evento.nombre,
+            'En hora buena!', {toastLife: 5000, showCloseButton: true});         
             this.sendEmailService.sendEmail(jsonEmail);
             this.preinscrito = true;
         }

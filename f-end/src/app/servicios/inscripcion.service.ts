@@ -13,7 +13,6 @@ import 'rxjs/add/operator/map';
 import { PreInscripcion } from '../modelos/preInscripcion.class';
 import { InscripcionConUsuario } from '../modelos/inscripcionConUsuario.class';
 import { InscripcionConEvento } from '../modelos/inscripcionConEvento.class';
- 
 
 @Injectable()
 export class InscripcionService {
@@ -27,8 +26,7 @@ export class InscripcionService {
         .toPromise()
         .then(
             response =>  {
-                console.log(response.text().toString());
-                return (JSON.parse(response.text().toString()).results as Inscripcion);
+                return (JSON.parse(response.text().toString()) as Inscripcion);
             }
         );
     }
@@ -190,7 +188,13 @@ export class InscripcionService {
             }
         );
     }
-
+    public aceptarInscripcionPorUsuario(inscripcion: Inscripcion | InscripcionConEvento): Promise< Inscripcion | JSON >{
+        return this.http
+        .get(this.coneccionInfo.getUrlAceptarInscipcionPorUsuario(inscripcion))
+        .toPromise()
+        .then (response => JSON.parse(response.text().toString()) as Inscripcion)
+        .catch();
+    }
     // Azucar
     public aceptarInscripcion( inscripcion: Inscripcion): Promise<Inscripcion|JSON> {
         return this.cambiarEstadoInscripcion(inscripcion, 'A').then(

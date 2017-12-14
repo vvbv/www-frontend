@@ -1,69 +1,70 @@
 <div *ngIf="estructuraEvento && evento && !preinscrito" class="preview-evento col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-
   
-  <div class="preview-evento-title">
-    <span>{{evento.nombre}}</span>
-  </div>
-  <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
-  <hr>
-  <div *ngIf="evento.estado == 'CC'" class="head-evento-cancelado">
-    Cancelado
-  </div>
-  <div [class.boton-editar-cancelado]="evento.estado == 'CC'" class="" [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
     
-    <p class="card-text text-justify preview-descripcion"><strong>Descripción</strong><br> {{evento.descripcion}}</p>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        <p class="mb-1">Precio: ${{evento.precio}}</p>
-      </li>
-      <li class="list-group-item">
-        <p class="card-text">
-          <small class="text-muted">
-            <b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}}
-            <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
-        </p>
-      </li>
-    </ul>
-  </div>
-  <div [class.opciones-cancelado]="evento.estado == 'CC'" class="card-footer preview-estado" style="width: 100%">
-    <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
-    <b class="preview-estado-b">{{getDisplayNameEstado(evento)}}&nbsp;</b>
-  </div>
-  <hr>
-  <div *ngIf="usuarioLogueado$ | async as  usuario" class="preview-opciones btn-group dropup">
-    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Opciones
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]" class="dropdown-item">Editar</button>
-      <button *ngIf="usuario.rol != 'UP'" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+evento.id">Usuarios Preinscritos</button>
-      <button *ngIf="usuario.rol != 'UP'" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-inscritos'+evento.id">Usuarios Inscritos</button>
-      <button [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
-      <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/newActivity']" [queryParams]="{idEvent: evento.id}" class="dropdown-item">Crear actividad</button>
+    <div class="preview-evento-title">
+      <span>{{evento.nombre}}</span>
     </div>
-
-    <ng-container *ngIf="usuarioLogueado$| async as usuarioLogueado">
-      <div class="modal fade usuarios-preinscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-xl">
-          <div class="modal-content">
-            <app-listUsers-preinscritos [evento]="evento"></app-listUsers-preinscritos>
+    <div class="img-min-evento" [style.backgroundImage]="'url('+ evento.imagen +')'"></div>
+    <hr>
+    <div *ngIf="evento.estado == 'CC'" class="head-evento-cancelado">
+      Cancelado
+    </div>
+    <div [class.boton-editar-cancelado]="evento.estado == 'CC'" class="" [class.active]="evento === eventoSeleccionado" (click)="seleccionarEvento(evento)">
+      
+      <p class="card-text text-justify preview-descripcion"><strong>Descripción</strong><br> {{evento.descripcion}}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <p class="mb-1">Precio: ${{evento.precio}}</p>
+        </li>
+        <li class="list-group-item">
+          <p class="card-text">
+            <small class="text-muted">
+              <b>Desde el</b> {{evento.fechaInicio | date:'MM/dd/yyyy'}}
+              <b> hasta el </b>{{evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div [class.opciones-cancelado]="evento.estado == 'CC'" class="card-footer preview-estado" style="width: 100%">
+      <!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
+      <b class="preview-estado-b">{{getDisplayNameEstado(evento)}}&nbsp;</b>
+    </div>
+    <hr>
+    <div *ngIf="usuarioLogueado$ | async as  usuario" class="preview-opciones btn-group dropup">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Opciones
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/edit-event/', evento.id]" class="dropdown-item">Editar</button>
+        <button *ngIf="usuario.rol != 'UP'" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-preinscritos'+evento.id">Usuarios Preinscritos</button>
+        <button *ngIf="usuario.rol != 'UP'" class="dropdown-item" data-toggle="modal" [attr.data-target]="'.usuarios-inscritos'+evento.id">Usuarios Inscritos</button>
+        <button [routerLink]="['/listActivities']" [queryParams]="{id: evento.id}" class="dropdown-item">Ver lista de actividades</button>
+        <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/newActivity']" [queryParams]="{idEvent: evento.id}" class="dropdown-item">Crear actividad</button>
+      </div>
+  
+      <ng-container *ngIf="usuario.rol !== 'UP'">
+        <div class="modal fade usuarios-preinscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-xl">
+            <div class="modal-content">
+              <app-listUsers-preinscritos [evento]="evento"></app-listUsers-preinscritos>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="modal fade usuarios-inscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-xl">
-          <div class="modal-content">
-            <app-listUsers-inscritos [evento]="evento"></app-listUsers-inscritos>
+  
+        <div class="modal fade usuarios-inscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg modal-xl">
+            <div class="modal-content">
+              <app-listUsers-inscritos [evento]="evento"></app-listUsers-inscritos>
+            </div>
           </div>
         </div>
-      </div>
-
-
-
-      <a *ngIf="usuarioLogueado.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento, usuarioLogueado)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
-      <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
-    </ng-container>
+  
+  
+  
+        <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
+      </ng-container>
+      <a *ngIf="usuario.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento, usuario)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
+      
+    </div>
   </div>
-</div>
