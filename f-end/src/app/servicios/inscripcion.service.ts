@@ -1,6 +1,7 @@
 import { InscripcionEstructura } from '../modelos/inscripcionEstructura.class';
 import { Injectable } from '@angular/core';
 import { Inscripcion } from '../modelos/inscripcion.class';
+import { InscripcionV2 } from '../modelos/inscripcionV2.class';
 import { Evento } from '../modelos/evento.class';
 import { Usuario } from '../modelos/usuario.class';
 import { ConeccionInfo } from './coneccion.info';
@@ -26,8 +27,24 @@ export class InscripcionService {
         .toPromise()
         .then(
             response =>  {
+                console.log(response.text().toString());
                 return (JSON.parse(response.text().toString()).results as Inscripcion);
             }
+        );
+    }
+
+    //.results [Se conserva la anterior para no causar alteraciones]
+    public getInscripcionV2(idInscripcion: string): Promise<Inscripcion> {
+        return this.http
+        .get(this.coneccionInfo.url_inscripcion + idInscripcion, {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                console.log(response.text().toString());
+                return (JSON.parse(response.text().toString()) as Inscripcion);
+            }
+        ).catch(
+            response => {return null;}
         );
     }
 
@@ -94,7 +111,7 @@ export class InscripcionService {
             });
     }
 
-    public getInscripciones(): Promise<Inscripcion[] | null>{
+    public getInscripciones(): Promise<InscripcionV2[] | null>{
         return this.http
         .get(this.coneccionInfo.url_inscripcion, {headers: this.coneccionInfo.headers})
         .toPromise()

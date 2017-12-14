@@ -5,28 +5,26 @@ import {
     NgbAlertModule
 } from '@ng-bootstrap/ng-bootstrap';
 
-import { GenerarEscarapelaRoutingModule } from './generar-escarapela-routing.module';
+import { VerificarEscarapelaRoutingModule } from './verificar-escarapela-routing.module';
 import { StatModule } from '../../shared';
-import { GenerarEscarapelaComponent } from './generar-escarapela.component';
+import { VerificarEscarapelaComponent } from './verificar-escarapela.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { NgClass } from '@angular/common';
-import { NgxBarcodeModule } from 'ngx-barcode';
 
 @NgModule({
     imports: [
-        NgxBarcodeModule,
         CommonModule,
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),
-        GenerarEscarapelaRoutingModule,
+        VerificarEscarapelaRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         StatModule,
         SharedModule
     ],
     declarations: [
-        GenerarEscarapelaComponent,
+        VerificarEscarapelaComponent,
     ]
 })
-export class GenerarEscarapelaModule { }
+export class VerificarEscarapelaModule { }

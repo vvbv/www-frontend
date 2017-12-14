@@ -44,11 +44,13 @@
                             {{escarapela.participante.apellidos}}
                         </div>
                         <div id="acceso">
-                            Acceso a:<br> {{escarapela.evento}}
+                            Acceso a:<br> {{escarapela.evento.nombre}}
                         </div>
                         <div id="centro-eventos">
                             <hr>
                             IEDB
+                            <hr>
+                            <ngx-barcode [bc-width]="2" [bc-height]="49" [bc-value]="'0'+escarapela.evento.id+'0-0'+escarapela.id+'0-0'+escarapela.participante.id+'0'" [bc-display-value]="true"></ngx-barcode>
                         </div>
                     </div>
                 </div>

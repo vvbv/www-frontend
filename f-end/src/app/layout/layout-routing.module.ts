@@ -34,6 +34,7 @@ const routes: Routes = [
             { path: 'newActivity', loadChildren: './crear-actividad/crear-actividad.module#CrearActividadModule'},
             { path: 'editActivity', loadChildren: './editar-actividad/editar-actividad.module#EditarActividadModule'},
             { path: 'generarEscarapela', loadChildren: './generar-escarapela/generar-escarapela.module#GenerarEscarapelaModule'},
+            { path: 'verificarEscarapela', loadChildren: './verificar-escarapela/verificar-escarapela.module#VerificarEscarapelaModule'},
         ]
     }
 ];
