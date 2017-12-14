@@ -41,9 +41,13 @@ export class listUsersInscritosComponent implements OnInit {
         this.usuarioLogueado$ = this.usuairosService.obtenerUsuarioActualCache();
         this.estructuraInscripcion$ = this.inscripcionService.getOpciones();
     }
-
-    ngOnInit() {
+    obtenerUsuariosInscritos$(): string {
+        this.inscripcionesConUsuario$ = null;
         this.inscripcionesConUsuario$ = this.inscripcionService.getInscripcionesPorEventoConUsuario(this.evento);
+        return '<!-- -->';
+    }
+    ngOnInit() {
+        this.obtenerUsuariosInscritos$();
     }
     getDisplayNameEstadoInscripcion(inscripcion: Inscripcion, estructura): any {
         const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === inscripcion.estado));

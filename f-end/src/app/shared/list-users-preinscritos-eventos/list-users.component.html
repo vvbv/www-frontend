@@ -1,4 +1,5 @@
  
+{{obtenerPreinscripcionesConUsuario$()}}
 <div *ngIf="estructuraPreinscripcion$ | async as estructuraPreinscripcion" class= "lista-usuarios">
  <div  *ngIf="preinscripcionesConUsuario$ | async as preinscripcionesConUsuario" [@routerTransition]>
         <div *ngIf="preinscripcionesConUsuario.length > 0" class="container-fluid">
