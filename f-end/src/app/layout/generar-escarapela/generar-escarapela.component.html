@@ -1,0 +1,58 @@
+<div [@routerTransition]>
+    <h1>Generar escarapela</h1>
+    <hr>
+    <div>
+        <table id="lista-usuarios" class="table">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>#</th>
+                    <th class="hidden-sm-down">Nombres</th>
+                    <th class="hidden-sm-down">Apellidos</th>
+                    <th>Nick</th>
+                    <th class="hidden-md-down">Correo</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let inscripcion of inscripciones; let i = index;">
+                    <th scope="row">{{i + 1}}</th>
+                    <td class="hidden-sm-down">{{inscripcion.participante.nombres}}</td>
+                    <td class="hidden-sm-down">{{inscripcion.participante.apellidos}}</td>
+                    <td>@{{inscripcion.participante.username}}</td>
+                    <td class="hidden-md-down">{{inscripcion.participante.custom_email}}</td>
+                    <td>
+                        <button (click)="establecerEscarapela(inscripcion)" data-toggle="modal" [attr.data-target] ="'.escarapela'" class="btn btn-sm btn-secondary">Generar escarapela</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal fade escarapela" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-md modal-lg modal-xl">
+            <div class="modal-content">
+                
+                <div class="container">
+                    <strong>*Capture, ajuste e imprima</strong>
+                    <div class="caja-escarapela">
+                        <div class="gancho"></div>
+                        <div id="foto-perfil">
+                            <img src="{{escarapela.participante.imagenPerfil}}" alt="">
+                        </div>
+                        <div id="nombres-apellidos">
+                            {{escarapela.participante.nombres}}<br>
+                            {{escarapela.participante.apellidos}}
+                        </div>
+                        <div id="acceso">
+                            Acceso a:<br> {{escarapela.evento}}
+                        </div>
+                        <div id="centro-eventos">
+                            <hr>
+                            IEDB
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

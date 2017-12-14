@@ -94,6 +94,21 @@ export class InscripcionService {
             });
     }
 
+    public getInscripciones(): Promise<Inscripcion[] | null>{
+        return this.http
+        .get(this.coneccionInfo.url_inscripcion, {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response => {
+                return (JSON.parse(response.text().toString()) as Inscripcion[]);
+            }
+            )
+            .catch(response => {
+                console.log(response);
+                return null;
+            });
+    }
+
     public getInscripcionesPorEventoConUsuario(evento: Evento): Promise<InscripcionConUsuario[] | null>{
         const idEvento: number = Number(evento.id);
         return this.http

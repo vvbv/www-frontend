@@ -32,6 +32,10 @@
             <i class="fa fa-th-list"></i>&nbsp; Noticias
         </a>
 
+        <a [routerLink]="['/generarEscarapela']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-th-list"></i>&nbsp; G. Escarapela
+        </a>
+
         <div id="salir" class="hidden-lg-up">
             <a  [routerLink]="['/login']" [queryParams]="{logout: 'yes'}" [routerLinkActive]="['router-link-active']"> <i class="fa fa-sign-out"></i>&nbsp; Cerrar sesion</a>
         </div>
