@@ -1,5 +1,5 @@
 <div clasa="row">
-    <div *ngIf="eventos" class="" [@routerTransition]>
+    <div *ngIf="eventos" class="card-columns" [@routerTransition]>
         <div class="container-fluid" *ngIf=" eventos ">
             <app-preview-evento *ngFor="let evento of eventos;" [evento]="evento"> </app-preview-evento>
         </div>
