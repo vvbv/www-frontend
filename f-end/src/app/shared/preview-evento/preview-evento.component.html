@@ -42,7 +42,7 @@
         <button *ngIf="usuario.rol != 'UP'" [routerLink]="['/newActivity']" [queryParams]="{idEvent: evento.id}" class="dropdown-item">Crear actividad</button>
       </div>
   
-      <ng-container *ngIf="usuarioLogueado$| async as usuarioLogueado">
+      <ng-container *ngIf="usuario.rol !== 'UP'">
         <div class="modal fade usuarios-preinscritos{{evento.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
           aria-hidden="true">
           <div class="modal-dialog modal-lg modal-xl">
@@ -62,8 +62,9 @@
   
   
   
-        <a *ngIf="usuarioLogueado.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento, usuarioLogueado)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
         <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
       </ng-container>
+      <a *ngIf="usuario.rol == 'UP' && evento.estado == 'SI'" (click)="preinscripcion(evento, usuario)" class="btn btn-sm btn-secondary">Preinscribirme</a>&nbsp;
+      
     </div>
   </div>

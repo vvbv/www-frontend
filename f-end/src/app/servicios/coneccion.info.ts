@@ -1,6 +1,8 @@
 
 import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
+import { Inscripcion } from 'app/modelos/inscripcion.class';
+import { InscripcionConEvento } from 'app/modelos/inscripcionConEvento.class';
 @Injectable()
 export class ConeccionInfo {
     public token_name;
@@ -89,7 +91,12 @@ export class ConeccionInfo {
     getUrlPreinscripcionesConEvento(idUsuario: number): string{
         return this.url_usuarios + idUsuario + '/preinscripcionesConEvento/';
     }
+    getUrlAceptarInscipcionPorUsuario(inscripcion: Inscripcion | InscripcionConEvento): string{
+        let idEvento = (inscripcion instanceof Inscripcion )? inscripcion.evento : inscripcion.evento.id;
 
+        return this.url_inscripcion + 'aceptarInscripcionPorUsuario/' + idEvento + '/' 
+        + inscripcion.participante + '/';
+    }
     getUrlInscripcionesConEvento(idUsuario: number): string{
         return this.url_usuarios + idUsuario + '/inscripcionesConEvento/';
     }

@@ -179,7 +179,9 @@ export class PreInscripcionService {
                     }
                 );
     }
-    public cancelarPreinscripcion( preinsCripcion: PreInscripcion): Promise<PreInscripcion|JSON> {
+    public cancelarPreinscripcion( preinsCripcion: PreInscripcion | PreinscripcionConEvento): Promise<PreInscripcion|JSON> {
+
+
         return this.http
         .delete(this.coneccionInfo.url_preinscripcion + preinsCripcion.id + '/' ,  {headers: this.coneccionInfo.headers})
         .toPromise()
