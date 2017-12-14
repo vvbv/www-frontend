@@ -1,10 +1,8 @@
-
-<div class="card-columns">
-    <div *ngIf =" usuarioLogueado" [@routerTransition]>
-        <div class = "container-fluid" *ngIf="preinscripcionesConEvento$ | async as preinscripcionesConEvento">
-            <h1  *ngIf=" preinscripcionesConEvento.length > 0 "> Lista de eventos</h1>
-                <app-lista-eventos-preinscritos  [preinscripcionesConEvento] = "preinscripcionesConEvento"> </app-lista-eventos-preinscritos>                
-        </div>
+<div *ngIf=" usuarioLogueado" [@routerTransition]>
+    <div class="container-fluid" *ngIf="preinscripcionesConEvento$ | async as preinscripcionesConEvento">
+        <h1 *ngIf=" preinscripcionesConEvento.length > 0 "> Lista de eventos</h1>
+        <app-lista-eventos-preinscritos [preinscripcionesConEvento]="preinscripcionesConEvento"> </app-lista-eventos-preinscritos>
     </div>
 </div>
+
     

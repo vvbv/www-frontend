@@ -37,6 +37,12 @@ export class PreviewEventoInscripcionComponent implements OnInit {
 
    }
 
+   aceptarInscripcion(inscripcion: InscripcionConEvento): void {
+     this.inscripcionService.aceptarInscripcionPorUsuario(inscripcion)
+     .then()
+     .catch();
+   }
+
   getDisplayNameEstadoInscripcion(inscripcion: InscripcionConEvento, estructura: InscripcionEstructura): string {
     const  est: JSON = (estructura.estado.choices.filter( choice => choice.value === inscripcion.estado));
     return est['0'].display_name;

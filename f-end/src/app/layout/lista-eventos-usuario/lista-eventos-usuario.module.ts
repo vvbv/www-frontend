@@ -8,6 +8,7 @@ import { MomentModule } from 'angular2-moment';
 import { Routes, RouterModule } from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
+import { ToastModule } from 'ng2-toastr/src/toast.module';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { SharedModule } from '../../shared/shared.module';
         PageHeaderModule,
         FormsModule,
         ReactiveFormsModule,
+        ToastModule.forRoot(),
         SharedModule,
         MomentModule
     ],
