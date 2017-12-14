@@ -41,7 +41,7 @@ export class VerificarEscarapelaComponent  {
       this.inscripcionService.getInscripcionV2(idInscripcion).then(
         response => {
           if(response != null){
-            if((response.id == idInscripcion)&&(response.evento == idEvento)&&(response.participante == idUsuario)){
+            if((response.estado == 'P')==(response.id == idInscripcion)&&(response.evento == idEvento)&&(response.participante == idUsuario)){
               this._toastr.success('Escarapela válida', 'En hora buena!', {toastLife: 3000, showCloseButton: false});
             }else{
               this._toastr.error('Escarapela inválida', 'Ups!', {toastLife: 3000, showCloseButton: false});
