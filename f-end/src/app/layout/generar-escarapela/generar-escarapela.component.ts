@@ -2,7 +2,8 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
-import { Inscripcion } from '../../modelos/inscripcion.class'
+import { Inscripcion } from '../../modelos/inscripcion.class';
+import { Usuario } from '../../modelos/usuario.class';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ConeccionInfo } from '../../servicios/coneccion.info';
 import { InscripcionService } from '../../servicios/inscripcion.service';
@@ -31,7 +32,8 @@ export class GenerarEscarapelaComponent  {
   ) {
     this._toastr.setRootViewContainerRef(vRef);
     this.inscripciones = new Array<Inscripcion>();
-    this.escarapela = null;
+    this.escarapela = new Inscripcion();
+    this.escarapela.participante = new Usuario();
     this.inscripcionService.getInscripciones().then(
       response => {
         for (let inscripcion of response) {
@@ -53,6 +55,7 @@ export class GenerarEscarapelaComponent  {
                       }
                     );
                   }else{
+                    response.imagenPerfil = "";
                     this.eventoService.getEventov2(Number(inscripcion.evento)).then(
                       response3 => {
                         inscripcion.evento = response3.nombre;
