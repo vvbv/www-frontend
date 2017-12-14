@@ -1,0 +1,22 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { EditEventComponent } from './edit-event.component';
+import { EditEventsRoutingModule } from './edit-event-routing.module';
+import { PageHeaderModule } from './../../shared';
+import {ToastModule, ToastOptions} from 'ng2-toastr/ng2-toastr';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SharedModule } from '../../shared/shared.module';
+
+@NgModule({
+    imports: [
+        CommonModule,
+        EditEventsRoutingModule,
+        FormsModule,
+        SharedModule,
+        ToastModule.forRoot(),
+    ],
+    declarations: [EditEventComponent],
+    providers: [ToastOptions],
+})
+export class EditEventModule { }

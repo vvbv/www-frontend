@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { TokenService } from './servicios/token.service';
+import { NgModule, ViewContainerRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Http, HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
@@ -10,6 +11,21 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 
 import { AuthenticationService } from './servicios/authentication.service';
+import { UsuarioService } from './servicios/usuario.service';
+import { SendEmailService } from './servicios/sendEmail.service';
+import { ConeccionInfo } from './servicios/coneccion.info';
+import { EventoService } from './servicios/events.service';
+import { ImagenesService } from './servicios/imagenes.service';
+import { PreInscripcionService } from './servicios/preInscripcion.service';
+import { InjectorToken } from './servicios/injectorToken.service';
+import { CrearActividadModule } from './shared/crear-actividad/crear-actividad.module';
+import { ActividadService } from './servicios/actividad.service';
+import { InscripcionService } from './servicios/inscripcion.service';
+import { MensajesToastService } from './servicios/mensajes-toast.service';
+import { ToastModule, ToastOptions } from 'ng2-toastr/ng2-toastr';
+import { NoticiasService } from './servicios/noticias.service';
+import { PaginaInicialModule } from './pagina-inicial/pagina-inicial.module';
+import { MockupServicios } from 'app/servicios/servicios.mockup';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -19,14 +35,20 @@ export function HttpLoaderFactory(http: Http) {
 }
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     imports: [
+
         BrowserModule,
-        BrowserAnimationsModule,
         FormsModule,
         HttpModule,
         AppRoutingModule,
+        ReactiveFormsModule,
+        NoopAnimationsModule,
+        PaginaInicialModule,
+        BrowserAnimationsModule,
+        CrearActividadModule,
+        ToastModule.forRoot(),
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
@@ -36,7 +58,21 @@ export function HttpLoaderFactory(http: Http) {
         })
     ],
     providers: [AuthGuard,
-                AuthenticationService],
+                AuthenticationService,
+                UsuarioService,
+                EventoService,
+                PreInscripcionService,
+                ConeccionInfo,
+                InscripcionService,
+                InjectorToken,
+                ToastOptions,
+                ActividadService,
+                MockupServicios,
+                NoticiasService,
+                ImagenesService,
+                SendEmailService,
+                MensajesToastService,
+                TokenService],
     bootstrap: [AppComponent]
 })
 export class AppModule {

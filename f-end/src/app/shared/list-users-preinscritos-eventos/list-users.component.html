@@ -1,0 +1,56 @@
+ 
+<div *ngIf="estructuraPreinscripcion$ | async as estructuraPreinscripcion" class= "lista-usuarios">
+ <div  *ngIf="preinscripcionesConUsuario$ | async as preinscripcionesConUsuario" [@routerTransition]>
+        <div *ngIf="preinscripcionesConUsuario.length > 0" class="container-fluid">
+            <h3>Lista de usuarios pre inscritos</h3><hr>
+
+            <div class="row">
+ 
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th class = "hidden-sm-down" >Nombres</th>
+                            <th class = "hidden-sm-down">Apellidos</th>
+                            <th>Nick</th>
+                            <th class = "hidden-md-down">Correo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let preinscripcionConUsuario of preinscripcionesConUsuario; let i = index;" >
+                            <td class = "hidden-sm-down">{{preinscripcionConUsuario.participante.nombres}}</td>
+                            <td class = "hidden-sm-down">{{preinscripcionConUsuario.participante.apellidos}}</td>
+                            <td>@{{preinscripcionConUsuario.participante.username}}</td>
+                            <td class = "hidden-md-down">{{preinscripcionConUsuario.participante.custom_email}}</td>
+                            <td>
+
+                            <div class = "hidden-sm-down"  *ngIf="evento.estado === 'SI'"  class="in-line" >
+                                <button *ngIf="preinscripcionConUsuario.estado === 'EA' || preinscripcionConUsuario.estado === 'R'"(click)="aceptarPreinscripcion(preinscripcionConUsuario)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="preinscripcionConUsuario.estado === 'EA' " (click)="rechazarPreinscripcion(preinscripcionConUsuario)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
+                                <p *ngIf="preinscripcionConUsuario.estado !== 'EA' &&  preinscripcionConUsuario.estado !== 'R'"> {{getDisplayNameEstado(preinscripcionConUsuario, estructuraPreinscripcion) }}</p>
+                            </div>
+                            <div *ngIf="preinscripcionConUsuario.estado === 'EA' || preinscripcionConUsuario.estado === 'R' " class="dropdown hidden-md-up">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Opciones
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <button *ngIf="preinscripcionConUsuario.estado === 'EA' || preinscripcionConUsuario.estado === 'R'" (click)="aceptarPreinscripcion(usuarioYRegistro[0], evento)"   class="dropdown-item">Aceptar</button>
+                                      <button *ngIf="preinscripcionConUsuario.estado === 'EA' "  (click)="rechazarPreinscripcion(usuarioYRegistro[0], evento)"  class="dropdown-item">Rechazar</button>
+                                      <p *ngIf="preinscripcionConUsuario.estado !== 'EA' && preinscripcionConUsuario.estado !== 'R'"> {{getDisplayNameEstado(preinscripcionConUsuario, estructuraPreinscripcion) }}</p>
+                                    </div>
+                                  </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class= "text-center" *ngIf="preinscripcionesConUsuario.length == 0">
+                <h3>No hay usuarios pre inscritos en este evento</h3>
+            </div>
+    </div>
+    <p *ngIf="!preinscripcionesConUsuario$"> <br>Cargando...<br></p>
+
+</div> 

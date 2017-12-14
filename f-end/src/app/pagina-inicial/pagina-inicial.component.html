@@ -1,0 +1,76 @@
+<div class="pos-f-t header contenedor-principal">
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-12 fixed-top nav-principal">
+                <a href=""><strong>IEDB</strong></a>
+                <a [routerLink]="['/signup']"  id="singup-principal" class="float-right">Registrarse</a>
+                <a [routerLink]="['/login']"  id="ingresar-principal" class="float-right">Ingresar</a>
+            </nav>
+        </div>
+        <div style="margin-top:60px;">
+            <h1>Bienvenido al sitio de eventos m&aacute;s impactante que jamás haya visto</h1>
+
+            <div class ="row">
+                <div class = "col-md-6 col-lg-4 col-sm-2 text-justify">
+                    <b>Titulo 1</b> <br> <br>
+                        La conexión entre el robo y el comité de reelección fue destacada por la cobertura de los medios de comunicación-en particular, la cobertura investigativa por The Washington Post, Time y The New York Times. La cobertura aumentó dramáticamente la publicidad y las consecuentes repercusiones políticas. Los reporteros Bob Woodward y Carl Bernstein descubrieron información que sugiere que el conocimiento de la invasión y los intentos de encubrirlo implicaban profundamente a los niveles superiores del Departamento de Justicia, el FBI, la CIA y la Casa Blanca . Woodward y Bernstein entrevistaron a Judy Hoback Miller, la contadora de Nixon, quien les reveló información sobre el mal manejo de fondos y registros que estaban siendo destruidos
+                </div>
+                <div class = "col-md-6 hidden-sm-down col-lg-4 col-sm-2 text-justify">
+                    <b>Titulo 2</b> <br> <br>
+                        El 29 de septiembre de 1972, la prensa informó que John Mitchell, mientras servía como Fiscal General, controlaba un fondo republicano secreto usado para financiar la reunión de inteligencia contra los demócratas. El 10 de octubre, el FBI informó que el allanamiento de Watergate fue parte de una campaña masiva de espionaje político y sabotaje en nombre del comité de reelección de Nixon. A pesar de estas revelaciones, la campaña de Nixon nunca fue seriamente puesta en peligro; El 7 de noviembre, el Presidente fue reelegido en uno de los mayores derrumbes de la historia política estadounidense.      
+                </div>
+                <div class = "col-md-6 col-lg-4 hidden-sm-down  col-sm-2 text-justify">
+                    <b>Titulo 3 </b> <br> <br>
+                        El 29 de septiembre de 1972, la prensa informó que John Mitchell, mientras servía como Fiscal General, controlaba un fondo republicano secreto usado para financiar la reunión de inteligencia contra los demócratas. El 10 de octubre, el FBI informó que el allanamiento de Watergate fue parte de una campaña masiva de espionaje político y sabotaje en nombre del comité de reelección de Nixon. A pesar de estas revelaciones, la campaña de Nixon nunca fue seriamente puesta en peligro; El 7 de noviembre, el Presidente fue reelegido en uno de los mayores derrumbes de la historia política estadounidense.      
+                </div>
+            </div>
+        </div>   
+          <div class="separador col-12"></div>
+
+          
+
+          <div class="row carrusel-noticias">
+            <div class="col-md-12 col-sm-12 col-lg-12 align-self-center justify-content-center align-items-center">
+                <h2>Ultimas noticias</h2>
+                <ngb-carousel *ngIf = "cincoUltimasNoticias$ | async as cincoUltimasNoticias">
+                    <ng-template ngbSlide *ngFor="let noticia of cincoUltimasNoticias">
+                        <img class="img-fluid mx-auto d-block" [src]="noticia.imagen" alt="noticia.titulo" width="100%">
+                        <div class="carousel-caption">
+                            <h3>{{noticia.titulo}}</h3>
+                            <p>{{noticia.resumen  | slice:0:50}}...</p>
+                            <button data-toggle="modal" [attr.data-target] ="'.noticia-'+noticia.id" >Seguir leyendo</button>
+                        </div>
+                    </ng-template>
+                </ngb-carousel>
+                
+            </div>
+        <ng-container *ngIf = "cincoUltimasNoticias$ | async as cincoUltimasNoticias">
+            <ng-container *ngFor = "let noticia of cincoUltimasNoticias">
+                <app-noticia-preview [noticia] = "noticia" ></app-noticia-preview>
+            </ng-container>
+        </ng-container>  
+        </div>
+          <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+            
+          </div>
+        <div class="row">
+          <div class="footer-principal col-12">
+              <footer>
+                  <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <img src="assets/images/footerimage.png" width="100px" class="user-avatar" /> 
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <a>Universidad del Valle 2017</a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                                <a>Acerca de</a>
+                        </div>
+                  </div>
+              </footer>
+          </div>
+        </div>
+    </div>
+</div>
+
+

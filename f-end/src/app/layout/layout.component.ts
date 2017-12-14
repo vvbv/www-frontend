@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MomentModule } from 'angular2-moment';
 
 @Component({
     selector: 'app-layout',
@@ -12,7 +13,7 @@ export class LayoutComponent implements OnInit {
 
     ngOnInit() {
         if (this.router.url === '/') {
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/list-events']);
         }
     }
 

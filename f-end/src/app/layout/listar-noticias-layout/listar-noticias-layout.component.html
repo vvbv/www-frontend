@@ -1,0 +1,16 @@
+
+
+<div *ngIf = "usuario$ | async as usuario"  [@routerTransition]>
+  <div *ngIf="(noticias$ | async) as noticias">
+  
+        <div *ngIf="noticias.length == 0">
+        <div class="alert alert-warning" role="alert">
+            <strong>Opps!</strong> No hay noticias registradas aún
+            
+            <a *ngIf="usuario.rol != 'UP' " [routerLink]="['/crearNoticia/']" [routerLinkActive]="['router-link-active']"  class="float-right" >Registrar una ahora?</a>
+          </div>
+    </div>
+    <div *ngIf= "noticias.length > 0" > </div>
+      <app-lista-noticias [noticias] = "noticias" [usuario] = "usuario"> </app-lista-noticias>
+  </div>
+</div>

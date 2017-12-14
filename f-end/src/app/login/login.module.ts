@@ -8,9 +8,9 @@ import { LoginComponent } from './login.component';
     imports: [
         CommonModule,
         LoginRoutingModule,
-        FormsModule 
+        FormsModule ,
     ],
-    declarations: [LoginComponent]
+    declarations: [LoginComponent],
 })
 export class LoginModule {
 }

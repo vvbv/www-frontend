@@ -1,0 +1,10 @@
+<div [@routerTransition]>
+  <h1>Edici&oacute;n de eventos</h1>
+  <div *ngIf="evento$ | async as evento">
+   <div *ngIf="estructuraEvento" >
+    <app-form-evento [errores] = "errores" [event] = "evento" ></app-form-evento>
+
+     <button (click)="actualizarEvento(evento)" type="button" class="btn float-right btn-primary">Actualizar</button>
+
+   </div>
+  </div> 
