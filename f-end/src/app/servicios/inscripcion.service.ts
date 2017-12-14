@@ -26,8 +26,24 @@ export class InscripcionService {
         .toPromise()
         .then(
             response =>  {
+                console.log(response.text().toString());
                 return (JSON.parse(response.text().toString()).results as Inscripcion);
             }
+        );
+    }
+
+    //.results [Se conserva la anterior para no causar alteraciones]
+    public getInscripcionV2(idInscripcion: string): Promise<Inscripcion> {
+        return this.http
+        .get(this.coneccionInfo.url_inscripcion + idInscripcion, {headers: this.coneccionInfo.headers})
+        .toPromise()
+        .then(
+            response =>  {
+                console.log(response.text().toString());
+                return (JSON.parse(response.text().toString()) as Inscripcion);
+            }
+        ).catch(
+            response => {return null;}
         );
     }
 
