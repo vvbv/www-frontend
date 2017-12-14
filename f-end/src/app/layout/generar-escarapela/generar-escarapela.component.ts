@@ -2,7 +2,7 @@ import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { FormControl } from '@angular/forms';
 
-import { Inscripcion } from '../../modelos/inscripcion.class';
+import { InscripcionV2 } from '../../modelos/inscripcionV2.class';
 import { Usuario } from '../../modelos/usuario.class';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { ConeccionInfo } from '../../servicios/coneccion.info';
@@ -19,9 +19,8 @@ import { routerTransition } from '../../router.animations';
 })
 export class GenerarEscarapelaComponent  {
 
-  inscripciones: Inscripcion[];
+  inscripciones: InscripcionV2[];
   escarapela: any;
-  idEvento: any;
   
   constructor(
     public _toastr: ToastsManager,
@@ -32,8 +31,8 @@ export class GenerarEscarapelaComponent  {
     vRef: ViewContainerRef
   ) {
     this._toastr.setRootViewContainerRef(vRef);
-    this.inscripciones = new Array<Inscripcion>();
-    this.escarapela = new Inscripcion();
+    this.inscripciones = new Array<InscripcionV2>();
+    this.escarapela = new InscripcionV2();
     this.escarapela.participante = new Usuario();
     this.inscripcionService.getInscripciones().then(
       response => {
@@ -49,8 +48,7 @@ export class GenerarEscarapelaComponent  {
                         inscripcion.participante.imagenPerfil = response2;
                         this.eventoService.getEventov2(Number(inscripcion.evento)).then(
                           response3 => {
-                            inscripcion.evento = response3.nombre;
-                            this.idEvento = response3.id;
+                            inscripcion.evento = response3;
                             this.inscripciones.push(inscripcion);
                           } 
                         );
@@ -60,8 +58,7 @@ export class GenerarEscarapelaComponent  {
                     response.imagenPerfil = "";
                     this.eventoService.getEventov2(Number(inscripcion.evento)).then(
                       response3 => {
-                        inscripcion.evento = response3.nombre;
-                        this.idEvento = response3.id;
+                        inscripcion.evento = response3;
                         this.inscripciones.push(inscripcion);
                       } 
                     );
