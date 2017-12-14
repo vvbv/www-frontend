@@ -30,8 +30,9 @@ export class ConeccionInfo {
     public url_estadisticas_eventos;
     public url_cinco_eventos_mas_proximos;
     public headers: Headers;
-    public url_inscripciones_por_evento:string;
-    public url_inscripciones_por_evento_con_usuario:string;
+    public url_get_medio_pago_username: string;
+    public url_inscripciones_por_evento: string;
+    public url_inscripciones_por_evento_con_usuario: string;
     public url_get_inscricion_por_usuario_evento: string;
     public url_sendEmail: string;
     public url_cinco_ultimas_noticias_publicadas: string;
@@ -50,32 +51,33 @@ export class ConeccionInfo {
         this.url_actividades_byEvent = this.url_base_api + '/actividades/byEvent/';
         this.url_asistencia = this.url_base_api + '/asistencias/';
         this.url_preinscripcion = this.url_eventos + 'preinscripciones/';
-
         this.url_inscripcion = this.url_base_api + '/eventos/inscripciones/';
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
         this.url_static_imagenes = this.url_base + '/static/';
+        this.url_get_medio_pago_username = this.url_usuarios + 'medio-de-pago-por-usernameo/';
         this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
         this.url_inscripciones_por_evento = this.url_inscripcion + 'byEvent/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
         this.url_noticias = this.url_base_api + '/noticias/';
         this.url_sendEmail = this.url_base_api + '/funcionesExtra/sendEmail';
-
         this.url_cinco_eventos_mas_proximos = this.url_eventos + 'cincoUltimos/';
         this.url_estadisticas_eventos = this.url_eventos + 'estadisticas/';
         this.url_cinco_ultimas_noticias_publicadas = this.url_noticias + 'cincoUltimas/';
         this.iniciarHeaders();
     }
-    
     getUrlPreinscripcionesPorEventoPorUsuario(idEvento: number, idUsuario: number){
         return this.url_eventos + idEvento + '/preinscripciones/usuario/' + idUsuario + '/';
     }
-    
     getUrlInscripcionesPorEvento(idEvento: number): string{
         return this.url_eventos + idEvento + '/inscripciones/' ;
     }
     getUrlPreinscripcionesPorEvento(idEvento: number): string{
         return this.url_eventos + idEvento + '/preinscripciones/' ;
+    }
+    getUrlRegistrarMedioPago(username: string, numero_cuenta: string, password: string): string {
+        return this.url_usuarios + 'registrar-medio-pago/' + username + '/' + numero_cuenta + '/'
+        + password + '/' ;
     }
     getUrlPreinscripcionesPorEventoConUsuarios(idEvento: number): string{
         return this.url_eventos + idEvento+ '/preinscripcionesConUsuario/';

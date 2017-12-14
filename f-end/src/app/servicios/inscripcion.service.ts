@@ -12,7 +12,6 @@ import 'rxjs/add/operator/map';
 import { PreInscripcion } from '../modelos/preInscripcion.class';
 import { InscripcionConUsuario } from '../modelos/inscripcionConUsuario.class';
 import { InscripcionConEvento } from '../modelos/inscripcionConEvento.class';
- 
 
 @Injectable()
 export class InscripcionService {
@@ -26,7 +25,7 @@ export class InscripcionService {
         .toPromise()
         .then(
             response =>  {
-                return (JSON.parse(response.text().toString()).results as Inscripcion);
+                return (JSON.parse(response.text().toString()) as Inscripcion);
             }
         );
     }
