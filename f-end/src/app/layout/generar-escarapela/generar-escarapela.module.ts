@@ -11,9 +11,11 @@ import { GenerarEscarapelaComponent } from './generar-escarapela.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { NgClass } from '@angular/common';
+import { NgxBarcodeModule } from 'ngx-barcode';
 
 @NgModule({
     imports: [
+        NgxBarcodeModule,
         CommonModule,
         NgbCarouselModule.forRoot(),
         NgbAlertModule.forRoot(),

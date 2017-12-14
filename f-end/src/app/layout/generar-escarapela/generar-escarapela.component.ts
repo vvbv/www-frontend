@@ -21,6 +21,7 @@ export class GenerarEscarapelaComponent  {
 
   inscripciones: Inscripcion[];
   escarapela: any;
+  idEvento: any;
   
   constructor(
     public _toastr: ToastsManager,
@@ -49,6 +50,7 @@ export class GenerarEscarapelaComponent  {
                         this.eventoService.getEventov2(Number(inscripcion.evento)).then(
                           response3 => {
                             inscripcion.evento = response3.nombre;
+                            this.idEvento = response3.id;
                             this.inscripciones.push(inscripcion);
                           } 
                         );
@@ -59,6 +61,7 @@ export class GenerarEscarapelaComponent  {
                     this.eventoService.getEventov2(Number(inscripcion.evento)).then(
                       response3 => {
                         inscripcion.evento = response3.nombre;
+                        this.idEvento = response3.id;
                         this.inscripciones.push(inscripcion);
                       } 
                     );
