@@ -6,11 +6,11 @@
         <a class="navbar-brand" href="javascript:void(0)"><strong>IEDB</strong> </a><span class="hidden-md-down">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
         <div class="collapse navbar-collapse">
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >
+                <!--<input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >-->
             </form>
             <ul class="navbar-nav ml-auto mt-2 mt-md-0">
-                <li class="nav-item dropdown" ngbDropdown>
-                    <!-- <div class="dropdown"> -->
+                <!--<li class="nav-item dropdown" ngbDropdown>
+                    <div class="dropdown">
                     <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
                         <i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span>
                     </a>
@@ -40,8 +40,8 @@
                             </div>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item dropdown" ngbDropdown>
+                </li>-->
+                <!--<li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                         <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
                     </a>
@@ -52,7 +52,7 @@
                         <li class="dropdown-divider"></li>
                         <a href="javascript:void(0)" class="dropdown-item">View All</a>
                     </ul>
-                </li>
+                </li>-->
                
                 <li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
@@ -66,7 +66,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
                         <!--<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-user"></i> {{ 'Profile' | translate }}</a>-->
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>
+                        <!--<a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-envelope"></i> Mensajes</a>-->
                         <a class="dropdown-item" [routerLink]="['/profile']"><i class="fa fa-fw fa-gear"></i> Editar perfil</a>
                         <a class="dropdown-item" [routerLink]="['/login']" [queryParams]="{logout: 'yes'}"><i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }} </a>
                     </div>
