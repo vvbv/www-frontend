@@ -59,7 +59,7 @@ export class RegistrarMedioPagoComponent implements OnInit {
         }
         else {
           this._toastr.error(this.respuesta['mensaje'], 'Error!', { toastLife: 3000, showCloseButton: true });
-          this.medioDePago.password = '';
+          this.medioDePago.clave = '';
         }
 
       }
