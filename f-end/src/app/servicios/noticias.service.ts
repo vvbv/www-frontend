@@ -39,7 +39,7 @@ export class NoticiasService {
   }
   public getNoticia(id: number): Observable<Noticia>  {
     return this.http
-    .get(this.coneccionInfo.url_noticias + id.toString(), {headers: this.coneccionInfo.headers})
+    .get(this.coneccionInfo.url_noticias + id.toString() + '/', {headers: this.coneccionInfo.headers})
     .map( response =>   JSON.parse(response.text().toString()) as Noticia) ;
 
   }
