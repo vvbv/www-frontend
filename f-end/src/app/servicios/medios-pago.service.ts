@@ -13,12 +13,12 @@ export class MediosPagoService {
         private coneccionInfo: ConeccionInfo
     ) {}
 
-    getMedioPagoPorUserName(username: string): Promise <MedioDePago> {
+    getMedioPagoPorUserName(usuario: string): Promise <MedioDePago> {
         return this.http
-        .get(this.coneccionInfo.url_get_medio_pago_username + username + '/')
+        .get(this.coneccionInfo.url_get_medio_pago_username + usuario + '/')
         .toPromise()
         .then(
-            response => JSON.parse(response.text().toString()) as MedioDePago
+            response => JSON.parse(response.text().toString())[0] as MedioDePago
         ).catch(
             response => {
              console.log(response);
@@ -26,9 +26,9 @@ export class MediosPagoService {
             }
         )
     }
-    registrarMedioDePago(username: string, numero_cuenta: string,  password: string): Promise <JSON> {
+    registrarMedioDePago(usuario: string, numero_cuenta: string,  clave: string): Promise <JSON> {
         return this.http
-        .get(this.coneccionInfo.getUrlRegistrarMedioPago(username, numero_cuenta, password))
+        .get(this.coneccionInfo.getUrlRegistrarMedioPago(usuario, numero_cuenta, clave))
         .toPromise()
         .then(
             response => JSON.parse(response.text().toString())

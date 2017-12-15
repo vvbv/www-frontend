@@ -6,6 +6,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { async } from 'q';
+import { MedioDePago } from 'app/modelos/medio-pago.class';
 
 
 @Injectable()
@@ -178,6 +179,13 @@ export class UsuarioService {
         );
     }
 
+    public registrarMedioPago(medioPago: MedioDePago): Promise<JSON>{
+        return this.http
+        .get(this.coneccionInfo.getUrlRegistrarMedioPago(medioPago.usuario, medioPago.numero_cuenta, medioPago.clave))
+        .toPromise()
+        .then(response=>  {console.log(response); return (JSON.parse(response.text().toString()) as JSON);})
+        .catch(response => {return (JSON.parse(response.text().toString()))} )
+    }
     public cambiarEstadoUsuario(idUsuario: string, isActivo: boolean): Promise<JSON>{
         let estadoActivo = 'true';
         if(!isActivo){

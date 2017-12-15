@@ -1,4 +1,6 @@
 export class MedioDePago {
-    public username: string;
-    public id_tarjeta: string;
+    public id :string;
+    public usuario: string;
+    public clave: string;
+    public numero_cuenta : string;
 }

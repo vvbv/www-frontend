@@ -25,6 +25,7 @@ import { ListaEventosPreinscritosComponent } from './lista-eventos-preinscritos/
 import { PreviewEventoPreinscripcionComponent } from './preview-evento-preinscrito/preview-evento.component';
 import { ListaEventosInscritosComponent } from './lista-eventos-inscritos/lista-eventos-inscritos.component';
 import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/preview-evento.component';
+import { AbonarEventoComponent } from './abonar-evento/abonar-evento.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -54,6 +55,7 @@ import { PreviewEventoInscripcionComponent } from './preview-evento-inscrito/pre
         UserPreviewComponent,
         ListaEventosPreinscritosComponent,
         UsersPreviewComponent,
+        AbonarEventoComponent,
     ],
     exports: [
         PreviewEventoComponent,
