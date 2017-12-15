@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Headers } from '@angular/http';
 import { Inscripcion } from 'app/modelos/inscripcion.class';
 import { InscripcionConEvento } from 'app/modelos/inscripcionConEvento.class';
+import { Usuario } from '../modelos/usuario.class';
 @Injectable()
 export class ConeccionInfo {
     public token_name;
@@ -73,7 +74,9 @@ export class ConeccionInfo {
     }
 
     
-
+    getUrlActivivdadesByUser(usuario: Usuario){
+        return this.url_actividades + 'byUser/' + usuario.id + '/';
+    }
     getUrlPreinscripcionesPorEventoPorUsuario(idEvento: number, idUsuario: number){
         return this.url_eventos + idEvento + '/preinscripciones/usuario/' + idUsuario + '/';
     }

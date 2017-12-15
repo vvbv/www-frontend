@@ -26,21 +26,26 @@ import {
   CalendarEventTimesChangedEvent,
   DAYS_OF_WEEK
 } from 'angular-calendar';
+import { Actividad } from 'app/modelos/actividad.class';
+import { ActividadService } from '../../servicios/actividad.service';
+import { Usuario } from '../../modelos/usuario.class';
+import { UsuarioService } from 'app/servicios/usuario.service';
 
-const colors: any = {
-  red: {
+const colors: any = [{
     primary: '#ad2121',
     secondary: '#FAE3E3'
-  },
-  blue: {
+  }, {
     primary: '#1e90ff',
     secondary: '#D1E8FF'
-  },
-  yellow: {
+  }, {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
+  },
+  {
+    primary: '#FDF1BA',
+    secondary: '#e3bc08'
   }
-};
+];
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -60,13 +65,13 @@ const colors: any = {
 
 
 
-export class CalendarComponent  {
+export class CalendarComponent  implements OnInit{
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
     view = 'month';
     locale = 'es';
 
-
-    
+    public actividades$: Promise<Actividad[]>;
+    public usuarioLogueado$: Promise<Usuario>;
       viewDate: Date = new Date();
   
       weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
@@ -76,7 +81,7 @@ export class CalendarComponent  {
       action: string;
       event: CalendarEvent;
     };
-    actions: CalendarEventAction[] = [
+    public actions: CalendarEventAction[] = [
       {
         label: '<i class="fa fa-fw fa-pencil"></i>',
         onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -92,41 +97,13 @@ export class CalendarComponent  {
       }
     ];
     refresh: Subject<any> = new Subject();
-    events: CalendarEvent[] = [
-      {
-        start: subDays(startOfDay(new Date()), 1),
-        end: addDays(new Date(), 1),
-        title: 'A 3 day event',
-        color: colors.red,
-        actions: this.actions
-      },
-      {
-        start: startOfDay(new Date()),
-        title: 'An event with no end date',
-        color: colors.yellow,
-        actions: this.actions
-      },
-      {
-        start: subDays(endOfMonth(new Date()), 3),
-        end: addDays(endOfMonth(new Date()), 3),
-        title: 'A long event that spans 2 months',
-        color: colors.blue
-      },
-      {
-        start: addHours(startOfDay(new Date()), 2),
-        end: new Date(),
-        title: 'A draggable and resizable event',
-        color: colors.yellow,
-        actions: this.actions,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        },
-        draggable: true
-      }
-    ];
+    public events: CalendarEvent[];
     activeDayIsOpen = true;
-    constructor(private modal: NgbModal) {}
+    constructor(private modal: NgbModal, 
+      private activadService: ActividadService,
+    private usuarioService: UsuarioService) {
+      this.events = new Array<CalendarEvent>();
+    }
     dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
       if (isSameMonth(date, this.viewDate)) {
         if (
@@ -167,5 +144,31 @@ export class CalendarComponent  {
         }
       });
       this.refresh.next();
+    }
+    initCalendarEventsFromActivities(actividades: Actividad[]): void {
+
+      for (var i = 0; i < actividades.length ; i++){
+        console.log(new Date(actividades[i].fechaInicio));
+    this.events.push({
+      start: subDays(startOfDay(new Date(actividades[i].fechaInicio)), 1),
+      end: addDays(new Date(actividades[i].fechaFinalizacion), 1),
+      title: actividades[i].nombre,
+      color: colors[i],
+      actions: this.actions
+    });
+    this.refresh.next();
+      }
+    }
+    ngOnInit(){
+      this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+      this.usuarioService.obtenerUsuarioActualCache()
+      .then(response => {
+        let usuarioActual: Usuario  = response;
+        this.actividades$ = this.activadService.getActividadesByUser(usuarioActual);
+        this.activadService.getActividadesByUser(usuarioActual)
+        .then(response =>{
+          this.initCalendarEventsFromActivities(response as Actividad[]);
+        })
+      }).catch();
     }
 }

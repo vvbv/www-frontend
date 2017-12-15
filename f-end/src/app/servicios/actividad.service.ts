@@ -8,6 +8,7 @@ import { Actividad } from '../modelos/actividad.class';
 import { ActividadV2 } from '../modelos/actividadV2.class';
 import { Asistencia } from '../modelos/asistencia.class';
 import { Observable } from 'rxjs/Observable';
+import { Usuario } from '../modelos/usuario.class';
 
 
 @Injectable()
@@ -32,6 +33,13 @@ export class ActividadService {
     .catch(response => {
       return response;
     });
+  }
+  public getActividadesByUser(usuario: Usuario): Promise <Actividad[] | null>{
+    return this.http
+    .get(this.coneccionInfo.getUrlActivivdadesByUser(usuario))
+    .toPromise()
+    .then(response =>  JSON.parse(response.text().toString()) as Actividad[])
+    .catch(response => {console.log(response); return response} );
   }
 
   public getActividad(id: number): Observable<Actividad>  {
