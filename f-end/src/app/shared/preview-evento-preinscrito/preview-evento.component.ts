@@ -20,7 +20,7 @@ import { esconderSlideToLeft } from '../../router.animations';
 export class PreviewEventoPreinscripcionComponent implements OnInit {
   @Input() public preinscripcionConEvento: PreinscripcionConEvento;
   public usuarioLogueado$: Promise<Usuario>;
-  public pinscripcionCancelada: boolean;
+  public preinscripcionCancelada: boolean;
   public estructuraPreinscripcion$: Promise<PreInscripcionEstructura>;
   estructuraEvento: EventoEstructura;
   constructor(private usuarioService: UsuarioService,
