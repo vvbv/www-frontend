@@ -5,12 +5,12 @@
             <h1><strong>IEDB</strong></h1>
             <form role="form" #logginForm="ngForm">
                     <div class="form-content">
-                        <input type="text" class="form-control input-underline input-lg" name= "username" id=""  [(ngModel)]="model.username" placeholder="Email"  #username="ngModel">
+                        <input type="text" class="form-control input-underline input-lg" name= "username" id=""  [(ngModel)]="model.username" placeholder="Nombre de usuario"  #username="ngModel">
                     </div>
                     <div class="form-group">
                         <input  type="password" class="form-control input-underline input-lg" id="" (keyup.enter)="onLoggedin()" name = "password" [(ngModel)]="model.password" placeholder="Password" #password="ngModel">
                     </div>
-                <a class="btn rounded-btn"  (click)="onLoggedin()"> Log in </a>
+                <a class="btn rounded-btn"  (click)="onLoggedin()"> Ingresar </a>
                 &nbsp;
 
                 <!--div class="g-recaptcha" data-sitekey="6Le4HD0UAAAAABzV8RBMon_cZ6etz7gO7t3T2YBF"></div-->

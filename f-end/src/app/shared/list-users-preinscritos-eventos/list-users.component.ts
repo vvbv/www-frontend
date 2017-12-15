@@ -3,6 +3,7 @@ import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { SendEmailService } from '../../servicios/sendEmail.service';
 import { UsuarioService } from '../../servicios/usuario.service';
 import { PreInscripcionService } from '../../servicios/preInscripcion.service';
 import { InscripcionService } from '../../servicios/inscripcion.service';
@@ -12,6 +13,7 @@ import { FormControl } from '@angular/forms';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { PreInscripcionEstructura } from 'app/modelos/preInscripcionEstructura';
 import { PreInscripcionConUsuario } from 'app/modelos/preInscripcionConUsuario.class';
+import { EventoService } from '../../servicios/events.service';
 @Component({
     selector: 'app-listUsers-preinscritos',
     templateUrl: './list-users.component.html',
@@ -32,7 +34,9 @@ export class listUsersComponent implements OnInit {
             private preInscripcionService: PreInscripcionService,
             private preinscripcionService: PreInscripcionService,
             private usuairosService: UsuarioService,
-            private inscripcionService: InscripcionService
+            private inscripcionService: InscripcionService,
+            private sendEmailService: SendEmailService,
+            public eventoService: EventoService
         ) {
         this._toastr.setRootViewContainerRef(vRef);
         this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
@@ -63,6 +67,12 @@ export class listUsersComponent implements OnInit {
             this.preinscripcionService.rechazarPreinscripcion(preinscripcion)
             .then(res => {
                 preinscripcionConUsuario.estado = 'R';
+                this.eventoService.getEventov2(Number(preinscripcion.evento)).then(
+                    response => {
+                        let mensaje_json = JSON.parse('{"to": "'+preinscripcion.participante.custom_email+'", "html": "true","message": "Estado inscripcion","subject": "<h1>IEDB</h1><br>Se ha rechazado una preinscripción a '+response.nombre+'"}');
+                        this.sendEmailService.sendEmail(mensaje_json);
+                    }
+                );
                 this._toastr.warning('Se ha rechazado una inscripción',
                  'Accion realizada', {toastLife: 3000, showCloseButton: false});
             })
@@ -86,6 +96,12 @@ export class listUsersComponent implements OnInit {
         this.preinscripcionService.aceptarPreinscripcion(preinscripcion)
                 .then(res => {
                     preinscripcionConUsuario.estado = 'A';
+                    this.eventoService.getEventov2(Number(preinscripcion.evento)).then(
+                        response => {
+                            let mensaje_json = JSON.parse('{"to": "'+preinscripcion.participante.custom_email+'", "html": "true","message": "Estado inscripcion","subject": "<h1>IEDB</h1><br>Se ha realizado inscripcion a '+response.nombre+'"}');
+                            this.sendEmailService.sendEmail(mensaje_json);
+                        }
+                    );
                     this._toastr.success('El usuario ha sido inscrito al evento',
                      'En hora buena!', {toastLife: 3000, showCloseButton: false});
                 })
