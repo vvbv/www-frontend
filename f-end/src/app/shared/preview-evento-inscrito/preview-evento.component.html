@@ -1,4 +1,4 @@
-<div *ngIf="estructuraEvento && inscripcionConEvento" class="preview-evento col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+<div *ngIf="estructuraEvento && inscripcionConEvento && !inscripcionCancelada" class="preview-evento col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
   
     
     <div class="preview-evento-title">
@@ -39,7 +39,7 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <button [routerLink]="['/listActivities']" [queryParams]="{id: inscripcionConEvento.evento.id}" class="dropdown-item">Ver lista de actividades</button>
       <button (click) = "aceptarInscripcion(inscripcionConEvento)" class="dropdown-item">Aceptar inscripcion</button>
-      <button class="dropdown-item">Rechazar inscripcion</button>
+      <button (click) = "rechazarInscripcion(inscripcionConEvento)" class="dropdown-item">Rechazar inscripcion</button>
     </div>
   </div>
 </div>

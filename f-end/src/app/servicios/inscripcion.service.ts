@@ -195,6 +195,13 @@ export class InscripcionService {
         .then (response => JSON.parse(response.text().toString()) as Inscripcion)
         .catch();
     }
+    public rechazarInscripcionPorUsuario(inscripcion: Inscripcion | InscripcionConEvento): Promise< Inscripcion | JSON >{
+        return this.http
+        .get(this.coneccionInfo.getUrlRechazarInscipcionPorUsuario(inscripcion))
+        .toPromise()
+        .then (response => JSON.parse(response.text().toString()) as Inscripcion)
+        .catch();
+    }
     // Azucar
     public aceptarInscripcion( inscripcion: Inscripcion): Promise<Inscripcion|JSON> {
         return this.cambiarEstadoInscripcion(inscripcion, 'A').then(

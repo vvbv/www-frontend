@@ -8,17 +8,19 @@ import { PreinscripcionConEvento } from '../../modelos/preInscripcionConEvento.c
 import { PreInscripcionEstructura } from 'app/modelos/preInscripcionEstructura';
 import { PreInscripcionService } from 'app/servicios/preInscripcion.service';
 import { ToastsManager } from 'ng2-toastr/src/toast-manager';
+import { esconderSlideToLeft } from '../../router.animations';
 
 
 @Component({
   selector: 'app-preview-evento-preinscripcion',
   templateUrl: './preview-evento.component.html',
-  styleUrls: ['./preview-evento.component.scss']
+  styleUrls: ['./preview-evento.component.scss'],
+  animations: [esconderSlideToLeft()]
 })
 export class PreviewEventoPreinscripcionComponent implements OnInit {
   @Input() public preinscripcionConEvento: PreinscripcionConEvento;
   public usuarioLogueado$: Promise<Usuario>;
-  public preinscripcionCancelada: boolean;
+  public pinscripcionCancelada: boolean;
   public estructuraPreinscripcion$: Promise<PreInscripcionEstructura>;
   estructuraEvento: EventoEstructura;
   constructor(private usuarioService: UsuarioService,

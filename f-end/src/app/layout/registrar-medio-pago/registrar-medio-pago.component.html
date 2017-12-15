@@ -1,0 +1,16 @@
+<div *ngIf="usuarioLogueado$ | async as usuario" class="row  ingresar-tarjeta">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <img src ="assets/images/tarjetaPagos.jpg"  >
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 form">
+        <div class="form-group">
+            <label class="col-form-label" for="numero_cuenta">Ingrese su número de cuenta</label>
+            <input [readonly]="solo_lectura" id ="numero_cuenta" name ="numero_cuenta" [(ngModel)]="medioDePago.numero_cuenta" type="text" class="form-control" id="formGroupExampleInput" placeholder="Número de tarjeta" required>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label" for="clave">Ingrese la clave</label>
+            <input [readonly]="solo_lectura"  id = "clave" name ="clave" [(ngModel)]="medioDePago.clave" type="password" class="form-control" id="formGroupExampleInput" placeholder="Contraseña tarjeta" required>
+        </div>
+        <button [disabled] = "solo_lectura" (click) = "actalizarMedioPago(usuario, medioDePago)" type="button" class="btn btn-primary btn-md">Guardar</button>
+    </div>
+</div>
