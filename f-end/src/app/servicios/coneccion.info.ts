@@ -9,6 +9,7 @@ export class ConeccionInfo {
     public token;
     private token_prefix;
     public url_base: string;
+    public url_pagos: string;
     public url_base_api: string;
     public url_eventos: string;
     public url_preinscripcion: string;
@@ -32,6 +33,7 @@ export class ConeccionInfo {
     public url_estadisticas_eventos;
     public url_cinco_eventos_mas_proximos;
     public headers: Headers;
+    public key_pagos;
     public url_get_medio_pago_username: string;
     public url_inscripciones_por_evento: string;
     public url_inscripciones_por_evento_con_usuario: string;
@@ -57,7 +59,7 @@ export class ConeccionInfo {
         this.url_usuarios = this.url_base_api + '/usuarios/';
         this.url_imagenes = this.url_base_api + '/imagenes/';
         this.url_static_imagenes = this.url_base + '/static/';
-        this.url_get_medio_pago_username = this.url_usuarios + 'medio-de-pago-por-usernameo/';
+        this.url_get_medio_pago_username = this.url_usuarios + 'medio-de-pago-por-username/';
         this.url_imagenes_crear = this.url_imagenes + 'imagen/nueva/';
         this.url_inscripciones_por_evento = this.url_inscripcion + 'byEvent/';
         this.url_imagenes_modificar = this.url_imagenes + 'imagen/';
@@ -66,8 +68,12 @@ export class ConeccionInfo {
         this.url_cinco_eventos_mas_proximos = this.url_eventos + 'cincoUltimos/';
         this.url_estadisticas_eventos = this.url_eventos + 'estadisticas/';
         this.url_cinco_ultimas_noticias_publicadas = this.url_noticias + 'cincoUltimas/';
+        this.key_pagos = 'asd4as5df8asdf5a6fd5';
         this.iniciarHeaders();
     }
+
+    
+
     getUrlPreinscripcionesPorEventoPorUsuario(idEvento: number, idUsuario: number){
         return this.url_eventos + idEvento + '/preinscripciones/usuario/' + idUsuario + '/';
     }
@@ -95,6 +101,12 @@ export class ConeccionInfo {
         let idEvento = (inscripcion instanceof Inscripcion )? inscripcion.evento : inscripcion.evento.id;
 
         return this.url_inscripcion + 'aceptarInscripcionPorUsuario/' + idEvento + '/' 
+        + inscripcion.participante + '/';
+    }
+    getUrlRechazarInscipcionPorUsuario(inscripcion: Inscripcion | InscripcionConEvento): string{
+        let idEvento = (inscripcion instanceof Inscripcion )? inscripcion.evento : inscripcion.evento.id;
+
+        return this.url_inscripcion + 'rechazarInscripcionPorUsuario/' + idEvento + '/' 
         + inscripcion.participante + '/';
     }
     getUrlInscripcionesConEvento(idUsuario: number): string{

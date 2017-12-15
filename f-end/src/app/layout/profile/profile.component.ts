@@ -16,6 +16,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class ProfileComponent implements OnInit {
     usuarioLogueado$: Promise<Usuario>;
     errorUsuario: any;
+    imagenPerfil$: Promise<string>;
     usuarioActualizado$: Promise< Usuario>;
     constructor(private _toastr: ToastsManager, vRef: ViewContainerRef, public usuarioService: UsuarioService) {
         this._toastr.setRootViewContainerRef(vRef);
@@ -27,10 +28,8 @@ export class ProfileComponent implements OnInit {
     }
 
     public getImagenPerfil(usuario: Usuario) {
-        this.usuarioService.getImagenPerfil(usuario.imagenPerfil)
-        .then(response => {
-            return response ;
-        });
+        this.imagenPerfil$ = this.usuarioService.getImagenPerfil(usuario.imagenPerfil);
+
     }
 
     public actualizarInformacionPerfil(usuarioActualizado: Usuario){

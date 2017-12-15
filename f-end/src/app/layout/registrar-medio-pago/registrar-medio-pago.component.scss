@@ -1,0 +1,27 @@
+
+@import '../../app.component.scss';
+img{
+  width : 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto 
+}
+.ingresar-tarjeta {
+  vertical-align: middle;
+}
+.form{
+  margin-top: 25px;
+}
+.btn{
+  float: right;
+}
+.card-columns {
+  .card{
+    display: flex;
+    flex-flow: row wrap;
+  }
+  display: flex;
+    flex-flow: row wrap;
+
+  
+}

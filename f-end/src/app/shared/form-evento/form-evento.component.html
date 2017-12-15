@@ -11,7 +11,7 @@
     <input [class.form-control-danger]="errores['nombre']" [(ngModel)]="event.nombre" id="nombre" name="nombre" type="text" class="form-control">
     <div ngFor="let error of errores['nombre']">
       <span class="help-block">{{errores['nombre']}}</span>
-    </div>
+    </div> 
   </div>
   <div [class.has-danger]="errores['descripcion']" class="form-group col-12">
     <label class="col-form-label" for="descripcion">Descripción</label>
