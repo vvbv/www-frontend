@@ -1,10 +1,13 @@
 <div *ngIf="usuarioLogueado$ | async as usuarioLogueado"[@routerTransition]>
     <h2 class="text-muted">Bienvenido: <strong>{{usuarioLogueado.nombres}} {{usuarioLogueado.apellidos}}</strong> (@{{usuarioLogueado.username}})<!--<small>Statistics Overview</small>--></h2>
+    <hr>
     <div class="row">
         <div class="col-md-12">
+            <h3>Estos son los cinco eventos que estan por iniciar</h3>
             <ngb-carousel *ngIf = "cincoEventosMasProximos$ | async as cincoEventosMasProximos">
                 <ng-template ngbSlide *ngFor="let evento of cincoEventosMasProximos">
-                    <img class="img-fluid mx-auto d-block" [src]="evento.imagen" alt="evento.nombre" width="100%">
+                    <!--<img class="img-fluid mx-auto d-block" [src]="evento.imagen" alt="evento.nombre" width="100%">-->
+                    <img class="img-dashboard img-fluid mx-auto d-block" [src]="" [style.backgroundImage]="'url('+ evento.imagen +')'" width="100%">
                     <div class="carousel-caption">
                         <h3>{{evento.nombre}}</h3>
                         <p>{{evento.descripcion}}</p>
@@ -12,7 +15,6 @@
                 </ng-template>
             </ngb-carousel>
         </div>
-        <h2>Estos son los cinco eventos que estan por iniciar</h2>
     </div>
     <hr>
     <div *ngIf = "estadisticasEventos$ | async as estadisticasEventos" class="row">
@@ -29,36 +31,6 @@
             <app-stat [bgClass]="'card-danger'" [icon]="'fa-lock'" [count]="estadisticasEventos.cantidadEventosCancelados" [label]="'Eventos Cancelados'"></app-stat>
         </div>
     </div>
-    <hr />
-    <ngb-alert [type]="alert.type" (close)="closeAlert(alert)" *ngFor="let alert of alerts">{{ alert.message }}</ngb-alert>
-    <hr />
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
-                </div>
-                <!-- /.card-header -->
-                <app-timeline></app-timeline>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-        </div>
-        <!-- /.col-lg-8 -->
-        <div class="col-lg-4">
-            <div class="card card-default">
-                <div class="card-header">
-                    <i class="fa fa-bell fa-fw"></i> Notifications card
-                </div>
-                <!-- /.card-header -->
-                <app-notification></app-notification>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <app-chat></app-chat>
-            <!-- /.card .chat-card -->
-        </div>
-        <!-- /.col-lg-4 -->
-    </div>
+    
+    
 </div>
