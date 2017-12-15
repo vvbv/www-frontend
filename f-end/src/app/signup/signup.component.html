@@ -2,27 +2,59 @@
     <div class="row">
         <div class="col-md-4 push-md-4">
             <img class="user-avatar" src="assets/images/logo.png" width="150px" />
-            <h1>SB Admin BS4 Angular4</h1>
-            <form role="form">
+            <h1>IEDB</h1>
+            <form  #nuevoUsuarioPublicoForm="ngForm">
                 <div class="form-content">
+                        <div class="form-group">
+                                
+                           <input [(ngModel)]="usuario.username" name = "username" [class.form-control-danger] = "errorRetorno['username']" type="text" class="form-control input-underline input-lg" id="" placeholder="Nick Name" required>
+                           <div ngFor="let error of errorRetorno" >
+                                   <span class="help-block">{{errorRetorno['username']}}</span>
+                           </div>
+                       </div>
+                       <div class="form-group">
+                            
+                       <input [(ngModel)]="usuario.numero_identificacion" name = "numero_identificacion" [class.form-control-danger] = "errorRetorno['nombres']" type="text" class="form-control input-underline input-lg" id="" placeholder="Número de identificacion" required>
+                       <div ngFor="let error of errorRetorno" >
+                               <span class="help-block">{{errorRetorno['numero_identificacion']}}</span>
+                       </div>
+                   </div>
                     <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Full Name">
+                             
+                        <input [(ngModel)]="usuario.nombres" name = "nombres" [class.form-control-danger] = "errorRetorno['nombres']" type="text" class="form-control input-underline input-lg" id="" placeholder="Nombres" required>
+                        <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['nombres']}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input  [(ngModel)]="usuario.apellidos" name = "apellidos"  [class.form-control-danger] = "errorRetorno['apellidos']"type="text" class="form-control input-underline input-lg" id="" placeholder="Apellidos" required>
+                        <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['apellidos']}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input  [(ngModel)]="usuario.custom_email" name = "custom_email" [class.form-control-danger] = "errorRetorno['email']"type="text" class="form-control input-underline input-lg" id="" placeholder="Email" required>
+                        <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['custom_email']}}</span>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control input-underline input-lg" id="" placeholder="Email">
+                        <input type="password" (keyup) ="keyuppass($event)" [(ngModel)]="usuario.password" name = "password" class="form-control input-underline input-lg" [class.form-control-danger] = "errorRetorno['password']"id="" placeholder="Contraseña" required>
+                        <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['password']}}</span>
+                        </div>
                     </div>
+                  <!--  <div class="form-group" >
+                        <input  [(ngModel)]="pass_verificacion" name = "password"  type="password" class="form-control input-underline input-lg" id="" placeholder="Repetir Contraseña" required>
 
-                    <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Password">
                     </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Repeat Password">
-                    </div>
+                -->
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/dashboard']"> Register </a>&nbsp;
-                <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
             </form>
+                <a class="btn rounded-btn" (click) = "crearUsuario(usuario)" > Register </a>&nbsp;
+                <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
+           
         </div>
     </div>
 </div>

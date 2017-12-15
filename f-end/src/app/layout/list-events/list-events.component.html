@@ -1,0 +1,9 @@
+<div class="card-columns">
+    <div *ngIf=" usuarioLogueado$ | async as usuarioLogueado" [@routerTransition]>
+        <div class="container-fluid" *ngIf=" eventos$ | async as eventos">
+            <h1 *ngIf=" eventos.length > 0 "> Lista de eventos</h1>
+            <hr>
+            <app-lista-eventos [eventosUsuario]="false" [eventos]="eventos"> </app-lista-eventos>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div [@routerTransition]>
+  <h1>Crear actividad</h1>
+  
+   <div *ngIf="estructuraActividad " >
+   <form #actividadForm="ngForm" > 
+       <div *ngFor="let error of errores['non_field_errors']" class="alert alert-warning alert-dismissible fade show" role="alert">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+           <strong>Algo va mal! </strong> {{error}}
+         </div>
+ 
+         <div *ngIf = "eventoEditado">
+           <div class="alert alert-success" role="alert">
+             Se ha editado el evento
+           </div>
+         </div>
+         <div [class.has-danger] = "errores.nombre" class="form-group col-12">
+          <label for="example-datetime-local-input" class="col-8 col-form-label">{{estructuraActividad.nombre.label}}</label>
+            <input  [class.form-control-danger] = "errores.nombre" [(ngModel)]="actividad.nombre"  id="nombre" name="nombre" class="form-control" type="text"  >
+              <div ngFor="let error of errores.nombre" >
+                <span class="help-block">{{errores.nombre}}</span>
+          </div>
+        </div>
+        </form>
+  </div> 
+</div>

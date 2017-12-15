@@ -1,0 +1,51 @@
+
+<div *ngIf="estructuraInscripcion$ | async as estructuraInscripcion" class= "lista-usuarios">
+ <div  *ngIf="inscripcionesConUsuario$ | async as inscripcionesConUsuario" [@routerTransition]>
+        <div class="container-fluid">
+            <h3>Lista de usuarios inscritos</h3><hr>
+
+            <div class="row">
+ 
+                <table class="table">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th class = "hidden-sm-down" >Nombres</th>
+                            <th class = "hidden-sm-down">Apellidos</th>
+                            <th>Nick</th>
+                            <th class = "hidden-md-down">Correo</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let inscripcionConUsuario of inscripcionesConUsuario">
+                            <td class = "hidden-sm-down">{{inscripcionConUsuario.participante.nombres}}</td>
+                            <td class = "hidden-sm-down">{{inscripcionConUsuario.participante.apellidos}}</td>
+                            <td>@{{inscripcionConUsuario.participante.username}}</td>
+                            <td class = "hidden-md-down">{{inscripcionConUsuario.participante.custom_email}}</td>
+                            <td>
+
+                            <div class = "hidden-sm-down"  *ngIf="evento.estado === 'SI'"  class="in-line" >
+                                <button *ngIf="inscripcionConUsuario.estado === 'EA' || inscripcionConUsuario.estado === 'R'" (click)="aceptarInscripcion(inscripcionConUsuario)"  class="btn hidden-sm-down btn-sm btn-primary">Aceptar</button>
+                                <button *ngIf="inscripcionConUsuario.estado === 'EA'"  (click)="rechazarInscripcion(inscripcionConUsuario)"  class="btn hidden-sm-down btn-sm btn-danger">Rechazar</button>
+                            </div>
+                            <div *ngIf="inscripcionConUsuario.estado === 'EA' || inscripcionConUsuario.estado === 'R'" class="dropdown hidden-md-up">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Opciones
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                      <button *ngIf="inscripcionConUsuario.estado === 'EA' || inscripcionConUsuario.estado=== 'R'" (click)="aceptarInscripcion(inscripcionConUsuario)"   class="dropdown-item">Aceptar</button>
+                                      <button *ngIf="inscripcionConUsuario.estado === 'EA'"  (click)="rechazarInscripcion(inscripcionConUsuario)"  class="dropdown-item">Rechazar</button>
+                                    </div>
+                             </div>
+                             <p *ngIf="inscripcionConUsuario.estado !== 'EA' && inscripcionConUsuario.estado !== 'R'"> {{getDisplayNameEstadoInscripcion(inscripcionConUsuario, estructuraInscripcion) }}</p>
+                             
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <p *ngIf="!inscripcionesConUsuario$"> <br>Cargando...<br></p>
+</div> 

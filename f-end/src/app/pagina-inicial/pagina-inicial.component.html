@@ -1,0 +1,63 @@
+<div class="pos-f-t header contenedor-principal" [style.backgroundImage]="'url(assets/images/background.jpg)'">
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-12 fixed-top nav-principal">
+                <a href="">
+                    <strong>IEDB</strong>
+                </a>
+                <a [routerLink]="['/signup']" id="singup-principal" class="float-right">Registrarse</a>
+                <a [routerLink]="['/login']" id="ingresar-principal" class="float-right">Ingresar</a>
+            </nav>
+        </div>
+        <div class="cuerpo-home">
+            <div class="row" style="padding:0">
+                <div class="col-12 col-md-9 col-lg-9 col-xl-9 col-sm-12">
+                    <div class="carrusel-noticias">
+                        <ngb-carousel *ngIf="cincoUltimasNoticias$ | async as cincoUltimasNoticias">
+                            <ng-template ngbSlide *ngFor="let noticia of cincoUltimasNoticias">
+                                <img class="img-carousel img-fluid mx-auto d-block" [src]="" [style.backgroundImage]="'url('+ noticia.imagen +')'" width="100%">
+                               
+                                <div  class="carousel-caption">
+                                    <h4>{{noticia.titulo}}</h4>
+                                    <p>{{noticia.resumen | slice:0:50}}...</p>
+                                    <button data-toggle="modal" [attr.data-target]="'.noticia-'+noticia.id">Seguir leyendo</button>
+                                </div>
+                            </ng-template>
+                        </ngb-carousel>
+                        <ng-container *ngIf="cincoUltimasNoticias$ | async as cincoUltimasNoticias">
+                            <ng-container *ngFor="let noticia of cincoUltimasNoticias">
+                                <app-noticia-preview [noticia]="noticia"></app-noticia-preview>
+                            </ng-container>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3 col-lg-3 col-xl-3 col-sm-12 text-justify">
+                    <b id="quienes-somos">¿Quiénes somos? </b>
+                    <p>Sociedad anónima, con presencia en el mercado desde el año 2017, dedicada a la coordinación de eventos masivos. Es líder en la industria del entretenimiento y referente en el mercado de eventos Internacional.  Entre los eventos que comercializa se cuentan: Teatro, deportes, conciertos, foros académicos, festivales, entre otros.
+                    </p>
+                    <div style="text-align:center">
+                        <a id="continuar" [routerLink]="['/signup']">Entrar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="separador col-12"></div>
+        <div class="row">
+            <div class="footer-principal col-12">
+                <footer>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <!--<img src="assets/images/footerimage.png" width="100px" class="user-avatar" />-->
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <a>Universidad del Valle 2017</a>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>

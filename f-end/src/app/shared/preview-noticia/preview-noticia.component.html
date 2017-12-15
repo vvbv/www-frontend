@@ -1,0 +1,22 @@
+<div class="cuadro-noticia">
+  <!--<img width="100%" src="{{noticia.imagen}}" class="img-rounded" alt="imagen  {{noticia.titulo}}">-->
+  <div class="img-min-noticia" [style.backgroundImage]="'url('+ noticia.imagen +')'"></div>
+  
+  <!--- list-group-item list-group-item-action flex-column align-items-start -->
+  <div class="informacion flex-column align-items-start ">
+    <span class="informacion-titulo">{{noticia.titulo}}</span> <br>
+    <small><b>Publicada el </b> {{noticia.fechaRegistro| date:'MM/dd/yyyy'}} </small> 
+    <hr>
+    <p class="mb-1">{{noticia.resumen}}</p>
+    <hr>
+    <div class="leer-mas">
+      <a href="">-- Leer más --</a>
+    </div>
+    <hr>
+    <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->
+  </div>
+  <div *ngIf="noticia.estado == 'false'" class="head-evento-cancelado">
+      Cancelado
+    </div>
+  <!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->
+</div>

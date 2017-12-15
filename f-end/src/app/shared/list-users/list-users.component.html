@@ -1,0 +1,69 @@
+<div *ngIf="usuarioLogueado$ | async as usuarioLogueado" [@routerTransition]>
+    <div class="container-fluid">
+        <h1 class="titulo-html-componente">Lista de usuarios</h1>
+        <hr>
+        <div class="row">
+            <div class="form-group">
+                <!-- <input (keyup)="filtrar($event)" type="" name="filtro" value="" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo"> -->
+                <!-- <input  type="text" name="filtro"  id="filtro" [(ngModel)]='filtro' class="form-control" placeholder="Buscar: Nick o Correo">-->
+            </div>
+            <table id="lista-usuarios" class="table">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="hidden-lg-down">#</th>
+                        <th class="hidden-sm-down">Nombres</th>
+                        <th class="hidden-sm-down">Apellidos</th>
+                        <th>Nick</th>
+                        <th class="hidden-md-down">Correo</th>
+                        <th class="hidden-lg-down">Rol</th>
+                        <th class="hidden-md-down">Estado</th>
+                        <th class="hidden-sm-down"></th>
+                        <th class="hidden-md-up"></th>
+                        <th class="hidden-sm-down"></th>
+                    </tr>
+                </thead>
+                <app-users-preview [usuarios]="usuariosFiltrados"> </app-users-preview>
+                <tbody>
+                    <tr *ngFor="let usuario of usuariosFiltrados; let i = index;">
+                        <th class="hidden-lg-down" scope="row">{{usuario.numero_identificacion}}</th>
+                        <td class="hidden-sm-down">{{usuario.nombres}}</td>
+                        <td class="hidden-sm-down">{{usuario.apellidos}}</td>
+                        <td>@{{usuario.username}}</td>
+                        <td class="hidden-md-down">{{usuario.custom_email}}</td>
+                        <td class="hidden-md-down">{{usuario.rol}}</td>
+                        <td class="hidden-sm-down" *ngIf="!usuario.estadoHabilitado">
+                            <button (click)="activarUsuario(usuario.username, i)" class="btn btn-sm btn-primary">Activar</button>
+                        </td>
+                        <td class="hidden-sm-down" *ngIf="usuario.estadoHabilitado">
+                            <button (click)="desactivarUsuario(usuario.username, i)" class="btn btn-sm btn-danger">Inactivar</button>
+                        </td>
+                        <td class="hidden-sm-down">
+                            <a href="" [routerLink]="['/editSystemUser']" [queryParams]="{username: usuario.username}" class="btn btn-sm btn-primary">Editar</a>
+                        </td>
+                        <td class="hidden-md-up">
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDrop1" type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    Opciones
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="!usuario.estadoHabilitado" (click)="activarUsuario(usuario.username, i)">Activar</a>
+                                    <a class="dropdown-item" href="javascript:void(0);" *ngIf="usuario.estadoHabilitado" (click)="desactivarUsuario(usuario.username, i)">Inactivar</a>
+                                    <a class="dropdown-item" href="" [routerLink]="['/editSystemUser']" [queryParams]="{username: usuario.username}">Editar</a>
+                                    <button data-toggle="dropdown-item modal" [attr.data-target]="'.usuario-'+usuario.id">Detalles de usuario</button>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#lista-usuarios').DataTable();
+    });
+</script>

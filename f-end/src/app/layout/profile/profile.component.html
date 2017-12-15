@@ -1,0 +1,57 @@
+<div *ngIf="usuarioLogueado$ | async as usuarioLogueado" [@routerTransition]>
+    <div *ngIf="usuarioActualizado$ | async as usuarioActualizado" class="container-fluid">
+        <h1>Informaci&oacute;n personal</h1><hr>
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3 col-xl-3 actualizar-imagen">
+                <form>
+                    <div class="form-group">
+                        <img *ngIf="imagenPerfil$ | async as imagenPerfil" src="{{imagenPerfil}}" class="img-fluid img-perfil" alt="">
+                    </div>
+                    <!--<button class="col btn btn-success"  (click)="actualizarImagenPerfil()" type="" disabled><i class="fa fa-refresh"></i> Actualizar imagen</button>-->
+                    <button class="col btn btn-success"  type="" disabled><i class="fa fa-refresh"></i> Actualizar imagen</button>
+                </form>
+            </div>
+            <form #usuarioForm="ngForm" class="row col-sm-12 col-md-9 col-lg-7 col-xl-7 formulario-perfil">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="">Nombres:</label>
+                        <input type="" class="form-control" name="nombres" value="" [(ngModel)]="usuarioActualizado.nombres">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Apellidos:</label>
+                        <input type="" class="form-control" name="apellidos" value="" [(ngModel)]="usuarioActualizado.apellidos">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Identificacion:</label>
+                        <input type="" class="form-control" name="numero_identificacion" value="" [(ngModel)]="usuarioActualizado.numero_identificacion" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nick:</label>
+                        <input type="" class="form-control" name="username" value="" [(ngModel)]="usuarioActualizado.username" disabled>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div [class.has-danger] = "errorUsuario.custom_email" class="form-group">
+                            <label for="">Correo electr&oacute;nico:</label>
+                            <input [class.form-control-danger] = "errorUsuario.custom_email" type="" class="form-control" name="custom_email" value="" [(ngModel)]="usuarioActualizado.custom_email">
+                            <div ngFor="let error of errorUsuario" >
+                                <span class="help-block">{{errorUsuario.custom_email}}</span>
+                            </div>
+                        </div>
+                        <div [class.has-danger] = "errorUsuario.password" class="form-group">
+                            <label for="">Nueva contrase&ntilde;a:</label>
+                            <input [class.form-control-danger] = "errorUsuario.password" type="password" class="form-control" name="password" [(ngModel)]="usuarioActualizado.password">
+                            <div ngFor="let error of errorUsuario" >
+                                <span class="help-block">{{errorUsuario.password}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <a  [routerLink]="['/registrar-medio-pago']"  class="btn btn-success float-right">Medio de pago</a>
+                            <button (click)="actualizarInformacionPerfil(usuarioActualizado)" class="btn btn-primary float-right">Actualizar datos</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

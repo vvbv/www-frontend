@@ -1,0 +1,9 @@
+<div *ngIf="preinscripcionesConEvento"class = "container-fluid" [@routerTransition]>   
+
+            <app-preview-evento-preinscripcion  *ngFor="let preinscripcionConEvento of preinscripcionesConEvento;" [preinscripcionConEvento] = "preinscripcionConEvento"> </app-preview-evento-preinscripcion>          
+</div>
+  <div *ngIf="preinscripcionesConEvento.length == 0">
+      <div class="alert alert-warning" role="alert">
+          <strong>Opps!</strong> No se ha preinscrito a ningun evento
+        </div>
+  </div>

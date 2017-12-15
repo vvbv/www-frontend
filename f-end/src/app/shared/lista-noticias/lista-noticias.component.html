@@ -1,0 +1,11 @@
+
+    <h1> Lista de noticias</h1>
+    <hr>
+    <div *ngIf= "noticias" class = "row">
+        <div  class = "bloque-noticia col-12"  *ngFor= "let noticia of noticias">
+            <app-preview-noticia [noticia] = "noticia" [usuario] = "usuario"> </app-preview-noticia>
+        <div  class="opciones-noticia">
+             <a *ngIf="usuario.rol != 'UP'" [routerLink]="['/editarNoticia/', noticia.id]"  class="btn btn-sm btn-success">Editar</a>
+        </div>
+        </div>
+    </div>

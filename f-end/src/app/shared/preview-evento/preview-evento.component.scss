@@ -1,0 +1,90 @@
+.preview-evento{
+  border: 1px solid #888888;
+  margin-top: 2em;
+  box-shadow: 0 0 30px #888888;
+}
+
+.preview-opciones{
+  margin-bottom: 0.7em;
+}
+
+.preview-estado{
+  text-align: center;
+}
+
+.preview-descripcion{
+  padding-left: 1em;
+}
+
+.preview-evento-title{
+  width: 100%;
+  background-color: #292b2c;
+  color: #eeeeee;
+  padding: 0.4em;
+  text-align: center;
+  
+}
+
+.preview-evento-title span{
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 80%;
+  width: 100%;
+}
+.head-evento-cancelado{
+  padding: 5px;
+  width: 100%;
+  background-color: #3a0000;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
+.opciones-cancelado{
+  border: 1px solid #3a0000 !important;
+}
+.example-full-width {
+  width: 100%;
+}
+.boton-editar-cancelado{
+  border-color:#3a0000;
+}
+.active > .d-flex, .active > .mb-1{
+  color: white;
+}
+
+.opciones-evento{
+padding: 0.3em;
+border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.item-evento{
+cursor: pointer;
+}
+.modal-xl{
+  width: 90% !important;
+ max-width:1200px !important;
+
+}
+.btn-danger{
+text-decoration: none;
+color: white !important;
+}
+.evento{
+// border: 25px solid red;
+border-color: red;
+}
+.card-footer{
+margin-bottom:0px;
+}
+
+.img-min-evento{
+  margin-top: 0.4rem;
+  height: 13rem;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
