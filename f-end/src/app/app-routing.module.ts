@@ -9,8 +9,8 @@ const routes: Routes = [
         loadChildren: './layout/layout.module#LayoutModule',
         canActivate: [AuthGuard]
     },
-    { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'home', component: PaginaInicialComponent },
+    { path: 'login', loadChildren: './login/login.module#LoginModule' },
     { path: 'signup', loadChildren: './signup/signup.module#SignupModule' },
     { path: 'not-found', loadChildren: './not-found/not-found.module#NotFoundModule' },
     { path: '**', redirectTo: 'not-found' }
