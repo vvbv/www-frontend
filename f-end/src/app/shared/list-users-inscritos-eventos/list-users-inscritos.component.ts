@@ -1,7 +1,8 @@
 import { InscripcionEstructura } from '../../modelos/inscripcionEstructura.class';
 import { PreInscripcion } from '../../modelos/preInscripcion.class';
 import { Inscripcion } from '../../modelos/inscripcion.class';
-
+import { SendEmailService } from '../../servicios/sendEmail.service';
+import { EventoService } from '../../servicios/events.service';
 import { Component, OnInit, Input, ViewContainerRef } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { ActivatedRoute, Params, Route } from '@angular/router';
@@ -34,7 +35,9 @@ export class listUsersInscritosComponent implements OnInit {
             vRef: ViewContainerRef,
             private preInscripcionService: PreInscripcionService,
             private usuairosService: UsuarioService,
-            private inscripcionService: InscripcionService
+            private inscripcionService: InscripcionService,
+            private sendEmailService: SendEmailService,
+            public eventoService: EventoService
         ) {
         this._toastr.setRootViewContainerRef(vRef); 
         this.inscripcionesConUsuario$ = null;
@@ -67,6 +70,12 @@ export class listUsersInscritosComponent implements OnInit {
         this.inscripcionService.rechazarInscripcion(inscripcion)
             .then(res => {
                 inscripcionConUsuario.estado = 'R';
+                this.eventoService.getEventov2(Number(inscripcion.evento)).then(
+                    response => {
+                        let mensaje_json = JSON.parse('{"to": "'+inscripcionConUsuario.participante.custom_email+'", "html": "true","message": "Estado inscripcion","subject": "<h1>IEDB</h1><br>Su inscripcion al '+response.nombre+' se ha rechazado."}');
+                        this.sendEmailService.sendEmail(mensaje_json);
+                    }
+                );
                 this._toastr.warning('Se ha rechazado una inscripción',
                  'Accion realizada', {toastLife: 3000, showCloseButton: false});
             })
@@ -92,6 +101,12 @@ export class listUsersInscritosComponent implements OnInit {
         this.inscripcionService.aceptarInscripcion(inscripcion)
                 .then(res => {
                     inscripcionConUsuario.estado = 'A';
+                    this.eventoService.getEventov2(Number(inscripcion.evento)).then(
+                        response => {
+                            let mensaje_json = JSON.parse('{"to": "'+inscripcionConUsuario.participante.custom_email+'", "html": "true","message": "Estado inscripcion","subject": "<h1>IEDB</h1><br>Su inscripcion al '+response.nombre+' se ha aceptado."}');
+                            this.sendEmailService.sendEmail(mensaje_json);
+                        }
+                    );
                     this._toastr.success('El usuario ha sido inscrito al evento',
                      'En hora buena!', {toastLife: 3000, showCloseButton: false});
                 })
