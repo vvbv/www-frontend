@@ -1,0 +1,15 @@
+@import '../preview-evento/preview-evento.component.scss';
+
+.preview-estado-b {
+    @media screen and (max-width: 500px) {
+        border-bottom: 1px solid black;
+    }
+    @media screen and (min-width: 500px) {
+    float: right; 
+    }
+}
+.preview-estado-preinscripcion {
+    @media screen and (min-width: 500px) {
+    float:  left;
+    }
+}

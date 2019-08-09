@@ -1,0 +1,54 @@
+
+
+.actividad{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+
+    .actividad-titulo{
+        padding-left: 0.7rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        font-weight: bold;
+        font-size: 1.1em;
+        background-color: #292b2c;
+        color: #efefef;
+    }
+    .actividad-descripcion{
+        color: #363636;
+        margin-top: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #444;
+    }
+    .actividad-opciones{
+        padding-top: 0.3rem;
+        margin-top: 0.3rem;
+        border-top: 1px solid #444;
+        margin-bottom: 1.5rem;
+    }
+}
+.actividad:last-child{
+    border-bottom-width: 0px;
+}
+.btn-participar-2, .btn-participar-2:hover, .btn-participar-2:active{
+    color: #FFF;
+}
+.btn-participar{
+    background-color: transparent;
+    color: #000;
+    border-color: #444;
+    border-radius: 0.25rem;
+}
+
+.btn-participar:hover{
+    $timeTransition: 0.25ms;
+    $colorHover:#018d18;
+    color: #fff;
+    background-color: $colorHover;
+    border-color: $colorHover;
+    transition: background-color $timeTransition ease-in-out;
+    transition: color $timeTransition ease-in-out;
+    transition: border-color $timeTransition ease-in-out;
+    
+}

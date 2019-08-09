@@ -1,0 +1,21 @@
+<div class="row">
+    <div *ngIf="eventos" class="card-columns" [@routerTransition]>
+        <div class="container-fluid" *ngIf=" eventos ">
+            <app-preview-evento *ngFor="let evento of eventos;" [evento]="evento"> </app-preview-evento>
+        </div>
+    </div>
+</div>
+<ng-container *ngIf="usuarioLogueado$ | async as usuarioLogueado">
+    <div *ngIf="eventos.length == 0">
+        <div class="alert alert-warning" role="alert">
+            <strong>Opps!</strong>
+            <ng-container *ngIf="!eventosUsuario">
+                <a *ngIf="usuarioLogueado.rol !== 'UP'" [routerLink]="['/events/']" [routerLinkActive]="['router-link-active']" class="float-right">Registrar uno ahora?</a>
+            </ng-container>
+            <ng-container *ngIf="eventosUsuario">
+                Se ha inscrito o preinscrito a todos nuestros eventos!
+                <br> Puede ver sus eventos en el menú "Mis Eventos" en la barra lateral
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

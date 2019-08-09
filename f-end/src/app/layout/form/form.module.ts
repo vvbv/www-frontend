@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormRoutingModule } from './form-routing.module';
@@ -8,9 +8,9 @@ import { PageHeaderModule } from './../../shared';
 @NgModule({
     imports: [
         CommonModule,
-        FormRoutingModule,
-        PageHeaderModule
+        FormRoutingModule
     ],
-    declarations: [FormComponent]
+    declarations: [FormComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class FormModule { }
