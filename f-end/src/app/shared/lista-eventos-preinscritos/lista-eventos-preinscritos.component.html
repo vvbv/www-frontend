@@ -1,0 +1,17 @@
+<div clasa="row"  >
+<div *ngIf="preinscripcionesConEvento" class="card-columns"  [@routerTransition]>
+<div class = "container-fluid" >   
+
+            <app-preview-evento-preinscripcion  *ngFor="let preinscripcionConEvento of preinscripcionesConEvento;" [preinscripcionConEvento] = "preinscripcionConEvento"> </app-preview-evento-preinscripcion>
+
+
+                
+</div>
+</div>
+</div>
+
+  <div *ngIf="preinscripcionesConEvento.length == 0">
+      <div class="alert alert-warning" role="alert">
+          <strong>Opps!</strong> No se ha preinscrito a ningun evento
+        </div>
+  </div>

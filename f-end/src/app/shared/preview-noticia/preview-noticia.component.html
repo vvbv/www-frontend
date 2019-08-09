@@ -1,0 +1,17 @@
+<img width="100%" src="{{noticia.imagen}}" class="img-rounded" alt="imagen  {{noticia.titulo}}">
+
+<div *ngIf="noticia.estado == 'false'" class="head-evento-cancelado">
+  Cancelado
+</div>
+<div class="list-group-item list-group-item-action flex-column align-items-start ">
+  <div class="d-flex w-100 justify-content-between" title="Click para editar">
+    <h5 class="mb-1">{{noticia.titulo}}</h5>
+    <small style="margin-left: auto;">
+      <b>Publicada el </b> {{noticia.fechaRegistro| date:'MM/dd/yyyy'}} </small>
+
+    <br>
+  </div>
+  <p class="mb-1">Resumen: {{noticia.resumen}}</p>
+  <!-- <small> Last updated: {{evento.fechaInicio | date:'MM/dd/yyyy' | amTimeAgo:true}}</small>-->
+</div>
+<!--<a href="" class="btn btn-sm btn-secondary">Ver detalles</a>&nbsp;-->

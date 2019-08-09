@@ -1,0 +1,35 @@
+<div *ngIf = "estructuraEvento && preinscripcionConEvento" class="card col-lg-6 col-xl-6 col-md-12 col-sm-12">
+  
+  <div class="img-min-evento" [style.backgroundImage]="'url('+ preinscripcionConEvento.evento.imagen +')'"></div>
+   <div  *ngIf="preinscripcionConEvento.evento.estado == 'CC'" class= "head-evento-cancelado">
+      Cancelado
+    </div>
+    <div [class.boton-editar-cancelado]="preinscripcionConEvento.evento.estado == 'CC'"   class="card-block" >
+    
+      <h4 class="card-title">{{preinscripcionConEvento.evento.nombre}}</h4>
+    
+      <p class="card-text text-justify">Descripción: {{preinscripcionConEvento.evento.descripcion}}</p>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"> <p class="mb-1">Precio: ${{preinscripcionConEvento.evento.precio}}</p></li>
+          <li class="list-group-item">  <p class="card-text"><small class="text-muted"><b>Desde el</b> {{preinscripcionConEvento.evento.fechaInicio | date:'MM/dd/yyyy'}} <b> hasta el </b>{{preinscripcionConEvento.evento.fechaFinalizacion | date:'MM/dd/yyyy'}} </small></p></li>
+        </ul> 
+    </div>
+<div [class.opciones-cancelado]="preinscripcionConEvento.evento.estado == 'CC'" class="card-footer " style = "width: 100%">
+
+ 
+<!--  <a (click)="eliminarEvento(evento, i)"  class="btn btn-sm btn-danger">Eliminar</a>-->
+  <b  class = "float-right" >{{getDisplayNameEstado(preinscripcionConEvento.evento)}}&nbsp;</b>
+  <b *ngIf = "estructuraPreinscripcion$ | async as estructuraPreinscripcion"> {{getDisplayNameEstadoPreinscripcion(preinscripcionConEvento, estructuraPreinscripcion)}}</b>
+
+</div>
+
+
+<div *ngIf = "usuarioLogueado$ | async as  usuario"  class=" btn-group dropup">
+    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Opciones
+    </button>
+<div  class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <button  [routerLink]="['/listActivities']" [queryParams]="{id: preinscripcionConEvento.evento.id}" class="dropdown-item">Ver lista de actividades</button>
+</div>
+</div>
+</div>

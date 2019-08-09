@@ -1,0 +1,68 @@
+<div *ngIf = "usuarioLogueado$ | async as usuarioLogueado" [@routerTransition]>
+   <div class="container-fluid">
+       <div class="row">
+           <div class="col-12">
+               <h1>Crear nuevo usuario</h1>
+               <hr>
+           </div>
+           <div class="col-12">
+               <form #nuevoUsuarioForm="ngForm">
+                   <div [class.has-danger] = "errorRetorno['nombres']" class="form-group col-12">
+                       <label for="">Nombres:</label>
+                       <input [class.form-control-danger] = "errorRetorno['nombres']" type="" class="form-control" name="nombres" value="" [(ngModel)]="usuarioNuevo.nombres" placeholder="" required>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['nombres']}}</span>
+                        </div>
+                   </div>
+                   <div [class.has-danger] = "errorRetorno['apellidos']" class="form-group col-12">
+                       <label for="">Apellidos:</label>
+                       <input [class.form-control-danger] = "errorRetorno['apellidos']" type="" class="form-control" name="apellidos" value="" [(ngModel)]="usuarioNuevo.apellidos" placeholder="" required>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['apellidos']}}</span>
+                        </div>
+                   </div>
+                   <div [class.has-danger] = "errorRetorno['numero_identificacion']" class="form-group col-12">
+                       <label for="">Número de identificación:</label>
+                       <input [class.form-control-danger] = "errorRetorno['numero_identificacion']" type="" class="form-control" name="numero_identificacion" value="" [(ngModel)]="usuarioNuevo.numero_identificacion" placeholder="" required>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['numero_identificacion']}}</span>
+                        </div>
+                   </div>
+                   <div [class.has-danger] = "errorRetorno['username']" class="form-group col-12">
+                       <label for="">Nombre de usuario:</label>
+                       <input [class.form-control-danger] = "errorRetorno['username']" type="" class="form-control" name="username" value="" [(ngModel)]="usuarioNuevo.username" placeholder="" required>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['username']}}</span>
+                        </div>
+                   </div>
+                   <div [class.has-danger] = "errorRetorno['custom_email']" class="form-group col-12">
+                       <label for="">Email:</label>
+                       <input [class.form-control-danger] = "errorRetorno['custom_email']" type="email" class="form-control" name="custom_email" value="" [(ngModel)]="usuarioNuevo.custom_email" placeholder="" required>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['custom_email']}}</span>
+                        </div>
+                   </div>
+                   <div [class.has-danger] = "errorRetorno['password']" class="form-group col-12">
+                       <label for="">Contrase&ntilde;a:</label>
+                       <input [class.form-control-danger] = "errorRetorno['password']" type="password" class="form-control" name="password" value="" [(ngModel)]="usuarioNuevo.password" placeholder="" required>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['password']}}</span>
+                        </div>
+                   </div>
+                   <div [class.has-danger] = "errorRetorno['rol']" class="form-group col-12">
+                       <label for="">Rol:</label>
+                       <select [class.form-control-danger] = "errorRetorno['rol']" class="form-control" (change)="actualizarRol()" name="rol" [(ngModel)]="rol">
+                           <option *ngFor="let rol of roles; let i = index;" [value]="rol.value"  class="form-control">{{rol.display_name}}</option>
+                       </select>
+                       <div ngFor="let error of errorRetorno" >
+                                <span class="help-block">{{errorRetorno['rol']}}</span>
+                        </div>
+                   </div>
+                   <div class="form-group col-12">
+                       <button (click)="registrarUSuario()" type="" class="btn btn-primary float-right">Registrar usuario</button>
+                   </div>
+               </form>
+           </div>
+       </div>
+   </div>
+</div>

@@ -1,4 +1,25 @@
 $topnav-background-color: #222;
+#salir{
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.75rem 1.25rem 0.75rem 1.25rem;
+    a{
+        color: #999;
+    }
+    a:hover{
+        color: #FFF;
+        text-decoration: none;
+    }
+}
+#salir:hover{
+    background-color: darken($topnav-background-color, 5%);
+    a{
+        color: #fff;
+    }
+}
 .sidebar{
     border-radius: 0;
     position: fixed;

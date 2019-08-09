@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
+import { ActivatedRoute, Params, Route } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import { UsuarioService } from '../../servicios/usuario.service';
+import { Usuario } from '../../modelos/usuario.class';
+import { Evento } from '../../modelos/evento.class';
+import { EventoService } from 'app/servicios/events.service';
+import { EstadisticasEventos } from '../../modelos/estadisticasEventos.class';
 
 @Component({
     selector: 'app-dashboard',
@@ -10,8 +17,21 @@ import { routerTransition } from '../../router.animations';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
+    public usuarioLogueado$: Promise<Usuario>;
+    public cincoEventosMasProximos$: Promise<Evento[]>;
+    public username: string;
+    public nombres: string;
+    public estadisticasEventos$: Promise<EstadisticasEventos>;
+    public apellidos:string;
 
-    constructor() {
+    constructor(
+        private usuarioService: UsuarioService,
+        private eventosService: EventoService
+    ) {
+        
+        this.usuarioLogueado$ = this.usuarioService.obtenerUsuarioActualCache();
+        this.estadisticasEventos$ = this.eventosService.getEstadisticasEventos();
+        this.cincoEventosMasProximos$  = this.eventosService.getCincoEventosMaxProximos();
         this.sliders.push({
             imagePath: 'assets/images/slider1.jpg',
             label: 'First slide label',
@@ -41,6 +61,8 @@ export class DashboardComponent implements OnInit {
                 consectetur velit culpa molestias dignissimos
                 voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
         });
+
+        
     }
 
     ngOnInit() {
